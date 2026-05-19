@@ -1,65 +1,176 @@
-import Image from "next/image";
+import Link from "next/link";
+
+import { AnimatedBench } from "@/components/animated-bench";
+import { MagneticLink } from "@/components/magnetic-link";
+import { Reveal } from "@/components/reveal";
+import { workItems } from "@/lib/work";
+
+const operatingNotes = [
+  "Start with the outcome the user or team needs.",
+  "Build the smallest vehicle that can prove it.",
+  "Keep the artifact clear enough for the next person or model to inherit.",
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main id="main">
+      <header className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 py-5 font-mono text-sm text-[var(--text-muted)] sm:px-8 lg:px-12">
+        <Link
+          href="/"
+          className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
+        >
+          Outcomes
+        </Link>
+        <nav aria-label="Primary navigation" className="flex items-center gap-5">
+          <a
+            href="#work"
+            className="transition-colors hover:text-[var(--text-primary)]"
+          >
+            work
+          </a>
+          <a
+            href="#contact"
+            className="transition-colors hover:text-[var(--text-primary)]"
+          >
+            contact
+          </a>
+        </nav>
+      </header>
+
+      <section className="grid min-h-[100dvh] items-end gap-8 px-5 pb-10 pt-24 sm:px-8 sm:pb-12 lg:grid-cols-[0.86fr_1.14fr] lg:px-12 lg:pb-8 lg:pt-28">
+        <div className="max-w-2xl pb-4 lg:pb-14">
+          <p className="font-mono text-sm text-[var(--accent)]">
+            Drew McFarland
           </p>
+          <h1 className="mt-5 font-serif text-6xl leading-[0.96] text-[var(--text-primary)] sm:text-7xl lg:text-8xl">
+            Outcomes
+          </h1>
+          <p className="mt-7 max-w-xl text-2xl leading-tight text-[var(--text-primary)] sm:text-3xl">
+            I ship outcomes. Products are the vehicle.
+          </p>
+          <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg">
+            I work between service design, product strategy, and full-stack
+            building. I frame the problem, build the first usable version, and
+            leave the work legible for the next person who has to carry it.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <MagneticLink href="#work">View work</MagneticLink>
+            <MagneticLink href="https://linkedin.com/in/drewux/" external>
+              Contact Drew
+            </MagneticLink>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <AnimatedBench />
+      </section>
+
+      <section className="border-y border-[var(--border)] px-5 py-12 sm:px-8 lg:px-12">
+        <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+          <p className="font-mono text-sm text-[var(--text-muted)]">
+            operating thesis
+          </p>
+          <div className="grid gap-6 md:grid-cols-[1fr_0.82fr_1.18fr]">
+            {operatingNotes.map((note, index) => (
+              <Reveal key={note} delay={index * 0.05}>
+                <div className="border-t border-[var(--border-strong)] pt-4">
+                  <p className="font-mono text-xs text-[var(--accent)]">
+                    0{index + 1}
+                  </p>
+                  <p className="mt-4 max-w-xs text-base leading-7 text-[var(--text-secondary)]">
+                    {note}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section id="work" className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="grid gap-10 lg:grid-cols-[0.46fr_1fr]">
+          <div className="lg:sticky lg:top-10 lg:self-start">
+            <p className="font-mono text-sm text-[var(--accent)]">selected work</p>
+            <h2 className="mt-4 max-w-sm font-serif text-4xl leading-tight text-[var(--text-primary)] sm:text-5xl">
+              Each project starts with the result it had to make possible.
+            </h2>
+          </div>
+
+          <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+            {workItems.map((item, index) => (
+              <Reveal key={item.slug} delay={index * 0.04}>
+                <Link
+                  href={`/work/${item.slug}`}
+                  className="group grid gap-5 py-7 transition-colors hover:bg-[rgba(246,242,234,0.025)] sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:px-4"
+                >
+                  <div className="font-mono text-xs text-[var(--text-muted)]">
+                    <p>{item.year}</p>
+                    <p className="mt-2 text-[var(--accent)]">{item.title}</p>
+                  </div>
+                  <div>
+                    <p className="max-w-3xl text-2xl leading-tight text-[var(--text-primary)] sm:text-3xl">
+                      {item.outcome}
+                    </p>
+                    <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
+                      {item.vehicle}
+                    </p>
+                  </div>
+                  <span className="font-mono text-xs text-[var(--text-faint)] transition-colors group-hover:text-[var(--accent)]">
+                    open
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-20 sm:px-8 lg:px-12 lg:pb-28">
+        <Reveal>
+          <div className="grid gap-8 border-y border-[var(--border)] py-12 lg:grid-cols-[0.8fr_1.2fr]">
+            <p className="font-mono text-sm text-[var(--text-muted)]">
+              proof pattern
+            </p>
+            <div>
+              <p className="max-w-3xl font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
+                Strategy matters when it changes what ships.
+              </p>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
+                The common thread is a loop: understand the real constraint,
+                build a vehicle that proves a path, and make the work clear
+                enough for others to reuse.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <footer
+        id="contact"
+        className="border-t border-[var(--border)] px-5 py-10 sm:px-8 lg:px-12"
+      >
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="font-mono text-sm text-[var(--accent)]">
+              Drew McFarland
+            </p>
+            <p className="mt-3 max-w-lg text-base leading-7 text-[var(--text-secondary)]">
+              Designer-builder focused on GovTech, infrastructure, and products
+              that shorten the distance from problem to working software.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <MagneticLink href="https://github.com/Mountain-Dr3w" external>
+              GitHub
+            </MagneticLink>
+            <MagneticLink href="https://seams.velveteen.sh" external>
+              Seams
+            </MagneticLink>
+            <MagneticLink href="https://velveteen.sh" external>
+              Velveteen
+            </MagneticLink>
+          </div>
+        </div>
+      </footer>
+    </main>
   );
 }
