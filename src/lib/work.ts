@@ -13,21 +13,11 @@ export interface WorkLink {
 export interface WorkArtifact {
   label: string;
   body: string;
-  // Deprecated, will be removed once all case studies are rewritten. Kept optional so old data still validates.
-  title?: string;
-  meta?: string;
-}
-
-export interface WorkSnapshot {
-  label: string;
-  body: string;
 }
 
 export interface WorkSection {
   title: string;
   body: string[];
-  // Deprecated, will be removed once all case studies are rewritten. Kept optional so old data still validates.
-  label?: string;
 }
 
 export interface WorkVisual {
@@ -56,13 +46,6 @@ export interface WorkItem {
     src: string;
     alt: string;
   };
-  // Deprecated, will be removed once all case studies are rewritten. Optional so old data still validates.
-  snapshot?: WorkSnapshot[];
-  vehicle?: string;
-  vehicleLabel?: string;
-  proof?: string[];
-  constraints?: string[];
-  decisions?: string[];
 }
 
 export interface WritingItem {
