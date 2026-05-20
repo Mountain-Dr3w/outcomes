@@ -172,9 +172,6 @@ export default function Home() {
                     <p className="max-w-3xl text-2xl leading-tight text-[var(--text-primary)] sm:text-3xl">
                       {item.outcome}
                     </p>
-                    <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
-                      {item.vehicle}
-                    </p>
                   </div>
                   <span className="font-mono text-xs text-[var(--text-faint)] transition-colors group-hover:text-[var(--accent)]">
                     open
