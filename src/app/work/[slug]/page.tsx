@@ -127,8 +127,20 @@ export default async function WorkPage({ params }: WorkPageProps) {
               </Reveal>
             ) : null}
 
-            <div className="mt-14 grid gap-10">
-              <EvidenceSection title="Proof" items={item.proof} />
+            <section className="mt-16 grid gap-10">
+              {item.sections.map((section, index) => (
+                <CaseStudySection
+                  key={section.title}
+                  label={section.label}
+                  title={section.title}
+                  body={section.body}
+                  delay={index * 0.04}
+                />
+              ))}
+            </section>
+
+            <div className="mt-16 grid gap-10">
+              <EvidenceSection title="What shipped" items={item.proof} />
               <EvidenceSection title="Constraints" items={item.constraints} />
               <EvidenceSection title="Decisions" items={item.decisions} />
             </div>
@@ -167,6 +179,36 @@ export default async function WorkPage({ params }: WorkPageProps) {
         </div>
       </section>
     </main>
+  );
+}
+
+function CaseStudySection({
+  label,
+  title,
+  body,
+  delay,
+}: {
+  label: string;
+  title: string;
+  body: string[];
+  delay: number;
+}) {
+  return (
+    <Reveal delay={delay}>
+      <article className="grid gap-5 border-t border-[var(--border)] pt-8 lg:grid-cols-[0.32fr_1fr]">
+        <p className="font-mono text-sm text-[var(--accent)]">{label}</p>
+        <div>
+          <h2 className="max-w-3xl font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
+            {title}
+          </h2>
+          <div className="mt-6 grid max-w-3xl gap-5 text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
+            {body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </article>
+    </Reveal>
   );
 }
 

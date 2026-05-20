@@ -6,9 +6,9 @@ import { Reveal } from "@/components/reveal";
 import { workItems } from "@/lib/work";
 
 const operatingNotes = [
-  "Start with the outcome the user or team needs.",
-  "Build the smallest vehicle that can prove it.",
-  "Keep the artifact clear enough for the next person or model to inherit.",
+  "Name the change the work has to create before naming the product.",
+  "Build the smallest working vehicle that can test the claim.",
+  "Leave a decision trail clear enough for the next person or model to inherit.",
 ];
 
 export default function Home() {
@@ -49,9 +49,10 @@ export default function Home() {
             I ship outcomes. Products are the vehicle.
           </p>
           <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg">
-            I work between service design, product strategy, and full-stack
-            building. I frame the problem, build the first usable version, and
-            leave the work legible for the next person who has to carry it.
+            I am a designer by training and a builder by choice. I work across
+            service design, product strategy, and implementation: define the
+            outcome, build the proof, and leave behind an artifact a team can
+            operate.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <MagneticLink href="#work">View work</MagneticLink>
@@ -91,7 +92,7 @@ export default function Home() {
           <div className="lg:sticky lg:top-10 lg:self-start">
             <p className="font-mono text-sm text-[var(--accent)]">selected work</p>
             <h2 className="mt-4 max-w-sm font-serif text-4xl leading-tight text-[var(--text-primary)] sm:text-5xl">
-              Each project starts with the result it had to make possible.
+              Case studies about what changed, not just what shipped.
             </h2>
           </div>
 
@@ -135,9 +136,9 @@ export default function Home() {
                 Strategy matters when it changes what ships.
               </p>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
-                The common thread is a loop: understand the real constraint,
-                build a vehicle that proves a path, and make the work clear
-                enough for others to reuse.
+                The common thread is a loop: find the real constraint, build a
+                vehicle that can prove a path, and make the work clear enough
+                for someone else to use without a handoff meeting.
               </p>
             </div>
           </div>
@@ -155,7 +156,8 @@ export default function Home() {
             </p>
             <p className="mt-3 max-w-lg text-base leading-7 text-[var(--text-secondary)]">
               Designer-builder focused on GovTech, infrastructure, and products
-              that shorten the distance from problem to working software.
+              that shorten the distance between a hard problem and working
+              software.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
