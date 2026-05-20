@@ -242,91 +242,43 @@ export const workItems: WorkItem[] = [
     year: "2026",
     outcome:
       "Government delivery teams get a reusable path to production instead of rebuilding setup work for every engagement.",
-    vehicle:
-      "An eight-week internal platform proof that mapped the current developer journey, defined a target responsibility split, and bounded what the platform could credibly demonstrate.",
-    vehicleLabel: "proof shape",
     role: "Product strategy",
     summary:
-      "MissionOS Core was an internal proof for a recurring GovTech delivery problem: teams were rebuilding environments, access, delivery paths, and compliance evidence before mission-product work could start. The proof made that burden visible and showed which parts a platform could absorb.",
-    snapshot: [
-      {
-        label: "What it is",
-        body: "An internal DevSecOps platform proof for government software teams that needed reusable setup and delivery patterns.",
-      },
-      {
-        label: "Impact",
-        body: "Gave leadership, engineering, and compliance a shared benchmark for what the platform should absorb and what developers should still own.",
-      },
-      {
-        label: "My role",
-        body: "Framed the proof, mapped the current developer path, defined four planning goals, and wrote the architecture and decision artifacts.",
-      },
-      {
-        label: "Key artifacts",
-        body: "Current-state DevEx map, target tenant path, demo contract, claim boundaries, and phase-line decisions.",
-      },
-    ],
+      "MissionOS Core was an eight-week internal proof I led for a recurring GovTech delivery problem: government software teams kept burning the first weeks of an engagement rebuilding the same delivery setup before any mission product could start. Environments, access, pipelines, deployment paths, compliance artifacts. Every team solved these from scratch, every time. The proof was supposed to show what that work amounted to, and what a shared platform could take on instead.",
     sections: [
       {
-        label: "what was happening",
-        title: "Teams were losing momentum before the mission product even started.",
+        title: "I started by mapping the parts that were already happening",
         body: [
-          "Government software teams often inherit delivery setup as bespoke work: environments, access, compliance artifacts, deployment paths, and operating rules. Each team can solve those pieces, but solving them from scratch burns time before the mission product gets traction.",
-          "I mapped six developer touchpoints from pre-code through operations: onboarding, repo setup, pipeline configuration, deployment, observability, and operations. Then I marked what the platform should absorb, what developers should still own, and what should disappear.",
+          "Before I could argue for a platform, I had to show what teams were already doing without one. I mapped the developer journey across six touchpoints (onboarding, repo setup, pipeline configuration, deployment, observability, and operations) and tagged each step with what the platform should take over, what developers should still own, and what should disappear entirely. The map was the first thing that made the conversation move. Until then, leadership, engineering, and compliance had been talking about a 'platform' that meant different things to each of them. The map was the same diagram in all three rooms.",
         ],
       },
       {
-        label: "what i shaped",
-        title: "I gave the proof four things to organize around.",
+        title: "The four goals were how we kept the proof honest",
         body: [
-          "During the eight-week surge, I shaped the work around repeatable environment standup, developer-led delivery, time to first tenant deploy, and reusable compliance. Those goals gave leadership, engineering, and compliance a shared way to judge progress.",
-          "The tenant-path artifact turned the target state into four platform jobs: provision environments, run delivery, scan the app, and regenerate evidence as the product changes. Tenants still submit intake, push code, and iterate.",
+          "The work could have stretched in any direction, so I anchored the eight weeks around four planning goals: repeatable environment standup, developer-led delivery, time to first tenant deploy, and reusable compliance. Each one was something we could either demonstrate or fail to demonstrate. That mattered more than it sounds. It meant leadership couldn't push the proof to claim things we hadn't shown, and engineering couldn't disappear into tooling preferences that had nothing to do with platform value. The goals separated 'this is the path' from 'this is the toolchain I happen to like.'",
+          "The same discipline shaped the demo. The team wanted the demo to do double duty as a marketing artifact, which is how internal proofs become public claims you regret later. I built a demo contract that distinguished internal evidence (what we were learning) from external claims (what we were allowed to say outside the room). It was unglamorous and probably the most useful thing I produced that quarter.",
         ],
       },
       {
-        label: "what got left behind",
-        title: "The next owner inherited something they could actually build on.",
+        title: "What got left behind was the point",
         body: [
-          "The work left behind explicit claims, risks, phase lines, and decision records. The next owner could see what had been proven, what still needed hardening, and how to keep public claims disciplined.",
+          "Internal proofs often end with a slide deck and a vague handoff. This one ended with a tenant path artifact and a stack of decision records. The tenant path split responsibilities by owner: tenants still submit intake, push code, and iterate; the platform provisions environments, runs delivery, scans the app, and regenerates compliance evidence as the product changes. That separation was the operating model itself. The diagram showed which work belonged to which side and what could be safely retired.",
+          "The decision records were just as important. The next owner could pick up what we'd tried, what we'd ruled out, and what was still soft, without having to reconstruct it from meeting memory. The proof gave leadership enough to commit to a real product investment without losing the discipline of what we hadn't yet shown.",
         ],
       },
-    ],
-    proof: [
-      "Led an eight-week internal proof from problem framing through demo contract, architecture decisions, and progress tracking.",
-      "Mapped current-state developer touchpoints across onboarding, repo setup, pipeline configuration, deployment, observability, and operations.",
-      "Defined four planning goals that sequenced the work and kept platform value separate from tool preference.",
-      "Wrote the architecture and decision artifacts so the next product owner could inherit the context without relying on meeting memory.",
-      "Kept public and internal claims bounded so leadership, engineering, and compliance could trust the proof.",
-    ],
-    constraints: [
-      "Government delivery teams cannot treat compliance, infrastructure, and access as afterthoughts.",
-      "The proof had to show internal trust without overstating external authorization, adoption, or guarantee claims.",
-      "Platform choices needed fallback paths because one stalled policy migration could block the whole benchmark.",
-    ],
-    decisions: [
-      "Use GitLab-native scaffolding for the proof window and reserve heavier orchestration for later hardening.",
-      "Put compliance artifacts at the promotion gate so onboarding stayed focused on launch momentum.",
-      "Separate tenant provisioning from app onboarding to avoid coupling two different operating events.",
-      "Frame the tenant path through responsibilities: what tenants still do, what the platform absorbs, and what no longer needs to exist.",
     ],
     artifacts: [
       {
         label: "Touchpoints",
-        title: "The gap map made platform absorption visible",
-        body: "The workshop board tracked each developer step from pre-code to ongoing operations and scored how much burden still sat outside the platform.",
-        meta: "Current-state map",
+        body: "Current-state map across six developer phases, tagged with what the platform should take over, what developers keep, and what disappears.",
       },
       {
         label: "Tenant path",
-        title: "The target state became a responsibility split",
-        body: "The slide separated what tenants do from what the platform handles, giving the proof an operating model with more weight than a tool demo.",
-        meta: "Day 0 to operate",
+        body: "Target-state diagram that splits responsibilities between tenants and the platform across provisioning, delivery, scanning, and evidence regeneration.",
       },
       {
         label: "Demo contract",
-        title: "The proof bounded its claims",
-        body: "Demo framing separated internal evidence from external claims so the team could move without inflating the result.",
-        meta: "Claim control",
+        body: "A written distinction between internal evidence and external claims, so leadership could share results without overstating them.",
       },
     ],
     visuals: [
@@ -335,7 +287,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/missionos-devex-touchpoints.png",
         alt: "MissionOS Core workshop board mapping current-state developer touchpoints across pre-code, repo setup, pipeline configuration, deployment, observability, and operations.",
         caption:
-          "Workshop artifact mapping current-state developer touchpoints and where platform absorption still needed to replace manual tenant work.",
+          "The workshop board. Six developer touchpoints across the top, with what we found tenants were currently doing themselves at each phase. The colored tags mark where a shared platform would change the answer.",
         width: 4096,
         height: 1479,
         layout: "wide",
@@ -345,7 +297,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/missionos-tenant-path.png",
         alt: "MissionOS Core tenant path slide showing what tenants do versus what the platform handles across onboard, provision, push, deliver, and operate.",
         caption:
-          "Target-state artifact separating tenant responsibilities from platform-owned work across onboarding, provisioning, delivery, and operations.",
+          "Target state. The slide separates what tenants still do (intake, push code, iterate) from what the platform takes over (provisioning, delivery, scanning, evidence regeneration). It became the operating model people referred back to throughout the proof.",
         width: 7680,
         height: 4320,
         layout: "wide",
