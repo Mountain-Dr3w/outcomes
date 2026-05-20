@@ -33,7 +33,7 @@ export async function generateMetadata({
     title: item.title,
     description: item.outcome,
     openGraph: {
-      title: `${item.title} | Outcomes`,
+      title: `${item.title} | Drew McFarland`,
       description: item.outcome,
       url: `/work/${item.slug}`,
     },
@@ -55,7 +55,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
           href="/"
           className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
         >
-          Outcomes
+          Drew McFarland
         </Link>
         <Link href="/#work" className="transition-colors hover:text-[var(--text-primary)]">
           all work
@@ -99,7 +99,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
 
             <Reveal delay={0.05}>
               <section className="mt-14 border-y border-[var(--border)] py-8">
-                <p className="font-mono text-xs text-[var(--accent)]">vehicle</p>
+                <p className="font-mono text-xs text-[var(--accent)]">what I built</p>
                 <p className="mt-4 max-w-3xl text-2xl leading-snug text-[var(--text-primary)]">
                   {item.vehicle}
                 </p>
@@ -191,6 +191,9 @@ function VisualEvidence({
 }: {
   visuals: NonNullable<(typeof workItems)[number]["visuals"]>;
 }) {
+  const phoneVisuals = visuals.filter((visual) => visual.layout === "phone");
+  const standardVisuals = visuals.filter((visual) => visual.layout !== "phone");
+
   return (
     <Reveal delay={0.08}>
       <section className="mt-14 border-y border-[var(--border)] py-8">
@@ -199,7 +202,38 @@ function VisualEvidence({
             visual evidence
           </p>
           <div className="grid gap-8">
-            {visuals.map((visual) => {
+            {phoneVisuals.length ? (
+              <div className="overflow-x-auto pb-3">
+                <div className="grid grid-flow-col auto-cols-[minmax(12rem,14rem)] gap-5 lg:grid-flow-row lg:grid-cols-4 lg:overflow-visible">
+                  {phoneVisuals.map((visual) => (
+                    <figure key={visual.src} className="grid gap-3">
+                      <a
+                        href={visual.src}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block rounded-[2.35rem] bg-black p-2 shadow-[0_28px_70px_rgba(0,0,0,0.35)] transition-transform hover:-translate-y-1"
+                      >
+                        <Image
+                          src={visual.src}
+                          alt={visual.alt}
+                          width={visual.width}
+                          height={visual.height}
+                          className="h-auto w-full rounded-[1.8rem]"
+                        />
+                      </a>
+                      <figcaption className="border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)]">
+                        <span className="block text-[var(--accent)]">
+                          {visual.label}
+                        </span>
+                        <span>{visual.caption}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {standardVisuals.map((visual) => {
               const isWide = visual.layout === "wide";
 
               return (

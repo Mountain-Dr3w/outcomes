@@ -2,8 +2,8 @@
 
 ## Product
 
-- Lead every case study with the outcome.
-- Explain the product as the vehicle that made the outcome possible.
+- Lead every case study with what changed.
+- Explain the product through the proof, artifact, or operating path it created.
 - Keep MissionOS Core public-safe: no named internal stakeholders, no sensitive program detail, no overstated authorization claims.
 - Keep copy concrete and short. Remove filler, throat-clearing, and vague claims.
 

@@ -1,4 +1,4 @@
-export type WorkSlug = "velveteen" | "sbir-radar" | "missionos-core" | "seams";
+export type WorkSlug = "velveteen" | "sbir-radar" | "missionos-core";
 
 export interface WorkLink {
   label: string;
@@ -25,7 +25,7 @@ export interface WorkVisual {
   caption: string;
   width: number;
   height: number;
-  layout?: "wide" | "portrait";
+  layout?: "wide" | "portrait" | "phone";
 }
 
 export interface WorkItem {
@@ -50,6 +50,14 @@ export interface WorkItem {
   };
 }
 
+export interface WritingItem {
+  title: string;
+  eyebrow: string;
+  href: string;
+  summary: string;
+  proof: string[];
+}
+
 export const workItems: WorkItem[] = [
   {
     slug: "velveteen",
@@ -57,43 +65,43 @@ export const workItems: WorkItem[] = [
     eyebrow: "Product, infrastructure, security",
     year: "2026",
     outcome:
-      "AI-built apps move from local experiment to live, scanned, shareable software.",
+      "AI-built apps move from 'works on my laptop' to a live, scanned URL without the infrastructure team you'd usually need.",
     vehicle:
-      "A deployment platform that reads a GitHub repo, generates production scaffolding, runs security scanners, explains findings, and ships the app to a Velveteen URL.",
+      "You connect a GitHub repo and pick a subdomain. Velveteen figures out the framework, generates the infra files you're missing, runs a security pipeline, explains what it finds, and ships the app to a live URL.",
     role:
       "Founder, product designer, full-stack builder, infrastructure owner.",
     summary:
-      "Velveteen exists for the moment after a useful app starts running locally. The builder has momentum, but production still asks the same questions: how does it run, what secrets does it need, what did the scanners find, and where can another person use it?",
+      "Velveteen exists for the awkward moment right after a useful app starts running locally. You've got momentum, but production still asks the same questions: how does it run, what secrets does it need, what did the scanners find, and where can someone else actually use it?",
     sections: [
       {
-        label: "Situation",
-        title: "A local app is not a launched product.",
+        label: "the gap",
+        title: "A local app still needs a launch path.",
         body: [
-          "Coding tools made it easier for people to generate useful software. They did not make those people infrastructure operators. A repo could work on one laptop while still missing Docker, environment documentation, deployment standards, and any plain-language read on whether it was safe to share.",
-          "Most deploy products start after those questions are already answered. Velveteen starts earlier, at the point where the builder has a GitHub repo and needs the product to become legible enough to ship.",
+          "AI coding tools got good enough that a lot more people can build working software. They didn't make those same people into infrastructure operators. A repo can work on one laptop while still missing Docker, env docs, deploy standards, and any plain-language read on whether it's even safe to share.",
+          "Most deploy products start after those questions are already answered. Velveteen starts earlier, when you've got a GitHub repo and need it to become legible enough to ship.",
         ],
       },
       {
-        label: "Intervention",
-        title: "I turned deployment into a guided production review.",
+        label: "what i built",
+        title: "Deployment starts with production review.",
         body: [
-          "The product asks for a repo and a subdomain, then moves through a visible pipeline: clone, detect, scaffold, scan, explain, gate, deploy. Each stage produces an artifact the user can understand, not just a hidden build log.",
-          "The generated Dockerfile, standards file, and environment guide make the project easier for the next coding session to continue. Scanner findings become short explanations and repair prompts instead of a wall of terminal output.",
+          "The product asks for a repo and a subdomain, then walks through a visible pipeline: clone, detect, scaffold, scan, explain, gate, deploy. Each stage produces a readable artifact.",
+          "The generated Dockerfile, standards file, and env guide leave the project easier to pick back up next time you sit down with it. Scanner findings come back as short explanations and prompts you can paste straight into your coding tool.",
         ],
       },
       {
-        label: "Product shape",
-        title: "The launch path teaches the standard.",
+        label: "where the weight goes",
+        title: "The security pipeline is the point.",
         body: [
-          "I made the security pipeline the center of the product because launch without a fix path is theater. Gitleaks, Semgrep, Trivy, and Syft run before the public URL matters, and the UI keeps blocked states specific enough that a user can act.",
-          "The system uses stronger reasoning for codebase scaffolding and lighter reasoning for scanner explanations, which keeps the pipeline economical without flattening the work into canned feedback.",
+          "I put the security pipeline at the center of the product because deployment without a fix path is theater. Gitleaks, Semgrep, Trivy, and Syft run before the public URL matters, and the UI keeps blocked states specific enough that you actually know what to do next.",
+          "Under the hood, heavier reasoning runs on codebase scaffolding and lighter reasoning handles scanner explanations. That keeps the pipeline cheap to run without flattening everything into canned-feedback noise.",
         ],
       },
       {
-        label: "Outcome",
-        title: "The question changes from can it run to what should change before it is shared.",
+        label: "where it lands",
+        title: "The question changes from 'can it run' to 'what should change before I share it.'",
         body: [
-          "Velveteen gives AI-built apps a repeatable path from repository to live URL. More importantly, it creates a record of what the app needs to be operated, reviewed, and handed back into the build loop.",
+          "Velveteen gives AI-built apps a repeatable path from repo to live URL. More than that, it leaves a record of what the app actually needs to be operated, reviewed, and handed back into the next coding session.",
         ],
       },
     ],
@@ -101,7 +109,7 @@ export const workItems: WorkItem[] = [
       "Connected GitHub sign-in, repo selection, subdomain choice, deploy history, and live status screens into one launch flow.",
       "Built a seven-stage pipeline across clone, framework detection, scaffold, scan, explain, gate, and deploy.",
       "Paired a codebase-scaffolding model with a findings-explanation model so deep reasoning and high-volume interpretation stay separate.",
-      "Ran Gitleaks, Semgrep, Trivy, and Syft so security checks shape the path to launch instead of sitting outside it.",
+      "Ran Gitleaks, Semgrep, Trivy, and Syft so security checks shape the path to launch.",
     ],
     constraints: [
       "The user may lack Docker, TLS, scanner output, or environment variable context.",
@@ -140,6 +148,28 @@ export const workItems: WorkItem[] = [
         href: "https://velveteen.sh/about/under-the-hood",
       },
     ],
+    visuals: [
+      {
+        label: "Onboarding",
+        src: "/artifacts/velveteen-onboarding-review.png",
+        alt: "Velveteen onboarding review screen showing connected GitHub, chosen repo, subdomain, detected framework, and launch action.",
+        caption:
+          "The launch review collapses GitHub connection, repo selection, framework detection, and subdomain choice into one confirmation step.",
+        width: 760,
+        height: 760,
+        layout: "wide",
+      },
+      {
+        label: "Running pipeline",
+        src: "/artifacts/velveteen-running-pipeline.png",
+        alt: "Velveteen running pipeline screen showing completed clone and scaffold stages, a pre-build security warning, and an active build step.",
+        caption:
+          "The status screen turns infrastructure into visible progress: scaffold complete, security finding noted, build running, deploy path still in view.",
+        width: 760,
+        height: 620,
+        layout: "wide",
+      },
+    ],
   },
   {
     slug: "sbir-radar",
@@ -147,41 +177,41 @@ export const workItems: WorkItem[] = [
     eyebrow: "iOS, data pipeline, opportunity discovery",
     year: "2026",
     outcome:
-      "Federal R&D opportunities become fast mobile triage instead of portal archaeology.",
+      "Federal R&D opportunities become a fast mobile scan that replaces an afternoon in government portals.",
     vehicle:
-      "An iOS app and data pipeline that turn SBIR/STTR topics into searchable signals, deadlines, saved radars, and watchable opportunities.",
+      "An iOS app and data pipeline that turn SBIR and STTR topics into searchable signals: agency, deadline, funding range, and a plain summary you can read in line at a coffee shop.",
     role:
       "Product owner, iOS designer, SwiftUI builder, pipeline designer.",
     summary:
-      "SBIR Radar came from a live search problem: federal R&D topics matter, but discovery happens across dense portals, stale links, acronyms, and deadline pressure. The app turns that crawl into a short mobile briefing.",
+      "SBIR Radar came out of a real search problem I was running into myself. Federal R&D topics matter, but discovery happens across dense portals, stale links, agency acronyms, and deadline pressure. The app turns that crawl into a short mobile briefing.",
     sections: [
       {
-        label: "Situation",
+        label: "the wall",
         title: "Good opportunities were buried in bad reading conditions.",
         body: [
-          "SBIR and STTR topics can shape a company roadmap, but the discovery workflow asks founders to browse government portals like archivists. Topic pages mix agency language, shifting dates, inconsistent data, and long descriptions that rarely answer the first triage question: should I spend another hour on this?",
-          "I was navigating the process myself and wanted the first version to serve that pressure honestly. It had to help someone scan, compare, save, and return without pretending the source material was cleaner than it is.",
+          "SBIR and STTR topics can shape a company's roadmap, but the discovery workflow asks founders to browse government portals like archivists. Topic pages mix agency language, shifting dates, inconsistent data, and long descriptions that rarely answer the first triage question: should I spend another hour on this?",
+          "I was running this process myself and wanted the first version to serve that pressure honestly. It had to help me scan, compare, save, and return without pretending the source material was cleaner than it actually is.",
         ],
       },
       {
-        label: "Intervention",
+        label: "what i built",
         title: "I designed the app around triage, not database completeness.",
         body: [
-          "The iOS experience treats each topic as a signal. A user can scan agency, deadline, phase, funding range, source status, and a plain summary before opening the full government page.",
-          "Saved radars and watched opportunities create the loop: decide what matters, keep track of it, and come back when deadlines or source changes deserve attention.",
+          "The iOS experience treats each topic as a signal. You can scan agency, deadline, phase, funding range, source status, and a plain summary before opening the full government page.",
+          "Saved radars and watched opportunities close the loop: decide what matters, keep track of it, and come back when deadlines or source changes actually deserve attention.",
         ],
       },
       {
-        label: "System",
+        label: "the contract",
         title: "The product needed a clean contract over messy sources.",
         body: [
           "The pipeline normalizes public topic data into a contract the app can trust. When structured APIs failed, the source strategy shifted toward HTML fallback, fixture-backed development, and source-health language in the interface.",
-          "That choice kept the app moving while preserving honesty about the data. The product does not hide uncertainty; it shows the user what is known and where the official source still matters.",
+          "That choice kept the app moving while staying honest about the data. The product tells you what's known and where the official source still matters.",
         ],
       },
       {
-        label: "Outcome",
-        title: "Discovery becomes a repeatable scan instead of an occasional portal dive.",
+        label: "where it lands",
+        title: "Discovery becomes a repeatable scan.",
         body: [
           "SBIR Radar gives a founder, operator, or grant writer a faster way to decide which opportunities deserve desk research. The first version favors useful reading and watchable intent over accounts, collaboration, or monetization.",
         ],
@@ -189,6 +219,7 @@ export const workItems: WorkItem[] = [
     ],
     proof: [
       "Built an editorial iOS design system with feed rows, topic detail, deadline language, empty states, source-health labels, and snapshot coverage.",
+      "Redesigned the app around four native tabs: Signals, My Radars, Watchlist, and Settings.",
       "Modeled topics across pipeline, backend, and iOS so source changes can flow into the app without hand cleanup.",
       "Shipped a fixture-backed app foundation with real topics while external deployment credentials remained outside the product work.",
       "Used source health and fallback parsing when public SBIR APIs became unreliable.",
@@ -229,10 +260,48 @@ export const workItems: WorkItem[] = [
         href: "https://github.com/Mountain-Dr3w",
       },
     ],
-    image: {
-      src: "/artifacts/sbir-feed.png",
-      alt: "SBIR Radar iOS feed snapshot showing a NASA SBIR opportunity and deadline.",
-    },
+    visuals: [
+      {
+        label: "Signals",
+        src: "/artifacts/sbir-signals.png",
+        alt: "SBIR Radar iPhone Signals tab showing searchable funding opportunities, filters, and deadline language.",
+        caption:
+          "Searchable signal feed with filters, source labels, saved stars, and deadline language.",
+        width: 1206,
+        height: 2622,
+        layout: "phone",
+      },
+      {
+        label: "My Radars",
+        src: "/artifacts/sbir-my-radars.png",
+        alt: "SBIR Radar iPhone My Radars tab showing watched saved searches with match counts.",
+        caption:
+          "Saved searches become watched radars with agency, phase, keywords, and match counts.",
+        width: 1206,
+        height: 2622,
+        layout: "phone",
+      },
+      {
+        label: "Watchlist",
+        src: "/artifacts/sbir-watchlist.png",
+        alt: "SBIR Radar iPhone Watchlist tab showing an empty state for starred opportunities.",
+        caption:
+          "The watchlist keeps pursuit candidates separate from broad discovery.",
+        width: 1206,
+        height: 2622,
+        layout: "phone",
+      },
+      {
+        label: "Settings",
+        src: "/artifacts/sbir-settings.png",
+        alt: "SBIR Radar iPhone Settings tab showing source coverage, sync status, and notification controls.",
+        caption:
+          "Settings expose source coverage, sync state, and notification controls without burying source reliability.",
+        width: 1206,
+        height: 2622,
+        layout: "phone",
+      },
+    ],
   },
   {
     slug: "missionos-core",
@@ -240,51 +309,51 @@ export const workItems: WorkItem[] = [
     eyebrow: "Service design, platform strategy, GovTech",
     year: "2026",
     outcome:
-      "Delivery teams inherit a path to production instead of rebuilding one for each engagement.",
+      "Government delivery teams inherit a working path to production before each engagement rebuilds one by hand.",
     vehicle:
-      "A productized DevSecOps platform proof framed around environment standup, developer-led delivery, tenant onboarding, and reusable compliance.",
+      "An eight-week internal proof for a DevSecOps platform, built around the four things teams keep reinventing: environment standup, developer-led delivery, tenant onboarding, and reusable compliance.",
     role:
       "Service designer, acting product owner, artifact owner, stakeholder translator.",
     summary:
-      "MissionOS Core translated a recurring platform bottleneck into a product-shaped proof. The work focused on the path a delivery team inherits before mission code can move with confidence: developer touchpoints, tenant setup, delivery mechanics, and compliance evidence.",
+      "MissionOS Core was an eight-week internal proof against a recurring problem I'd watched a lot of teams hit: government delivery teams keep rebuilding the same setup work, including environments, access, compliance artifacts, and deployment paths, before anyone can write a line of mission code. The work mapped that path and showed how a platform could absorb most of it.",
     sections: [
       {
-        label: "Situation",
-        title: "Teams were losing momentum before the mission product started.",
+        label: "what was happening",
+        title: "Teams were losing momentum before the mission product even started.",
         body: [
-          "Government software teams often inherit the hardest parts of delivery as bespoke setup work: environments, access, compliance artifacts, deployment paths, and the operating rules around all of them. Each team can solve those pieces, but solving them from scratch burns time before the actual mission product gets traction.",
-          "I mapped the current-state developer path from pre-code through ongoing operations and marked which steps the platform should absorb, which steps a developer still owned, and which steps should disappear. That made the gap visible before the team argued about tools.",
+          "Government software teams often inherit the hardest parts of delivery as bespoke setup work: environments, access, compliance artifacts, deployment paths, and the operating rules around all of them. Each team can solve those pieces, but solving them from scratch every time burns weeks before the actual mission product gets any traction.",
+          "I mapped the current-state developer path from pre-code through ongoing operations and marked which steps the platform should absorb, which steps a developer still owned, and which steps should disappear. That made the gap visible before the team could fall into arguing about tools.",
         ],
       },
       {
-        label: "Intervention",
-        title: "I gave the proof four outcomes to organize around.",
+        label: "what i shaped",
+        title: "I gave the proof four things to organize around.",
         body: [
-          "During an eight-week surge, I shaped the work around repeatable environment standup, developer-led delivery, time to first tenant deploy, and reusable compliance. Those outcomes gave leadership, engineering, and compliance a shared way to judge progress.",
+          "During the eight-week surge, I shaped the work around repeatable environment standup, developer-led delivery, time to first tenant deploy, and reusable compliance. Those four gave leadership, engineering, and compliance a shared way to judge whether the work was moving.",
           "The tenant-path artifact turned the target state into a simple operating promise: the tenant submits intake, pushes source code, and iterates; the platform provisions environments, runs the delivery path, scans the app, and regenerates evidence as the product changes.",
         ],
       },
       {
-        label: "Tradeoffs",
+        label: "tradeoffs",
         title: "A credible proof had to choose the smaller path first.",
         body: [
-          "The target architecture needed room for stronger orchestration, but the surge window needed something teams could actually validate. We chose GitLab-native scaffolding for the proof and kept heavier platform moves as later hardening.",
-          "Compliance evidence moved to the promotion gate, and tenant provisioning stayed separate from app onboarding. Those boundaries kept different operating events from collapsing into one overloaded workflow while the proof stayed honest about what it could demonstrate.",
+          "The target architecture had room for stronger orchestration, but the surge window needed something teams could actually validate. We chose GitLab-native scaffolding for the proof and held heavier platform moves for later hardening.",
+          "Compliance evidence moved to the promotion gate, and tenant provisioning stayed separate from app onboarding. Those boundaries kept different operating events from collapsing into one overloaded workflow while the proof stayed honest about what it could actually demonstrate.",
         ],
       },
       {
-        label: "Outcome",
-        title: "The next owner inherited a product argument, not loose notes.",
+        label: "what got left behind",
+        title: "The next owner inherited something they could actually build on.",
         body: [
-          "The work left behind a bounded proof with explicit claims, risks, and phase lines. It showed how a delivery team could inherit more of the path to production while keeping public claims disciplined and implementation choices traceable.",
+          "The work left behind a bounded proof with explicit claims, risks, and phase lines. It showed how a delivery team could inherit more of the path to production while keeping public claims disciplined and the implementation choices traceable.",
         ],
       },
     ],
     proof: [
-      "Led an eight-week internal proof from problem framing through demo contract, architecture decisions, and outcome tracking.",
+      "Led an eight-week internal proof from problem framing through demo contract, architecture decisions, and progress tracking.",
       "Mapped current-state developer touchpoints across onboarding, repo setup, pipeline configuration, deployment, observability, and operations.",
-      "Defined four planning outcomes that sequenced the work and kept platform value separate from tool preference.",
-      "Authored architecture and decision artifacts that let the next product owner inherit context without relying on meeting memory.",
+      "Defined four planning goals that sequenced the work and kept platform value separate from tool preference.",
+      "Wrote the architecture and decision artifacts so the next product owner could inherit the context without relying on meeting memory.",
       "Kept public and internal claims bounded so leadership, engineering, and compliance could trust the proof.",
     ],
     constraints: [
@@ -296,7 +365,7 @@ export const workItems: WorkItem[] = [
       "Use GitLab-native scaffolding for the proof window and reserve heavier orchestration for later hardening.",
       "Put compliance artifacts at the promotion gate so onboarding stayed focused on launch momentum.",
       "Separate tenant provisioning from app onboarding to avoid coupling two different operating events.",
-      "Frame the tenant path as a split of responsibilities instead of a feature list: what tenants still do, what the platform absorbs, and what no longer needs to exist.",
+      "Frame the tenant path through responsibilities: what tenants still do, what the platform absorbs, and what no longer needs to exist.",
     ],
     artifacts: [
       {
@@ -308,7 +377,7 @@ export const workItems: WorkItem[] = [
       {
         label: "Tenant path",
         title: "The target state became a responsibility split",
-        body: "The slide separated what tenants do from what the platform handles, turning the proof into an operating model instead of a tool demo.",
+        body: "The slide separated what tenants do from what the platform handles, giving the proof an operating model with more weight than a tool demo.",
         meta: "Day 0 to operate",
       },
       {
@@ -347,94 +416,19 @@ export const workItems: WorkItem[] = [
       },
     ],
   },
+];
+
+export const writingItems: WritingItem[] = [
   {
-    slug: "seams",
     title: "Seams",
     eyebrow: "Writing, positioning, project memory",
-    year: "2026",
-    outcome:
-      "The designer-to-builder transition becomes visible while the work is still unfinished.",
-    vehicle:
-      "A writing site that documents technical decisions, design decisions, and the places where those become the same decision.",
-    role:
-      "Writer, editor, designer, builder.",
+    href: "https://seams.velveteen.sh",
     summary:
-      "Seams is the public notebook for the career transition I am making in real time. It documents what changes when design artifacts stop being only alignment tools and start helping software get built.",
-    sections: [
-      {
-        label: "Situation",
-        title: "The clean version of a transition usually arrives too late.",
-        body: [
-          "Designer-to-builder stories often get written after the uncertainty is gone. By then the useful parts disappear: the awkward first projects, the tools that pushed back, the moment a design decision became an implementation decision.",
-          "I wanted a public record that kept those details while they still had texture. The writing needed to sound like work in progress, not a personal-brand recap.",
-        ],
-      },
-      {
-        label: "Intervention",
-        title: "I built a quiet place for unfinished arguments.",
-        body: [
-          "Seams is a restrained MDX site for essays about building, product judgment, and artifacts written for both humans and models. The design keeps the surface sparse so each post can feel like a note from the workbench.",
-          "The site also gives Velveteen and this portfolio a clearer source of language. Instead of inventing a polished story later, the writing records the arguments as they form.",
-        ],
-      },
-      {
-        label: "Practice",
-        title: "The artifact became part of the operating system.",
-        body: [
-          "Writing changed how I made project docs. A useful artifact now has to help a teammate understand the choice and help a coding model continue the work without guessing.",
-          "That raises the bar for specificity. Vague strategy language breaks faster when the next reader is a person trying to ship or a model trying to edit code.",
-        ],
-      },
-      {
-        label: "Outcome",
-        title: "The transition has a memory while it is still moving.",
-        body: [
-          "Seams keeps the learning loop public. It captures the shift from shaping products at a distance to building the thing, watching it fail in specific ways, and improving the next artifact because of it.",
-        ],
-      },
-    ],
+      "Seams is where I write about the designer-to-builder transition while it's still messy: the awkward first projects, the tools that pushed back, and the moments where a design decision quietly became an implementation decision.",
     proof: [
-      "Published essays on becoming a builder, process identity, and artifacts written for both humans and models.",
-      "Built the site as a restrained MDX blog connected back to the Velveteen ecosystem.",
-      "Used the writing to clarify the thesis behind Velveteen and the portfolio: closer loops produce better outcomes.",
-      "Kept the voice specific to lived work, including the awkward parts of learning through shipped software.",
-    ],
-    constraints: [
-      "The writing cannot sound like a launch essay or a generic personal brand page.",
-      "The site needs to stay sparse enough that each post feels like a note from the workshop.",
-      "The public story should capture work in progress without cleaning the story until it loses value.",
-    ],
-    decisions: [
-      "Use a dark editorial surface, serif body type, and low-chrome navigation to keep attention on the argument.",
-      "Treat artifacts as shared memory instead of process theater.",
-      "Write before the story is finished so the useful mistakes remain visible.",
-    ],
-    artifacts: [
-      {
-        label: "Essay",
-        title: "Becoming a builder",
-        body: "The first post names the career shift from shaping work at a distance to building the thing and letting it push back.",
-        meta: "April 2026",
-      },
-      {
-        label: "Essay",
-        title: "The artifacts changed",
-        body: "Project docs now have two readers: teammates and models. That raises the standard for precision.",
-        meta: "April 2026",
-      },
-      {
-        label: "System",
-        title: "Writing as operating memory",
-        body: "The blog creates a public record of why design and implementation decisions moved together.",
-        meta: "MDX, Next.js",
-      },
-    ],
-    links: [
-      { label: "Read Seams", href: "https://seams.velveteen.sh" },
-      {
-        label: "Becoming a builder",
-        href: "https://seams.velveteen.sh/becoming-a-builder",
-      },
+      "Becoming a builder",
+      "The artifacts changed",
+      "Project memory for humans and models",
     ],
   },
 ];

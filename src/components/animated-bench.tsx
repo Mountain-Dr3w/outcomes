@@ -10,7 +10,7 @@ import { motion, useReducedMotion } from "motion/react";
 
 const stageItems = ["clone", "detect", "scaffold", "scan", "explain", "deploy"];
 
-const outcomeItems = [
+const proofItems = [
   ["Velveteen", "live app"],
   ["SBIR Radar", "mobile triage"],
   ["MissionOS", "inherited path"],
@@ -30,8 +30,8 @@ export function AnimatedBench() {
     <motion.div
       {...entrance}
       transition={{ type: "spring", stiffness: 90, damping: 20, delay: 0.12 }}
-      className="artifact-shadow relative min-h-[31rem] overflow-hidden border border-[var(--border)] bg-[rgba(24,23,22,0.82)] p-4 sm:min-h-[36rem] sm:p-5"
-      aria-label="Artifact bench previewing portfolio outcomes"
+      className="artifact-shadow relative min-h-[31rem] w-full min-w-0 max-w-full overflow-hidden border border-[var(--border)] bg-[rgba(24,23,22,0.82)] p-4 sm:min-h-[36rem] sm:p-5"
+      aria-label="Artifact bench previewing selected work"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,var(--accent),transparent)]" />
       <motion.div
@@ -47,16 +47,16 @@ export function AnimatedBench() {
         className="absolute left-[18%] top-12 h-48 w-48 rounded-full bg-[rgba(196,138,123,0.13)] blur-3xl"
       />
 
-      <div className="relative grid h-full gap-4 md:grid-cols-[1fr_0.82fr]">
-        <section className="paper-shadow flex min-h-[18rem] flex-col justify-between bg-[var(--paper)] p-5 text-[#211f1d] sm:p-6">
+      <div className="relative grid h-full min-w-0 gap-4 md:grid-cols-[1fr_0.82fr]">
+        <section className="paper-shadow flex min-h-[18rem] w-full min-w-0 max-w-full flex-col justify-between bg-[var(--paper)] p-5 text-[#211f1d] sm:p-6">
           <div>
-            <p className="font-mono text-xs text-[#7a7066]">outcome ledger</p>
+            <p className="font-mono text-xs text-[#7a7066]">artifact bench</p>
             <h2 className="mt-4 max-w-[13rem] font-serif text-4xl leading-[1.02] text-[#181716] sm:text-5xl">
-              Products are vehicles.
+              The work has receipts.
             </h2>
           </div>
           <div className="mt-10 divide-y divide-[#ded6cb] border-y border-[#ded6cb]">
-            {outcomeItems.map(([name, result], index) => (
+            {proofItems.map(([name, result], index) => (
               <motion.div
                 key={name}
                 initial={shouldReduceMotion ? false : { opacity: 0, x: -14 }}
@@ -67,7 +67,7 @@ export function AnimatedBench() {
                   damping: 18,
                   delay: 0.18 + index * 0.08,
                 }}
-                className="grid grid-cols-[1fr_auto] gap-4 py-3 font-mono text-xs"
+                className="grid grid-cols-1 gap-1 py-3 font-mono text-xs sm:grid-cols-[1fr_auto] sm:gap-4"
               >
                 <span className="text-[#5d554d]">{name}</span>
                 <span className="text-[#a95725]">{result}</span>
@@ -154,7 +154,7 @@ export function AnimatedBench() {
 
       <div className="absolute bottom-4 left-4 flex items-center gap-2 font-mono text-[0.7rem] text-[var(--text-faint)]">
         <GitBranch aria-hidden="true" size={14} weight="regular" />
-        <span>outcomes / main</span>
+        <span>drew / work</span>
       </div>
     </motion.div>
   );

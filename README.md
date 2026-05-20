@@ -1,8 +1,8 @@
-# Outcomes
+# Drew McFarland Portfolio
 
 Portfolio webapp for Drew McFarland.
 
-Thesis: Drew ships outcomes. Products are the vehicle.
+Thesis: concrete work should make the result obvious without naming it too hard.
 
 ## Stack
 
@@ -19,7 +19,8 @@ Thesis: Drew ships outcomes. Products are the vehicle.
 - `/work/velveteen`
 - `/work/sbir-radar`
 - `/work/missionos-core`
-- `/work/seams`
+
+Writing lives on the home page under `#writing` and links out to Seams.
 
 ## Local Development
 
