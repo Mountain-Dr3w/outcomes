@@ -179,12 +179,7 @@ export const workItems: WorkItem[] = [
         body: "Saved radars match new topics against the criteria you care about. The watchlist surfaces them when deadlines or source state shifts.",
       },
     ],
-    links: [
-      {
-        label: "GitHub owner",
-        href: "https://github.com/Mountain-Dr3w",
-      },
-    ],
+    links: [],
     visuals: [
       {
         label: "Signals",
