@@ -227,33 +227,36 @@ export const workItems: WorkItem[] = [
       "Government delivery teams get a reusable path to production instead of rebuilding setup work for every engagement.",
     role: "Product strategy",
     summary:
-      "MissionOS Core was an eight-week internal proof I led for a recurring GovTech delivery problem: government software teams kept burning the first weeks of an engagement rebuilding the same delivery setup before any mission product could start. Environments, access, pipelines, deployment paths, compliance artifacts. Every team solved these from scratch, every time. The proof was supposed to show what that work amounted to, and what a shared platform could take on instead.",
+      "MissionOS Core is Rise8's bet on a pre-authorized, multi-tenant delivery platform for government software teams. The problem it addresses is structural. Every engagement had been rebuilding its own infrastructure, security pipeline, and compliance foundation from scratch, burning 12 to 18 months and most of the program budget before any mission code shipped. I led an eight-week surge from problem definition through internal proof, as service designer and acting product owner, with one question to answer: could we trust the platform enough to put it in front of a real delivery team for the next engagement.",
     sections: [
       {
-        title: "I started by mapping the parts that were already happening",
+        title: "I made the cost of the status quo legible before pitching the platform",
         body: [
-          "Before I could argue for a platform, I had to show what teams were already doing without one. I mapped the developer journey across six touchpoints (onboarding, repo setup, pipeline configuration, deployment, observability, and operations) and tagged each step with what the platform should take over, what developers should still own, and what should disappear entirely. The map was the first thing that made the conversation move. Until then, leadership, engineering, and compliance had been talking about a 'platform' that meant different things to each of them. The map was the same diagram in all three rooms.",
+          "The case for MissionOS Core had to start with numbers, because the rebuild-from-scratch pattern had become invisible to the people repeating it. Teams were spending more than half their first six to nine months on path-to-production infrastructure. Time to first mission outcome in production sat at 211 days and was trending the wrong way. 38% of active project teams had been running nine to twelve months without an authorized path to production. The most public case was FORGE: $12.6M over 351 days, zero approved outcomes. The inherited-environment story was the opposite. 42% of 2025 outcomes came from teams that started with a path to production already standing, and 67% when you counted every team that began the year inside an authorized environment. The math was direct. Inherited paths produce more outcomes, faster. The surge existed to test whether a shared platform could make that inheritance the default for the next engagement.",
+          "I framed the eight weeks as a time-boxed experiment with explicit hypotheses and a customer-zero validation model held by a skeptical evaluator. The surge would prove internal viability. It would not prove external adoption, AO acceptance across programs, or the 180-day guarantee as a contract term. Conflating those would have burned credibility with the technical team and with leadership before week three.",
         ],
       },
       {
-        title: "The four goals were how we kept the proof honest",
+        title: "I planned the surge around four outcomes",
         body: [
-          "The work could have stretched in any direction, so I anchored the eight weeks around four planning goals: repeatable environment standup, developer-led delivery, time to first tenant deploy, and reusable compliance. Each one was something we could either demonstrate or fail to demonstrate. That mattered more than it sounds. It meant leadership couldn't push the proof to claim things we hadn't shown, and engineering couldn't disappear into tooling preferences that had nothing to do with platform value. The goals separated 'this is the path' from 'this is the toolchain I happen to like.'",
-          "The same discipline shaped the demo. The team wanted the demo to do double duty as a marketing artifact, which is how internal proofs become public claims you regret later. I built a demo contract that distinguished internal evidence (what we were learning) from external claims (what we were allowed to say outside the room). It was unglamorous and probably the most useful thing I produced that quarter.",
+          "The four were Repeatable Environment Standup, Developer-Led Delivery, Time to First Tenant Deploy, and Reusable Compliance. The order mattered. There's no pipeline to test until environments stand up, and no onboarding metric to measure until something exists for tenants to onboard into.",
+          "Each outcome was something the surge could either demonstrate or fail to demonstrate. That distinction mattered more than it sounds. It meant leadership couldn't push the proof to claim things we hadn't shown, and engineering couldn't disappear into tooling preferences with no link to platform value. When someone proposed adopting Kratix during the surge, the test was whether it eliminated more surge work than it created. It didn't, so we stayed on GitLab-native scaffolding and parked Kratix as post-surge work. The same test settled the build path: Shipwright with Paketo buildpacks, Buildah as a fallback if the Rego policy migration stalled. The Rego migration was the single highest-risk item in the surge, and the team needed a path that didn't block the benchmark if it slipped.",
+          "The same discipline shaped the demos. Multiple external commitments were competing for the team's attention: an OUSD A&S capabilities overview tied to an OTA solicitation, a proposed Prodacity workshop, a stack of internal town halls. The risk was that internal evidence (what we were learning) would silently become external claims (what leadership felt free to say in those rooms). I wrote a demo contract that defined what each demo would and would not claim, in writing, before it happened. When a senior stakeholder floated a public narrative that overclaimed the compliance work, I pushed back with specifics about which claims the technical data did and did not support, and which people needed to weigh in before the framing locked.",
         ],
       },
       {
-        title: "What got left behind was the point",
+        title: "A path the next owner could pick up",
         body: [
-          "Internal proofs often end with a slide deck and a vague handoff. This one ended with a tenant path artifact and a stack of decision records. The tenant path split responsibilities by owner: tenants still submit intake, push code, and iterate; the platform provisions environments, runs delivery, scans the app, and regenerates compliance evidence as the product changes. That separation was the operating model itself. The diagram showed which work belonged to which side and what could be safely retired.",
-          "The decision records were just as important. The next owner could pick up what we'd tried, what we'd ruled out, and what was still soft, without having to reconstruct it from meeting memory. The proof gave leadership enough to commit to a real product investment without losing the discipline of what we hadn't yet shown.",
+          "The customer-zero check kept the surge from grading its own homework. Mike Gehard held the acceptance criteria: deploy Spring Pet Clinic in three steps. Stand up an instance, push code and see it deployed, make a change and see it reflected. Mike ran the path himself. Manual interventions got reported, not papered over. The Week 3 demo showed environments standing in the new stack, Pet Clinic deploying end-to-end through GitLab-native automation, and a precise list of what was still hand-rolled.",
+          "The artifacts mattered as much as the demo. The formal PO was split across other priorities, the technical PM hire was still open, and I knew I wouldn't be the one running this past the surge. So every record had to work as a steering tool, not just documentation. The architecture document recorded the target state, then made explicit per layer which parts were surge dependencies and which were post-surge hardening. The risk register named eleven risks, each with a mitigation and an escalation trigger. The compliance work split platform posture (CMMC L2 to L3) from app-level posture (IL5 inheritable, IL6 with air-gap + CNAP), which unblocked a set of decisions that had been stuck under \"everything must be IL5\" for weeks. ELK came out of the stack and took roughly $900K a year in licensing with it, replaced by the Grafana/Loki/Mimir setup the platform was already running.",
+          "The FORGE anti-patterns got named and used as live evaluation criteria throughout the surge. Demo-driven development. Tool-first architecture. Overclaiming capability before validation. \"Curiosity and startup vibes\" as a substitute for thinking from the tenant's perspective. Catching those patterns early was as much of the work as the architecture, because the next owner would inherit whichever ones survived.",
         ],
       },
     ],
     artifacts: [
       {
         label: "Touchpoints",
-        body: "Current-state map across six developer phases, tagged with what the platform should take over, what developers keep, and what disappears.",
+        body: "Current-state DevEx map across the developer journey. Each phase tagged with what the platform should take over, what developers keep, and what disappears.",
       },
       {
         label: "Tenant path",
@@ -261,7 +264,7 @@ export const workItems: WorkItem[] = [
       },
       {
         label: "Demo contract",
-        body: "A written distinction between internal evidence and external claims, so leadership could share results without overstating them.",
+        body: "Written rules for what each demo would and would not claim, so internal proof points couldn't silently become external commitments.",
       },
     ],
     visuals: [
