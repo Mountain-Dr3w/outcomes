@@ -39,20 +39,47 @@ export default function Home() {
           </nav>
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[0.46fr_0.54fr]">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[0.34fr_0.66fr]">
           <div>
             <h1 className="max-w-lg font-serif text-4xl font-light italic leading-tight text-[var(--text-primary)] sm:text-5xl">
               outcomes over everything.
             </h1>
           </div>
 
-          <div className="max-w-3xl space-y-5 font-serif text-lg leading-8 text-[var(--text-secondary)] sm:text-xl sm:leading-9">
-            <p>
-              I&apos;ve spent enough years watching good-looking work fail to
-              land that I&apos;ve stopped trusting the artifact. I plan around
-              the outcome. If a project shipped and the way people work
-              didn&apos;t change, I count it as a miss.
-            </p>
+          <div className="max-w-3xl space-y-8">
+            <div className="space-y-5 font-serif text-lg leading-8 text-[var(--text-secondary)] sm:text-xl sm:leading-9">
+              <p>
+                I&apos;ve spent enough years watching good-looking work fail to
+                land that I&apos;ve stopped trusting the artifact. I plan around
+                the outcome. If a project shipped and the way people work
+                didn&apos;t change, I count it as a miss.
+              </p>
+            </div>
+            <dl className="grid grid-cols-[6rem_1fr] gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 font-mono text-xs">
+              <dt className="text-[var(--text-muted)]">role</dt>
+              <dd className="text-[var(--text-primary)]">
+                Sr Product Designer and Product Lead, Rise8
+              </dd>
+              <dt className="text-[var(--text-muted)]">background</dt>
+              <dd className="text-[var(--text-primary)]">
+                Nine years on GovTech and defense platforms, mostly at Kessel
+                Run, now at Rise8
+              </dd>
+              <dt className="text-[var(--text-muted)]">clearance</dt>
+              <dd className="text-[var(--text-primary)]">
+                Active Secret, USAF veteran
+              </dd>
+              <dt className="text-[var(--text-muted)]">open to</dt>
+              <dd className="text-[var(--text-primary)]">
+                Senior IC and design leadership roles.{" "}
+                <a
+                  href="mailto:drewjmcfarland@live.com"
+                  className="text-[var(--accent)] underline-offset-4 hover:underline"
+                >
+                  drewjmcfarland@live.com
+                </a>
+              </dd>
+            </dl>
           </div>
         </div>
       </header>

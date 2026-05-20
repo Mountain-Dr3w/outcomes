@@ -227,12 +227,12 @@ export const workItems: WorkItem[] = [
       "Government delivery teams get a reusable path to production instead of rebuilding setup work for every engagement.",
     role: "Product strategy",
     summary:
-      "MissionOS Core is a pre-authorized, multi-tenant delivery platform for government software teams. The problem it addresses is structural. Every engagement had been rebuilding its own infrastructure, security pipeline, and compliance foundation from scratch, burning 12 to 18 months and most of the program budget before any mission code shipped. I led an eight-week surge from problem definition through internal proof, as service designer and acting product owner, with one question to answer: could we trust the platform enough to put it in front of a real delivery team for the next engagement.",
+      "MissionOS Core is a pre-authorized, multi-tenant delivery platform for government software teams. The problem it addresses is structural. Every engagement had been rebuilding its production environment from scratch, including the security pipeline and compliance posture, and burning 12 to 18 months and most of the program budget before any mission code shipped. I led an eight-week surge from problem definition through internal proof, as service designer and acting product owner, with one question to answer: could we trust the platform enough to put it in front of a real delivery team for the next engagement.",
     sections: [
       {
-        title: "I made the cost of the status quo legible before pitching the platform",
+        title: "I put a number on the status quo before pitching the platform",
         body: [
-          "The case for the platform had to start with numbers, because the rebuild-from-scratch pattern had become invisible to the people repeating it. Teams were spending more than half their first six to nine months on path-to-production infrastructure. Time to first mission outcome in production sat at 211 days and was trending the wrong way. 38% of active project teams had been running nine to twelve months without an authorized path to production. The most expensive case in the portfolio had burned $12.6M over 351 days with zero approved outcomes. The inherited-environment story was the opposite. 42% of 2025 outcomes came from teams that started with a path to production already standing, and 67% when you counted every team that began the year inside an authorized environment. The math was direct. Inherited paths produce more outcomes, faster. The surge existed to test whether a shared platform could make that inheritance the default for the next engagement.",
+          "The case for the platform had to start with numbers, because the rebuild-from-scratch pattern had become invisible to the people repeating it. Teams were spending more than half their first six to nine months on path-to-production infrastructure. Time to first mission outcome in production sat at 211 days and was trending the wrong way. 38% of active project teams had been running nine to twelve months without an authorized path to production. The most expensive case in the portfolio had burned $12.6M over 351 days with zero approved outcomes. The inherited-environment side told a different story. 42% of 2025 outcomes came from teams that started with a path to production already standing, and 67% when you counted every team that began the year inside an authorized environment. Inherited paths produced more outcomes, faster, and the surge existed to test whether a shared platform could make that inheritance the default for the next engagement.",
           "I framed the eight weeks as a time-boxed experiment with explicit hypotheses and a customer-zero validation model held by a skeptical reviewer. The surge would prove internal viability. It would not prove external adoption, broad compliance acceptance, or the 180-day guarantee as a contract term. Conflating those would have burned credibility with the technical team and with leadership before week three.",
         ],
       },
@@ -241,14 +241,14 @@ export const workItems: WorkItem[] = [
         body: [
           "The four were Repeatable Environment Standup, Developer-Led Delivery, Time to First Tenant Deploy, and Reusable Compliance. The order mattered. There's no pipeline to test until environments stand up, and no onboarding metric to measure until something exists for tenants to onboard into.",
           "Each outcome was something the surge could either demonstrate or fail to demonstrate. That distinction mattered more than it sounds. It meant leadership couldn't push the proof to claim things we hadn't shown, and engineering couldn't disappear into tooling preferences with no link to platform value. When someone proposed swapping in a new orchestration layer mid-surge, the test was whether it eliminated more surge work than it created. It didn't, so we stayed on the existing scaffolding and parked the new layer as post-surge work. The same test settled the build path: a cloud-native buildpack approach as the primary, a traditional container build as a fallback if the policy-engine migration stalled. The policy migration was the single highest-risk item in the surge, and the team needed a path that didn't block the benchmark if it slipped.",
-          "The same discipline shaped the demos. Multiple external commitments were competing for the team's attention: a capabilities overview tied to a procurement vehicle, a proposed external workshop, a stack of internal town halls. The risk was that internal evidence (what we were learning) would silently become external claims (what leadership felt free to say in those rooms). I wrote a demo contract that defined what each demo would and would not claim, in writing, before it happened. When a senior stakeholder floated a public narrative that overclaimed the compliance work, I pushed back with specifics about which claims the technical data did and did not support, and which people needed to weigh in before the framing locked.",
+          "The same discipline shaped the demos. Several external commitments were pulling at the team's calendar. A capabilities overview tied to a procurement vehicle. A proposed external workshop. A run of internal town halls. The risk was that internal evidence (what we were learning) would silently become external claims (what leadership felt free to say in those rooms). I wrote a demo contract that defined what each demo would and would not claim, in writing, before it happened. When a senior stakeholder floated a public narrative that overclaimed the compliance work, I pushed back with specifics about which claims the technical data did and did not support, and which people needed to weigh in before the framing locked.",
         ],
       },
       {
-        title: "A path the next owner could pick up",
+        title: "Building for the next owner",
         body: [
           "The customer-zero check kept the surge from grading its own homework. Acceptance was a small reference app, deployed in three steps. Stand up an instance, push code and see it deployed, make a change and see it reflected. The reviewer ran the path themselves, and manual interventions got reported instead of papered over. The Week 3 demo showed environments standing in the new stack, the reference app deploying end-to-end through the platform's own automation, and a precise list of what was still hand-rolled.",
-          "The artifacts mattered as much as the demo. The formal product owner was split across other priorities, the technical PM hire was still open, and I knew I wouldn't be the one running this past the surge. So every record had to work as a steering tool, not just documentation. The architecture document recorded the target state, then made explicit per layer which parts were surge dependencies and which were post-surge hardening. The risk register named eleven risks, each with a mitigation and an escalation trigger. The compliance work split platform-level posture from app-level posture, which unblocked a set of decisions that had been stuck for weeks under a one-size-fits-all framing. A licensed logging stack came out of the architecture and took roughly $900K a year in license fees with it, replaced by the open-source observability tools the platform was already running.",
+          "The artifacts mattered as much as the demo. The formal product owner was split across other priorities, the technical PM hire was still open, and I knew I wouldn't be the one running this past the surge. Every record had to function as a steering tool. Documentation alone wouldn't do. The architecture document recorded the target state, then called out per layer which parts were surge dependencies and which were post-surge hardening. The risk register named eleven risks, each with a mitigation and an escalation trigger. The compliance work split platform-level posture from app-level posture, which unblocked a set of decisions that had been stuck for weeks under a one-size-fits-all framing. A licensed logging stack came out of the architecture and took roughly $900K a year in license fees with it, replaced by the open-source observability tools the platform was already running.",
           "The anti-patterns from that most expensive case got named and used as live evaluation criteria throughout the surge. Demo-driven development. Tool-first architecture. Overclaiming capability before validation. Treating curiosity and startup energy as a substitute for thinking from the tenant's perspective. Catching those patterns early was as much of the work as the architecture, because the next owner would inherit whichever ones survived.",
         ],
       },
@@ -299,34 +299,43 @@ export const workItems: WorkItem[] = [
   {
     slug: "forge",
     title: "FORGE",
-    eyebrow: "Service design, DevSecOps, onboarding",
+    eyebrow: "Service design at Rise8 · Space Force DevSecOps",
     year: "2026",
     outcome:
-      "Space Force application teams moved from opaque platform onboarding toward visible status, ownership, support routes, and self-service access.",
+      "Onboarding to a Space Force platform got a visible spine. Tenant teams could see where they were, who owned the next step, and what they could do without waiting on someone else.",
     role: "Service design",
     summary:
-      "FORGE is a cloud platform and DevSecOps environment for Space Force application teams. I came in as a service designer when the platform itself was working but the tenant experience around it was a mess. Five internal teams owned different phases of onboarding, and a tenant moving through the system had to figure out for themselves which team owned what came next. The target was for a new tenant to be productive within a week. Real paths could stretch into months.",
+      "FORGE is a Space Force ground systems platform that needed a real path to production for the application teams trying to use it. Rise8 was brought in to build that path. I joined the engagement as the service designer. The individual pieces of the platform mostly worked. The seams between them did not. Five internal teams owned different phases of onboarding, multiple outside contractors had overlapping responsibilities with no shared tooling, and tenants moving through the system had to figure out for themselves who owned what came next. New teams were supposed to be productive in a week. Real onboarding could stretch into months.",
     sections: [
       {
-        title: "I had to make the whole journey visible before anything else",
+        title: "Mapping the journey before anything else",
         body: [
-          "You can't redesign what you can't see. The first thing I did was map the tenant journey end to end as a service blueprint, across seventeen phases from initial intake through production deployment. The blueprint showed four lanes for each phase: what the tenant was doing, what was visible to them, what was happening backstage, and which support systems were in play. Until that artifact existed, the five internal teams had been having the same conversations about onboarding for months without realizing they were each describing different segments of the same broken path.",
-          "I ran event storming sessions alongside the blueprint to map the internal operating flow. The Domain-Driven Design framing exposed something specific: the platform depended on tacit knowledge at most of its transition points. Tenants couldn't navigate the system because the system, internally, was a chain of human handoffs that assumed everyone already knew how it worked.",
+          "You can't redesign what you can't see. The first artifact I built was a service blueprint of the tenant journey end to end, seventeen phases from initial intake through production deployment. Four lanes per phase: what the tenant was doing, what was visible to them, what was happening backstage, and which support systems were in play. Until the blueprint existed, the internal teams had been having the same onboarding conversations for months without realizing they were each describing different segments of the same path.",
+          "I ran event storming sessions in parallel to map the operating flow on the inside. The Domain-Driven Design framing surfaced something specific. The platform depended on tacit knowledge at almost every transition point. Tenants couldn't navigate the system because the system, internally, was a chain of human handoffs that assumed everyone already knew how it worked.",
+          "The work happened inside a multi-contractor reality. Several organizations shared responsibility for different parts of the platform with no shared tooling and no shared vocabulary. The blueprint became the first place anyone could point to and say, 'this phase belongs to your team, and here is where the handoff to mine is failing.'",
         ],
       },
       {
-        title: "The friction log turned pain into something the teams could prioritize",
+        title: "The friction log",
         body: [
-          "Most platform teams hear tenant complaints as anecdotes. I wanted them to read them as data. So I built a friction log with four columns: owning team, UX impact severity, breakage risk, and rationale. Every documented pain point had to go through those four fields before it could be discussed. That changed the meeting. Conversations stopped being 'a tenant complained about X' and started being 'this is a high-severity issue with breakage risk, owned by this team, and here's why it matters.'",
-          "The log surfaced repeated patterns that the five lanes had been treating as their own problems: outage communication gaps, unclear support ownership, limited tenant access to pairing rooms, undocumented ArgoCD expectations, Docker folder conventions that worked for the internal team but failed silently for tenants. These weren't five disconnected issues. They were the same issue in different costumes. The pattern was that internal practices had become invisible requirements for external tenants.",
+          "Platform teams tend to hear tenant complaints as anecdotes. I wanted them to read them as data. So I built a friction log with four columns: owning team, UX impact severity, breakage risk, and rationale. Every documented pain point had to go through those four fields before it could be discussed in a meeting.",
+          "That changed the conversation. 'A tenant complained about X' became 'this is a high-severity issue with breakage risk, owned by your team, and here is why.' The log also surfaced repeating patterns that each lane had been treating as their own local problem. Outage communication gaps. Unclear support ownership. Undocumented ArgoCD expectations. Docker folder conventions that worked for the internal team but failed silently for tenants. The patterns shared a root. Internal practices had quietly become unspoken requirements for the people on the outside.",
         ],
       },
       {
-        title: "The portal turned status into the answer to three questions",
+        title: "The portal concept",
         body: [
-          "By the time the portal concept came together, I knew what tenants needed and couldn't get. They needed to know where they were in the process, who currently owned the next step, and what they could do right now without waiting on anyone. The portal answered those three questions on every screen. Status, ownership, and next action were the spine of the design, and every other piece of information sat in support of those three.",
-          "The services hub did something parallel for the tools. GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements had all existed before, but they had been a scavenger hunt through documentation and tribal knowledge. The hub made the full toolkit visible from one place, with the access state shown alongside each one. The platform stopped looking like six unrelated systems that happened to share users.",
-          "None of this changed the platform's internal architecture. What it changed was the gap between what the platform was capable of and what tenants could see, find, and act on. That gap was where the months were getting lost.",
+          "By the time the portal concept came together, I knew what tenants needed and couldn't get. Where am I in the process. Who owns the next step. What can I do right now without waiting on anyone. The portal was built around those three questions. Status, ownership, and next action were the spine of the design, and every other piece of information sat in support of them.",
+          "The services hub did something parallel for the tools. GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements had all existed before. Tenants found them through documentation and tribal knowledge, in that order. The hub put the full toolkit on one screen, with each tool's access state shown next to it. The platform stopped looking like six unrelated systems that happened to share users.",
+          "None of this changed the platform's internal architecture. What it changed was how much of the platform's actual capability tenants could see and act on. That gap was where the months were getting lost.",
+        ],
+      },
+      {
+        title: "What I'd do differently",
+        body: [
+          "Two patterns I'd handle earlier next time.",
+          "Bring tenant teams into the design work from week one. The internal retrospective on the engagement landed on the same point. Client enablement started too late, and you build a handoff problem into the work when you don't include the people who'll own it after you leave. The friction log was a good forcing function but it came from research with tenants, not collaboration with them. The next version of this work would put a tenant team in the room while the log was being built.",
+          "Don't assume visibility alone shortens the timeline. Making the journey visible was necessary but not sufficient. A lot of what the blueprint exposed was structural. Manual provisioning that runs serially across several tools and takes weeks. Licensing constraints that prevent parallel work. Compliance scoping that lands after a project is already underway. A portal can show you that you're waiting. It can't make the wait shorter. The portal concept needed a companion roadmap for the automation work that would actually compress the timeline, and I'd start that earlier in the next engagement.",
         ],
       },
     ],
@@ -337,14 +346,19 @@ export const workItems: WorkItem[] = [
       },
       {
         label: "Friction log",
-        body: "Four columns (owning team, UX impact severity, breakage risk, rationale) turned scattered complaints into a prioritization queue with names on it.",
+        body: "Each row scored against owning team, UX impact severity, breakage risk, and rationale. The columns kept meetings on the issues that ranked highest rather than the ones argued loudest.",
       },
       {
         label: "Portal",
         body: "A tenant-facing view designed around three questions: where am I, who owns the next step, what can I do right now.",
       },
     ],
-    links: [],
+    links: [
+      {
+        label: "Rise8",
+        href: "https://www.rise8.us",
+      },
+    ],
     visuals: [
       {
         label: "Service blueprint",
@@ -371,7 +385,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-friction-log.png",
         alt: "FORGE friction log categorizing onboarding pain points by owner, impact, breakage risk, and rationale.",
         caption:
-          "The friction log. Each row is a tenant pain point with the owning team, UX impact severity, breakage risk, and rationale. The columns are why meetings stopped being about anecdotes.",
+          "The friction log. Each row is a tenant pain point with the owning team, UX impact severity, breakage risk, and rationale. The columns kept meetings on the issues that ranked highest instead of the ones argued loudest.",
         width: 4096,
         height: 2209,
         layout: "landscape",
@@ -391,7 +405,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-portal-services.png",
         alt: "FORGE platform services hub showing tenant access to development tools and services from a single dashboard.",
         caption:
-          "The services hub. One screen for the tenant toolkit (GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, SD Elements) with the tenant's access state shown alongside each. The hub replaced the scavenger hunt with a directory.",
+          "The services hub. One screen for the tenant toolkit (GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, SD Elements) with the tenant's access state shown alongside each. Tenants no longer needed to hunt through documentation to find which tools they had access to.",
         width: 4096,
         height: 2277,
         layout: "landscape",
