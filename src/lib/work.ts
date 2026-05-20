@@ -81,95 +81,43 @@ export const workItems: WorkItem[] = [
     year: "2026",
     outcome:
       "AI-built apps get a repeatable path from GitHub repo to live, scanned URL.",
-    vehicle:
-      "You connect a GitHub repo and pick a subdomain. Velveteen detects the framework, generates missing infra files, runs security checks, explains findings, gates unsafe launches, and deploys the app.",
-    vehicleLabel: "operating path",
     role: "Product design + full-stack build",
     summary:
-      "Velveteen is a product I designed and built for the handoff after an AI-built app starts working locally but before it is safe or legible enough to share. It turns that gap into a visible launch pipeline with generated operating docs and security findings the user can act on.",
-    snapshot: [
-      {
-        label: "What it is",
-        body: "A GitHub-to-live-URL deployment product for AI-built apps that are working locally but missing production scaffolding.",
-      },
-      {
-        label: "Impact",
-        body: "Turned deployment into a seven-stage review path with Docker and env docs, security scans, fix prompts, and a launch gate.",
-      },
-      {
-        label: "My role",
-        body: "Designed and built the repo intake, launch review, pipeline status, scanner explanations, blocked-state flow, and deployment path.",
-      },
-      {
-        label: "Key artifacts",
-        body: "Launch review, running pipeline, scanner explanations, generated Dockerfile, standards file, and env guide.",
-      },
-    ],
+      "Velveteen is the product I built for the awkward middle of AI-assisted development. The code runs locally. The project isn't ready for someone else. There's no Dockerfile, no env docs, no honest read on whether shipping it would leak secrets. I kept hitting that spot in my own projects and watching other people stall there too. The tools that got us to working-locally had nothing to say about getting out of it.",
     sections: [
       {
-        label: "the gap",
-        title: "A local app still needs a launch path.",
+        title: "What was actually broken",
         body: [
-          "AI coding tools made working local software easier to create. They did not make every builder an infrastructure operator. A repo can run on one laptop while still missing Docker, env docs, deploy standards, and any plain-language read on whether it is safe to share.",
+          "The framing I started with was that AI coding tools made building easier without making operating easier. That undersells it. You can install Trivy. You can write a Dockerfile. The deeper problem is that if you reached a working app by chatting your way through it, you don't have the muscle for any of that, and you don't have a clear next step either. The repo runs. It's also full of secrets in the wrong places, dependencies you never picked, and no documentation explaining how to bring it back up next month. The gap between \"I have code\" and \"I have a thing I can deploy\" is wider than it reads.",
         ],
       },
       {
-        label: "what i built",
-        title: "I designed and built the launch path around production review.",
+        title: "I built it around the security review",
         body: [
-          "I built the product around a repo and subdomain intake, then a visible seven-checkpoint path through clone, detect, scaffold, scan, explain, gate, and deploy. Each stage produces a readable artifact instead of hiding infrastructure work behind a spinner.",
-          "The system generates three operating artifacts before launch: a Dockerfile, standards file, and env guide. Scanner explanations and fix prompts sit beside those files so the repo is easier to reopen in the next coding session.",
+          "The early decision that mattered most was making the security work visible. Most deployment products hide infrastructure so you don't have to think about it. I wanted the opposite: a pipeline you can watch, with a real pause for findings before anything goes live.",
+          "The path is seven stages: clone, detect, scaffold, scan, explain, gate, deploy. Each one produces something you can look at. The scaffold step writes a Dockerfile, a standards file, and an env guide into your repo, so the project is more legible when you come back to it. The scan step runs four tools. Gitleaks looks for secrets, Semgrep checks the source, Trivy scans the container, Syft produces the SBOM. The explain step is the one I care about most. Scanner output is usually unreadable. This step turns it into something a person can read, alongside a prompt you can paste back into your coding assistant to fix what it found.",
+          "Two models do the work, not one. A bigger model handles scaffolding, where reasoning matters. A smaller, cheaper one handles explanations, which are high volume. Splitting them kept costs sane.",
         ],
       },
       {
-        label: "where the weight goes",
-        title: "The security pipeline is the point.",
+        title: "What I'm still figuring out",
         body: [
-          "I put security before the public URL because a deploy flow without a fix path is not enough. Four scan types shape the launch decision: secrets, static analysis, container risk, and SBOM review through Gitleaks, Semgrep, Trivy, and Syft.",
+          "The pipeline shape is settled. Seven stages, the gate, the artifacts on the side. What I'm watching is the explanation layer. The four scans produce findings of very different shapes. A leaked AWS key reads nothing like a vulnerable Python dependency, and the model translating them into plain language has a much easier time with some than others. If the next version of Velveteen lives or dies, it's there.",
         ],
       },
-      {
-        label: "where it lands",
-        title: "The launch question gets sharper.",
-        body: [
-          "Velveteen changes the question from whether an app can run to what should change before someone else uses it. The launch leaves behind a record of operating needs, findings, fixes, and deployment state.",
-        ],
-      },
-    ],
-    proof: [
-      "Connected GitHub sign-in, repo selection, subdomain choice, deploy history, and live status screens into one launch flow.",
-      "Built a seven-stage pipeline across clone, framework detection, scaffold, scan, explain, gate, and deploy.",
-      "Paired a codebase-scaffolding model with a findings-explanation model so deep reasoning and high-volume interpretation stay separate.",
-      "Ran Gitleaks, Semgrep, Trivy, and Syft so security checks shape the path to launch.",
-    ],
-    constraints: [
-      "The user may lack Docker, TLS, scanner output, or environment variable context.",
-      "Every blocking state needs a next action the user can hand back to their coding tool.",
-      "The first version has to stay small enough to run on lean infrastructure and expose real deployment behavior.",
-    ],
-    decisions: [
-      "Make the security pipeline the product edge. Deployment alone leaves the user without a fix path.",
-      "Use one Next.js app, a worker, Postgres, Docker, and Caddy before introducing orchestration.",
-      "Generate standards and environment docs beside the Dockerfile so the project becomes easier for the next coding session to read.",
     ],
     artifacts: [
       {
         label: "Pipeline",
-        title: "Seven stages, one launch decision",
-        body: "The status page turns infrastructure work into visible progress: clone, detect, scaffold, scan, explain, gate, deploy.",
-        meta: "GitHub to live URL",
+        body: "Seven stages from GitHub to live URL, each producing something visible.",
       },
       {
-        label: "Security",
-        title: "Findings become fix prompts",
-        body: "Scanner output becomes plain English plus a prompt the user can paste into their coding assistant.",
-        meta: "Gitleaks, Semgrep, Trivy, Syft",
+        label: "Security explanations",
+        body: "Gitleaks, Semgrep, Trivy, and Syft output, translated into plain language with a fix prompt for your coding assistant.",
       },
       {
-        label: "Scaffold",
-        title: "The repo learns how to run",
-        body: "Generated Dockerfiles, standards, and env docs make the project legible before it goes live.",
-        meta: "Next.js, Drizzle, graphile-worker",
+        label: "Generated scaffolding",
+        body: "A Dockerfile, a standards file, and an env guide written into the repo before it ships.",
       },
     ],
     links: [
@@ -185,7 +133,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/velveteen-onboarding-review-trimmed.png",
         alt: "Velveteen onboarding review screen showing connected GitHub, chosen repo, subdomain, detected framework, and launch action.",
         caption:
-          "The launch review collapses GitHub connection, repo selection, framework detection, and subdomain choice into one confirmation step.",
+          "The screen you hit right before launching. GitHub connected, repo picked, framework auto-detected, subdomain claimed. I wanted everything you'd normally do across four pages to sit in one place, so you can see exactly what you're about to do before you do it.",
         width: 760,
         height: 612,
         layout: "landscape",
@@ -195,7 +143,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/velveteen-running-pipeline-trimmed.png",
         alt: "Velveteen running pipeline screen showing completed clone and scaffold stages, a pre-build security warning, and an active build step.",
         caption:
-          "The status screen turns infrastructure into visible progress: scaffold complete, security finding noted, build running, deploy path still in view.",
+          "Mid-pipeline. Clone and scaffold are done. The orange flag is a pre-build security finding the build is now reckoning with. The rest of the path stays in view. Nothing hidden behind a spinner.",
         width: 760,
         height: 493,
         layout: "landscape",
