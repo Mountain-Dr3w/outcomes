@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -50,22 +51,21 @@ export default async function WorkPage({ params }: WorkPageProps) {
 
   return (
     <main id="main" className="min-h-[100dvh]">
-      <header className="flex items-center justify-between border-b border-[var(--border)] px-5 py-5 font-mono text-sm text-[var(--text-muted)] sm:px-8 lg:px-12">
-        <Link
-          href="/"
-          className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
-        >
-          Drew McFarland
-        </Link>
-        <Link href="/#work" className="transition-colors hover:text-[var(--text-primary)]">
-          all work
-        </Link>
-      </header>
-
       <section className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[0.62fr_1.38fr]">
           <aside className="lg:sticky lg:top-10 lg:self-start">
-            <p className="font-mono text-sm text-[var(--accent)]">{item.eyebrow}</p>
+            <Link
+              href="/#work"
+              className="group -mx-2 inline-flex min-h-11 items-center gap-2 px-2 font-mono text-sm font-medium text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
+            >
+              <ArrowLeftIcon
+                aria-hidden="true"
+                className="transition-transform group-hover:-translate-x-0.5"
+                size={14}
+                weight="bold"
+              />
+              back to case studies
+            </Link>
             <h1 className="mt-5 font-serif text-5xl leading-[0.98] text-[var(--text-primary)] sm:text-6xl">
               {item.title}
             </h1>
@@ -73,18 +73,25 @@ export default async function WorkPage({ params }: WorkPageProps) {
               {item.year}
             </p>
             <div className="mt-8 border-y border-[var(--border)] py-6">
-              <p className="font-mono text-xs text-[var(--text-muted)]">role</p>
+              <p className="font-mono text-xs text-[var(--text-muted)]">
+                role
+              </p>
               <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">
                 {item.role}
               </p>
+              <p className="mt-4 text-sm leading-6 text-[var(--text-muted)]">
+                {item.outcome}
+              </p>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {item.links.map((link) => (
-                <MagneticLink key={link.href} href={link.href} external>
-                  {link.label}
-                </MagneticLink>
-              ))}
-            </div>
+            {item.links.length ? (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {item.links.map((link) => (
+                  <MagneticLink key={link.href} href={link.href} external>
+                    {link.label}
+                  </MagneticLink>
+                ))}
+              </div>
+            ) : null}
           </aside>
 
           <div>
@@ -97,45 +104,14 @@ export default async function WorkPage({ params }: WorkPageProps) {
               </p>
             </Reveal>
 
-            <Reveal delay={0.05}>
-              <section className="mt-14 border-y border-[var(--border)] py-8">
-                <p className="font-mono text-xs text-[var(--accent)]">what I built</p>
-                <p className="mt-4 max-w-3xl text-2xl leading-snug text-[var(--text-primary)]">
-                  {item.vehicle}
-                </p>
-              </section>
-            </Reveal>
-
-            {item.image ? (
-              <Reveal delay={0.08}>
-                <figure className="mt-12 grid gap-4 lg:grid-cols-[0.76fr_0.24fr]">
-                  <div className="paper-shadow overflow-hidden bg-[var(--paper)]">
-                    <Image
-                      src={item.image.src}
-                      alt={item.image.alt}
-                      width={1170}
-                      height={1800}
-                      className="h-[30rem] w-full object-cover object-top sm:h-[38rem] lg:h-[46rem]"
-                      priority
-                    />
-                  </div>
-                  <figcaption className="border-t border-[var(--border)] pt-4 font-mono text-xs leading-6 text-[var(--text-muted)] lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
-                    Real snapshot artifact from the SBIR Radar SwiftUI test
-                    suite.
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ) : null}
-
             {item.visuals?.length ? (
               <VisualEvidence visuals={item.visuals} />
             ) : null}
 
-            <section className="mt-16 grid gap-10">
+            <section className="mt-16 grid gap-12">
               {item.sections.map((section, index) => (
                 <CaseStudySection
                   key={section.title}
-                  label={section.label}
                   title={section.title}
                   body={section.body}
                   delay={index * 0.04}
@@ -143,40 +119,24 @@ export default async function WorkPage({ params }: WorkPageProps) {
               ))}
             </section>
 
-            <div className="mt-16 grid gap-10">
-              <EvidenceSection title="What shipped" items={item.proof} />
-              <EvidenceSection title="Constraints" items={item.constraints} />
-              <EvidenceSection title="Decisions" items={item.decisions} />
-            </div>
-
             <Reveal>
-              <section className="mt-16">
-                <div className="grid gap-6 border-t border-[var(--border)] pt-8 lg:grid-cols-[0.32fr_1fr]">
-                  <p className="font-mono text-sm text-[var(--accent)]">
-                    artifacts
-                  </p>
-                  <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
-                    {item.artifacts.map((artifact) => (
-                      <article
-                        key={artifact.title}
-                        className="grid gap-4 py-6 sm:grid-cols-[10rem_1fr] sm:px-4"
-                      >
-                        <div className="font-mono text-xs text-[var(--text-muted)]">
-                          <p className="text-[var(--accent)]">{artifact.label}</p>
-                          {artifact.meta ? <p className="mt-2">{artifact.meta}</p> : null}
-                        </div>
-                        <div>
-                          <h2 className="text-2xl leading-tight text-[var(--text-primary)]">
-                            {artifact.title}
-                          </h2>
-                          <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
-                            {artifact.body}
-                          </p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
+              <section className="mt-16 border-t border-[var(--border)] pt-8">
+                <h2 className="font-mono text-sm text-[var(--accent)]">
+                  artifacts
+                </h2>
+                <ul className="mt-6 divide-y divide-[var(--border)] border-y border-[var(--border)]">
+                  {item.artifacts.map((artifact) => (
+                    <li
+                      key={artifact.label}
+                      className="py-5 text-base leading-7 text-[var(--text-secondary)] sm:px-4"
+                    >
+                      <span className="font-semibold text-[var(--text-primary)]">
+                        {artifact.label}.
+                      </span>{" "}
+                      {artifact.body}
+                    </li>
+                  ))}
+                </ul>
               </section>
             </Reveal>
           </div>
@@ -235,25 +195,34 @@ function VisualEvidence({
 
             {standardVisuals.map((visual) => {
               const isWide = visual.layout === "wide";
+              const isLandscape = visual.layout === "landscape";
 
               return (
                 <figure key={visual.src} className="grid gap-3">
                   <div
                     className={[
                       "artifact-shadow overflow-hidden border border-[var(--border-strong)] bg-[var(--bg-raised)]",
+                      isLandscape ? "p-3 sm:p-5" : "",
                       isWide ? "overflow-x-auto" : "",
                     ].join(" ")}
                   >
-                    <a href={visual.src} target="_blank" rel="noreferrer">
+                    <a
+                      href={visual.src}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={isLandscape ? "block" : undefined}
+                    >
                       <Image
                         src={visual.src}
                         alt={visual.alt}
                         width={visual.width}
                         height={visual.height}
                         className={
-                          isWide
-                            ? "h-auto w-full max-w-none"
-                            : "h-[30rem] w-full object-cover object-top sm:h-[38rem]"
+                          isLandscape
+                            ? "h-auto w-full"
+                            : isWide
+                              ? "h-auto w-full max-w-none"
+                              : "h-[30rem] w-full object-cover object-top sm:h-[38rem]"
                         }
                       />
                     </a>
@@ -273,57 +242,26 @@ function VisualEvidence({
 }
 
 function CaseStudySection({
-  label,
   title,
   body,
   delay,
 }: {
-  label: string;
   title: string;
   body: string[];
   delay: number;
 }) {
   return (
     <Reveal delay={delay}>
-      <article className="grid gap-5 border-t border-[var(--border)] pt-8 lg:grid-cols-[0.32fr_1fr]">
-        <p className="font-mono text-sm text-[var(--accent)]">{label}</p>
-        <div>
-          <h2 className="max-w-3xl font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
-            {title}
-          </h2>
-          <div className="mt-6 grid max-w-3xl gap-5 text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
-            {body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
+      <article className="border-t border-[var(--border)] pt-8">
+        <h2 className="max-w-3xl font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
+          {title}
+        </h2>
+        <div className="mt-6 grid max-w-3xl gap-5 text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
+          {body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
       </article>
-    </Reveal>
-  );
-}
-
-function EvidenceSection({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
-  return (
-    <Reveal>
-      <section className="grid gap-6 border-t border-[var(--border)] pt-8 lg:grid-cols-[0.32fr_1fr]">
-        <h2 className="font-mono text-sm text-[var(--accent)]">{title}</h2>
-        <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
-          {items.map((item) => (
-            <li
-              key={item}
-              className="py-5 text-base leading-7 text-[var(--text-secondary)] sm:px-4"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
     </Reveal>
   );
 }
