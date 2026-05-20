@@ -208,7 +208,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/sbir-signals.png",
         alt: "SBIR Radar iPhone Signals tab showing searchable funding opportunities, filters, and deadline language.",
         caption:
-          "The Signals tab. Each row is a topic, with the fields you need to decide whether to open the full page: agency, deadline, phase, funding range, source state. Filters at the top, saved stars on the side, deadline language up front so you don't have to do the date math.",
+          "Signals. Searchable topics surface agency, deadline, phase, funding range, and source state before you open the full page.",
         width: 1206,
         height: 2622,
         layout: "phone",
@@ -317,102 +317,45 @@ export const workItems: WorkItem[] = [
     year: "2026",
     outcome:
       "Space Force application teams moved from opaque platform onboarding toward visible status, ownership, support routes, and self-service access.",
-    vehicle:
-      "A service blueprint, event-stormed operating map, friction log, and onboarding portal concept that exposed status, owners, blockers, support paths, and platform services from intake through production.",
-    vehicleLabel: "service path",
     role: "Service design",
     summary:
-      "FORGE is a cloud platform and DevSecOps environment for Space Force application teams. When I joined, onboarding lacked a shared picture: tenants moved across disconnected tools, siloed teams, and undocumented requirements without knowing what came next.",
-    snapshot: [
-      {
-        label: "What it is",
-        body: "A DevSecOps and cloud platform for Space Force application teams moving from intake to production deployment.",
-      },
-      {
-        label: "Impact",
-        body: "Made a months-long onboarding path visible through phases, owners, support routes, pending actions, and service access.",
-      },
-      {
-        label: "My role",
-        body: "Mapped the tenant journey, facilitated discovery, created the friction log, and designed onboarding and services portal concepts.",
-      },
-      {
-        label: "Key artifacts",
-        body: "17-phase service blueprint, event-storming map, friction log, onboarding portal, and platform services hub.",
-      },
-    ],
+      "FORGE is a cloud platform and DevSecOps environment for Space Force application teams. I came in as a service designer when the platform itself was working but the tenant experience around it was a mess. Five internal teams owned different phases of onboarding, and a tenant moving through the system had to figure out for themselves which team owned what came next. The target was for a new tenant to be productive within a week. Real paths could stretch into months.",
     sections: [
       {
-        label: "the failure mode",
-        title: "No one owned the whole tenant journey.",
+        title: "I had to make the whole journey visible before anything else",
         body: [
-          "The platform had strong internal capabilities, but the tenant experience was fragmented across five internal ownership lanes. Each team owned a different part of the path, and tenants were expected to know how those pieces fit together.",
-          "The onboarding target was one week, but real paths could stretch into months. Teams got stuck on unclear handoffs, missing support routes, and requirements that were known internally but invisible to new tenants.",
+          "You can't redesign what you can't see. The first thing I did was map the tenant journey end to end as a service blueprint, across seventeen phases from initial intake through production deployment. The blueprint showed four lanes for each phase: what the tenant was doing, what was visible to them, what was happening backstage, and which support systems were in play. Until that artifact existed, the five internal teams had been having the same conversations about onboarding for months without realizing they were each describing different segments of the same broken path.",
+          "I ran event storming sessions alongside the blueprint to map the internal operating flow. The Domain-Driven Design framing exposed something specific: the platform depended on tacit knowledge at most of its transition points. Tenants couldn't navigate the system because the system, internally, was a chain of human handoffs that assumed everyone already knew how it worked.",
         ],
       },
       {
-        label: "map",
-        title: "I made the invisible work discussable.",
+        title: "The friction log turned pain into something the teams could prioritize",
         body: [
-          "I facilitated workshops to build a service blueprint across 17 phases, from initial intake through production deployment. The artifact showed tenant actions, visible touchpoints, backstage work, and support systems in one view.",
-          "Event storming brought the internal operating flow into the same conversation and exposed handoffs that depended on tacit knowledge.",
+          "Most platform teams hear tenant complaints as anecdotes. I wanted them to read them as data. So I built a friction log with four columns: owning team, UX impact severity, breakage risk, and rationale. Every documented pain point had to go through those four fields before it could be discussed. That changed the meeting. Conversations stopped being 'a tenant complained about X' and started being 'this is a high-severity issue with breakage risk, owned by this team, and here's why it matters.'",
+          "The log surfaced repeated patterns that the five lanes had been treating as their own problems: outage communication gaps, unclear support ownership, limited tenant access to pairing rooms, undocumented ArgoCD expectations, Docker folder conventions that worked for the internal team but failed silently for tenants. These weren't five disconnected issues. They were the same issue in different costumes. The pattern was that internal practices had become invisible requirements for external tenants.",
         ],
       },
       {
-        label: "friction",
-        title: "Pain points became an operating artifact.",
+        title: "The portal turned status into the answer to three questions",
         body: [
-          "I established a friction log with owning team, UX impact severity, breakage risk, and rationale. That moved the conversation from anecdotes to prioritizable service-design work.",
-          "The log surfaced repeated patterns: outage communication gaps, unclear support ownership, limited pairing access, undocumented ArgoCD expectations, and Docker folder conventions.",
+          "By the time the portal concept came together, I knew what tenants needed and couldn't get. They needed to know where they were in the process, who currently owned the next step, and what they could do right now without waiting on anyone. The portal answered those three questions on every screen. Status, ownership, and next action were the spine of the design, and every other piece of information sat in support of those three.",
+          "The services hub did something parallel for the tools. GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements had all existed before, but they had been a scavenger hunt through documentation and tribal knowledge. The hub made the full toolkit visible from one place, with the access state shown alongside each one. The platform stopped looking like six unrelated systems that happened to share users.",
+          "None of this changed the platform's internal architecture. What it changed was the gap between what the platform was capable of and what tenants could see, find, and act on. That gap was where the months were getting lost.",
         ],
       },
-      {
-        label: "solution",
-        title: "The portal turned onboarding into status, ownership, and next actions.",
-        body: [
-          "The portal concept gave tenants a persistent view of status, assigned team, progress, pending actions, and direct links. It answered the questions that had created support churn: where am I, who owns this, and what do I do next?",
-          "A services hub made GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements legible as a connected platform instead of a scavenger hunt through documentation and tribal knowledge.",
-          "Against an estimated 6-7% tenant self-service baseline, the work reframed time-to-deployment as an operating problem: less ambiguity, clearer accountability, and blockers visible to both tenants and internal teams.",
-        ],
-      },
-    ],
-    proof: [
-      "Created a comprehensive service blueprint spanning 17 phases from intake through production deployment.",
-      "Facilitated event storming sessions using Domain-Driven Design principles to reveal commands, state changes, decisions, and failure points.",
-      "Established a friction log that categorized problems by owning team, UX impact severity, what could break, and why it mattered.",
-      "Designed a self-service onboarding portal with status, assigned team, progress, pending actions, and direct links.",
-      "Centralized platform service discovery for GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements.",
-    ],
-    constraints: [
-      "Five internal teams held different parts of the tenant journey.",
-      "External tenants could not rely on the same internal Slack and pairing-room access as delivery teams.",
-      "Undocumented repo and Docker conventions created repeat failures for new tenants.",
-      "The platform had to support mission-critical teams without exposing them to internal organizational complexity.",
-    ],
-    decisions: [
-      "Use the service blueprint as the shared artifact before jumping to another tool.",
-      "Treat the friction log as service data, not a complaint tracker.",
-      "Make ownership visible on every action, blocker, and support path.",
-      "Link to existing platform tools instead of trying to replace them inside the portal.",
     ],
     artifacts: [
       {
         label: "Blueprint",
-        title: "Seventeen phases made the journey discussable",
-        body: "The service blueprint connected tenant-visible steps, backstage work, support systems, and handoff failures across the onboarding path.",
-        meta: "Intake to production",
+        body: "Seventeen phases mapped across tenant action, visible touchpoint, backstage work, and support systems. The first artifact that gave five internal teams a shared picture.",
       },
       {
         label: "Friction log",
-        title: "Pain points got owners and severity",
-        body: "The log categorized platform friction by owning team, UX impact, what could break, and why each issue mattered.",
-        meta: "Support and handoffs",
+        body: "Four columns (owning team, UX impact severity, breakage risk, rationale) turned scattered complaints into a prioritization queue with names on it.",
       },
       {
         label: "Portal",
-        title: "Status became the interface",
-        body: "The onboarding portal showed progress, assigned teams, pending actions, and service access in one tenant-facing view.",
-        meta: "Self-service onboarding",
+        body: "A tenant-facing view designed around three questions: where am I, who owns the next step, what can I do right now.",
       },
     ],
     links: [],
@@ -422,7 +365,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-service-blueprint.png",
         alt: "FORGE service blueprint mapping the tenant journey across onboarding phases, backstage work, support systems, and friction points.",
         caption:
-          "The service blueprint made a fragmented 17-phase onboarding journey visible enough for teams to reason about handoffs and failure points.",
+          "The service blueprint. Seventeen onboarding phases across the top. Four lanes per phase: tenant action, visible touchpoint, backstage work, and support system. The first time the whole tenant journey existed in one place.",
         width: 4096,
         height: 2435,
         layout: "landscape",
@@ -432,7 +375,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-event-storm.png",
         alt: "FORGE event storming board showing commands, domain events, decision points, and hotspots across the internal platform workflow.",
         caption:
-          "Event storming exposed where the platform depended on tacit knowledge and human intervention at transition points.",
+          "The event storm. Commands, events, decision points, and hotspots laid out across the internal flow. The hotspots are the places where the platform was relying on someone in the room remembering what to do next.",
         width: 4096,
         height: 1315,
         layout: "wide",
@@ -442,7 +385,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-friction-log.png",
         alt: "FORGE friction log categorizing onboarding pain points by owner, impact, breakage risk, and rationale.",
         caption:
-          "The friction log turned scattered tenant pain into a prioritizable operating artifact with ownership and impact.",
+          "The friction log. Each row is a tenant pain point with the owning team, UX impact severity, breakage risk, and rationale. The columns are why meetings stopped being about anecdotes.",
         width: 4096,
         height: 2209,
         layout: "landscape",
@@ -452,7 +395,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-portal-onboarding.png",
         alt: "FORGE onboarding portal concept showing current review status, assigned team, progress, pending actions, and direct task links.",
         caption:
-          "The onboarding view answered status, ownership, and next-action questions that had previously created support churn.",
+          "The onboarding portal concept. Status of the current review, assigned team, progress through the seventeen phases, pending tenant actions, and direct task links. Designed around the three questions tenants couldn't get answered before: where am I, who owns this, what do I do next.",
         width: 4096,
         height: 2283,
         layout: "landscape",
@@ -462,7 +405,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-portal-services.png",
         alt: "FORGE platform services hub showing tenant access to development tools and services from a single dashboard.",
         caption:
-          "The services hub made the tenant toolkit discoverable without asking teams to chase documentation or tribal knowledge.",
+          "The services hub. One screen for the tenant toolkit (GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, SD Elements) with the tenant's access state shown alongside each. The hub replaced the scavenger hunt with a directory.",
         width: 4096,
         height: 2277,
         layout: "landscape",
