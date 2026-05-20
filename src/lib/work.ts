@@ -157,96 +157,43 @@ export const workItems: WorkItem[] = [
     year: "2026",
     outcome:
       "Federal R&D opportunities become a mobile triage feed instead of an afternoon in government portals.",
-    vehicle:
-      "An iOS app and data pipeline that turn SBIR and STTR topics into searchable signals: agency, deadline, phase, funding range, source health, and a plain summary.",
-    vehicleLabel: "operating path",
     role: "Product design",
     summary:
-      "SBIR Radar came from a real discovery problem: valuable federal R&D topics were scattered across dense portals, agency language, stale links, and deadlines. The app turns that search into a short mobile briefing for scan, save, and follow-up decisions.",
-    snapshot: [
-      {
-        label: "What it is",
-        body: "A native iOS app and topic pipeline for scanning SBIR and STTR funding opportunities.",
-      },
-      {
-        label: "Impact",
-        body: "Reduced opportunity discovery to a fast mobile read with triage fields, source health, saved searches, and watchlists.",
-      },
-      {
-        label: "My role",
-        body: "Designed the mobile IA, signal feed, topic details, saved radar loop, watchlist behavior, and reliability language.",
-      },
-      {
-        label: "Key artifacts",
-        body: "Signals feed, My Radars, Watchlist, Settings, normalized topic contract, and HTML fallback strategy.",
-      },
-    ],
+      "SBIR Radar is the iOS app I built for the part of federal R&D discovery that nobody enjoys: scanning topic pages on government portals to figure out which ones are worth another hour of your time. The information you need to make that call (which agency, when's it due, what phase, how much money, is the source even current) is buried under inconsistent fields, agency shorthand, and dense topic descriptions. I wanted that triage to take minutes instead of an afternoon.",
     sections: [
       {
-        label: "the wall",
-        title: "Good opportunities were buried in bad reading conditions.",
+        title: "Triage was the actual problem",
         body: [
-          "SBIR and STTR topics can shape a company's roadmap, but discovery often starts in portals that bury the first decision: is this worth another hour? Topic pages mix agency language, shifting dates, inconsistent fields, and long descriptions.",
+          "The instinct, looking at the SBIR landscape from the outside, is to think the problem is search. You imagine a better database, or smarter filters. That isn't what slows people down. What slows people down is reading. You open a topic page on sbir.gov, you scroll past two paragraphs of background, you hunt for the deadline, you fail to find a funding range without clicking through, and by the third or fourth topic you've already burned twenty minutes and you still don't know what to focus on. The decision that mattered for v1 was that I wasn't building a better database. I was building a faster read.",
         ],
       },
       {
-        label: "what i built",
-        title: "I designed the app around triage, not database completeness.",
+        title: "I designed it as a feed of signals, not a search engine",
         body: [
-          "The iOS experience treats each topic as a signal. Agency, deadline, phase, funding range, source status, and summary are readable before the user opens the full government page.",
-          "Saved radars and watched opportunities close the loop: decide what matters, track it, and return when deadlines or source changes deserve attention.",
+          "Each topic in the app is a signal. Agency, deadline, phase, funding range, source status, plain summary. All readable in a row before you tap in. Those fields aren't optional cosmetic detail. They're the only things that matter when you're deciding whether a topic is worth another five minutes. If the answer is yes, you tap to the full government page. If no, you keep scrolling and you've lost two seconds, not five.",
+          "Saved radars and the watchlist are the second half of the product. You decide what matters once (agency, keywords, phase) and the radar surfaces matches as they appear. Watched topics show up when their source state changes or a deadline gets close. None of this is a CRM or a collaboration tool, and that was the second deliberate call. v1 has to earn its keep as a reading tool before asking anyone to log in or pay for it.",
         ],
       },
       {
-        label: "the contract",
-        title: "The product needed a clean contract over messy sources.",
+        title: "The pipeline turned out to be a bigger problem than the app",
         body: [
-          "The pipeline normalizes public topic data into a contract the app can trust. When structured APIs failed, the strategy shifted toward HTML fallback, fixture-backed development, and source-health language in the interface.",
+          "The plan was for the SBIR public APIs to do the heavy lifting. They couldn't. Coverage was inconsistent, fields shifted between sources, and a few endpoints stopped returning what they had been returning. I moved the pipeline toward HTML fallback parsing, with fixture-backed development so the design work could keep going against real topic shapes even when the source was misbehaving. The interface had to reflect that reality too, which is why source state shows up alongside every topic. If the data is stale or partial, the app says so, instead of pretending the source is fine.",
+          "This was the part of the project I'd been most ready to skip. It became the thing I think most about now. The app reads only as well as the pipeline lets it.",
         ],
       },
-      {
-        label: "where it lands",
-        title: "Discovery becomes a repeatable scan.",
-        body: [
-          "SBIR Radar gives founders, operators, and grant writers a faster way to decide which opportunities deserve desk research. The first version favors useful reading and watchable intent over accounts, collaboration, or monetization.",
-        ],
-      },
-    ],
-    proof: [
-      "Built an editorial iOS design system with feed rows, topic detail, deadline language, empty states, source-health labels, and snapshot coverage.",
-      "Redesigned the app around four native tabs: Signals, My Radars, Watchlist, and Settings.",
-      "Modeled topics across pipeline, backend, and iOS so source changes can flow into the app without hand cleanup.",
-      "Shipped a fixture-backed app foundation that kept design and pipeline work testable against real topic shapes.",
-      "Used source health and fallback parsing when public SBIR APIs became unreliable.",
-    ],
-    constraints: [
-      "Official portals expose valuable data through inconsistent APIs and dense listing pages.",
-      "The app has to serve newcomers without procurement shorthand.",
-      "Mobile triage should reveal whether a topic deserves deeper reading before the full source review.",
-    ],
-    decisions: [
-      "Use an editorial visual system so opportunities read like a briefing.",
-      "Treat saved searches and watchlists as the alert loop, with richer database features deferred.",
-      "Keep v1 free, accountless, and focused on useful reading before monetization or collaboration.",
     ],
     artifacts: [
       {
         label: "Feed",
-        title: "Scan first, research second",
-        body: "The feed gives each topic a headline, agency, deadline, funding range, and source state before the user opens the portal.",
-        meta: "SwiftUI snapshot artifact",
+        body: "Each topic shows agency, deadline, phase, funding range, source status, and a plain summary. Enough to decide whether to open the full page.",
       },
       {
         label: "Pipeline",
-        title: "Dirty sources, clean contract",
-        body: "The Python pipeline fetches, normalizes, dedupes, diffs, and publishes topic snapshots for iOS and Workers.",
-        meta: "SBIR.gov HTML fallback",
+        body: "A normalized contract over public SBIR data, with HTML fallback for when the structured APIs go quiet.",
       },
       {
         label: "Loop",
-        title: "Saved radars drive the product",
-        body: "The phase-two plan centers saved searches, watchlists, and trusted notifications before expanding the database.",
-        meta: "Alert loop first",
+        body: "Saved radars match new topics against the criteria you care about. The watchlist surfaces them when deadlines or source state shifts.",
       },
     ],
     links: [
@@ -261,7 +208,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/sbir-signals.png",
         alt: "SBIR Radar iPhone Signals tab showing searchable funding opportunities, filters, and deadline language.",
         caption:
-          "Searchable signal feed with filters, source labels, saved stars, and deadline language.",
+          "The Signals tab. Each row is a topic, with the fields you need to decide whether to open the full page: agency, deadline, phase, funding range, source state. Filters at the top, saved stars on the side, deadline language up front so you don't have to do the date math.",
         width: 1206,
         height: 2622,
         layout: "phone",
@@ -271,7 +218,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/sbir-my-radars.png",
         alt: "SBIR Radar iPhone My Radars tab showing watched saved searches with match counts.",
         caption:
-          "Saved searches become watched radars with agency, phase, keywords, and match counts.",
+          "My Radars. Each row is a saved search you've turned into a watcher. Agency, phase, keywords, and a running count of fresh matches that fit those criteria.",
         width: 1206,
         height: 2622,
         layout: "phone",
@@ -281,7 +228,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/sbir-settings.png",
         alt: "SBIR Radar iPhone Settings tab showing source coverage, sync status, and notification controls.",
         caption:
-          "Settings expose source coverage, sync state, and notification controls without burying source reliability.",
+          "Settings. Source coverage and sync state get top billing because the app is only useful if the pipeline is up. Notification controls are below.",
         width: 1206,
         height: 2622,
         layout: "phone",
