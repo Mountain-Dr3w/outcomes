@@ -28,11 +28,11 @@ export const metadata: Metadata = {
     template: "%s | Drew McFarland",
   },
   description:
-    "Drew McFarland is a designer-builder working across GovTech, infrastructure, and early product systems.",
+    "Drew McFarland designs and builds GovTech and infrastructure products where the plan has to survive contact with working software.",
   openGraph: {
     title: "Drew McFarland",
     description:
-      "Products, artifacts, and systems for teams working through complex delivery.",
+      "GovTech and infrastructure work from the messy stretch between plan, proof, and running software.",
     url: "https://outcomes.velveteen.sh",
     siteName: "Drew McFarland",
     type: "website",
@@ -47,11 +47,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <a className="skip-link" href="#main">
-          Skip to work
+          Skip to content
         </a>
         {children}
       </body>

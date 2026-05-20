@@ -1,232 +1,149 @@
 import Link from "next/link";
 
-import { AnimatedBench } from "@/components/animated-bench";
-import { MagneticLink } from "@/components/magnetic-link";
-import { Reveal } from "@/components/reveal";
-import { workItems, writingItems } from "@/lib/work";
-
-const operatingNotes = [
-  "I try to name the change I'm after before I name a product. The product is just how you get there.",
-  "I'd rather build the smallest version that can prove the idea than write a long doc about it.",
-  "I write everything down. The next person picking the work up, sometimes me and sometimes a model, needs context I would have left in someone's head a few years ago.",
-];
+import { workItems } from "@/lib/work";
 
 export default function Home() {
   return (
-    <main id="main">
-      <header className="absolute inset-x-0 top-0 z-30 flex items-center justify-between gap-4 px-5 py-5 font-mono text-xs text-[var(--text-muted)] sm:px-8 sm:text-sm lg:px-12">
-        <Link
-          href="/"
-          className="text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
-        >
-          Drew McFarland
-        </Link>
-        <nav aria-label="Primary navigation" className="flex items-center gap-3 sm:gap-5">
-          <a
-            href="#writing"
-            className="transition-colors hover:text-[var(--text-primary)]"
+    <main id="main" className="min-h-[100dvh]">
+      <header className="mx-auto max-w-5xl px-5 py-8 sm:px-8 sm:py-12 lg:max-w-6xl">
+        <div className="flex items-center justify-between gap-3 font-mono text-sm">
+          <Link
+            href="/"
+            className="-mx-2 inline-flex min-h-11 items-center gap-2 px-2 text-[var(--text-muted)] transition-colors hover:text-[var(--text-secondary)]"
           >
-            writing
-          </a>
-          <a
-            href="#work"
-            className="transition-colors hover:text-[var(--text-primary)]"
+            <VelveteenMark className="h-[18px] w-[18px] text-[var(--accent)]" />
+            <span>Drew McFarland</span>
+          </Link>
+          <nav
+            aria-label="Primary navigation"
+            className="flex items-center gap-1 text-[var(--text-muted)] sm:gap-2"
           >
-            work
-          </a>
-          <a
-            href="#contact"
-            className="transition-colors hover:text-[var(--text-primary)]"
-          >
-            contact
-          </a>
-        </nav>
+            <a
+              href="https://seams.velveteen.sh"
+              className="inline-flex min-h-11 items-center px-2 transition-colors hover:text-[var(--accent)]"
+            >
+              Blog
+            </a>
+            <a
+              href="#work"
+              className="inline-flex min-h-11 items-center px-2 transition-colors hover:text-[var(--accent)]"
+            >
+              Work
+            </a>
+            <Link
+              href="/resume"
+              className="inline-flex min-h-11 items-center px-2 transition-colors hover:text-[var(--accent)]"
+            >
+              Resume
+            </Link>
+          </nav>
+        </div>
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-[0.46fr_0.54fr]">
+          <div>
+            <h1 className="max-w-lg font-serif text-4xl font-light italic leading-tight text-[var(--text-primary)] sm:text-5xl">
+              outcomes over everything.
+            </h1>
+          </div>
+
+          <div className="max-w-3xl space-y-5 font-serif text-lg leading-8 text-[var(--text-secondary)] sm:text-xl sm:leading-9">
+            <p>
+              I&apos;ve spent enough years watching good-looking work fail to
+              land that I&apos;ve stopped trusting the artifact. I plan around
+              the outcome. If a project shipped and the way people work
+              didn&apos;t change, I count it as a miss.
+            </p>
+          </div>
+        </div>
       </header>
 
-      <section className="grid min-h-[100dvh] w-full min-w-0 items-end gap-8 px-5 pb-10 pt-24 sm:px-8 sm:pb-12 lg:grid-cols-[0.86fr_1.14fr] lg:px-12 lg:pb-8 lg:pt-28">
-        <div className="w-full min-w-0 max-w-2xl pb-4 lg:pb-14">
-          <p className="font-mono text-sm text-[var(--accent)]">
-            Drew McFarland
-          </p>
-          <h1 className="mt-5 max-w-[9ch] font-serif text-5xl leading-[0.96] text-[var(--text-primary)] sm:max-w-2xl sm:text-7xl lg:text-8xl">
-            Designer who builds.
-          </h1>
-          <p className="mt-7 max-w-xl text-2xl leading-tight text-[var(--text-primary)] sm:text-3xl">
-            I&apos;ve been a designer for almost a decade. A couple years ago I
-            started building the software too.
-          </p>
-          <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg">
-            Most of my work sits somewhere between figuring out why something is
-            broken, building the smallest version that proves a path through it,
-            and writing it down well enough that someone else can keep going.
-            Lately that&apos;s mostly GovTech and infrastructure; the kind of
-            project where the hard part isn&apos;t the idea, it&apos;s getting to
-            something that actually runs.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <MagneticLink href="#work">View work</MagneticLink>
-            <MagneticLink href="#writing">Read writing</MagneticLink>
-            <MagneticLink href="https://linkedin.com/in/drewux/" external>
-              Contact Drew
-            </MagneticLink>
-          </div>
-        </div>
-
-        <AnimatedBench />
-      </section>
-
-      <section className="border-y border-[var(--border)] px-5 py-12 sm:px-8 lg:px-12">
-        <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-          <p className="font-mono text-sm text-[var(--text-muted)]">
-            how i work
-          </p>
-          <div className="grid gap-6 md:grid-cols-[1fr_0.82fr_1.18fr]">
-            {operatingNotes.map((note, index) => (
-              <Reveal key={note} delay={index * 0.05}>
-                <div className="border-t border-[var(--border-strong)] pt-4">
-                  <p className="font-mono text-xs text-[var(--accent)]">
-                    0{index + 1}
-                  </p>
-                  <p className="mt-4 max-w-xs text-base leading-7 text-[var(--text-secondary)]">
-                    {note}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section
-        id="writing"
-        className="border-b border-[var(--border)] px-5 py-16 sm:px-8 lg:px-12 lg:py-20"
+        id="work"
+        aria-labelledby="work-heading"
+        className="mx-auto max-w-5xl px-5 pb-16 sm:px-8 lg:max-w-6xl lg:pb-24"
       >
-        <div className="grid gap-10 lg:grid-cols-[0.46fr_1fr]">
-          <div>
-            <p className="font-mono text-sm text-[var(--accent)]">writing</p>
-            <h2 className="mt-4 max-w-md font-serif text-4xl leading-tight text-[var(--text-primary)] sm:text-5xl">
-              Notes from the workbench while the work is still messy.
-            </h2>
-          </div>
-
-          <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
-            {writingItems.map((item, index) => (
-              <Reveal key={item.title} delay={index * 0.04}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group grid gap-5 py-7 transition-colors hover:bg-[rgba(246,242,234,0.025)] sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:px-4"
-                >
-                  <div className="font-mono text-xs text-[var(--text-muted)]">
-                    <p className="text-[var(--accent)]">{item.title}</p>
-                    <p className="mt-2">{item.eyebrow}</p>
-                  </div>
-                  <div>
-                    <p className="max-w-3xl text-2xl leading-tight text-[var(--text-primary)] sm:text-3xl">
-                      {item.summary}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {item.proof.map((proof) => (
-                        <span
-                          key={proof}
-                          className="border border-[var(--border)] px-3 py-1 font-mono text-xs text-[var(--text-muted)]"
-                        >
-                          {proof}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <span className="font-mono text-xs text-[var(--text-faint)] transition-colors group-hover:text-[var(--accent)]">
-                    read
-                  </span>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="work" className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.46fr_1fr]">
+        <div className="grid gap-8 border-t border-[var(--border)] pt-8 lg:grid-cols-[0.34fr_0.66fr]">
           <div className="lg:sticky lg:top-10 lg:self-start">
-            <p className="font-mono text-sm text-[var(--accent)]">selected work</p>
-            <h2 className="mt-4 max-w-sm font-serif text-4xl leading-tight text-[var(--text-primary)] sm:text-5xl">
-              A few projects. I&apos;m trying to say what changed and what proves
-              it.
+            <h2
+              id="work-heading"
+              className="font-mono text-sm text-[var(--accent)]"
+            >
+              work
             </h2>
+            <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
+              These are the projects where I think the way people work
+              actually changed. All from 2026. For older work, reach out. I
+              love to talk shop and would be happy to walk through it.
+            </p>
           </div>
 
           <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
-            {workItems.map((item, index) => (
-              <Reveal key={item.slug} delay={index * 0.04}>
+            {workItems.map((item) => (
+              <article key={item.slug}>
                 <Link
                   href={`/work/${item.slug}`}
-                  className="group grid gap-5 py-7 transition-colors hover:bg-[rgba(246,242,234,0.025)] sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:px-4"
+                  className="group block py-8 transition-colors hover:bg-[rgba(246,242,234,0.025)] sm:px-6 sm:py-10"
                 >
-                  <div className="font-mono text-xs text-[var(--text-muted)]">
-                    <p>{item.year}</p>
-                    <p className="mt-2 text-[var(--accent)]">{item.title}</p>
+                  <div className="flex items-baseline justify-between gap-5">
+                    <h3 className="font-serif text-3xl leading-tight text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)] sm:text-4xl">
+                      {item.title}
+                    </h3>
+                    <span className="shrink-0 font-mono text-xs text-[var(--text-muted)]">
+                      {item.year}
+                    </span>
                   </div>
-                  <div>
-                    <p className="max-w-3xl text-2xl leading-tight text-[var(--text-primary)] sm:text-3xl">
+                  <div className="mt-6 max-w-3xl border-l border-[var(--border-strong)] pl-4 sm:pl-5">
+                    <p className="font-mono text-xs text-[var(--accent)]">
+                      Outcome
+                    </p>
+                    <p className="mt-2 text-base leading-7 text-[var(--text-primary)] sm:text-lg sm:leading-8">
                       {item.outcome}
                     </p>
                   </div>
-                  <span className="font-mono text-xs text-[var(--text-faint)] transition-colors group-hover:text-[var(--accent)]">
-                    open
-                  </span>
                 </Link>
-              </Reveal>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-5 pb-20 sm:px-8 lg:px-12 lg:pb-28">
-        <Reveal>
-          <div className="grid gap-8 border-y border-[var(--border)] py-12 lg:grid-cols-[0.8fr_1.2fr]">
-            <p className="font-mono text-sm text-[var(--text-muted)]">
-              the thread
-            </p>
-            <div>
-              <p className="max-w-3xl font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
-                Strategy is only worth something when it changes what gets shipped.
-              </p>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--text-secondary)]">
-                The thread through all of it: find the actual constraint, build a small thing that proves a path through it, and leave enough behind that nobody needs a handoff meeting to keep going.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      <footer
-        id="contact"
-        className="border-t border-[var(--border)] px-5 py-10 sm:px-8 lg:px-12"
-      >
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="font-mono text-sm text-[var(--accent)]">
-              Drew McFarland
-            </p>
-            <p className="mt-3 max-w-lg text-base leading-7 text-[var(--text-secondary)]">
-              Designer who builds. Mostly GovTech and infrastructure work, the part of the job where a hard problem becomes something that actually runs.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <MagneticLink href="https://github.com/Mountain-Dr3w" external>
-              GitHub
-            </MagneticLink>
-            <MagneticLink href="https://seams.velveteen.sh" external>
-              Seams
-            </MagneticLink>
-            <MagneticLink href="https://velveteen.sh" external>
-              Velveteen
-            </MagneticLink>
+      <footer className="mx-auto flex w-full max-w-5xl flex-wrap gap-x-3 gap-y-2 border-t border-[var(--border)] px-5 py-8 font-mono text-sm text-[var(--text-muted)] sm:px-8 lg:max-w-6xl">
+        <div className="grid w-full gap-4 lg:grid-cols-[0.34fr_0.66fr]">
+          <p className="text-[var(--accent)]">Drew McFarland</p>
+          <div className="flex flex-wrap gap-x-3 gap-y-2">
+            <a
+              href="https://seams.velveteen.sh"
+              className="-mx-2 inline-flex min-h-11 items-center px-2 transition-colors hover:text-[var(--accent)]"
+            >
+              seams
+            </a>
+            <a
+              href="https://linkedin.com/in/drewux/"
+              className="-mx-2 inline-flex min-h-11 items-center px-2 transition-colors hover:text-[var(--accent)]"
+            >
+              linkedin
+            </a>
           </div>
         </div>
       </footer>
     </main>
+  );
+}
+
+function VelveteenMark({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect x="7" y="2" width="5" height="13" fill="currentColor" />
+      <rect x="20" y="2" width="5" height="13" fill="currentColor" />
+      <rect x="3" y="13" width="26" height="17" fill="currentColor" />
+      <rect x="9" y="19" width="4" height="4" fill="var(--bg)" />
+      <rect x="19" y="19" width="4" height="4" fill="var(--bg)" />
+    </svg>
   );
 }
