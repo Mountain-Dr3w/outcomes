@@ -16,7 +16,7 @@ export interface ResumeEducation {
 
 export const resume = {
   name: "Drew McFarland",
-  headline: "Service Designer | USAF Veteran | Active Secret Clearance",
+  headline: "Product Designer and Strategist | USAF Veteran | Active Secret Clearance",
   website: "work.velveteen.sh",
   websiteHref: "https://work.velveteen.sh",
   email: "drewjmcfarland@live.com",
@@ -26,11 +26,12 @@ export const resume = {
       organization: "Rise8, Inc.",
       roles: [
         {
-          title: "Senior Service Designer",
+          title: "Sr Product Designer / Product Lead",
           period: "May 2025 to Present",
           bullets: [
-            "Reshaped the platform roadmap based on stakeholder research that pinpointed where new DoD programs were getting stuck during onboarding, shifting priority toward the capabilities they needed to reach first deployment",
-            "Redesigned the tenant onboarding journey from provisioning through first deployment, turning a high-touch engineering-led process into a repeatable one with reusable artifacts that new tenant teams now run themselves",
+            "Drove discovery to map the constraint blocking new tenant deployments on a government DevSecOps platform replacing a 12 to 18 month accreditation process, redirecting the roadmap to capabilities new programs need first",
+            "Led the redesign of tenant onboarding from provisioning through first deployment, replacing a high-touch engineering process with reusable artifacts new teams run themselves",
+            "Shaped the productization plan around four measurable outcomes (environment standup, time to first deploy, developer-led delivery, reusable compliance), giving leadership a single way to prioritize and report progress across delivery, compliance, and GTM",
           ],
         },
       ],

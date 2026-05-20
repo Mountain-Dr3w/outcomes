@@ -10,11 +10,11 @@ import { resume } from "@/lib/resume";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Resume for Drew McFarland, a service designer, USAF veteran, and product designer working across GovTech and infrastructure.",
+    "Resume for Drew McFarland, a product designer and strategist, USAF veteran, and active Secret clearance holder.",
   openGraph: {
     title: "Resume | Drew McFarland",
     description:
-      "Service design, product design, and design operations experience across GovTech, defense, and infrastructure products.",
+      "Product design, strategy, and design operations experience across GovTech, defense, and infrastructure products.",
     url: "/resume",
   },
 };
@@ -88,7 +88,7 @@ export default function ResumePage() {
               experience
             </h2>
             <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
-              Service design, product design, and design operations roles where
+              Product design, strategy, and design operations roles where
               research had to turn into shipped operational change.
             </p>
           </aside>
