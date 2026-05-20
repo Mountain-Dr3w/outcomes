@@ -127,6 +127,10 @@ export default async function WorkPage({ params }: WorkPageProps) {
               </Reveal>
             ) : null}
 
+            {item.visuals?.length ? (
+              <VisualEvidence visuals={item.visuals} />
+            ) : null}
+
             <section className="mt-16 grid gap-10">
               {item.sections.map((section, index) => (
                 <CaseStudySection
@@ -179,6 +183,58 @@ export default async function WorkPage({ params }: WorkPageProps) {
         </div>
       </section>
     </main>
+  );
+}
+
+function VisualEvidence({
+  visuals,
+}: {
+  visuals: NonNullable<(typeof workItems)[number]["visuals"]>;
+}) {
+  return (
+    <Reveal delay={0.08}>
+      <section className="mt-14 border-y border-[var(--border)] py-8">
+        <div className="grid gap-6 lg:grid-cols-[0.22fr_1fr]">
+          <p className="font-mono text-sm text-[var(--accent)]">
+            visual evidence
+          </p>
+          <div className="grid gap-8">
+            {visuals.map((visual) => {
+              const isWide = visual.layout === "wide";
+
+              return (
+                <figure key={visual.src} className="grid gap-3">
+                  <div
+                    className={[
+                      "artifact-shadow overflow-hidden border border-[var(--border-strong)] bg-[var(--bg-raised)]",
+                      isWide ? "overflow-x-auto" : "",
+                    ].join(" ")}
+                  >
+                    <a href={visual.src} target="_blank" rel="noreferrer">
+                      <Image
+                        src={visual.src}
+                        alt={visual.alt}
+                        width={visual.width}
+                        height={visual.height}
+                        className={
+                          isWide
+                            ? "h-auto w-full max-w-none"
+                            : "h-[30rem] w-full object-cover object-top sm:h-[38rem]"
+                        }
+                      />
+                    </a>
+                  </div>
+                  <figcaption className="grid gap-2 border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)] sm:grid-cols-[8rem_1fr]">
+                    <span className="text-[var(--accent)]">{visual.label}</span>
+                    <span>{visual.caption}</span>
+                  </figcaption>
+                </figure>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </Reveal>
   );
 }
 
