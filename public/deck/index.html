@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drew McFarland — Portfolio Review</title>
+<meta name="description" content="A portfolio review. Two case studies — Jigsaw and FORGE — told the same way: the before, what I did, and the measured result.">
+<meta name="theme-color" content="#08090c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Drew McFarland — Portfolio Review">
+<meta property="og:description" content="Two case studies — Jigsaw and FORGE — told the same way: the before, what I did, and the measured result.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+  @font-face {
+    font-family: 'Geist';
+    src: url('/deck/fonts/Geist-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: block;
+  }
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('/deck/fonts/GeistMono-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: block;
+  }
+
+  :root {
+    --bg: #08090c;
+    --panel: #0d0f14;
+    --line: rgba(255,255,255,0.10);
+    --line-soft: rgba(255,255,255,0.05);
+    --text: #eceef1;
+    --dim: #8a909a;
+    --faint: #4a4f58;
+    --amber: #f5a623;
+    --cyan: #38d6f0;
+    --sans: 'Geist', ui-sans-serif, -apple-system, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    background: #050608;
+    overflow: hidden;
+    font-family: var(--sans);
+    color: var(--text);
+  }
+
+  #stage {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 1280px; height: 720px;
+    transform-origin: center center;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 1280px; height: 720px;
+    background: var(--bg);
+    padding: 64px 72px 56px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  .slide { --accent: var(--text); }
+  .slide[data-section="jigsaw"] { --accent: var(--cyan); }
+  .slide[data-section="forge"]  { --accent: var(--amber); }
+
+  /* ——— chrome ——— */
+  .chrome {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40px;
+    padding: 0 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line-soft);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .chrome .sec { color: var(--dim); }
+  .chrome .sec b { color: var(--accent); font-weight: 500; }
+
+  .pageno {
+    position: absolute;
+    bottom: 22px; right: 72px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+  }
+  .progress {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    background: var(--accent, var(--text));
+    opacity: 0.5;
+  }
+
+  /* ——— shared type ——— */
+  .eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .eyebrow .coord {
+    color: var(--faint);
+    letter-spacing: 0.1em;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: 555;
+    letter-spacing: -0.022em;
+    line-height: 1.12;
+    max-width: 980px;
+  }
+  h1 .mut { color: var(--dim); }
+  .lede {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--dim);
+    max-width: 660px;
+  }
+
+  .content { margin-top: 20px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+  .active .rv { animation: rise .5s cubic-bezier(.2,.7,.2,1) both; }
+  .active .rv:nth-child(1) { animation-delay: .04s; }
+  .active .rv:nth-child(2) { animation-delay: .11s; }
+  .active .rv:nth-child(3) { animation-delay: .18s; }
+  .active .rv:nth-child(4) { animation-delay: .25s; }
+  .active .rv:nth-child(5) { animation-delay: .32s; }
+  .active .rv:nth-child(6) { animation-delay: .39s; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ——— ruled rows (the workhorse layout) ——— */
+  .rows { border-top: 1px solid var(--line); }
+  .row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 32px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .row .idx {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .row .t { font-size: 20px; font-weight: 520; letter-spacing: -0.012em; line-height: 1.3; }
+  .row .d { font-size: 14.5px; color: var(--dim); margin-top: 6px; line-height: 1.5; max-width: 820px; }
+  .row .d b { color: var(--text); font-weight: 520; }
+
+  /* wide variant: title col + desc col side by side */
+  .row.wide { grid-template-columns: 120px 360px 1fr; }
+  .row.wide .d { margin-top: 0; }
+
+  /* ——— metric blocks ——— */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .metrics.four { grid-template-columns: repeat(4, 1fr); }
+  .metric {
+    padding: 28px 28px 26px 0;
+    border-right: 1px solid var(--line);
+    margin-right: 28px;
+  }
+  .metric:last-child { border-right: none; margin-right: 0; }
+  .metric .delta {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    margin-bottom: 14px;
+  }
+  .metric .num {
+    font-family: var(--mono);
+    font-size: 46px;
+    font-weight: 450;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .metric .lbl {
+    font-size: 13.5px;
+    color: var(--dim);
+    margin-top: 14px;
+    line-height: 1.45;
+  }
+
+  /* ——— "what we heard" ——— */
+  .heard {
+    padding: 20px 0 4px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    max-width: 1010px;
+  }
+  .heard .hk {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .heard p {
+    font-size: 22px;
+    line-height: 1.42;
+    font-weight: 440;
+    letter-spacing: -0.014em;
+  }
+  .heard p .mut { color: var(--dim); }
+
+  /* ——— image frames ——— */
+  .shot {
+    position: relative;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    min-height: 0;
+    display: block;
+  }
+  .shot .cap {
+    flex: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 12px 4px 2px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+  }
+  .shot .cap b { color: var(--text); font-weight: 500; letter-spacing: 0.12em; }
+
+  .cols { display: grid; gap: 44px; flex: 1; min-height: 0; }
+  .c2 { grid-template-columns: 1fr 1fr; }
+  .c-38-62 { grid-template-columns: 38fr 58fr; }
+
+  /* side panel next to a shot */
+  .side {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+  }
+  .side .ek {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .side p { font-size: 15.5px; line-height: 1.65; color: var(--dim); }
+  .side p + p { margin-top: 14px; }
+  .side p b { color: var(--text); font-weight: 530; }
+  .side .foot {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    line-height: 1.7;
+  }
+
+  /* divider slides */
+  .divider { justify-content: center; }
+  .divider .giant {
+    font-family: var(--mono);
+    font-size: 120px;
+    font-weight: 350;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--text);
+  }
+  .divider .giant span { color: var(--accent); }
+  .divider .sub {
+    font-size: 23px;
+    color: var(--dim);
+    margin-top: 26px;
+    font-weight: 420;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+    line-height: 1.4;
+  }
+  .meta-row {
+    display: flex;
+    margin-top: 52px;
+    border-top: 1px solid var(--line);
+  }
+  .meta-row .mi { padding: 16px 36px 0 0; margin-right: 36px; }
+  .meta-row .mi .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 8px;
+  }
+  .meta-row .mi .v { font-size: 15.5px; font-weight: 480; }
+
+  .tick { width: 44px; height: 4px; background: var(--accent); margin-bottom: 36px; }
+
+  /* title slide */
+  .title-slide { justify-content: center; }
+  .title-slide .statement {
+    font-size: 88px;
+    font-weight: 580;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+  .title-slide .statement .o { color: var(--amber); }
+  .title-slide .id-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .title-slide .id-row .nm { color: var(--text); }
+
+  /* timeline (about) */
+  .tl { display: flex; border-top: 1px solid var(--line); margin-top: auto; }
+  .tl .seg { flex: 1; padding: 18px 18px 0 0; position: relative; }
+  .tl .seg::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: 0;
+    width: 5px; height: 5px;
+    background: var(--amber);
+    border-radius: 50%;
+  }
+  .tl .yr { font-family: var(--mono); font-size: 11px; color: var(--amber); letter-spacing: 0.12em; margin-bottom: 8px; }
+  .tl .role { font-size: 15px; font-weight: 520; line-height: 1.3; }
+  .tl .org { font-size: 13px; color: var(--dim); margin-top: 4px; }
+
+  .range-list { border-top: 1px solid var(--line); }
+  .range-list .r {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .range-list .r .a { font-size: 16.5px; font-weight: 500; }
+  .range-list .r .b { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+
+  .case-index { margin-top: auto; border-top: 1px solid var(--line); }
+  .case-index .ci {
+    display: grid;
+    grid-template-columns: 60px 200px 1fr 300px;
+    gap: 28px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .case-index .ci .no { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; }
+  .case-index .ci.j .no { color: var(--cyan); }
+  .case-index .ci.f .no { color: var(--amber); }
+  .case-index .ci .nm { font-family: var(--mono); font-size: 19px; font-weight: 480; letter-spacing: 0.05em; }
+  .case-index .ci .ds { font-size: 14.5px; color: var(--dim); line-height: 1.45; }
+  .case-index .ci .oc { font-family: var(--mono); font-size: 12.5px; color: var(--dim); text-align: right; }
+  .case-index .ci.j .oc em { font-style: normal; color: var(--cyan); }
+  .case-index .ci.f .oc em { font-style: normal; color: var(--amber); }
+
+  /* three questions */
+  .qs { border-top: 1px solid var(--line); }
+  .qs .q { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+  .qs .q .qn { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; flex: none; }
+  .qs .q .qt { font-size: 21px; font-weight: 510; letter-spacing: -0.012em; }
+
+  .teaser {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    font-size: 14.5px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+  .teaser .tk { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); flex: none; }
+  .teaser b { color: var(--text); font-weight: 520; }
+  .teaser .url { font-family: var(--mono); color: var(--text); }
+
+  #hint {
+    position: fixed;
+    bottom: 14px; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    opacity: 0;
+    transition: opacity .4s;
+    pointer-events: none;
+    text-transform: uppercase;
+  }
+  body.fresh #hint { opacity: 1; }
+
+  /* ——— self-guided viewing chrome (hosted only) ——— */
+  #nav-ui {
+    --accent: var(--amber);
+    position: fixed;
+    bottom: 18px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 7px 8px 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(8,9,12,0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-family: var(--mono);
+    opacity: 0;
+    transition: opacity .45s, transform .45s;
+    pointer-events: none;
+  }
+  body.show-ui #nav-ui { opacity: 1; pointer-events: auto; }
+  body.present #nav-ui, body.present #hint { display: none; }
+  #nav-ui .count {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--dim);
+    min-width: 70px;
+    text-align: center;
+  }
+  #nav-ui .count b { color: var(--text); font-weight: 500; }
+  #nav-ui button {
+    appearance: none;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text);
+    width: 32px; height: 32px;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    cursor: pointer;
+    font-size: 14px; line-height: 1;
+    transition: border-color .2s, color .2s, background .2s;
+  }
+  #nav-ui button:hover { border-color: var(--accent); color: var(--accent); }
+  #nav-ui button:active { background: rgba(255,255,255,0.05); }
+  #nav-ui button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #nav-ui a.pdf {
+    color: var(--faint);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    padding: 0 14px 0 4px;
+    transition: color .2s;
+  }
+  #nav-ui a.pdf:hover { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .active .rv { animation: none !important; opacity: 1 !important; transform: none !important; }
+    #nav-ui { transition: none; }
+  }
+
+  @media print {
+    html, body { overflow: visible; background: var(--bg); }
+    #stage { position: static; transform: none !important; width: auto; height: auto; }
+    .slide {
+      display: flex !important;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+    }
+    .rv { animation: none !important; opacity: 1 !important; transform: none !important; }
+    #hint, #nav-ui { display: none !important; }
+  }
+  @page { size: 1280px 720px; margin: 0; }
+</style>
+</head>
+<body class="fresh">
+<div id="stage">
+
+  <!-- ====================== 01 · TITLE ====================== -->
+  <section class="slide title-slide" data-sec-label="PORTFOLIO REVIEW">
+    <div class="content" style="justify-content:center">
+      <div class="rv eyebrow" style="--accent:var(--amber)"><span class="coord">DM—00</span> Portfolio Review · June 2026</div>
+      <div class="rv statement">Outcomes over<br>everything<span class="o">.</span></div>
+      <div class="rv id-row">
+        <span class="nm">Drew McFarland</span>
+        <span>Product &amp; Service Design</span>
+        <span>2 case studies · 30 min</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 02 · ABOUT ====================== -->
+  <section class="slide" data-sec-label="INTRODUCTION">
+    <div class="content">
+      <div class="rv eyebrow" style="--accent:var(--amber)"><span class="coord">DM—01</span> The short version</div>
+      <h1 class="rv">If it shipped and the way people work<br>didn't change, <span class="mut">I count it as a miss.</span></h1>
+      <div class="rv cols c2" style="margin-top:40px; flex:initial">
+        <div class="range-list">
+          <div class="r"><span class="a">User research</span><span class="b">Embedded with operators</span></div>
+          <div class="r"><span class="a">Service design</span><span class="b">Blueprints · event storming</span></div>
+          <div class="r"><span class="a">Product design</span><span class="b">Complex operational UI</span></div>
+          <div class="r"><span class="a">Product strategy</span><span class="b">Metrics · alignment</span></div>
+          <div class="r"><span class="a">Build</span><span class="b">Design → working software</span></div>
+        </div>
+        <div class="lede" style="font-size:16px">
+          Nine years on government and defense software. USAF veteran, so I was the user
+          before I was the designer. M.S. in Human-Computer Interaction. Active Secret clearance.
+          The two cases today cover both ends of my range: one deep on a single
+          operational interface, one wide across a whole organization.
+        </div>
+      </div>
+      <div class="rv tl">
+        <div class="seg"><div class="yr">2016</div><div class="role">Service Design Consultant</div><div class="org">DrewUX, independent</div></div>
+        <div class="seg"><div class="yr">2017</div><div class="role">Product Designer</div><div class="org">USAF Kessel Run</div></div>
+        <div class="seg"><div class="yr">2022</div><div class="role">Design Operations Lead</div><div class="org">USAF Kessel Run</div></div>
+        <div class="seg"><div class="yr">2025</div><div class="role">Sr Service Designer · Product Lead</div><div class="org">Rise8</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 03 · FRAMEWORK ====================== -->
+  <section class="slide" data-sec-label="HOW TO READ THIS">
+    <div class="content">
+      <div class="rv eyebrow" style="--accent:var(--amber)"><span class="coord">DM—02</span> Format</div>
+      <h1 class="rv">Two case studies, told the same way.</h1>
+      <div class="rv rows" style="margin-top:28px">
+        <div class="row wide">
+          <span class="idx">Before</span>
+          <span class="t">The symptom I was handed</span>
+          <span class="d">The stated task, and what researching it actually turned up.</span>
+        </div>
+        <div class="row wide">
+          <span class="idx">The target</span>
+          <span class="t">The outcome users needed</span>
+          <span class="d">What good had to look like, once the real problem was clear.</span>
+        </div>
+        <div class="row wide">
+          <span class="idx">What I did</span>
+          <span class="t">The design moves, and the fights</span>
+          <span class="d">Decisions, artifacts, and where I had to push back.</span>
+        </div>
+        <div class="row wide">
+          <span class="idx">Result</span>
+          <span class="t">What changed, measured</span>
+          <span class="d">Measured in adoption, hours, and independence.</span>
+        </div>
+      </div>
+      <div class="rv case-index">
+        <div class="ci j">
+          <span class="no">01</span>
+          <span class="nm">JIGSAW</span>
+          <span class="ds">Aerial-refueling planning · USAF Kessel Run · product design depth</span>
+          <span class="oc">adopted by <em>1 → 4 AOCs</em></span>
+        </div>
+        <div class="ci f">
+          <span class="no">02</span>
+          <span class="nm">FORGE</span>
+          <span class="ds">Platform onboarding · Space Force / Rise8 · service design breadth</span>
+          <span class="oc">self-service <em>7% → 90%</em></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 04 · JIGSAW DIVIDER ====================== -->
+  <section class="slide divider" data-section="jigsaw" data-sec-label="CASE 01 · JIGSAW">
+    <div class="content" style="justify-content:center">
+      <div class="rv tick"></div>
+      <div class="rv giant">JIGSAW<span>.</span></div>
+      <div class="rv sub">A modernized planning tool that worked in one air operations center but couldn't expand to a second. My job was to find out why.</div>
+      <div class="rv meta-row">
+        <div class="mi"><div class="k">Role</div><div class="v">Lead UX Designer</div></div>
+        <div class="mi"><div class="k">Org</div><div class="v">USAF Kessel Run</div></div>
+        <div class="mi"><div class="k">Duration</div><div class="v">8 months</div></div>
+        <div class="mi"><div class="k">Team</div><div class="v">8 people</div></div>
+        <div class="mi"><div class="k">Environment</div><div class="v">Classified · screens sanitized</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 05 · JIGSAW BEFORE ====================== -->
+  <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · BEFORE">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">J—01</span> Before</div>
+      <h1 class="rv">Modernized, but stuck<br>in one theater.</h1>
+      <div class="rv rows" style="margin:34px 0 0">
+        <div class="row">
+          <span class="idx">The task</span>
+          <div><div class="t">"We can't expand to other AOCs. Fix it."</div><div class="d">A previous team had already "modernized" tanker planning for one air operations center. I was brought on for what came next, starting from that symptom rather than a diagnosis.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The catch</span>
+          <div><div class="t">Modernized, but nothing was actually solved.</div><div class="d">It moved planning off spreadsheets into a clean UI, but it was built around <b>one center's local process</b> instead of the outcome planners need. Nothing in it earned a second AOC's adoption.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The stakes</span>
+          <div><div class="t">Every sortie depends on this plan.</div><div class="d">A late or wrong plan means receivers don't get fuel, so sorties get cut and missions re-planned. A tool that can't travel leaves every other theater planning the hard way.</div></div>
+        </div>
+      </div>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">What I kept hearing</div>
+        <p>Other centers looked at it and didn't see their job in it, <span class="mut">so they kept planning their own way.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 06 · JIGSAW RESEARCH ====================== -->
+  <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · BEFORE">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">J—02</span> The target · what good looks like</div>
+      <h1 class="rv">Two theaters, one job.<br>I went looking for the difference.</h1>
+      <p class="rv lede" style="margin-top:28px; max-width:900px">
+        I split time between the 613th (Pacific) and 609th (Central) Air Operations Centers,
+        two theaters running the same mission their own ways. I followed the plan end to end in
+        each, separating what <b style="color:var(--text);font-weight:560">every</b> tanker planner needs from what one office happened to do.
+      </p>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">The reframe that set the direction</div>
+        <p>"Modernize the workflow" was the old goal, and the reason the tool couldn't travel. The real target was to <span style="color:var(--accent)">design for the outcome every planner needs</span>: <span class="mut">a fast, conflict-free, trustworthy plan that's worth adopting in any theater.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 07 · JIGSAW PRINCIPLES ====================== -->
+  <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">J—03</span> What I did · Framing</div>
+      <h1 class="rv">Design for what every planner needs,<br>not what one office does.</h1>
+      <div class="rv rows" style="margin-top:36px">
+        <div class="row">
+          <span class="idx">Trust</span>
+          <div><div class="t">The plan checks itself.</div><div class="d">A planner's core outcome is a plan they can trust. Conflicts validate as it's built, so a double-booking flags the moment it's made instead of after the phone rings. Every theater needs that, and none of it is local.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">Clarity</span>
+          <div><div class="t">Selecting a sortie shows what it touches.</div><div class="d">Click any sortie and everything it connects to lights up: tankers, receivers, airspace. Managing those dependencies is the job in every theater, so the tool draws the ripple effects instead of asking planners to remember them.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">Portability</span>
+          <div><div class="t">Shaped by what planning produces.</div><div class="d">The day at a glance, then filtered the way planners actually slice it. It's modeled on what planning <b>produces</b> rather than one center's naming and steps, and that's what let a second, third, and fourth AOC see their job in it.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 08 · JIGSAW SOLUTION (GANTT) ====================== -->
+  <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">J—04</span> What I did · The planning surface</div>
+      <div class="rv shot" style="flex:1">
+        <img src="/deck/assets/jigsaw-gantt.png" alt="Jigsaw Gantt planning interface">
+        <div class="cap">
+          <span><b>THE PLAN, IN THE TOOL</b></span>
+          <span>color-coded requests · dependencies drawn · conflicts flagged as they're made · sanitized (CUI)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 09 · JIGSAW SOLUTION (MAP + THE FIGHT) ====================== -->
+  <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">J—05</span> What I did · Time and space, one canvas</div>
+      <div class="cols c-38-62" style="margin-top:0">
+        <div class="rv side">
+          <div class="ek">Where I pushed back</div>
+          <p>Engineering pushed back hard on connected highlighting. It cut across data relationships system-wide, and the estimate was big.</p>
+          <p>I pushed for it because it serves the planner's core outcome: <b>seeing what else moves when one thing moves.</b> That's the job in every theater. Without it, the tool is only a cleaner form to fill out.</p>
+          <p>We kept the argument on observed work rather than taste, and scoped it to ship: <b>highlight first, full dependency tracing later.</b></p>
+          <div class="foot">It shipped in v1.</div>
+        </div>
+        <div class="rv shot">
+          <img src="/deck/assets/jigsaw-map-split.png" alt="Jigsaw split timeline and map view">
+          <div class="cap">
+            <span><b>SPLIT TIMELINE + MAP</b></span>
+            <span>synchronized selection · route details on demand</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 10 · JIGSAW RESULT ====================== -->
+  <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · RESULT">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">J—06</span> Result</div>
+      <h1 class="rv">One AOC became four,<br>and the day got shorter in each.</h1>
+      <div class="rv metrics four" style="margin-top:36px; flex:initial">
+        <div class="metric"><div class="delta">AOCs ADOPTED — 1 →</div><div class="num">4</div><div class="lbl">the tool finally traveled, meeting the original mandate</div></div>
+        <div class="metric"><div class="delta">DAILY PLANNING — 8+ HRS →</div><div class="num">1.5 hrs</div><div class="lbl">finished before the morning brief</div></div>
+        <div class="metric"><div class="delta">ONBOARDING — 4 WEEKS →</div><div class="num">3 days</div><div class="lbl">new planners planning unsupervised</div></div>
+        <div class="metric"><div class="delta">CONFLICTS MISSED — 90 DAYS</div><div class="num">0</div><div class="lbl">the tool catches what hand-checking missed</div></div>
+      </div>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">Why adoption was the real test</div>
+        <p>A tool built for one office gets rebuilt for the next. <span class="mut">One built on the outcome every planner shares just spreads.</span> Planners rotate every 2–3 years, so the time it saves adds up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 11 · FORGE DIVIDER ====================== -->
+  <section class="slide divider" data-section="forge" data-sec-label="CASE 02 · FORGE">
+    <div class="content" style="justify-content:center">
+      <div class="rv tick"></div>
+      <div class="rv giant">FORGE<span>.</span></div>
+      <div class="rv sub">A platform built to speed delivery, where reaching the warfighter still took eighteen to twenty-four months.</div>
+      <div class="rv meta-row">
+        <div class="mi"><div class="k">Role</div><div class="v">Service Designer</div></div>
+        <div class="mi"><div class="k">Org</div><div class="v">Rise8 · Space Force</div></div>
+        <div class="mi"><div class="k">Domain</div><div class="v">DevSecOps platform</div></div>
+        <div class="mi"><div class="k">Scope</div><div class="v">5 internal teams · multi-contractor</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 12 · FORGE BEFORE ====================== -->
+  <section class="slide" data-section="forge" data-sec-label="FORGE · BEFORE">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">F—01</span> Before</div>
+      <h1 class="rv">18–24 months from kickoff<br>to the warfighter.</h1>
+      <div class="rv rows" style="margin:30px 0 0">
+        <div class="row">
+          <span class="idx">The problem</span>
+          <div><div class="t">No compliant, paved path to production.</div><div class="d">The platform existed to get capability to the warfighter fast. It couldn't. Standing a team up and reaching first deploy dragged on for months.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The waste</span>
+          <div><div class="t">Year-long contracts that delivered nothing.</div><div class="d">A 12-month proof-of-concept contract could start and end with nothing in front of a user. It was no one's fault, but the government bought a year for no return, and the vendor had nothing to re-compete on.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The trap</span>
+          <div><div class="t">Two years of building, no feedback.</div><div class="d">What reached the field after two years rarely got adopted, because it was built that whole time without real user feedback. Slow delivery quietly broke the feedback loop.</div></div>
+        </div>
+      </div>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">My slice · the target</div>
+        <p>Rise8 was brought in to pave the path. I owned <span style="color:var(--accent)">onboarding</span>, the front of it, where teams stalled for months. <span class="mut">The target was to get a team from onboard to first deploy in days instead of months.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 13 · FORGE BLUEPRINT ====================== -->
+  <section class="slide" data-section="forge" data-sec-label="FORGE · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">F—02</span> What I did · Make the journey visible</div>
+      <h1 class="rv" style="font-size:32px">I started by mapping the whole path.</h1>
+      <div class="rv shot" style="flex:1; margin-top:22px">
+        <img src="/deck/assets/forge-service-blueprint.png" alt="FORGE service blueprint — 17 phases, 4 lanes">
+        <div class="cap">
+          <span><b>SERVICE BLUEPRINT — 17 PHASES × 4 LANES</b></span>
+          <span>tenant action · visible touchpoint · backstage work · support · the first shared picture five teams had</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 14 · FORGE FRICTION LOG ====================== -->
+  <section class="slide" data-section="forge" data-sec-label="FORGE · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">F—03</span> What I did · From anecdotes to data</div>
+      <div class="cols c-38-62" style="margin-top:0">
+        <div class="rv side">
+          <div class="ek">The friction log</div>
+          <p>Every tenant pain point scored on four fields before it could enter a meeting: <b>owning team · UX severity · breakage risk · rationale</b>.</p>
+          <p>"A tenant complained about X" became <b>"high-severity, breakage risk, owned by your team, and here's why."</b> Meetings re-centered on what ranked highest instead of what was argued loudest.</p>
+          <p>The repeating patterns shared a root: internal habits had quietly become unspoken requirements for people on the outside.</p>
+          <div class="foot">Paired with DDD event storming of the internal flow</div>
+        </div>
+        <div class="rv shot">
+          <img src="/deck/assets/forge-friction-log.png" alt="FORGE friction log">
+          <div class="cap">
+            <span><b>FRICTION LOG</b></span>
+            <span>each row: owner · severity · breakage risk · rationale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 15 · FORGE PORTAL ====================== -->
+  <section class="slide" data-section="forge" data-sec-label="FORGE · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">F—04</span> What I did · The portal</div>
+      <div class="cols c-38-62" style="margin-top:0">
+        <div style="display:flex; flex-direction:column">
+          <h1 class="rv" style="font-size:29px; margin-bottom:28px">Built around the three questions tenants couldn't get answered.</h1>
+          <div class="rv qs">
+            <div class="q"><span class="qn">Q—01</span><span class="qt">Where am I in the process?</span></div>
+            <div class="q"><span class="qn">Q—02</span><span class="qt">Who owns the next step?</span></div>
+            <div class="q"><span class="qn">Q—03</span><span class="qt">What can I do right now?</span></div>
+          </div>
+          <p class="rv" style="font-size:14px; color:var(--dim); line-height:1.6; margin-top:24px">
+            The design is built on three things: status, ownership, and next action. A services hub put
+            the full toolkit on one screen, with each tool's access state beside it.
+          </p>
+        </div>
+        <div class="rv shot">
+          <img src="/deck/assets/forge-portal-onboarding.png" alt="FORGE portal onboarding progress">
+          <div class="cap">
+            <span><b>ONBOARDING PROGRESS</b></span>
+            <span>status · assigned team · pending actions with owners</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 16 · FORGE RESULT ====================== -->
+  <section class="slide" data-section="forge" data-sec-label="FORGE · RESULT">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">F—05</span> Result · the onboarding slice</div>
+      <h1 class="rv">Onboarding stopped<br>costing months.</h1>
+      <div class="rv metrics four" style="margin-top:36px; flex:initial">
+        <div class="metric"><div class="delta">SELF-SERVICE — 6–7% →</div><div class="num">90%</div><div class="lbl">most teams finish without a support handoff</div></div>
+        <div class="metric"><div class="delta">ONBOARD → 1ST DEPLOY — MONTHS →</div><div class="num">4.5 days</div><div class="lbl">past the original one-week target</div></div>
+        <div class="metric"><div class="delta">SUPPORT TICKETS</div><div class="num">−80%</div><div class="lbl">"what's my status?" stopped reaching the queue</div></div>
+        <div class="metric"><div class="delta">TEAMS ONBOARDED</div><div class="num">8</div><div class="lbl">a repeatable path instead of a one-off rescue</div></div>
+      </div>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">Why the front of the path mattered most</div>
+        <p>Compress onboarding and the whole timeline moves. <span class="mut">Teams reach real users sooner, so feedback starts while the design can still change.</span> That's the loop the 18–24-month cycle had broken.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 17 · COMMON THREAD ====================== -->
+  <section class="slide" data-sec-label="THE PATTERN">
+    <div class="content">
+      <div class="rv eyebrow" style="--accent:var(--amber)"><span class="coord">DM—03</span> The common thread</div>
+      <h1 class="rv">I was handed a symptom both times.<br>The work was finding the outcome.</h1>
+      <div class="rv rows" style="margin-top:34px">
+        <div class="row">
+          <span class="idx">The symptom</span>
+          <div><div class="t">The brief is never the problem.</div><div class="d">"Modernize tanker planning." "We can't expand to other AOCs." "Onboarding is too slow." Each one is real, and each one is a symptom rather than the actual outcome anyone needs.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The outcome</span>
+          <div><div class="t">Find what users need to achieve, then design only for that.</div><div class="d">A plan any planner can trust and adopt. A path a team can actually get through. I research until the real outcome is clear, then cut everything that isn't it.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The proof</span>
+          <div><div class="t">The outcome shows up in how the work changes.</div><div class="d">One AOC became four. Onboarding went from months to days. Not a launch announcement. <b>The way people work changed.</b></div></div>
+        </div>
+      </div>
+      <div class="rv teaser">
+        <span class="tk">Lately</span>
+        <span>I also ship what I design. <b>Velveteen</b> is a deploy pipeline with a visible security gate, designed and built end-to-end. Live at <span class="url">velveteen.sh</span> · happy to go there in Q&amp;A.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 18 · CLOSE ====================== -->
+  <section class="slide title-slide" data-sec-label="Q&A">
+    <div class="content" style="justify-content:center">
+      <div class="rv eyebrow" style="--accent:var(--amber)"><span class="coord">DM—04</span> Thank you</div>
+      <div class="rv statement" style="font-size:72px">Questions,<br>especially the hard ones<span class="o">.</span></div>
+      <div class="rv id-row">
+        <span class="nm">Drew McFarland</span>
+        <span>drewjmcfarland2@gmail.com</span>
+        <span>Jigsaw · Forge · (Velveteen on request)</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="hint">← → to navigate</div>
+
+<nav id="nav-ui" aria-label="Slide navigation">
+  <button id="prev" type="button" aria-label="Previous slide">‹</button>
+  <span class="count"><b id="cur-no">01</b> / <span id="tot-no">18</span></span>
+  <button id="next" type="button" aria-label="Next slide">›</button>
+  <a class="pdf" href="/deck/portfolio-review.pdf" target="_blank" rel="noopener">PDF</a>
+</nav>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const present = /(?:^|[?&])present\b/.test(location.search);
+  if (present) document.body.classList.add('present');
+
+  let cur = Math.min(Math.max(parseInt(location.hash.slice(1), 10) || 1, 1), slides.length) - 1;
+
+  // section accent per slide, for the viewing chrome
+  const accentFor = (s) => s.dataset.section === 'jigsaw'
+    ? 'var(--cyan)'
+    : 'var(--amber)';
+
+  slides.forEach((s, i) => {
+    const label = s.dataset.secLabel || '';
+    const chrome = document.createElement('div');
+    chrome.className = 'chrome';
+    chrome.innerHTML = `<span class="sec"><b>DM</b> — PORTFOLIO REVIEW</span><span>${label}</span>`;
+    s.prepend(chrome);
+
+    const no = document.createElement('div');
+    no.className = 'pageno';
+    no.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    s.appendChild(no);
+
+    const prog = document.createElement('div');
+    prog.className = 'progress';
+    prog.style.width = (((i + 1) / slides.length) * 100) + '%';
+    s.appendChild(prog);
+  });
+
+  const curNo = document.getElementById('cur-no');
+  const totNo = document.getElementById('tot-no');
+  const navUi = document.getElementById('nav-ui');
+  totNo.textContent = String(slides.length).padStart(2, '0');
+
+  function show(i) {
+    cur = (i + slides.length) % slides.length;
+    slides.forEach((s, j) => s.classList.toggle('active', j === cur));
+    history.replaceState(null, '', '#' + (cur + 1));
+    curNo.textContent = String(cur + 1).padStart(2, '0');
+    navUi.style.setProperty('--accent', accentFor(slides[cur]));
+  }
+
+  function fit() {
+    const sc = Math.min(innerWidth / 1280, innerHeight / 720);
+    document.getElementById('stage').style.transform =
+      `translate(-50%, -50%) scale(${sc})`;
+  }
+
+  // ——— idle-fading viewing chrome (self-guided mode only) ———
+  let idle;
+  function wakeUI() {
+    if (present) return;
+    document.body.classList.add('show-ui');
+    clearTimeout(idle);
+    idle = setTimeout(() => document.body.classList.remove('show-ui'), 2600);
+  }
+
+  addEventListener('keydown', e => {
+    document.body.classList.remove('fresh');
+    if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    wakeUI();
+  });
+  addEventListener('resize', fit);
+
+  // on-screen controls
+  document.getElementById('prev').addEventListener('click', e => { e.stopPropagation(); show(cur - 1); wakeUI(); });
+  document.getElementById('next').addEventListener('click', e => { e.stopPropagation(); show(cur + 1); wakeUI(); });
+
+  // click / tap to advance — self-guided only; ignore clicks on links & the nav cluster
+  addEventListener('click', e => {
+    if (present) return;
+    if (e.target instanceof Element && e.target.closest('a, button, #nav-ui')) return;
+    document.body.classList.remove('fresh');
+    show(e.clientX < innerWidth * 0.45 ? cur - 1 : cur + 1);
+    wakeUI();
+  });
+
+  addEventListener('mousemove', wakeUI, { passive: true });
+  addEventListener('touchstart', wakeUI, { passive: true });
+
+  fit();
+  show(cur);
+  wakeUI();
+  setTimeout(() => document.body.classList.remove('fresh'), 4000);
+</script>
+</body>
+</html>
