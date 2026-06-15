@@ -140,6 +140,26 @@
     max-width: 660px;
   }
 
+  .haiku {
+    font-family: var(--mono);
+    font-size: 20px;
+    line-height: 1.62;
+    color: var(--text);
+    border-left: 2px solid var(--accent);
+    padding: 2px 0 2px 22px;
+    margin-top: 26px;
+    letter-spacing: 0.01em;
+  }
+  .haiku cite {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
   .content { margin-top: 20px; display: flex; flex-direction: column; flex: 1; min-height: 0; }
 
   .active .rv { animation: rise .5s cubic-bezier(.2,.7,.2,1) both; }
@@ -502,6 +522,76 @@
   }
   #nav-ui a.pdf:hover { color: var(--accent); }
 
+  /* ——— section-jump nav (top-right) ——— */
+  #jump {
+    position: fixed;
+    top: 14px; right: 16px;
+    z-index: 40;
+    --accent: var(--amber);
+    font-family: var(--mono);
+  }
+  #jump-btn {
+    display: flex; align-items: center; gap: 9px;
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(8,9,12,0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+  }
+  #jump-btn:hover { border-color: var(--accent); color: var(--text); }
+  #jump-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #jump .jx-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); flex: none; }
+  #jump .jx-caret { color: var(--faint); font-size: 8px; transition: transform .2s; }
+  #jump.open .jx-caret { transform: rotate(180deg); }
+  #jump-menu {
+    position: absolute;
+    top: calc(100% + 8px); right: 0;
+    min-width: 232px;
+    display: none;
+    flex-direction: column;
+    padding: 6px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(8,9,12,0.93);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  #jump.open #jump-menu { display: flex; }
+  #jump-menu button {
+    appearance: none;
+    display: flex; align-items: baseline; gap: 12px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0; border-radius: 8px;
+    background: none;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  #jump-menu button:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+  #jump-menu button.cur { color: var(--accent); }
+  #jump-menu button .n { color: var(--faint); font-size: 10px; letter-spacing: 0.1em; min-width: 20px; flex: none; }
+  #jump-menu .sep {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 10px 5px;
+    color: var(--faint);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  #jump-menu .sep::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  /* on-screen the jump pill is the section indicator, so drop the chrome's duplicate label */
+  .chrome .sec ~ span { display: none; }
+
   @media (prefers-reduced-motion: reduce) {
     .active .rv { animation: none !important; opacity: 1 !important; transform: none !important; }
     #nav-ui { transition: none; }
@@ -517,7 +607,8 @@
       break-after: page;
     }
     .rv { animation: none !important; opacity: 1 !important; transform: none !important; }
-    #hint, #nav-ui { display: none !important; }
+    #hint, #nav-ui, #jump { display: none !important; }
+    .chrome .sec ~ span { display: inline; }
   }
   @page { size: 1280px 720px; margin: 0; }
 </style>
@@ -839,15 +930,15 @@
             <div class="q"><span class="qn">Q—03</span><span class="qt">What can I do right now?</span></div>
           </div>
           <p class="rv" style="font-size:14px; color:var(--dim); line-height:1.6; margin-top:24px">
-            The design is built on three things: status, ownership, and next action. A services hub put
-            the full toolkit on one screen, with each tool's access state beside it.
+            The portal answers all three in order: a readiness score for status, a named owner on every
+            gate, and the one action a team can take right now.
           </p>
         </div>
         <div class="rv shot">
-          <img src="/deck/assets/forge-portal-onboarding.png" alt="FORGE portal onboarding progress">
+          <img src="/deck/assets/forge-portal-readiness.png" alt="FORGE portal — onboarding readiness: gates cleared and pending, owners, and an evidence packet">
           <div class="cap">
-            <span><b>ONBOARDING PROGRESS</b></span>
-            <span>status · assigned team · pending actions with owners</span>
+            <span><b>ONBOARDING READINESS</b></span>
+            <span>gates cleared vs. pending · who owns the next step · evidence packet on the right</span>
           </div>
         </div>
       </div>
@@ -956,16 +1047,21 @@
   <!-- ====================== 21 · VELVETEEN TARGET ====================== -->
   <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · THE TARGET">
     <div class="content">
-      <div class="rv eyebrow"><span class="coord">V—02</span> The target · what good looks like</div>
+      <div class="rv eyebrow"><span class="coord">V—02</span> The target · the principle I designed to</div>
       <h1 class="rv">Make the security review<br>something a non-coder can act on.</h1>
-      <p class="rv lede" style="margin-top:28px; max-width:900px">
-        Most deploy tools hide the infrastructure so you never think about it. I wanted the opposite.
-        The pipeline stays visible, it <b style="color:var(--text);font-weight:560">pauses on a real security finding before anything goes live</b>,
-        and it explains what it found in language the person who built the app can use.
+      <blockquote class="rv haiku">
+        Here is my source code,<br>
+        Run it on the cloud for me.<br>
+        I do not care how.
+        <cite>the platform-as-a-service ideal</cite>
+      </blockquote>
+      <p class="rv lede" style="margin-top:24px; max-width:900px">
+        That's the bar: you hand over your work and never see the machinery. The one thing that can't
+        stay hidden is a real security risk, so the pipeline <b style="color:var(--text);font-weight:560">surfaces just that finding, in plain language, before anything goes live.</b>
       </p>
       <div class="rv heard" style="margin-top:auto; border-bottom:none">
-        <div class="hk">The principles I designed to</div>
-        <p>Never show raw scan output or YAML. <span class="mut">Someone who doesn't code has to be able to read a finding and act on it, and the tool should teach by writing good scaffolding rather than by lecturing.</span></p>
+        <div class="hk">What that ruled out</div>
+        <p>Never raw scan output or YAML. <span class="mut">Someone who doesn't code has to read a finding and act on it, and the tool should teach by writing good scaffolding rather than by lecturing.</span></p>
       </div>
     </div>
   </section>
@@ -1093,6 +1189,13 @@
 
 </div>
 
+<nav id="jump" aria-label="Jump to section">
+  <button id="jump-btn" type="button" aria-haspopup="true" aria-expanded="false">
+    <span class="jx-dot"></span><span id="jump-cur">Start</span><span class="jx-caret">▾</span>
+  </button>
+  <div id="jump-menu" role="menu"></div>
+</nav>
+
 <div id="hint">← → to navigate</div>
 
 <nav id="nav-ui" aria-label="Slide navigation">
@@ -1109,9 +1212,9 @@
 
   let cur = Math.min(Math.max(parseInt(location.hash.slice(1), 10) || 1, 1), slides.length) - 1;
 
-  // section accent per slide, for the viewing chrome
-  const accentFor = (s) => s.dataset.section === 'jigsaw'
-    ? 'var(--cyan)'
+  // section accent per slide, for the viewing chrome (jigsaw cyan · velveteen coral · else amber)
+  const accentFor = (s) => s.dataset.section === 'jigsaw' ? 'var(--cyan)'
+    : s.dataset.section === 'velveteen' ? 'var(--coral)'
     : 'var(--amber)';
 
   slides.forEach((s, i) => {
@@ -1137,12 +1240,68 @@
   const navUi = document.getElementById('nav-ui');
   totNo.textContent = String(slides.length).padStart(2, '0');
 
+  // ——— section-jump menu ———
+  const jump = document.getElementById('jump');
+  const jumpBtn = document.getElementById('jump-btn');
+  const jumpMenu = document.getElementById('jump-menu');
+  const jumpCur = document.getElementById('jump-cur');
+
+  const anchorDefs = [
+    { test: s => s.classList.contains('title-slide') && s.dataset.secLabel === 'PORTFOLIO REVIEW', label: 'Start', appendix: false },
+    { test: s => s.dataset.section === 'jigsaw' && s.classList.contains('divider'), label: 'Jigsaw', appendix: false },
+    { test: s => s.dataset.section === 'forge' && s.classList.contains('divider'), label: 'Forge', appendix: false },
+    { test: s => s.dataset.secLabel === 'THE PATTERN', label: 'The pattern', appendix: false },
+    { test: s => s.dataset.secLabel === 'Q&A', label: 'Close · Q&A', appendix: false },
+    { test: s => s.dataset.section === 'velveteen' && s.classList.contains('divider'), label: 'Velveteen', appendix: true },
+    { test: s => s.dataset.secLabel === 'HOW I BUILD', label: 'How I build', appendix: true },
+  ];
+  const anchors = anchorDefs
+    .map(d => ({ label: d.label, appendix: d.appendix, idx: slides.findIndex(d.test) }))
+    .filter(a => a.idx >= 0);
+
+  let sepDone = false;
+  anchors.forEach(a => {
+    if (a.appendix && !sepDone) {
+      const sep = document.createElement('div');
+      sep.className = 'sep';
+      sep.textContent = 'On request';
+      jumpMenu.appendChild(sep);
+      sepDone = true;
+    }
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.idx = a.idx;
+    b.innerHTML = `<span class="n">${String(a.idx + 1).padStart(2, '0')}</span><span class="t">${a.label}</span>`;
+    b.addEventListener('click', e => { e.stopPropagation(); show(a.idx); closeJump(); });
+    jumpMenu.appendChild(b);
+  });
+
+  function curAnchor() {
+    let a = anchors[0];
+    for (const x of anchors) { if (x.idx <= cur) a = x; else break; }
+    return a;
+  }
+  function closeJump() { jump.classList.remove('open'); jumpBtn.setAttribute('aria-expanded', 'false'); }
+  function toggleJump() {
+    const open = jump.classList.toggle('open');
+    jumpBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function syncJump() {
+    const a = curAnchor();
+    jumpCur.textContent = a ? a.label : 'Start';
+    const aIdx = a ? a.idx : -1;
+    jumpMenu.querySelectorAll('button').forEach(b => b.classList.toggle('cur', +b.dataset.idx === aIdx));
+    jump.style.setProperty('--accent', accentFor(slides[cur]));
+  }
+  jumpBtn.addEventListener('click', e => { e.stopPropagation(); toggleJump(); });
+
   function show(i) {
     cur = (i + slides.length) % slides.length;
     slides.forEach((s, j) => s.classList.toggle('active', j === cur));
     history.replaceState(null, '', '#' + (cur + 1));
     curNo.textContent = String(cur + 1).padStart(2, '0');
     navUi.style.setProperty('--accent', accentFor(slides[cur]));
+    syncJump();
   }
 
   function fit() {
@@ -1166,9 +1325,15 @@
     if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(cur - 1); }
     if (e.key === 'Home') show(0);
     if (e.key === 'End') show(slides.length - 1);
+    if (e.key === 'Escape') closeJump();
     wakeUI();
   });
   addEventListener('resize', fit);
+
+  // click outside the jump menu closes it (works in present + self-guided)
+  addEventListener('click', e => {
+    if (jump.classList.contains('open') && !(e.target instanceof Element && e.target.closest('#jump'))) closeJump();
+  });
 
   // on-screen controls
   document.getElementById('prev').addEventListener('click', e => { e.stopPropagation(); show(cur - 1); wakeUI(); });
@@ -1177,7 +1342,7 @@
   // click / tap to advance — self-guided only; ignore clicks on links & the nav cluster
   addEventListener('click', e => {
     if (present) return;
-    if (e.target instanceof Element && e.target.closest('a, button, #nav-ui')) return;
+    if (e.target instanceof Element && e.target.closest('a, button, #nav-ui, #jump')) return;
     document.body.classList.remove('fresh');
     show(e.clientX < innerWidth * 0.45 ? cur - 1 : cur + 1);
     wakeUI();
