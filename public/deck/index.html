@@ -35,6 +35,7 @@
     --faint: #4a4f58;
     --amber: #f5a623;
     --cyan: #38d6f0;
+    --coral: #ff7a66;
     --sans: 'Geist', ui-sans-serif, -apple-system, sans-serif;
     --mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
   }
@@ -71,6 +72,7 @@
   .slide { --accent: var(--text); }
   .slide[data-section="jigsaw"] { --accent: var(--cyan); }
   .slide[data-section="forge"]  { --accent: var(--amber); }
+  .slide[data-section="velveteen"] { --accent: var(--coral); }
 
   /* ——— chrome ——— */
   .chrome {
@@ -552,8 +554,8 @@
         <div class="lede" style="font-size:16px">
           Nine years on government and defense software. USAF veteran, so I was the user
           before I was the designer. M.S. in Human-Computer Interaction. Active Secret clearance.
-          The two cases today cover both ends of my range: one deep on a single
-          operational interface, one wide across a whole organization.
+          The two cases today sit at opposite ends of what I do: one goes deep on a single
+          operational interface, one goes wide across a whole organization.
         </div>
       </div>
       <div class="rv tl">
@@ -574,7 +576,7 @@
         <div class="row wide">
           <span class="idx">Before</span>
           <span class="t">The symptom I was handed</span>
-          <span class="d">The stated task, and what researching it actually turned up.</span>
+          <span class="d">The stated task, and what researching it turned up.</span>
         </div>
         <div class="row wide">
           <span class="idx">The target</span>
@@ -633,11 +635,11 @@
       <div class="rv rows" style="margin:34px 0 0">
         <div class="row">
           <span class="idx">The task</span>
-          <div><div class="t">"We can't expand to other AOCs. Fix it."</div><div class="d">A previous team had already "modernized" tanker planning for one air operations center. I was brought on for what came next, starting from that symptom rather than a diagnosis.</div></div>
+          <div><div class="t">"We can't expand to other AOCs. Fix it."</div><div class="d">A previous team had already "modernized" tanker planning for one air operations center. I came on for what came next. The brief described a symptom, and finding the cause was my job.</div></div>
         </div>
         <div class="row">
           <span class="idx">The catch</span>
-          <div><div class="t">Modernized, but nothing was actually solved.</div><div class="d">It moved planning off spreadsheets into a clean UI, but it was built around <b>one center's local process</b> instead of the outcome planners need. Nothing in it earned a second AOC's adoption.</div></div>
+          <div><div class="t">Modernized, but nothing underneath was solved.</div><div class="d">It moved planning off spreadsheets into a clean UI, but it was built around <b>one center's local process</b> instead of the outcome planners need. Nothing in it earned a second AOC's adoption.</div></div>
         </div>
         <div class="row">
           <span class="idx">The stakes</span>
@@ -655,7 +657,7 @@
   <section class="slide" data-section="jigsaw" data-sec-label="JIGSAW · BEFORE">
     <div class="content">
       <div class="rv eyebrow"><span class="coord">J—02</span> The target · what good looks like</div>
-      <h1 class="rv">Two theaters, one job.<br>I went looking for the difference.</h1>
+      <h1 class="rv">Two theaters running the same job,<br>and I went looking for the difference.</h1>
       <p class="rv lede" style="margin-top:28px; max-width:900px">
         I split time between the 613th (Pacific) and 609th (Central) Air Operations Centers,
         two theaters running the same mission their own ways. I followed the plan end to end in
@@ -663,7 +665,7 @@
       </p>
       <div class="rv heard" style="margin-top:auto; border-bottom:none">
         <div class="hk">The reframe that set the direction</div>
-        <p>"Modernize the workflow" was the old goal, and the reason the tool couldn't travel. The real target was to <span style="color:var(--accent)">design for the outcome every planner needs</span>: <span class="mut">a fast, conflict-free, trustworthy plan that's worth adopting in any theater.</span></p>
+        <p>"Modernize the workflow" was the old goal, and the reason the tool couldn't travel. The real target was to <span style="color:var(--accent)">design for the outcome every planner needs</span>: <span class="mut">a plan they can build quickly and trust, in any theater.</span></p>
       </div>
     </div>
   </section>
@@ -684,7 +686,7 @@
         </div>
         <div class="row">
           <span class="idx">Portability</span>
-          <div><div class="t">Shaped by what planning produces.</div><div class="d">The day at a glance, then filtered the way planners actually slice it. It's modeled on what planning <b>produces</b> rather than one center's naming and steps, and that's what let a second, third, and fourth AOC see their job in it.</div></div>
+          <div><div class="t">Shaped by what planning produces.</div><div class="d">The day at a glance, then filtered the way planners slice it. It's modeled on what planning <b>produces</b> rather than one center's naming and steps, and that's what let a second, third, and fourth AOC see their job in it.</div></div>
         </div>
       </div>
     </div>
@@ -713,7 +715,7 @@
           <div class="ek">Where I pushed back</div>
           <p>Engineering pushed back hard on connected highlighting. It cut across data relationships system-wide, and the estimate was big.</p>
           <p>I pushed for it because it serves the planner's core outcome: <b>seeing what else moves when one thing moves.</b> That's the job in every theater. Without it, the tool is only a cleaner form to fill out.</p>
-          <p>We kept the argument on observed work rather than taste, and scoped it to ship: <b>highlight first, full dependency tracing later.</b></p>
+          <p>We kept the argument on what we'd watched planners do, not on taste, and scoped it to ship: <b>highlight first, full dependency tracing later.</b></p>
           <div class="foot">It shipped in v1.</div>
         </div>
         <div class="rv shot">
@@ -768,7 +770,7 @@
       <div class="rv rows" style="margin:30px 0 0">
         <div class="row">
           <span class="idx">The problem</span>
-          <div><div class="t">No compliant, paved path to production.</div><div class="d">The platform existed to get capability to the warfighter fast. It couldn't. Standing a team up and reaching first deploy dragged on for months.</div></div>
+          <div><div class="t">No compliant, paved path to production.</div><div class="d">The platform existed to get capability to the warfighter fast, and it couldn't. Standing a team up and reaching first deploy dragged on for months.</div></div>
         </div>
         <div class="row">
           <span class="idx">The waste</span>
@@ -878,15 +880,15 @@
       <div class="rv rows" style="margin-top:34px">
         <div class="row">
           <span class="idx">The symptom</span>
-          <div><div class="t">The brief is never the problem.</div><div class="d">"Modernize tanker planning." "We can't expand to other AOCs." "Onboarding is too slow." Each one is real, and each one is a symptom rather than the actual outcome anyone needs.</div></div>
+          <div><div class="t">The brief is never the problem.</div><div class="d">"Modernize tanker planning." "We can't expand to other AOCs." "Onboarding is too slow." Each one is real, and each one is a symptom of something the brief doesn't name.</div></div>
         </div>
         <div class="row">
           <span class="idx">The outcome</span>
-          <div><div class="t">Find what users need to achieve, then design only for that.</div><div class="d">A plan any planner can trust and adopt. A path a team can actually get through. I research until the real outcome is clear, then cut everything that isn't it.</div></div>
+          <div><div class="t">Find what users need to achieve, then design only for that.</div><div class="d">A plan any planner can trust and adopt. A path a team can get all the way through. I research until the real outcome is clear, then cut everything that isn't it.</div></div>
         </div>
         <div class="row">
           <span class="idx">The proof</span>
-          <div><div class="t">The outcome shows up in how the work changes.</div><div class="d">One AOC became four. Onboarding went from months to days. Not a launch announcement. <b>The way people work changed.</b></div></div>
+          <div><div class="t">The outcome shows up in how the work changes.</div><div class="d">One AOC became four. Onboarding went from months to days. The result shows up in <b>how people work now.</b></div></div>
         </div>
       </div>
       <div class="rv teaser">
@@ -909,13 +911,193 @@
     </div>
   </section>
 
+  <!-- ====================== 19 · VELVETEEN DIVIDER (case 03) ====================== -->
+  <section class="slide divider" data-section="velveteen" data-sec-label="CASE 03 · VELVETEEN">
+    <div class="content" style="justify-content:center">
+      <div class="rv tick"></div>
+      <div class="rv giant">VELVETEEN<span>.</span></div>
+      <div class="rv sub">Jigsaw and Forge were problems I was handed. This one I went looking for. AI lets anyone build a working app, but almost none reach real users, because shipping one safely still assumes you know Docker, certificates, and dependency scanning.</div>
+      <div class="rv meta-row">
+        <div class="mi"><div class="k">Role</div><div class="v">Product design + build</div></div>
+        <div class="mi"><div class="k">Org</div><div class="v">Independent</div></div>
+        <div class="mi"><div class="k">Stack</div><div class="v">Next.js · Drizzle · workers</div></div>
+        <div class="mi"><div class="k">Status</div><div class="v">Live at velveteen.sh</div></div>
+        <div class="mi"><div class="k">Scope</div><div class="v">Solo, end to end</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 20 · VELVETEEN BEFORE ====================== -->
+  <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · BEFORE">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">V—01</span> Before</div>
+      <h1 class="rv">An app that works on a laptop,<br>and never gets any further.</h1>
+      <div class="rv rows" style="margin:24px 0 0">
+        <div class="row">
+          <span class="idx">The user</span>
+          <div><div class="t">Built something real, can't ship it.</div><div class="d">A teacher tracking reading progress. A social worker replacing case-intake software from 2009. A clinic coordinator fixing a scheduling gap. All built with an AI assistant, all stuck at the same wall.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The bottleneck</span>
+          <div><div class="t">The last mile assumes a DevOps background.</div><div class="d">Putting an app online safely still assumes you know what a container is, what TLS is, how dependency vulnerabilities and environment variables work. <b>That knowledge has nothing to do with whether the app is good.</b></div></div>
+        </div>
+        <div class="row">
+          <span class="idx">The gap</span>
+          <div><div class="t">Working locally is not the same as shippable.</div><div class="d">The repo runs, but there's no Dockerfile, no env docs, and no honest read on whether shipping it would leak secrets. The jump from code to something deployable is bigger than it looks.</div></div>
+        </div>
+      </div>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">What I keep coming back to</div>
+        <p>Infrastructure is the last bottleneck between ordinary people and the impact their work could have. <span class="mut">It isn't talent or ideas they're missing, it's the operational knowledge to get software online safely.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 21 · VELVETEEN TARGET ====================== -->
+  <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · THE TARGET">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">V—02</span> The target · what good looks like</div>
+      <h1 class="rv">Make the security review<br>something a non-coder can act on.</h1>
+      <p class="rv lede" style="margin-top:28px; max-width:900px">
+        Most deploy tools hide the infrastructure so you never think about it. I wanted the opposite.
+        The pipeline stays visible, it <b style="color:var(--text);font-weight:560">pauses on a real security finding before anything goes live</b>,
+        and it explains what it found in language the person who built the app can use.
+      </p>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">The principles I designed to</div>
+        <p>Never show raw scan output or YAML. <span class="mut">Someone who doesn't code has to be able to read a finding and act on it, and the tool should teach by writing good scaffolding rather than by lecturing.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 22 · VELVETEEN WHAT I DID · SHAPE ====================== -->
+  <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">V—03</span> What I did · the shape of it</div>
+      <h1 class="rv">A repo goes in, and a scanned,<br>running URL comes out.</h1>
+      <div class="rv rows" style="margin-top:34px">
+        <div class="row">
+          <span class="idx">Detect</span>
+          <div><div class="t">Read the repo, figure out the framework.</div><div class="d">Paste a GitHub URL and Velveteen detects the framework, then writes the files the project was missing: a Dockerfile, a .dockerignore, an env guide, and a standards file inferred from your own code.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">Scan</span>
+          <div><div class="t">Four scanners, before and after the build.</div><div class="d">Gitleaks and Semgrep read the source before building. Trivy and Syft scan the built image after. Secrets, source issues, container vulnerabilities, and a software bill of materials, on every deploy.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">Explain</span>
+          <div><div class="t">Turn scanner output into a fix.</div><div class="d">Raw scanner output is unreadable. Each blocking finding gets rewritten in plain English, with <b>a prompt you can paste straight back into your coding assistant</b> to fix it.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 23 · VELVETEEN WHAT I DID · FRONT DOOR ====================== -->
+  <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">V—04</span> What I did · the front door</div>
+      <h1 class="rv" style="font-size:32px">Everything you'd do across four pages,<br>on one calm screen.</h1>
+      <div class="rv shot" style="flex:1; margin-top:22px">
+        <img src="/deck/assets/velveteen-onboarding.png" alt="Velveteen onboarding review: GitHub connected, repo chosen, framework auto-detected, subdomain claimed">
+        <div class="cap">
+          <span><b>ONBOARDING · REPO TO LAUNCH</b></span>
+          <span>github connected · repo chosen · framework auto-detected · subdomain claimed · confident, not a DevOps dashboard</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 24 · VELVETEEN WHAT I DID · THE GATE (THE FIGHT) ====================== -->
+  <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · WHAT I DID">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">V—05</span> What I did · the gate</div>
+      <div class="cols c-38-62" style="margin-top:0">
+        <div class="rv side">
+          <div class="ek">The decision that mattered</div>
+          <p>The gate can stop a deploy. The hard part was deciding what it stops for. Block on everything and people learn to ignore it, which is worse than no gate at all.</p>
+          <p>So I tuned it by hand. <b>Secrets always block.</b> Source issues block only at error severity. Container vulnerabilities block only at critical or high, with known framework noise downgraded to informational. The bill of materials never blocks.</p>
+          <p>And only the blocking findings get a written explanation, because those are the ones you have to act on. That kept the gate trustworthy and cheap enough to run on every deploy.</p>
+          <div class="foot">Dropped a two-model design for one.<br>About 15× cheaper. I pay for this myself.</div>
+        </div>
+        <div class="rv shot">
+          <img src="/deck/assets/velveteen-pipeline.png" alt="Velveteen running pipeline with a pre-build security check flagging one issue before the build">
+          <div class="cap">
+            <span><b>THE GATE, MID-RUN</b></span>
+            <span>pre-build security check flagged 1 issue · the build holds here until it's cleared</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 25 · VELVETEEN RESULT ====================== -->
+  <section class="slide" data-section="velveteen" data-sec-label="VELVETEEN · RESULT">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">V—06</span> Result</div>
+      <h1 class="rv">It runs end to end,<br>and it's live.</h1>
+      <div class="rv metrics four" style="margin-top:36px; flex:initial">
+        <div class="metric"><div class="delta">SECURITY SCANNERS</div><div class="num">4</div><div class="lbl">secrets, source, container, and SBOM, on every deploy</div></div>
+        <div class="metric"><div class="delta">FRAMEWORKS DETECTED</div><div class="num">6</div><div class="lbl">a repo URL in, the right Dockerfile out</div></div>
+        <div class="metric"><div class="delta">WRITTEN BACK TO THE REPO</div><div class="num">4 files</div><div class="lbl">Dockerfile, ignore, standards, env</div></div>
+        <div class="metric"><div class="delta">DEVOPS BACKGROUND</div><div class="num">0</div><div class="lbl">findings in plain English with a paste-back fix</div></div>
+      </div>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">Where this one actually is</div>
+        <p>No adoption numbers to show yet, and I won't invent any. <span class="mut">What's real: it's live, it works end to end, and I designed and built the whole thing. The bottleneck it removes is completely solvable.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 26 · HOW I BUILD (LOOM) · WHY ====================== -->
+  <section class="slide" data-sec-label="HOW I BUILD" style="--accent:var(--amber)">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">L—01</span> How I build with AI</div>
+      <h1 class="rv">I didn't build Velveteen by hand.<br>I designed the process that built it.</h1>
+      <p class="rv lede" style="margin-top:28px; max-width:900px">
+        I treat my own workflow like a product. First find the outcome: shipped, working
+        software I'd put my name on. Then design the system that gets there every time, and cut
+        the rest. The agents do the typing. The process is the part I designed.
+      </p>
+      <div class="rv heard" style="margin-top:auto; border-bottom:none">
+        <div class="hk">Why bother with a process</div>
+        <p>Point an AI agent at a problem and it hands you code that looks finished. <span class="mut">Half the time it never ran, skipped the security check, or made a call that wasn't its to make. Code that looks finished often isn't.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 27 · HOW I BUILD (LOOM) · THREE GATES ====================== -->
+  <section class="slide" data-sec-label="HOW I BUILD" style="--accent:var(--amber)">
+    <div class="content">
+      <div class="rv eyebrow"><span class="coord">L—02</span> The process · three gates</div>
+      <h1 class="rv">Three gates the agents never skip.</h1>
+      <div class="rv rows" style="margin-top:34px">
+        <div class="row">
+          <span class="idx">Design first</span>
+          <div><div class="t">A written plan before any code.</div><div class="d">Nothing gets built until the intent is on disk. It's the same move as the case studies: the plan is where the design happens, the code is just the build. No agent skips ahead to typing.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">Autonomous</span>
+          <div><div class="t">Agents do the work, often several at once.</div><div class="d">They plan, build, and fix their own mistakes in parallel. I review what they produce, the spec, the diff, and whatever's running, rather than watching every keystroke. It only stops for what's irreversible or genuinely mine to decide.</div></div>
+        </div>
+        <div class="row">
+          <span class="idx">Verify</span>
+          <div><div class="t">Nothing's done without proof it ran.</div><div class="d">No "it works" without fresh output on screen. A typecheck gate and auto-formatting are wired straight into the loop, so the standards hold without me repeating them.</div></div>
+        </div>
+      </div>
+      <div class="rv teaser">
+        <span class="tk">Loom</span>
+        <span>I packaged it as an open-source layer called Loom. Same rules across <b>Claude Code, Cursor, and Codex</b>, and every project in my workspace ships through it. <span class="url">github.com/Mountain-Dr3w/loom</span></span>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <div id="hint">← → to navigate</div>
 
 <nav id="nav-ui" aria-label="Slide navigation">
   <button id="prev" type="button" aria-label="Previous slide">‹</button>
-  <span class="count"><b id="cur-no">01</b> / <span id="tot-no">18</span></span>
+  <span class="count"><b id="cur-no">01</b> / <span id="tot-no">25</span></span>
   <button id="next" type="button" aria-label="Next slide">›</button>
   <a class="pdf" href="/deck/portfolio-review.pdf" target="_blank" rel="noopener">PDF</a>
 </nav>
