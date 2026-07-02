@@ -79,9 +79,6 @@ export default async function WorkPage({ params }: WorkPageProps) {
               <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">
                 {item.role}
               </p>
-              <p className="mt-4 text-sm leading-6 text-[var(--text-muted)]">
-                {item.outcome}
-              </p>
             </div>
             {item.links.length ? (
               <div className="mt-8 flex flex-wrap gap-3">

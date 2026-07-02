@@ -13,7 +13,6 @@ const stageItems = ["clone", "detect", "scaffold", "scan", "explain", "deploy"];
 const proofItems = [
   ["Velveteen", "live app"],
   ["SBIR Radar", "mobile triage"],
-  ["MissionOS", "inherited path"],
   ["Seams", "public memory"],
 ];
 

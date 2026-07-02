@@ -49,10 +49,10 @@ export default function Home() {
           <div className="max-w-3xl space-y-8">
             <div className="space-y-5 font-serif text-lg leading-8 text-[var(--text-secondary)] sm:text-xl sm:leading-9">
               <p>
-                I&apos;ve spent enough years watching good-looking work fail to
-                land that I&apos;ve stopped trusting the artifact. I plan around
-                the outcome. If a project shipped and the way people work
-                didn&apos;t change, I count it as a miss.
+                I&apos;ve watched plenty of polished work ship and change
+                nothing, at Kessel Run and everywhere since. So I plan around
+                the outcome instead of the artifact: a project counts when the
+                way people work is different afterward.
               </p>
             </div>
             <dl className="grid grid-cols-[6rem_1fr] gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 font-mono text-xs">
@@ -98,9 +98,10 @@ export default function Home() {
               work
             </h2>
             <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
-              These are the projects where I think the way people work
-              actually changed. All from 2026. For older work, reach out. I
-              love to talk shop and would be happy to walk through it.
+              Three projects from 2026, picked because I can show you what
+              changed for the people using them. For older work, reach out. I
+              love to talk shop and I&apos;m happy to walk through the back
+              catalog.
             </p>
           </div>
 

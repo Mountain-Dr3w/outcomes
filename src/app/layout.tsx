@@ -22,18 +22,18 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://outcomes.velveteen.sh"),
+  metadataBase: new URL("https://work.velveteen.sh"),
   title: {
     default: "Drew McFarland",
     template: "%s | Drew McFarland",
   },
   description:
-    "Drew McFarland designs and builds GovTech and infrastructure products where the plan has to survive contact with working software.",
+    "Portfolio of Drew McFarland, a product designer who also builds: GovTech, defense, and developer infrastructure work with the outcomes to show for it.",
   openGraph: {
     title: "Drew McFarland",
     description:
-      "GovTech and infrastructure work from the messy stretch between plan, proof, and running software.",
-    url: "https://outcomes.velveteen.sh",
+      "Case studies in GovTech, defense, and developer infrastructure from a product designer who also builds.",
+    url: "https://work.velveteen.sh",
     siteName: "Drew McFarland",
     type: "website",
   },
