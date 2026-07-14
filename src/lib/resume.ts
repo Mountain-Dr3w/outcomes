@@ -14,6 +14,33 @@ export interface ResumeEducation {
   school: string;
 }
 
+export interface ImpactItem {
+  metric: string;
+  outcome: string;
+  context: string;
+}
+
+export const impactItems: ImpactItem[] = [
+  {
+    metric: "300%",
+    outcome: "growth in daily active users",
+    context:
+      "Flight scheduling at Kessel Run, after service mapping and operational roadblocks were addressed.",
+  },
+  {
+    metric: "20%",
+    outcome: "faster maintenance initiation",
+    context:
+      "Pilot debriefing across multiple airframes and branches, from research through delivery.",
+  },
+  {
+    metric: "~40%",
+    outcome: "growth in platform adoption",
+    context:
+      "A government Platform-as-a-Service, after five developer friction points drove product changes.",
+  },
+];
+
 export const resume = {
   name: "Drew McFarland",
   headline: "Product Designer and Strategist | USAF Veteran | Active Secret Clearance",

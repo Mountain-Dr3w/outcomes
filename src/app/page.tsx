@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { workItems } from "@/lib/work";
+import { impactItems } from "@/lib/resume";
+import { displayWorkItems } from "@/lib/work";
 
 export default function Home() {
   return (
@@ -85,6 +86,48 @@ export default function Home() {
       </header>
 
       <section
+        id="impact"
+        aria-labelledby="impact-heading"
+        className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 sm:pb-24 lg:max-w-7xl lg:px-12 lg:pb-32"
+      >
+        <div className="grid gap-10 border-t border-[var(--border)] pt-12 sm:pt-16 lg:grid-cols-[0.34fr_0.66fr] lg:gap-20 lg:pt-20">
+          <div className="lg:sticky lg:top-10 lg:self-start">
+            <h2
+              id="impact-heading"
+              className="font-mono text-sm text-[var(--accent)]"
+            >
+              selected impact
+            </h2>
+            <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
+              Older programs where the result is known. The detail stays
+              public-safe; I&apos;m happy to walk through the work behind it.
+            </p>
+          </div>
+
+          <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+            {impactItems.map((impact) => (
+              <li
+                key={`${impact.metric}-${impact.outcome}`}
+                className="grid gap-3 py-8 sm:grid-cols-[9rem_1fr] sm:gap-8 sm:px-6 sm:py-9"
+              >
+                <p className="font-serif text-3xl leading-none text-[var(--text-primary)] sm:text-4xl">
+                  {impact.metric}
+                </p>
+                <div>
+                  <p className="text-lg leading-7 text-[var(--text-primary)]">
+                    {impact.outcome}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
+                    {impact.context}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section
         id="work"
         aria-labelledby="work-heading"
         className="mx-auto max-w-5xl px-5 pb-20 sm:px-8 sm:pb-24 lg:max-w-7xl lg:px-12 lg:pb-32"
@@ -98,15 +141,14 @@ export default function Home() {
               work
             </h2>
             <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
-              Three projects from 2026, picked because I can show you what
-              changed for the people using them. For older work, reach out. I
-              love to talk shop and I&apos;m happy to walk through the back
-              catalog.
+              Three current projects, ordered by the strength of the evidence.
+              Each one says what changed, what exists, and what still needs
+              proof.
             </p>
           </div>
 
           <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
-            {workItems.map((item) => (
+            {displayWorkItems.map((item) => (
               <article key={item.slug}>
                 <Link
                   href={`/work/${item.slug}`}
@@ -122,7 +164,7 @@ export default function Home() {
                   </div>
                   <div className="mt-6 max-w-3xl border-l border-[var(--border-strong)] pl-4 sm:pl-5">
                     <p className="font-mono text-xs text-[var(--accent)]">
-                      Outcome
+                      {item.status}
                     </p>
                     <p className="mt-2 text-base leading-7 text-[var(--text-primary)] sm:text-lg sm:leading-8">
                       {item.outcome}

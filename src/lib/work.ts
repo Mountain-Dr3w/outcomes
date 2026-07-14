@@ -10,7 +10,14 @@ export interface WorkLink {
   href: string;
 }
 
-export interface WorkArtifact {
+export type WorkEvidenceLevel =
+  | "observed change"
+  | "built capability"
+  | "concept"
+  | "still unproven";
+
+export interface WorkEvidence {
+  level: WorkEvidenceLevel;
   label: string;
   body: string;
 }
@@ -21,6 +28,7 @@ export interface WorkSection {
 }
 
 export interface WorkVisual {
+  afterSection: number;
   label: string;
   src: string;
   alt: string;
@@ -36,10 +44,13 @@ export interface WorkItem {
   eyebrow: string;
   year: string;
   outcome: string;
+  status: string;
+  scope: string;
+  proof: string;
   role: WorkRole;
   summary: string;
   sections: WorkSection[];
-  artifacts: WorkArtifact[];
+  evidence: WorkEvidence[];
   links: WorkLink[];
   visuals?: WorkVisual[];
   image?: {
@@ -63,10 +74,14 @@ export const workItems: WorkItem[] = [
     eyebrow: "Product, infrastructure, security",
     year: "2026",
     outcome:
-      "AI-built apps get a repeatable path from GitHub repo to live, scanned URL.",
+      "Built a live seven-stage deployment pipeline that makes four security checks inspectable before release.",
+    status: "Live product · validation ongoing",
+    scope: "Product design and full-stack build",
+    proof:
+      "The public product runs clone, detect, scaffold, scan, explain, gate, and deploy as one visible path.",
     role: "Product design + full-stack build",
     summary:
-      "Velveteen is the product I built for the stretch of AI-assisted development where the code runs locally but the project isn't ready for anyone else. There's no Dockerfile or env documentation, and no honest answer to whether deploying would leak a secret. I kept hitting that wall in my own projects and watched other people stall in the same place, because the tools that get you to a working app have nothing to say about what comes after it.",
+      "AI-assisted development gets you to a working repo faster than it gets you to a safe deployment. I built Velveteen to make the missing operational work visible: scaffolding, scanning, explanations, a human gate, then deployment. The product is live. Whether its explanations are consistently useful across every finding type is still under evaluation.",
     sections: [
       {
         title: "What was broken",
@@ -89,18 +104,21 @@ export const workItems: WorkItem[] = [
         ],
       },
     ],
-    artifacts: [
+    evidence: [
       {
-        label: "Pipeline",
-        body: "Seven stages from GitHub to live URL, each producing something visible.",
+        level: "built capability",
+        label: "Inspectable pipeline",
+        body: "Seven stages from GitHub to live URL, each producing an artifact instead of hiding the work behind a spinner.",
       },
       {
+        level: "built capability",
         label: "Security explanations",
         body: "Gitleaks, Semgrep, Trivy, and Syft output, translated into plain language with a fix prompt for your coding assistant.",
       },
       {
-        label: "Generated scaffolding",
-        body: "A Dockerfile, a standards file, and an env guide written into the repo before it ships.",
+        level: "still unproven",
+        label: "Explanation quality",
+        body: "Usefulness still varies across finding types, and the portfolio does not yet claim adoption or task-time results.",
       },
     ],
     links: [
@@ -112,6 +130,7 @@ export const workItems: WorkItem[] = [
     ],
     visuals: [
       {
+        afterSection: 1,
         label: "Onboarding",
         src: "/artifacts/velveteen-onboarding-review-trimmed.png",
         alt: "Velveteen onboarding review screen showing connected GitHub, chosen repo, subdomain, detected framework, and launch action.",
@@ -122,6 +141,7 @@ export const workItems: WorkItem[] = [
         layout: "landscape",
       },
       {
+        afterSection: 1,
         label: "Running pipeline",
         src: "/artifacts/velveteen-running-pipeline-trimmed.png",
         alt: "Velveteen running pipeline screen showing completed clone and scaffold stages, a pre-build security warning, and an active build step.",
@@ -139,10 +159,14 @@ export const workItems: WorkItem[] = [
     eyebrow: "iOS, data pipeline, opportunity discovery",
     year: "2026",
     outcome:
-      "Federal R&D opportunities become a mobile triage feed instead of an afternoon in government portals.",
+      "Prototyped a faster way to triage federal R&D opportunities; task time and source coverage still need validation.",
+    status: "Prototype · validation in progress",
+    scope: "iOS product and public-data pipeline",
+    proof:
+      "The prototype brings six decision signals into each feed row before a reader opens the government source.",
     role: "Product design",
     summary:
-      "SBIR Radar is the iOS app I built for the part of federal R&D discovery that nobody enjoys: scanning topic pages on government portals to figure out which ones are worth another hour of your time. The information you need to make that call (which agency, when's it due, what phase, how much money, is the source even current) is buried under inconsistent fields, agency shorthand, and dense topic descriptions. I wanted that triage to take minutes instead of an afternoon.",
+      "Federal R&D discovery often fails at the reading step: agency, deadline, phase, funding, and source state are buried across inconsistent government pages. I prototyped a feed that puts those signals before the source page. The interaction and fallback pipeline exist; the claimed time savings and dependable source coverage have not yet been validated.",
     sections: [
       {
         title: "The bottleneck was reading",
@@ -165,23 +189,27 @@ export const workItems: WorkItem[] = [
         ],
       },
     ],
-    artifacts: [
+    evidence: [
       {
-        label: "Feed",
-        body: "Each topic shows agency, deadline, phase, funding range, source status, and a plain summary. Enough to decide whether to open the full page.",
+        level: "built capability",
+        label: "Triage feed",
+        body: "Each topic shows agency, deadline, phase, funding range, source status, and a plain summary before the full page.",
       },
       {
-        label: "Pipeline",
+        level: "built capability",
+        label: "Fallback pipeline",
         body: "A normalized contract over public SBIR data, with HTML fallback for when the structured APIs go quiet.",
       },
       {
-        label: "Loop",
-        body: "Saved radars match new topics against the criteria you care about. The watchlist brings them back when a deadline approaches or source state changes.",
+        level: "still unproven",
+        label: "Triage improvement",
+        body: "No task-time study, sustained source-coverage result, or usage evidence is presented yet.",
       },
     ],
     links: [],
     visuals: [
       {
+        afterSection: 1,
         label: "Signals",
         src: "/artifacts/sbir-signals.png",
         alt: "SBIR Radar iPhone Signals tab showing searchable funding opportunities, filters, and deadline language.",
@@ -192,6 +220,7 @@ export const workItems: WorkItem[] = [
         layout: "phone",
       },
       {
+        afterSection: 1,
         label: "My Radars",
         src: "/artifacts/sbir-my-radars.png",
         alt: "SBIR Radar iPhone My Radars tab showing watched saved searches with match counts.",
@@ -202,6 +231,7 @@ export const workItems: WorkItem[] = [
         layout: "phone",
       },
       {
+        afterSection: 2,
         label: "Settings",
         src: "/artifacts/sbir-settings.png",
         alt: "SBIR Radar iPhone Settings tab showing source coverage, sync status, and notification controls.",
@@ -219,10 +249,14 @@ export const workItems: WorkItem[] = [
     eyebrow: "Service design at Rise8 · Space Force DevSecOps",
     year: "2026",
     outcome:
-      "Tenant teams onboarding to a Space Force platform could finally see where they were, who owned the next step, and what they could do without waiting on anyone.",
+      "Gave five platform teams a shared seventeen-stage view of onboarding and exposed the handoffs turning a one-week goal into months.",
+    status: "Delivered service design · portal remained a concept",
+    scope: "Five internal teams, multiple contractors, seventeen stages",
+    proof:
+      "The service blueprint became the first shared end-to-end picture of tenant onboarding across the internal teams.",
     role: "Service design",
     summary:
-      "FORGE is a Space Force ground systems platform that needed a real path to production for the application teams trying to use it, and Rise8 was brought in to build that path. I joined the engagement as the service designer. Most individual pieces of the platform worked; the seams between them were where onboarding fell apart. Five internal teams owned different phases, multiple outside contractors had overlapping responsibilities, and tenants had to figure out for themselves who owned whatever came next. New teams were supposed to be productive in a week. Real onboarding could stretch into months.",
+      "FORGE is a Space Force ground systems platform that needed a real path to production for application teams. I joined the Rise8 engagement as the service designer. Most individual pieces worked; onboarding failed at the seams between teams and contractors. The blueprint and friction log created a shared operating picture. The portal remained a concept, and interface work alone did not remove the structural waits.",
     sections: [
       {
         title: "Mapping the journey before anything else",
@@ -255,18 +289,26 @@ export const workItems: WorkItem[] = [
         ],
       },
     ],
-    artifacts: [
+    evidence: [
       {
-        label: "Blueprint",
-        body: "Seventeen phases mapped across tenant action, visible touchpoint, backstage work, and support systems. The first artifact that gave five internal teams a shared picture.",
+        level: "observed change",
+        label: "Shared operating picture",
+        body: "Seventeen phases across tenant action, visible touchpoint, backstage work, and support systems gave five teams one end-to-end view.",
       },
       {
-        label: "Friction log",
-        body: "Each row scored against owning team, UX impact severity, breakage risk, and rationale, so meetings could rank issues instead of re-arguing them.",
+        level: "observed change",
+        label: "Prioritized friction",
+        body: "Owner, UX severity, breakage risk, and rationale gave meetings a shared basis for ranking issues.",
       },
       {
-        label: "Portal",
-        body: "A tenant-facing view designed around three questions: where am I, who owns the next step, what can I do right now.",
+        level: "concept",
+        label: "Tenant portal",
+        body: "A concept organized around status, ownership, and next action; the portfolio does not present it as shipped.",
+      },
+      {
+        level: "still unproven",
+        label: "Onboarding duration",
+        body: "The work exposed structural delays but does not claim that the one-week target was reached or that months of waiting disappeared.",
       },
     ],
     links: [
@@ -277,6 +319,7 @@ export const workItems: WorkItem[] = [
     ],
     visuals: [
       {
+        afterSection: 0,
         label: "Service blueprint",
         src: "/artifacts/forge-service-blueprint.png",
         alt: "FORGE service blueprint mapping the tenant journey across onboarding phases, backstage work, support systems, and friction points.",
@@ -287,6 +330,7 @@ export const workItems: WorkItem[] = [
         layout: "landscape",
       },
       {
+        afterSection: 0,
         label: "Event storm",
         src: "/artifacts/forge-event-storm.png",
         alt: "FORGE event storming board showing commands, domain events, decision points, and hotspots across the internal platform workflow.",
@@ -297,6 +341,7 @@ export const workItems: WorkItem[] = [
         layout: "wide",
       },
       {
+        afterSection: 1,
         label: "Friction log",
         src: "/artifacts/forge-friction-log.png",
         alt: "FORGE friction log categorizing onboarding pain points by owner, impact, breakage risk, and rationale.",
@@ -307,6 +352,7 @@ export const workItems: WorkItem[] = [
         layout: "landscape",
       },
       {
+        afterSection: 2,
         label: "Onboarding portal",
         src: "/artifacts/forge-portal-onboarding.png",
         alt: "FORGE onboarding portal concept showing current review status, assigned team, progress, pending actions, and direct task links.",
@@ -317,6 +363,7 @@ export const workItems: WorkItem[] = [
         layout: "landscape",
       },
       {
+        afterSection: 2,
         label: "Services hub",
         src: "/artifacts/forge-portal-services.png",
         alt: "FORGE platform services hub showing tenant access to development tools and services from a single dashboard.",
@@ -347,4 +394,21 @@ export const writingItems: WritingItem[] = [
 
 export function getWorkBySlug(slug: string): WorkItem | undefined {
   return workItems.find((item) => item.slug === slug);
+}
+
+const displayOrder: WorkSlug[] = ["forge", "velveteen", "sbir-radar"];
+
+export const displayWorkItems = displayOrder.map((slug) => {
+  const item = getWorkBySlug(slug);
+
+  if (!item) {
+    throw new Error(`Missing work item for ${slug}`);
+  }
+
+  return item;
+});
+
+export function getNextWorkBySlug(slug: WorkSlug): WorkItem {
+  const index = displayWorkItems.findIndex((item) => item.slug === slug);
+  return displayWorkItems[(index + 1) % displayWorkItems.length];
 }

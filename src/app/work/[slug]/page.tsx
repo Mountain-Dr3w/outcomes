@@ -6,7 +6,12 @@ import { notFound } from "next/navigation";
 
 import { MagneticLink } from "@/components/magnetic-link";
 import { Reveal } from "@/components/reveal";
-import { getWorkBySlug, workItems } from "@/lib/work";
+import {
+  getNextWorkBySlug,
+  getWorkBySlug,
+  type WorkVisual,
+  workItems,
+} from "@/lib/work";
 
 interface WorkPageProps {
   params: Promise<{
@@ -49,6 +54,8 @@ export default async function WorkPage({ params }: WorkPageProps) {
     notFound();
   }
 
+  const nextItem = getNextWorkBySlug(item.slug);
+
   return (
     <main id="main" className="min-h-[100dvh]">
       <section className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
@@ -69,8 +76,10 @@ export default async function WorkPage({ params }: WorkPageProps) {
             <h1 className="mt-5 font-serif text-5xl leading-[0.98] text-[var(--text-primary)] sm:text-6xl">
               {item.title}
             </h1>
-            <p className="mt-5 font-mono text-sm text-[var(--text-muted)]">
+            <p className="mt-5 max-w-xs font-mono text-xs leading-6 text-[var(--text-muted)]">
               {item.year}
+              <span aria-hidden="true"> · </span>
+              {item.status}
             </p>
             <div className="mt-8 border-y border-[var(--border)] py-6">
               <p className="font-mono text-xs text-[var(--text-muted)]">
@@ -93,17 +102,31 @@ export default async function WorkPage({ params }: WorkPageProps) {
 
           <div>
             <Reveal>
-              <p className="max-w-4xl text-4xl leading-tight text-[var(--text-primary)] sm:text-5xl">
+              <p className="max-w-4xl text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.75rem]">
                 {item.outcome}
               </p>
               <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">
                 {item.summary}
               </p>
+              <dl className="mt-9 grid border-y border-[var(--border)] sm:grid-cols-[0.8fr_1.2fr] sm:divide-x sm:divide-[var(--border)]">
+                <div className="border-b border-[var(--border)] py-5 sm:border-b-0 sm:pr-6">
+                  <dt className="font-mono text-xs text-[var(--accent)]">
+                    scope
+                  </dt>
+                  <dd className="mt-3 text-sm leading-6 text-[var(--text-primary)]">
+                    {item.scope}
+                  </dd>
+                </div>
+                <div className="py-5 sm:pl-6">
+                  <dt className="font-mono text-xs text-[var(--accent)]">
+                    strongest proof
+                  </dt>
+                  <dd className="mt-3 text-sm leading-6 text-[var(--text-primary)]">
+                    {item.proof}
+                  </dd>
+                </div>
+              </dl>
             </Reveal>
-
-            {item.visuals?.length ? (
-              <VisualEvidence visuals={item.visuals} />
-            ) : null}
 
             <section className="mt-16 grid gap-12">
               {item.sections.map((section, index) => (
@@ -111,6 +134,9 @@ export default async function WorkPage({ params }: WorkPageProps) {
                   key={section.title}
                   title={section.title}
                   body={section.body}
+                  visuals={item.visuals?.filter(
+                    (visual) => visual.afterSection === index,
+                  )}
                   delay={index * 0.04}
                 />
               ))}
@@ -119,21 +145,79 @@ export default async function WorkPage({ params }: WorkPageProps) {
             <Reveal>
               <section className="mt-16 border-t border-[var(--border)] pt-8">
                 <h2 className="font-mono text-sm text-[var(--accent)]">
-                  artifacts
+                  evidence record
                 </h2>
                 <ul className="mt-6 divide-y divide-[var(--border)] border-y border-[var(--border)]">
-                  {item.artifacts.map((artifact) => (
+                  {item.evidence.map((evidence) => (
                     <li
-                      key={artifact.label}
-                      className="py-5 text-base leading-7 text-[var(--text-secondary)] sm:px-4"
+                      key={evidence.label}
+                      className="grid gap-3 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6 sm:px-4"
                     >
-                      <span className="font-semibold text-[var(--text-primary)]">
-                        {artifact.label}.
-                      </span>{" "}
-                      {artifact.body}
+                      <div>
+                        <p className="font-mono text-xs text-[var(--accent)]">
+                          {evidence.level}
+                        </p>
+                        <p className="mt-2 font-semibold text-[var(--text-primary)]">
+                          {evidence.label}
+                        </p>
+                      </div>
+                      <p className="text-base leading-7 text-[var(--text-secondary)]">
+                        {evidence.body}
+                      </p>
                     </li>
                   ))}
                 </ul>
+              </section>
+            </Reveal>
+
+            <Reveal>
+              <section
+                aria-labelledby="continue-heading"
+                className="mt-20 grid gap-8 border-t border-[var(--border)] pt-8 sm:grid-cols-[0.22fr_1fr]"
+              >
+                <h2
+                  id="continue-heading"
+                  className="font-mono text-sm text-[var(--accent)]"
+                >
+                  continue
+                </h2>
+                <div>
+                  <p className="font-mono text-xs text-[var(--text-muted)]">
+                    next case
+                  </p>
+                  <Link
+                    href={`/work/${nextItem.slug}`}
+                    className="group mt-3 inline-flex items-baseline gap-3 font-serif text-3xl text-[var(--text-primary)] transition-colors hover:text-[var(--accent)] sm:text-4xl"
+                  >
+                    {nextItem.title}
+                    <span
+                      aria-hidden="true"
+                      className="font-sans text-xl transition-transform group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </Link>
+                  <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-[var(--text-muted)]">
+                    <Link
+                      href="/resume"
+                      className="inline-flex min-h-11 items-center transition-colors hover:text-[var(--accent)]"
+                    >
+                      resume
+                    </Link>
+                    <a
+                      href="mailto:drewjmcfarland@live.com"
+                      className="inline-flex min-h-11 items-center transition-colors hover:text-[var(--accent)]"
+                    >
+                      email Drew
+                    </a>
+                    <Link
+                      href="/#work"
+                      className="inline-flex min-h-11 items-center transition-colors hover:text-[var(--accent)]"
+                    >
+                      all work
+                    </Link>
+                  </div>
+                </div>
               </section>
             </Reveal>
           </div>
@@ -143,108 +227,101 @@ export default async function WorkPage({ params }: WorkPageProps) {
   );
 }
 
-function VisualEvidence({
+function SectionVisuals({
   visuals,
 }: {
-  visuals: NonNullable<(typeof workItems)[number]["visuals"]>;
+  visuals: WorkVisual[];
 }) {
   const phoneVisuals = visuals.filter((visual) => visual.layout === "phone");
   const standardVisuals = visuals.filter((visual) => visual.layout !== "phone");
 
   return (
-    <Reveal delay={0.08}>
-      <section className="mt-14 border-y border-[var(--border)] py-8">
-        <div className="grid gap-6 lg:grid-cols-[0.22fr_1fr]">
-          <p className="font-mono text-sm text-[var(--accent)]">
-            visual evidence
-          </p>
-          <div className="grid gap-8">
-            {phoneVisuals.length ? (
-              <div className="overflow-x-auto pb-3">
-                <div className="grid grid-flow-col auto-cols-[minmax(12rem,14rem)] gap-5 lg:grid-flow-row lg:grid-cols-4 lg:overflow-visible">
-                  {phoneVisuals.map((visual) => (
-                    <figure key={visual.src} className="grid gap-3">
-                      <a
-                        href={visual.src}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="block rounded-[2.35rem] bg-black p-2 shadow-[0_28px_70px_rgba(0,0,0,0.35)] transition-transform hover:-translate-y-1"
-                      >
-                        <Image
-                          src={visual.src}
-                          alt={visual.alt}
-                          width={visual.width}
-                          height={visual.height}
-                          className="h-auto w-full rounded-[1.8rem]"
-                        />
-                      </a>
-                      <figcaption className="border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)]">
-                        <span className="block text-[var(--accent)]">
-                          {visual.label}
-                        </span>
-                        <span>{visual.caption}</span>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-
-            {standardVisuals.map((visual) => {
-              const isWide = visual.layout === "wide";
-              const isLandscape = visual.layout === "landscape";
-
-              return (
-                <figure key={visual.src} className="grid gap-3">
-                  <div
-                    className={[
-                      "artifact-shadow overflow-hidden border border-[var(--border-strong)] bg-[var(--bg-raised)]",
-                      isLandscape ? "p-3 sm:p-5" : "",
-                      isWide ? "overflow-x-auto" : "",
-                    ].join(" ")}
-                  >
-                    <a
-                      href={visual.src}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={isLandscape ? "block" : undefined}
-                    >
-                      <Image
-                        src={visual.src}
-                        alt={visual.alt}
-                        width={visual.width}
-                        height={visual.height}
-                        className={
-                          isLandscape
-                            ? "h-auto w-full"
-                            : isWide
-                              ? "h-auto w-full max-w-none"
-                              : "h-[30rem] w-full object-cover object-top sm:h-[38rem]"
-                        }
-                      />
-                    </a>
-                  </div>
-                  <figcaption className="grid gap-2 border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)] sm:grid-cols-[8rem_1fr]">
-                    <span className="text-[var(--accent)]">{visual.label}</span>
-                    <span>{visual.caption}</span>
-                  </figcaption>
-                </figure>
-              );
-            })}
+    <div className="mt-10 grid gap-8 border-y border-[var(--border)] py-8">
+      {phoneVisuals.length ? (
+        <div className="overflow-x-auto pb-3">
+          <div className="grid grid-flow-col auto-cols-[minmax(12rem,14rem)] gap-5 sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible">
+            {phoneVisuals.map((visual) => (
+              <figure key={visual.src} className="grid gap-3">
+                <a
+                  href={visual.src}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block rounded-[2.35rem] bg-black p-2 shadow-[0_28px_70px_rgba(0,0,0,0.35)] transition-transform hover:-translate-y-1"
+                >
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    width={visual.width}
+                    height={visual.height}
+                    className="h-auto w-full rounded-[1.8rem]"
+                  />
+                </a>
+                <figcaption className="border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)]">
+                  <span className="block text-[var(--accent)]">
+                    {visual.label}
+                  </span>
+                  <span>{visual.caption}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </div>
-      </section>
-    </Reveal>
+      ) : null}
+
+      {standardVisuals.map((visual) => {
+        const isWide = visual.layout === "wide";
+        const isLandscape = visual.layout === "landscape";
+
+        return (
+          <figure key={visual.src} className="grid gap-3">
+            <div
+              className={[
+                "artifact-shadow overflow-hidden border border-[var(--border-strong)] bg-[var(--bg-raised)]",
+                isLandscape ? "p-3 sm:p-5" : "",
+                isWide ? "overflow-x-auto" : "",
+              ].join(" ")}
+            >
+              <a
+                href={visual.src}
+                target="_blank"
+                rel="noreferrer"
+                className={isLandscape ? "block" : undefined}
+              >
+                <Image
+                  src={visual.src}
+                  alt={visual.alt}
+                  width={visual.width}
+                  height={visual.height}
+                  className={
+                    isLandscape
+                      ? "h-auto w-full"
+                      : isWide
+                        ? "h-auto w-full max-w-none"
+                        : "h-[30rem] w-full object-cover object-top sm:h-[38rem]"
+                  }
+                />
+              </a>
+            </div>
+            <figcaption className="grid gap-2 border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)] sm:grid-cols-[8rem_1fr]">
+              <span className="text-[var(--accent)]">{visual.label}</span>
+              <span>{visual.caption}</span>
+            </figcaption>
+          </figure>
+        );
+      })}
+    </div>
   );
 }
 
 function CaseStudySection({
   title,
   body,
+  visuals,
   delay,
 }: {
   title: string;
   body: string[];
+  visuals?: WorkVisual[];
   delay: number;
 }) {
   return (
@@ -258,6 +335,7 @@ function CaseStudySection({
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
+        {visuals?.length ? <SectionVisuals visuals={visuals} /> : null}
       </article>
     </Reveal>
   );
