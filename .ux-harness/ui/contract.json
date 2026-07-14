@@ -1,0 +1,927 @@
+{
+  "activity": [
+    {
+      "at": "2026-07-14T17:37:20Z",
+      "summary": "Drew McFarland portfolio credibility pass",
+      "type": "ui-initialized"
+    },
+    {
+      "at": "2026-07-14T17:37:32Z",
+      "summary": "person, moment, core_job, consequence, primary_outcome, primary_action, platform, stack, representative_content, constraints, character, known_facts, assumptions",
+      "type": "situation-updated"
+    },
+    {
+      "at": "2026-07-14T17:37:32Z",
+      "summary": "assumed",
+      "type": "product-truth-updated"
+    },
+    {
+      "at": "2026-07-14T17:37:32Z",
+      "summary": "For hiring reviewers in a fast portfolio scan, privilege credible proof and explicit project status over polished outcome language so Drew's actual seniority is legible without overstating unverified results",
+      "type": "commitment-set"
+    },
+    {
+      "at": "2026-07-14T17:37:32Z",
+      "summary": "F-001",
+      "type": "refusal-added"
+    },
+    {
+      "at": "2026-07-14T17:37:32Z",
+      "summary": "F-002",
+      "type": "refusal-added"
+    },
+    {
+      "at": "2026-07-14T17:37:32Z",
+      "summary": "F-003",
+      "type": "refusal-added"
+    },
+    {
+      "at": "2026-07-14T17:37:48Z",
+      "summary": "R-001",
+      "type": "direction-added"
+    },
+    {
+      "at": "2026-07-14T17:37:48Z",
+      "summary": "R-002",
+      "type": "direction-added"
+    },
+    {
+      "at": "2026-07-14T17:37:48Z",
+      "summary": "R-003",
+      "type": "direction-added"
+    },
+    {
+      "at": "2026-07-14T17:37:58Z",
+      "summary": "R-001",
+      "type": "direction-selected"
+    },
+    {
+      "at": "2026-07-14T17:37:58Z",
+      "summary": "Interaction architecture and disclosure recorded",
+      "type": "interaction-model-set"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-016",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-017",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-018",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-019",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-020",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-021",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-022",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-023",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-024",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:14Z",
+      "summary": "S-025",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:25Z",
+      "summary": "Visual fingerprint recorded",
+      "type": "fingerprint-set"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-001",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-002",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-003",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-004",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-005",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-006",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-007",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-008",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-009",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-010",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-011",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-012",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-013",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-014",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:38:53Z",
+      "summary": "S-015",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-001",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-002",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-003",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-004",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-005",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-006",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:45:56Z",
+      "summary": "V-007",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-008",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-009",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-010",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-011",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-012",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-013",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:47:51Z",
+      "summary": "V-014",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:49:52Z",
+      "summary": "representative_content",
+      "type": "situation-updated"
+    },
+    {
+      "at": "2026-07-14T17:49:52Z",
+      "summary": "S-016",
+      "type": "state-updated"
+    },
+    {
+      "at": "2026-07-14T17:50:54Z",
+      "summary": "V-015",
+      "type": "verification-added"
+    },
+    {
+      "at": "2026-07-14T17:50:54Z",
+      "summary": "V-016",
+      "type": "verification-added"
+    }
+  ],
+  "commitment": {
+    "optimize_for": "Credibility, scanability, and senior decision evidence",
+    "over": "Promotional compression and artifact volume",
+    "owner": "Codex, reversible implementation judgment",
+    "thesis": "For hiring reviewers in a fast portfolio scan, privilege credible proof and explicit project status over polished outcome language so Drew's actual seniority is legible without overstating unverified results"
+  },
+  "directions": [
+    {
+      "bet": "Small systemic content and hierarchy changes can repair credibility without changing the portfolio's identity",
+      "failure_case": "The evidence labels may feel defensive or resume-like if they overwhelm the story",
+      "falsification": "Reviewers still cannot distinguish shipped, concept, and unvalidated work after a 60-second scan",
+      "hierarchy": "Measured impact first, selected case studies second; within cases, status and strongest proof before narrative and imagery",
+      "id": "R-001",
+      "interaction": "Reviewers scan quantified impact, choose a case, follow decisions with adjacent artifacts, then continue or contact",
+      "name": "Evidence ledger",
+      "organizing_idea": "Keep the editorial homepage and case-study model, but make evidence level the repeating information spine: measured impact on the homepage, status and proof in each case, decisions paired with artifacts, and an honest end-state",
+      "selection_rationale": "It fixes the audited credibility failure while preserving the portfolio's strongest asset: a restrained, coherent editorial identity. The flagship direction overweights an unmeasured case, while the taxonomy adds more categorization than this small corpus needs.",
+      "status": "selected",
+      "tradeoffs": "Does not provide full narrative depth for older quantified work and keeps three current projects in the corpus"
+    },
+    {
+      "bet": "One deep senior-service-design story creates a clearer level signal than three equal-weight cases",
+      "failure_case": "The strongest visual story still rests on concept work and the overclaim becomes more prominent",
+      "falsification": "Reviewers ask for proof that the portal shipped or that onboarding improved",
+      "hierarchy": "FORGE first and visually dominant; Velveteen and SBIR secondary",
+      "id": "R-002",
+      "interaction": "Reviewers enter the flagship directly, then inspect builder breadth if interested",
+      "name": "Single flagship",
+      "organizing_idea": "Make FORGE the dominant long-form case and reduce other work to short supporting entries",
+      "status": "candidate",
+      "tradeoffs": "Concentrates the portfolio around a case whose shipped outcome is not yet demonstrated"
+    },
+    {
+      "bet": "Explicit categories create maximum honesty and make a nine-year career legible",
+      "failure_case": "The taxonomy becomes the visual subject and the projects feel secondary",
+      "falsification": "Reviewers spend more time interpreting categories than evaluating Drew's work",
+      "hierarchy": "Proven impact, shipped work, then experiments",
+      "id": "R-003",
+      "interaction": "Reviewers choose by evidence type rather than a single work list",
+      "name": "Work taxonomy",
+      "organizing_idea": "Split the homepage into proven impact, shipped products, and experiments, with different page treatments for each",
+      "status": "candidate",
+      "tradeoffs": "Adds more homepage structure and risks making a small body of work feel fragmented"
+    }
+  ],
+  "fingerprint": {
+    "color_role": "Near-black and warm neutrals create an archival field; rose marks orientation and provenance, while higher-contrast muted text preserves secondary hierarchy without sacrificing legibility",
+    "composition_rule": "Quantified proof occupies a stable leading column; each case moves from status and claim into decisions, with the artifact placed beside or immediately after the decision it supports",
+    "imagery_icon_language": "Only project artifacts and product screens are used; images document decisions, use honest captions, preserve aspect ratio, and provide descriptive alternatives",
+    "material_model": "A continuous case-file publication separated by rules and artifact strips, not a dashboard or card collection",
+    "signature_behavior": "Restrained content reveal preserves reading cadence, while case-to-case navigation keeps the portfolio moving without decorative motion",
+    "type_voice": "Documentary and editorial: Lora carries reflective claims, Geist carries readable narrative, and Geist Mono labels status, provenance, and numbers"
+  },
+  "interaction_model": {
+    "decision_points": "Reviewers choose between proven career impact and current case studies, then between live builder work, organizational service design, and an experiment still under validation. Labels make evidence level explicit before commitment.",
+    "entry_orientation": "The homepage opens with Drew's outcomes-first thesis, immediately followed by quantified career impact and then selected current work. Each case card states outcome or capability honestly.",
+    "feedback": "Existing hover, focus, and Reveal behavior remains; links have visible focus, external links remain explicit, and reduced-motion preferences suppress transitions.",
+    "information_disclosure": "Always visible: project status, role, outcome/capability, and strongest proof. In context: narrative decisions and visuals. Deferred: secondary artifacts and implementation detail. Never conceal validation gaps behind visual polish.",
+    "navigation_model": "Homepage anchors remain stable; case pages retain back navigation and add next-case, resume, and email actions at the end. Static routes preserve direct links and browser navigation.",
+    "primary_flow": "Scan identity and quantified impact; choose a current case; read status, role, scope, and strongest proof; follow two or three key decisions with adjacent artifacts; review what changed and what remains unproven; continue to the next case or contact Drew.",
+    "recovery_continuity": "404 route returns home; every case ends with a path to another case or contact; missing public links do not render dead controls; image alt text preserves the evidence description if media fails."
+  },
+  "product_truth": {
+    "evidence_source": "Repository content, rendered portfolio, and resume claims supplied in the project",
+    "level": "assumed",
+    "residual_risk": "No hiring-manager usability study, analytics, or independent verification of project outcome claims is available"
+  },
+  "project": {
+    "created_at": "2026-07-14T17:37:20Z",
+    "mode": "transform",
+    "name": "Drew McFarland portfolio credibility pass",
+    "source_prompt": "Great - make these changes then push to git.",
+    "updated_at": "2026-07-14T17:50:54Z"
+  },
+  "refusals": [
+    {
+      "id": "F-001",
+      "kind": "scope",
+      "protects": "Truthfulness and Drew's professional reputation",
+      "rationale": "A fabricated or thin case would undermine the credibility problem this pass is meant to solve",
+      "refusal": "Do not invent a full Kessel Run case study without source artifacts or project-specific narrative"
+    },
+    {
+      "id": "F-002",
+      "kind": "hierarchy",
+      "protects": "Accurate interpretation of Drew's impact",
+      "rationale": "Reviewers need to distinguish what exists from what has been validated",
+      "refusal": "Do not give concepts, shipped capabilities, and measured outcomes equal evidentiary weight"
+    },
+    {
+      "id": "F-003",
+      "kind": "aesthetic-behavior",
+      "protects": "The portfolio's established identity and reading focus",
+      "rationale": "The current visual language is coherent; the deficit is content hierarchy and evidence",
+      "refusal": "Do not replace the restrained editorial system with cards, ornamental dashboards, or decorative motion"
+    }
+  ],
+  "schema_version": 2,
+  "situation": {
+    "assumptions": "Hiring reviewers value honest evidence levels and senior decision-making more than a standard process narrative",
+    "character": "Editorial, documentary, and candid: restrained visuals, concrete evidence, explicit uncertainty",
+    "consequence": "Unsupported claims make the portfolio's outcomes-first thesis feel promotional; specific status and proof make it trustworthy",
+    "constraints": "Preserve the dark tactile artifact system; do not invent metrics or validation; maintain public-safe defense details; no new dependencies",
+    "core_job": "Judge Drew's level, individual contribution, ability to navigate complexity, and record of changing user or organizational outcomes",
+    "known_facts": "The resume contains 300% DAU growth, 20% faster maintenance initiation, roughly 40% platform adoption growth, and standards adopted across five programs. FORGE includes five teams and a seventeen-stage onboarding map. Velveteen is live. SBIR Radar has no public link or portfolio evidence of validation.",
+    "moment": "A one-to-three-minute initial scan, usually before an interview, with deeper reading only if the first evidence is credible",
+    "person": "Design leaders, recruiters, and hiring managers evaluating senior product design and design leadership candidates",
+    "platform": "Responsive web, desktop-first hiring review with complete mobile adaptation",
+    "primary_action": "Choose a case study, understand its evidence, then continue to the next case or contact Drew",
+    "primary_outcome": "Within the homepage and first case-study viewport, the reviewer can distinguish measured impact, shipped capability, concept work, and validation still in progress",
+    "representative_content": "FORGE service-design work, Velveteen builder work, SBIR Radar experiment, and three quantified user/conversion outcomes from the resume",
+    "stack": "Next.js 16 App Router server components, React 19, Tailwind CSS 4"
+  },
+  "states": [
+    {
+      "accessibility": "Semantic hierarchy, skip link, responsive reflow",
+      "available_information": "Identity, quantified impact, project status, and selected work",
+      "behavior": "Server-rendered homepage presents evidence before current work",
+      "content": "Real quantified resume impact and three current projects",
+      "id": "S-001",
+      "name": "first-use",
+      "primary_action": "Open a relevant case",
+      "reason": "",
+      "recovery": "Resume and email remain directly available",
+      "status": "designed",
+      "trigger": "First portfolio visit",
+      "user_goal": "Understand level and evidence quickly"
+    },
+    {
+      "accessibility": "Focus and link labels remain consistent",
+      "available_information": "Stable anchors, work ordering, and case navigation",
+      "behavior": "No onboarding overlay or transient state; browser history and anchors remain predictable",
+      "content": "Same published content",
+      "id": "S-002",
+      "name": "returning-use",
+      "primary_action": "Open another case or contact",
+      "reason": "",
+      "recovery": "Back links and next-case links",
+      "status": "designed",
+      "trigger": "Return visit or back navigation",
+      "user_goal": "Resume evaluation or open another case"
+    },
+    {
+      "accessibility": "No spinner-only or motion-dependent state",
+      "available_information": "Server-rendered text arrives independently; image dimensions reserve space",
+      "behavior": "Static pages render on the server; Next Image reserves artifact aspect ratios and lazy-loads below-fold media",
+      "content": "Artifact imagery with explicit dimensions",
+      "id": "S-003",
+      "name": "loading",
+      "primary_action": "Read the opening evidence",
+      "reason": "",
+      "recovery": "Alt text and captions preserve meaning if imagery is delayed",
+      "status": "designed",
+      "trigger": "Initial document or artifact image is loading",
+      "user_goal": "Begin reading without layout shift"
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-004",
+      "name": "empty-unconfigured",
+      "primary_action": "",
+      "reason": "No user-configured data or collection exists",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-005",
+      "name": "no-results",
+      "primary_action": "",
+      "reason": "The portfolio has no search or filter flow",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-006",
+      "name": "partial-stale-conflicting",
+      "primary_action": "",
+      "reason": "Published case-study content is static; uncertainty is expressed as project status and evidence labels rather than data freshness",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-007",
+      "name": "permission-restriction",
+      "primary_action": "",
+      "reason": "All portfolio routes are public and require no permissions",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-008",
+      "name": "invalid-input",
+      "primary_action": "",
+      "reason": "The portfolio contains no input forms",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "Semantic heading, native button, visible focus, no error-code burden",
+      "available_information": "A plain-language failure message and retry action",
+      "behavior": "Global error boundary renders a branded retry screen",
+      "content": "Something went wrong; try again; return home",
+      "id": "S-009",
+      "name": "recoverable-error",
+      "primary_action": "Try again",
+      "reason": "",
+      "recovery": "Retry button invokes reset; home link provides escape",
+      "status": "designed",
+      "trigger": "A route-level runtime error occurs",
+      "user_goal": "Recover without a dead end"
+    },
+    {
+      "accessibility": "Text alternatives preserve artifact meaning",
+      "available_information": "Server-rendered text, reserved media space, explicit link destinations",
+      "behavior": "No data-dependent client flow; page content remains meaningful without completed image loads",
+      "content": "Static narrative and captions",
+      "id": "S-010",
+      "name": "offline-slow-timeout",
+      "primary_action": "Continue reading or navigate back",
+      "reason": "",
+      "recovery": "Browser retry/back and direct route links",
+      "status": "designed",
+      "trigger": "Slow connection delays images or navigation",
+      "user_goal": "Keep orientation and read available content"
+    },
+    {
+      "accessibility": "Document order stays logical without sticky positioning",
+      "available_information": "Stable URL, section order, sticky identity block, and case footer",
+      "behavior": "No volatile local state; browser scroll restoration is left to platform behavior",
+      "content": "All case routes",
+      "id": "S-011",
+      "name": "interrupted-resumed",
+      "primary_action": "Continue reading or select next case",
+      "reason": "",
+      "recovery": "Back and next-case links",
+      "status": "designed",
+      "trigger": "Reviewer leaves a case and returns with browser navigation",
+      "user_goal": "Continue evaluation"
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-012",
+      "name": "destructive-undo",
+      "primary_action": "",
+      "reason": "No destructive or mutating actions exist",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "Descriptive link text and touch targets",
+      "available_information": "Next case, resume, and email contact",
+      "behavior": "A case footer replaces the previous dead end",
+      "content": "Next case title plus contact actions",
+      "id": "S-013",
+      "name": "success-partial-success",
+      "primary_action": "Continue to the next case",
+      "reason": "",
+      "recovery": "Back to selected work remains available",
+      "status": "designed",
+      "trigger": "Reviewer reaches the end of a case",
+      "user_goal": "Choose a meaningful next step"
+    },
+    {
+      "accessibility": "Supports browser zoom and text wrapping; no uppercase-only long labels",
+      "available_information": "All fields wrap in a single-column priority order at narrow widths",
+      "behavior": "Readable max-widths, wrapping grid tracks, and no fixed-height text containers",
+      "content": "FORGE outcome and long role names",
+      "id": "S-014",
+      "name": "long-localized-content",
+      "primary_action": "Continue reading",
+      "reason": "",
+      "recovery": "Not applicable",
+      "status": "designed",
+      "trigger": "Long project titles, proof statements, or translated browser text sizing",
+      "user_goal": "Read without clipping or horizontal overflow"
+    },
+    {
+      "accessibility": "Visible focus, semantic reading order, color-independent statuses",
+      "available_information": "Same content and actions",
+      "behavior": "Responsive grids stack; Reveal disables entrance animation; global transitions collapse",
+      "content": "All routes and states",
+      "id": "S-015",
+      "name": "large-text-reduced-motion",
+      "primary_action": "Navigate and read normally",
+      "reason": "",
+      "recovery": "Not applicable",
+      "status": "designed",
+      "trigger": "Browser zoom, large text, or prefers-reduced-motion",
+      "user_goal": "Access the complete portfolio without clipping or unwanted movement"
+    },
+    {
+      "accessibility": "Semantic headings, definition lists, links, visible focus, and single-column mobile reflow",
+      "available_information": "Role, background, three quantified user/conversion outcomes, selected projects, project evidence level",
+      "behavior": "Quantified user and adoption impact precedes the project list; current projects use honest outcome or capability language",
+      "content": "300% DAU growth, 20% faster maintenance initiation, roughly 40% platform adoption growth",
+      "id": "S-016",
+      "name": "homepage-first-scan",
+      "primary_action": "Open a relevant case study",
+      "reason": "",
+      "recovery": "Resume and email remain available without opening a case",
+      "status": "designed",
+      "trigger": "A reviewer opens the portfolio root",
+      "user_goal": "Understand Drew's level and decide whether the work merits a deeper read"
+    },
+    {
+      "accessibility": "H1, labelled metadata, figures with alt text and captions, readable measure",
+      "available_information": "Status, role, scope, evidence statement, narrative decisions, artifacts",
+      "behavior": "Short defensible outcome leads; proof strip separates known change from unmeasured aspiration",
+      "content": "FORGE: five teams, seventeen stages, shared operating picture; no unsupported onboarding-time reduction",
+      "id": "S-017",
+      "name": "measured-case-entry",
+      "primary_action": "Read the first pivotal decision",
+      "reason": "",
+      "recovery": "Back to work and next-case links",
+      "status": "designed",
+      "trigger": "A reviewer opens a case with observed organizational or user evidence",
+      "user_goal": "Verify what Drew changed and how"
+    },
+    {
+      "accessibility": "External links are named, focusable, and accompanied by visible labels",
+      "available_information": "Live status, public links, seven-stage pipeline, current validation gap",
+      "behavior": "Capability language replaces outcome language; live and under-validation states are both explicit",
+      "content": "Live product; four security tools; explanation quality remains under evaluation",
+      "id": "S-018",
+      "name": "live-capability-case",
+      "primary_action": "Inspect the security-review decision and live product",
+      "reason": "",
+      "recovery": "Return, visit product, continue to next case, or contact",
+      "status": "designed",
+      "trigger": "A reviewer opens Velveteen",
+      "user_goal": "Assess Drew's builder range without mistaking a live capability for validated adoption"
+    },
+    {
+      "accessibility": "No empty link group is rendered; status is textual, not color-only",
+      "available_information": "Prototype status, target triage job, pipeline risk, screenshots, no public link",
+      "behavior": "The page says validation in progress and avoids measured speed claims",
+      "content": "Prototype; six decision signals; no portfolio evidence of task-time improvement",
+      "id": "S-019",
+      "name": "experiment-case",
+      "primary_action": "Evaluate the decision and validation plan",
+      "reason": "",
+      "recovery": "Next-case and contact links remain available despite no product URL",
+      "status": "designed",
+      "trigger": "A reviewer opens SBIR Radar",
+      "user_goal": "Understand the product bet and what is not yet validated"
+    },
+    {
+      "accessibility": "Touch targets remain at least 44px where interactive; text does not rely on hover",
+      "available_information": "Same status, proof, content, and actions in linear priority order",
+      "behavior": "Asymmetric desktop grids collapse to one column; proof rows and impact entries stack",
+      "content": "Longest FORGE copy and multi-line impact labels",
+      "id": "S-020",
+      "name": "small-viewport",
+      "primary_action": "Open or continue reading a case",
+      "reason": "",
+      "recovery": "Browser back and explicit case navigation remain visible",
+      "status": "designed",
+      "trigger": "Viewport below the desktop grid breakpoint",
+      "user_goal": "Scan and read without horizontal overflow or lost hierarchy"
+    },
+    {
+      "accessibility": "No information depends on animation",
+      "available_information": "All content and hierarchy without animation",
+      "behavior": "Existing global media query reduces transitions and Reveal respects the preference",
+      "content": "All routes",
+      "id": "S-021",
+      "name": "reduced-motion",
+      "primary_action": "Navigate normally",
+      "reason": "",
+      "recovery": "Not applicable; no motion-gated content",
+      "status": "designed",
+      "trigger": "prefers-reduced-motion is enabled",
+      "user_goal": "Read without unnecessary movement"
+    },
+    {
+      "accessibility": "Descriptive alternative text; captions do not duplicate only decorative detail",
+      "available_information": "Figure label, descriptive alt text, and explanatory caption",
+      "behavior": "Reserved image dimensions limit layout shift and text remains meaningful",
+      "content": "Service blueprint, event storm, product screens",
+      "id": "S-022",
+      "name": "missing-or-failed-image",
+      "primary_action": "Continue the narrative",
+      "reason": "",
+      "recovery": "No blocked flow; raw image link is optional",
+      "status": "designed",
+      "trigger": "An artifact image loads slowly or fails",
+      "user_goal": "Understand what the artifact represents"
+    },
+    {
+      "accessibility": "Single H1 and keyboard-focusable link",
+      "available_information": "Clear 404 message and home link",
+      "behavior": "Existing styled not-found route remains",
+      "content": "Page moved or never existed",
+      "id": "S-023",
+      "name": "not-found",
+      "primary_action": "Return home",
+      "reason": "",
+      "recovery": "Home link",
+      "status": "designed",
+      "trigger": "Unknown route or work slug",
+      "user_goal": "Recover to valid work"
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-024",
+      "name": "authentication-and-permissions",
+      "primary_action": "",
+      "reason": "The portfolio is public and contains no authenticated actions",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    },
+    {
+      "accessibility": "",
+      "available_information": "",
+      "behavior": "",
+      "content": "",
+      "id": "S-025",
+      "name": "destructive-or-data-submission",
+      "primary_action": "",
+      "reason": "The portfolio has no destructive actions or forms; email uses a mailto link",
+      "recovery": "",
+      "status": "not-applicable",
+      "trigger": "",
+      "user_goal": ""
+    }
+  ],
+  "verification": [
+    {
+      "artifact": "Portfolio application",
+      "dimension": "runtime-integrity",
+      "id": "V-001",
+      "method": "npm scripts and production compiler",
+      "observed": "npm run lint exited 0; npm run build compiled successfully, passed TypeScript, and generated all 8 static pages including all three work routes.",
+      "remediation": "",
+      "settings": "Next.js 16.2.6, webpack production build",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Homepage and FORGE case study",
+      "dimension": "rendered-artifact",
+      "id": "V-002",
+      "method": "In-app browser screenshots and DOM snapshots",
+      "observed": "Homepage renders quantified impact before current work; FORGE opening exposes status, scope, and strongest proof; artifacts render immediately after their supporting narrative; case footer exposes next case, resume, email, and all-work paths.",
+      "remediation": "",
+      "settings": "Default desktop viewport",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Homepage, FORGE, and SBIR Radar",
+      "dimension": "responsive-reflow",
+      "id": "V-003",
+      "method": "In-app browser viewport override and DOM measurement",
+      "observed": "Layouts collapse to one column, project status remains in the identity block, horizontal artifact strips stay contained, and document scrollWidth equals viewport width at both 390px and 320px.",
+      "remediation": "",
+      "settings": "390x844 and 320x700",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Homepage to case study to continuation footer",
+      "dimension": "interaction-comprehension",
+      "id": "V-004",
+      "method": "Semantic DOM inspection and primary-flow walkthrough",
+      "observed": "A reviewer can distinguish observed change, built capability, concept, and still-unproven evidence; all three cases expose status in the opening and end with a valid continuation path.",
+      "remediation": "",
+      "settings": "Desktop and mobile",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Homepage and case-study pages",
+      "dimension": "density-disclosure",
+      "id": "V-005",
+      "method": "Rendered hierarchy review at distance and detail",
+      "observed": "Measured career impact leads; current project claims remain secondary; detailed evidence is deferred to case pages and artifact captions sit beside the decisions they document.",
+      "remediation": "",
+      "settings": "Desktop and mobile",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Global tokens and portfolio routes",
+      "dimension": "accessibility",
+      "id": "V-006",
+      "method": "Semantic DOM inspection, CSS contrast calculation, and responsive review",
+      "observed": "Headings, lists, figures, definition lists, landmarks, and descriptive links are present. Muted text now measures approximately 4.92:1 against the background. Reveal and global CSS contain reduced-motion handling. No assistive-technology session was run.",
+      "remediation": "Run screen-reader and full keyboard traversal if formal accessibility conformance is required.",
+      "settings": "Small text, 320px reflow, reduced-motion code path",
+      "status": "partial",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Local portfolio routes",
+      "dimension": "browser-runtime",
+      "id": "V-007",
+      "method": "In-app browser console inspection",
+      "observed": "No browser warnings or errors were reported for the reviewed tab.",
+      "remediation": "",
+      "settings": "Homepage, FORGE, and SBIR Radar during responsive review",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:45:56Z"
+    },
+    {
+      "artifact": "Homepage and all three case-study openings",
+      "dimension": "commitment-coherence",
+      "id": "V-008",
+      "method": "Rendered comparison against the owned commitment and refusal set",
+      "observed": "Measured career outcomes lead the homepage; current work is explicitly labelled as delivered concept work, a live product with validation ongoing, or a prototype. No visual treatment presents those evidence levels as equivalent.",
+      "remediation": "",
+      "settings": "Desktop and mobile",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "Homepage, /work/forge, /work/velveteen, /work/sbir-radar, /resume",
+      "dimension": "primary-flow",
+      "id": "V-009",
+      "method": "Semantic DOM inspection, direct route loading, and production route manifest",
+      "observed": "Each homepage work link points to a generated case route; each case exposes a next-case link plus resume, email, and all-work exits; all referenced internal routes are present in the successful static build.",
+      "remediation": "",
+      "settings": "Local browser and Next.js production build",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "Portfolio static states",
+      "dimension": "state-coverage",
+      "id": "V-010",
+      "method": "State-matrix review, rendered 404 inspection, and compiled recovery-component inspection",
+      "observed": "Unknown routes render the branded 404 with a home recovery path; SBIR omits an empty product-link group; image dimensions and alternatives preserve delayed/failure meaning; global error provides retry and home escape; non-applicable form, permission, and destructive states are explicitly excluded.",
+      "remediation": "",
+      "settings": "Unknown route, case with no external product link, delayed images, mobile, and reduced motion",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "FORGE and SBIR Radar",
+      "dimension": "content-stress",
+      "id": "V-011",
+      "method": "Rendered long-form content and DOM measurement",
+      "observed": "Long FORGE and SBIR strings wrap without clipping; the document remains exactly viewport width at 390px and 320px; horizontal phone galleries remain isolated inside their scroll container.",
+      "remediation": "",
+      "settings": "Longest status, outcome, narrative, evidence labels, 390px and 320px viewports",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "Homepage and case-study templates",
+      "dimension": "responsive-adaptive",
+      "id": "V-012",
+      "method": "Viewport override, screenshots, and layout measurement",
+      "observed": "Desktop asymmetry collapses to one-column priority order; status moves into the identity block on small screens; proof rows stack; page scrollWidth matches viewport width; touch-oriented links retain 44px minimum height.",
+      "remediation": "",
+      "settings": "Default desktop, 390x844, and 320x700",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "Portfolio templates and global tokens",
+      "dimension": "accessibility",
+      "id": "V-013",
+      "method": "Scoped semantic, contrast, reflow, focus-style, text-alternative, and reduced-motion inspection",
+      "observed": "Headings and landmarks are ordered; figures, lists, definition lists, and links expose semantic names; all artifact images have descriptive alternatives; muted small text is approximately 4.92:1; focus-visible styles and a skip link exist; reduced motion disables Reveal entrances. This is a scoped implementation pass, not a claim of formal accessibility conformance.",
+      "remediation": "",
+      "settings": "DOM snapshots, 320px reflow, CSS token calculation, prefers-reduced-motion implementation",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "Homepage, FORGE, and SBIR Radar",
+      "dimension": "final-craft",
+      "id": "V-014",
+      "method": "Two-pass visual quality ratchet",
+      "observed": "First pass established the evidence ledger and interleaved artifacts. Second pass moved status into the case identity block and simplified the proof strip, improving mobile priority and desktop measure without adding ornamental UI.",
+      "remediation": "",
+      "settings": "Distance review, detail review, desktop, 390px, and 320px",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:47:51Z"
+    },
+    {
+      "artifact": "Homepage selected impact section",
+      "dimension": "content-curation",
+      "id": "V-015",
+      "method": "Rendered browser DOM inspection",
+      "observed": "The section contains exactly three user/conversion outcomes: 300% daily active user growth, 20% faster maintenance initiation, and roughly 40% platform adoption growth. The five-program standards claim is absent from this section.",
+      "remediation": "",
+      "settings": "Desktop 1280px and mobile 390px",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:50:54Z"
+    },
+    {
+      "artifact": "Homepage",
+      "dimension": "responsive-reflow",
+      "id": "V-016",
+      "method": "In-app browser viewport measurement",
+      "observed": "Document client width and scroll width both measured 390px after the impact ledger was reduced to three items; no horizontal overflow was introduced.",
+      "remediation": "",
+      "settings": "390x844",
+      "status": "pass",
+      "verified_at": "2026-07-14T17:50:54Z"
+    }
+  ]
+}

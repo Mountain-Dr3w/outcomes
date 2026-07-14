@@ -14,6 +14,33 @@ export interface ResumeEducation {
   school: string;
 }
 
+export interface ImpactItem {
+  metric: string;
+  outcome: string;
+  context: string;
+}
+
+export const impactItems: ImpactItem[] = [
+  {
+    metric: "300%",
+    outcome: "growth in daily active users",
+    context:
+      "Flight scheduling at Kessel Run. I mapped how scheduling worked and partnered with military leaders to remove the roadblocks keeping crews from using the product.",
+  },
+  {
+    metric: "20%",
+    outcome: "faster maintenance initiation",
+    context:
+      "A pilot debriefing tool used across several airframes and military branches. I led the work from research through delivery.",
+  },
+  {
+    metric: "~40%",
+    outcome: "growth in platform adoption",
+    context:
+      "A government developer platform. Research found five problems that were keeping teams from adopting it, and I worked with the product team to address them.",
+  },
+];
+
 export const resume = {
   name: "Drew McFarland",
   headline: "Product Designer and Strategist | USAF Veteran | Active Secret Clearance",
@@ -29,9 +56,9 @@ export const resume = {
           title: "Sr Product Designer / Product Lead",
           period: "May 2025 to Present",
           bullets: [
-            "Drove discovery to map the constraint blocking new tenant deployments on a government DevSecOps platform replacing a 12 to 18 month accreditation process, redirecting the roadmap to capabilities new programs need first",
-            "Led the redesign of tenant onboarding from provisioning through first deployment, replacing a high-touch engineering process with reusable artifacts new teams run themselves",
-            "Shaped the productization plan around four measurable outcomes (environment standup, time to first deploy, developer-led delivery, reusable compliance), giving leadership a single way to prioritize and report progress across delivery, compliance, and GTM",
+            "Found the main reason new teams could not deploy on a government DevSecOps platform and redirected the roadmap toward the work they needed first",
+            "Redesigned onboarding from account setup through first deployment so new teams could complete more of the process without an engineer walking them through it",
+            "Gave leadership four measures for the platform: setup time, time to first deployment, delivery without outside help, and reusable compliance work",
           ],
         },
       ],
@@ -43,17 +70,17 @@ export const resume = {
           title: "Design Operations Lead",
           period: "Apr 2022 to May 2025",
           bullets: [
-            "Grew daily active users 300% for a flight scheduling application by mapping the full service experience and working with military leadership to clear the operational roadblocks holding it back",
-            "Used service blueprints to align 8 delivery teams around operator needs, keeping engineering effort on high-impact work instead of features nobody asked for",
-            "Built accessibility standards (Section 508), research templates, and design playbooks adopted across 5 programs that kept running after I moved on",
+            "Grew daily active users 300% for a flight-scheduling application by mapping how scheduling worked and helping military leaders remove the operational roadblocks",
+            "Used a shared service map to keep 8 delivery teams focused on operator problems instead of disconnected feature requests",
+            "Created Section 508 standards, research templates, and design playbooks that 5 programs continued using after I left",
           ],
         },
         {
           title: "Product Designer",
           period: "May 2017 to Apr 2022",
           bullets: [
-            "Cut maintenance initiation time 20% for a pilot debriefing app used across multiple airframes and branches by leading UX from research through delivery",
-            "Mapped developer journeys on a Platform-as-a-Service, surfaced 5 key friction points, and drove changes that increased platform adoption roughly 40%",
+            "Cut maintenance initiation time 20% for a pilot debriefing app used across several airframes and military branches. I led the work from research through delivery",
+            "Found 5 problems that were keeping teams from adopting a government developer platform and worked with the product team on changes that increased adoption roughly 40%",
             "Grew the application's footprint from 2 commands to 6 by building relationships with key advocates and running hands-on workshops with each new unit to show fit before pushing for rollout",
           ],
         },
@@ -66,8 +93,8 @@ export const resume = {
           title: "Service Design Consultant",
           period: "Jun 2016 to Present",
           bullets: [
-            "Took a defense tech startup from concept to launch: ran user research, built service blueprints, and shaped the pitch that landed them a NYC local government contract and an SBIR grant",
-            "Led discovery for a DoD data analysis startup and turned research into a value story that contributed to a $150K Stage 1 SBIR award",
+            "Helped a defense technology startup move from concept to launch through user research, service design, and a pitch that led to a New York City contract and an SBIR grant",
+            "Researched how customers used a DoD data analysis product and helped the startup explain its value, contributing to a $150K Stage 1 SBIR award",
           ],
         },
       ],

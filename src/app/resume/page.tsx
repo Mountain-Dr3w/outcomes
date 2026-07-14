@@ -88,8 +88,8 @@ export default function ResumePage() {
               experience
             </h2>
             <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
-              Product design, strategy, and design operations roles where
-              research had to turn into shipped operational change.
+              Product design, strategy, and design operations across
+              government, defense, and developer platforms.
             </p>
           </aside>
 
