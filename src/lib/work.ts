@@ -1,4 +1,7 @@
-export type WorkSlug = "velveteen" | "sbir-radar" | "forge";
+export type WorkSlug =
+  | "velveteen"
+  | "sbir-radar"
+  | "space-force-cloud-platform";
 export type WorkRole =
   | "Product design"
   | "Product design + full-stack build"
@@ -227,19 +230,19 @@ export const workItems: WorkItem[] = [
     ],
   },
   {
-    slug: "forge",
-    title: "FORGE",
-    eyebrow: "Service design at Rise8 · Space Force DevSecOps",
+    slug: "space-force-cloud-platform",
+    title: "Space Force Cloud Platform",
+    eyebrow: "Service design · anonymized USSF cloud platform",
     year: "2026",
     outcome:
       "I mapped the full onboarding process so five platform teams could see why application teams were waiting months to reach production and who owned each delay.",
     status: "Client work at Rise8",
-    audience: "Application teams onboarding to a Space Force software platform",
+    audience: "Application teams onboarding to a USSF cloud platform",
     result:
       "Five internal teams got their first shared map of the full onboarding process and a ranked list of the problems to fix.",
     role: "Service design",
     summary:
-      "Application teams were supposed to reach production on FORGE in a week. Some waited months, moving between internal teams and contractors without knowing who owned the next step. As the service designer, I mapped the 17-step process, documented the recurring problems, and designed a portal concept around three questions: where am I, who owns this, and what can I do now? The map and problem log were delivered. The portal was not built.",
+      "Application teams were supposed to reach production on a USSF cloud platform in a week. Some waited months, moving between internal teams and contractors without knowing who owned the next step. As the service designer, I mapped the 17-step process, documented the recurring problems, and designed a portal concept around three questions: where am I, who owns this, and what can I do now? The map and problem log were delivered. The portal was not built. The project name and identifying details are generalized here to protect client work.",
     sections: [
       {
         title: "Put the whole process on one page",
@@ -286,18 +289,13 @@ export const workItems: WorkItem[] = [
         body: "The unbuilt concept showed application teams their status, the owner of the next step, and what they could do without waiting.",
       },
     ],
-    links: [
-      {
-        label: "Rise8",
-        href: "https://www.rise8.us",
-      },
-    ],
+    links: [],
     visuals: [
       {
         afterSection: 0,
         label: "Service blueprint",
-        src: "/artifacts/forge-service-blueprint.png",
-        alt: "FORGE service blueprint mapping the tenant journey across onboarding phases, backstage work, support systems, and friction points.",
+        src: "/artifacts/space-force-cloud-platform-service-blueprint.png",
+        alt: "Space Force Cloud Platform service blueprint mapping the application team's journey across onboarding steps, internal work, support systems, and recurring problems.",
         caption:
           "The map covers 17 onboarding steps. Each step shows what the application team does, what they can see, what happens inside the platform team, and which systems are involved.",
         width: 4096,
@@ -307,8 +305,8 @@ export const workItems: WorkItem[] = [
       {
         afterSection: 0,
         label: "Event storm",
-        src: "/artifacts/forge-event-storm.png",
-        alt: "FORGE event storming board showing commands, domain events, decision points, and hotspots across the internal platform workflow.",
+        src: "/artifacts/space-force-cloud-platform-event-storm.png",
+        alt: "Space Force Cloud Platform event-storming board showing commands, events, decisions, and problem areas across the internal workflow.",
         caption:
           "The event-storming sessions showed where onboarding depended on an unwritten rule or on someone knowing who to call next.",
         width: 4096,
@@ -318,8 +316,8 @@ export const workItems: WorkItem[] = [
       {
         afterSection: 1,
         label: "Friction log",
-        src: "/artifacts/forge-friction-log.png",
-        alt: "FORGE friction log categorizing onboarding pain points by owner, impact, breakage risk, and rationale.",
+        src: "/artifacts/space-force-cloud-platform-problem-log.png",
+        alt: "Space Force Cloud Platform problem log organizing onboarding issues by owner, effect on application teams, risk, and rationale.",
         caption:
           "Each row names an onboarding problem, the team that owns it, its effect on the application team, and the risk of leaving it unfixed.",
         width: 4096,
@@ -329,8 +327,8 @@ export const workItems: WorkItem[] = [
       {
         afterSection: 2,
         label: "Onboarding portal",
-        src: "/artifacts/forge-portal-onboarding.png",
-        alt: "FORGE onboarding portal concept showing current review status, assigned team, progress, pending actions, and direct task links.",
+        src: "/artifacts/space-force-cloud-platform-portal-onboarding.png",
+        alt: "Space Force Cloud Platform onboarding portal concept showing review status, assigned team, progress, pending actions, and direct task links.",
         caption:
           "The unbuilt portal concept shows the current review, the team handling it, progress through onboarding, and any action the application team can take next.",
         width: 4096,
@@ -340,8 +338,8 @@ export const workItems: WorkItem[] = [
       {
         afterSection: 2,
         label: "Services hub",
-        src: "/artifacts/forge-portal-services.png",
-        alt: "FORGE platform services hub showing tenant access to development tools and services from a single dashboard.",
+        src: "/artifacts/space-force-cloud-platform-portal-services.png",
+        alt: "Space Force Cloud Platform services concept showing an application team's access to development tools in one dashboard.",
         caption:
           "The unbuilt services concept puts six platform tools on one screen and shows whether the application team has access to each one.",
         width: 4096,
@@ -371,7 +369,11 @@ export function getWorkBySlug(slug: string): WorkItem | undefined {
   return workItems.find((item) => item.slug === slug);
 }
 
-const displayOrder: WorkSlug[] = ["forge", "velveteen", "sbir-radar"];
+const displayOrder: WorkSlug[] = [
+  "space-force-cloud-platform",
+  "velveteen",
+  "sbir-radar",
+];
 
 export const displayWorkItems = displayOrder.map((slug) => {
   const item = getWorkBySlug(slug);
