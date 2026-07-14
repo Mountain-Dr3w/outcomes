@@ -43,17 +43,22 @@ export default function Home() {
         <div className="mt-14 grid gap-10 sm:mt-20 lg:gap-20 lg:grid-cols-[0.34fr_0.66fr]">
           <div>
             <h1 className="max-w-lg font-serif text-4xl font-light italic leading-tight text-[var(--text-primary)] sm:text-5xl">
-              outcomes over everything.
+              I design software for government and defense teams.
             </h1>
           </div>
 
           <div className="max-w-3xl space-y-8">
             <div className="space-y-5 font-serif text-lg leading-8 text-[var(--text-secondary)] sm:text-xl sm:leading-9">
               <p>
-                I&apos;ve watched plenty of polished work ship and change
-                nothing, at Kessel Run and everywhere since. So I plan around
-                the outcome instead of the artifact: a project counts when the
-                way people work is different afterward.
+                For nine years, I&apos;ve worked with operators, developers, and
+                program leaders to understand where their work gets stuck and
+                build practical ways through it. I stay from research through
+                delivery.
+              </p>
+              <p>
+                That has meant getting more crews onto a flight-scheduling
+                tool, helping maintainers start work faster, and making a
+                developer platform easier to adopt.
               </p>
             </div>
             <dl className="grid grid-cols-[6rem_1fr] gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 font-mono text-xs">
@@ -99,8 +104,8 @@ export default function Home() {
               selected impact
             </h2>
             <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
-              Older programs where the result is known. The detail stays
-              public-safe; I&apos;m happy to walk through the work behind it.
+              Results from earlier work. Some details can&apos;t be public, but I
+              can discuss my role and approach in an interview.
             </p>
           </div>
 
@@ -141,9 +146,8 @@ export default function Home() {
               work
             </h2>
             <p className="mt-4 max-w-sm text-base leading-7 text-[var(--text-secondary)]">
-              Three current projects, ordered by the strength of the evidence.
-              Each one says what changed, what exists, and what still needs
-              proof.
+              Three recent projects: client work at Rise8 and two products I
+              built around problems I kept running into.
             </p>
           </div>
 

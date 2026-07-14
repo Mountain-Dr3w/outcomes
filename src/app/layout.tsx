@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Drew McFarland",
   },
   description:
-    "Portfolio of Drew McFarland, a product designer who also builds: GovTech, defense, and developer infrastructure work with the outcomes to show for it.",
+    "Drew McFarland's product design work across government, defense, and developer tools.",
   openGraph: {
     title: "Drew McFarland",
     description:

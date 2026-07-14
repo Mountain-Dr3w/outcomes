@@ -10,14 +10,7 @@ export interface WorkLink {
   href: string;
 }
 
-export type WorkEvidenceLevel =
-  | "observed change"
-  | "built capability"
-  | "concept"
-  | "still unproven";
-
-export interface WorkEvidence {
-  level: WorkEvidenceLevel;
+export interface WorkHighlight {
   label: string;
   body: string;
 }
@@ -45,12 +38,12 @@ export interface WorkItem {
   year: string;
   outcome: string;
   status: string;
-  scope: string;
-  proof: string;
+  audience: string;
+  result: string;
   role: WorkRole;
   summary: string;
   sections: WorkSection[];
-  evidence: WorkEvidence[];
+  highlights: WorkHighlight[];
   links: WorkLink[];
   visuals?: WorkVisual[];
   image?: {
@@ -74,51 +67,44 @@ export const workItems: WorkItem[] = [
     eyebrow: "Product, infrastructure, security",
     year: "2026",
     outcome:
-      "Built a live seven-stage deployment pipeline that makes four security checks inspectable before release.",
-    status: "Live product · validation ongoing",
-    scope: "Product design and full-stack build",
-    proof:
-      "The public product runs clone, detect, scaffold, scan, explain, gate, and deploy as one visible path.",
+      "Velveteen takes a GitHub repo, checks it for common security problems, and gives you a chance to fix them before it deploys.",
+    status: "Live product",
+    audience: "People deploying AI-built apps without an infrastructure team",
+    result:
+      "A user can connect a repo, review security problems, and deploy from one place.",
     role: "Product design + full-stack build",
     summary:
-      "AI-assisted development gets you to a working repo faster than it gets you to a safe deployment. I built Velveteen to make the missing operational work visible: scaffolding, scanning, explanations, a human gate, then deployment. The product is live. Whether its explanations are consistently useful across every finding type is still under evaluation.",
+      "AI coding tools can get an app working locally without helping with the work that comes next: deployment files, secrets, vulnerable dependencies, and a safe path online. I built Velveteen to put those steps in one place. I designed the product, wrote the application, and run the service.",
     sections: [
       {
-        title: "What was broken",
+        title: "A working app was only half the job",
         body: [
-          "I started from the framing that AI coding tools made building easier without making operating easier, but that undersells the problem. Installing Trivy or writing a Dockerfile isn't hard on its own. It's hard when you arrived at a working app by chatting your way there, because none of the usual operating muscle got built along the way and nothing in the toolchain tells you what to do next. The repo runs, and it's also full of secrets in the wrong places, dependencies you never chose, and no documentation for bringing it back up next month.",
+          "AI coding tools can get someone to a working app without teaching them how to run it. That was my situation: the repo worked on my laptop, but secrets were in the wrong places, dependencies were hard to account for, and there was no reliable way to bring it back later. The next step was scattered across Docker documentation, security tools, and hosting guides. I built Velveteen to put that work in one place.",
         ],
       },
       {
-        title: "I built it around the security review",
+        title: "Show problems before anything goes live",
         body: [
-          "The early decision that mattered most was making the security work visible. Most deployment products hide infrastructure so you don't have to think about it. I wanted the opposite: a pipeline you can watch, with a real pause for findings before anything goes live.",
-          "The path is seven stages: clone, detect, scaffold, scan, explain, gate, deploy. Each stage leaves an artifact you can inspect. The scaffold step writes a Dockerfile, a standards file, and an env guide into your repo, so the project is more legible when you come back to it. The scan step runs four tools. Gitleaks looks for secrets, Semgrep checks the source, Trivy scans the container, Syft produces the SBOM. The explain step is the one I care about most: scanner output is close to unreadable for most people, so this step turns it into plain language alongside a prompt you can paste back into your coding assistant to fix what was found.",
-          "The pipeline runs on two models. A bigger one handles scaffolding, where the reasoning is hard, and a smaller, cheaper one writes the explanations, which are high volume. Splitting them kept costs sane.",
+          "Most deployment products hide the infrastructure work. Velveteen shows each step and pauses when it finds a problem, before the app is deployed.",
+          "It creates the missing deployment files, then runs four checks: Gitleaks for secrets, Semgrep for source-code issues, Trivy for container problems, and Syft for a software bill of materials. Raw scanner output is difficult to read, so Velveteen explains each finding in plain language and creates a prompt the user can paste into a coding assistant to fix it.",
+          "A larger model writes the deployment files. A smaller model explains the higher-volume scanner results. That split keeps the service affordable to run.",
         ],
       },
       {
-        title: "What I'm still figuring out",
+        title: "What I'm improving",
         body: [
-          "The pipeline shape is settled, and the part I'm still watching is the explanation layer. The four scanners produce findings of very different shapes. A leaked AWS key reads nothing like a vulnerable Python dependency, and the model translating them into plain language handles some of those shapes much better than others. Getting the weak cases up to the standard of the good ones is most of the work ahead.",
+          "The four security tools report problems in very different ways. A leaked AWS key looks nothing like a vulnerable Python dependency, and some explanations are clearer than others. I am testing those weaker cases and improving the prompts that handle them.",
         ],
       },
     ],
-    evidence: [
+    highlights: [
       {
-        level: "built capability",
-        label: "Inspectable pipeline",
-        body: "Seven stages from GitHub to live URL, each producing an artifact instead of hiding the work behind a spinner.",
+        label: "One place to deploy",
+        body: "Connect a GitHub repo, create the missing deployment files, review problems, and deploy without moving between separate tools.",
       },
       {
-        level: "built capability",
-        label: "Security explanations",
-        body: "Gitleaks, Semgrep, Trivy, and Syft output, translated into plain language with a fix prompt for your coding assistant.",
-      },
-      {
-        level: "still unproven",
-        label: "Explanation quality",
-        body: "Usefulness still varies across finding types, and the portfolio does not yet claim adoption or task-time results.",
+        label: "Problems people can act on",
+        body: "Velveteen turns output from four security tools into a plain explanation and a prompt for fixing the problem.",
       },
     ],
     links: [
@@ -142,11 +128,11 @@ export const workItems: WorkItem[] = [
       },
       {
         afterSection: 1,
-        label: "Running pipeline",
+        label: "Deployment in progress",
         src: "/artifacts/velveteen-running-pipeline-trimmed.png",
         alt: "Velveteen running pipeline screen showing completed clone and scaffold stages, a pre-build security warning, and an active build step.",
         caption:
-          "Mid-pipeline. Clone and scaffold are done, and the orange flag is a pre-build security finding the build has to answer for. The rest of the path stays in view instead of collapsing into a spinner.",
+          "The repo and deployment files are ready. The orange flag marks a security problem that must be reviewed before the app can go live. The remaining steps stay visible while the work runs.",
         width: 760,
         height: 493,
         layout: "landscape",
@@ -159,62 +145,59 @@ export const workItems: WorkItem[] = [
     eyebrow: "iOS, data pipeline, opportunity discovery",
     year: "2026",
     outcome:
-      "Prototyped a faster way to triage federal R&D opportunities; task time and source coverage still need validation.",
-    status: "Prototype · validation in progress",
-    scope: "iOS product and public-data pipeline",
-    proof:
-      "The prototype brings six decision signals into each feed row before a reader opens the government source.",
+      "SBIR Radar puts the deadline, funding range, phase, and agency in the feed, so people can skip opportunities that are not a fit without opening every page.",
+    status: "Working iOS prototype",
+    audience: "Small teams looking for federal research and development funding",
+    result:
+      "In the prototype, readers can rule opportunities in or out from the feed and save searches they want to watch.",
     role: "Product design",
     summary:
-      "Federal R&D discovery often fails at the reading step: agency, deadline, phase, funding, and source state are buried across inconsistent government pages. I prototyped a feed that puts those signals before the source page. The interaction and fallback pipeline exist; the claimed time savings and dependable source coverage have not yet been validated.",
+      "People looking for federal research and development work have to open long government pages just to find the deadline, funding range, phase, or agency. SBIR Radar puts those basics in a mobile feed and lets people save the searches they care about. I built the iOS prototype and the data service behind it.",
     sections: [
       {
-        title: "The bottleneck was reading",
+        title: "The slow part was opening every result",
         body: [
-          "From the outside, the SBIR landscape looks like a search problem, and I spent a while imagining better databases and smarter filters. But search isn't what slows people down. You open a topic page on sbir.gov, scroll past two paragraphs of background, hunt for the deadline, fail to find a funding range without clicking through, and by the third or fourth topic you've burned twenty minutes and still don't know what to focus on. The reading is the expensive part, so the call I made for v1 was to skip the database ambitions and build a faster read.",
+          "At first I treated SBIR discovery as a search problem. It was not. Search returns plenty of topics; the slow part is opening each government page and hunting for the deadline, funding range, phase, and agency. After three or four pages, a person can spend twenty minutes and still not know which opportunity deserves attention. I narrowed the first version to that decision.",
         ],
       },
       {
-        title: "A feed of signals",
+        title: "Put the basics in the feed",
         body: [
-          "Each topic in the app is a signal: agency, deadline, phase, funding range, source status, and a plain summary, all readable in a row before you tap in. Those fields are what you need to decide whether a topic deserves another five minutes of your attention. If it does, you tap through to the full government page. If it doesn't, you keep scrolling, and the topic cost you a couple of seconds.",
-          "Saved radars and the watchlist are the other half of the product. You set your criteria once (agency, keywords, phase) and the radar collects new matches as they appear, while watched topics come back up when their source state changes or a deadline gets close. I kept CRM and collaboration features out on purpose. v1 has to earn its keep as a reading tool before it asks anyone to log in or pay.",
+          "Each row shows the agency, deadline, phase, funding range, source status, and a short summary. That is enough to decide whether to open the full government page or keep scrolling.",
+          "A saved radar watches an agency, phase, or set of keywords for new matches. The watchlist brings a topic back when its source changes or a deadline gets close. I left out CRM and collaboration features because the first version only needs to help one person find and revisit relevant work.",
         ],
       },
       {
-        title: "The pipeline turned out to be a bigger problem than the app",
+        title: "The public data was unreliable",
         body: [
-          "The plan was for the public SBIR APIs to do the heavy lifting, and they couldn't. Coverage was inconsistent, fields shifted between sources, and a few endpoints stopped returning what they had been returning. I moved the pipeline toward HTML fallback parsing, with fixture-backed development so design work could keep going against real topic shapes even while a source misbehaved. The interface reflects that reality too, which is why source state sits alongside every topic. If the data is stale or partial, the app says so rather than pretending the source is fine.",
-          "This was the part of the project I'd been most ready to skip, and it's now the part I think about most, because the app only reads as well as the pipeline feeding it.",
+          "The public SBIR APIs did not provide dependable coverage. Fields changed between sources, and some endpoints stopped returning data. I added HTML parsing as a fallback and kept local examples of real topics so I could continue designing when a source was down.",
+          "The app shows the source status next to each topic. If the data is stale or incomplete, the reader can see that before relying on it.",
         ],
       },
     ],
-    evidence: [
+    highlights: [
       {
-        level: "built capability",
-        label: "Triage feed",
-        body: "Each topic shows agency, deadline, phase, funding range, source status, and a plain summary before the full page.",
+        label: "Opportunity feed",
+        body: "Each topic shows the details a reader needs before deciding to open the government page.",
       },
       {
-        level: "built capability",
-        label: "Fallback pipeline",
-        body: "A normalized contract over public SBIR data, with HTML fallback for when the structured APIs go quiet.",
+        label: "Saved radars",
+        body: "A reader can save an agency, phase, or set of keywords and return when new topics match.",
       },
       {
-        level: "still unproven",
-        label: "Triage improvement",
-        body: "No task-time study, sustained source-coverage result, or usage evidence is presented yet.",
+        label: "Honest source status",
+        body: "The app says when public data is stale or incomplete instead of presenting every topic as current.",
       },
     ],
     links: [],
     visuals: [
       {
         afterSection: 1,
-        label: "Signals",
+        label: "Opportunities",
         src: "/artifacts/sbir-signals.png",
         alt: "SBIR Radar iPhone Signals tab showing searchable funding opportunities, filters, and deadline language.",
         caption:
-          "Signals. Each row shows agency, deadline, phase, funding range, and source state before you commit to opening the full page.",
+          "Each row shows the agency, deadline, phase, funding range, and source status before the reader opens the full page.",
         width: 1206,
         height: 2622,
         layout: "phone",
@@ -225,7 +208,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/sbir-my-radars.png",
         alt: "SBIR Radar iPhone My Radars tab showing watched saved searches with match counts.",
         caption:
-          "My Radars. Each row is a saved search you've turned into a watcher. Agency, phase, keywords, and a running count of fresh matches that fit those criteria.",
+          "Each radar is a saved agency, phase, or set of keywords, with a count of new opportunities that match.",
         width: 1206,
         height: 2622,
         layout: "phone",
@@ -236,7 +219,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/sbir-settings.png",
         alt: "SBIR Radar iPhone Settings tab showing source coverage, sync status, and notification controls.",
         caption:
-          "Settings. Source coverage and sync state get top billing because the app is only useful if the pipeline is up. Notification controls are below.",
+          "The app shows when its public sources last updated and whether any are unavailable. Notification settings sit below that status.",
         width: 1206,
         height: 2622,
         layout: "phone",
@@ -249,66 +232,58 @@ export const workItems: WorkItem[] = [
     eyebrow: "Service design at Rise8 · Space Force DevSecOps",
     year: "2026",
     outcome:
-      "Gave five platform teams a shared seventeen-stage view of onboarding and exposed the handoffs turning a one-week goal into months.",
-    status: "Delivered service design · portal remained a concept",
-    scope: "Five internal teams, multiple contractors, seventeen stages",
-    proof:
-      "The service blueprint became the first shared end-to-end picture of tenant onboarding across the internal teams.",
+      "I mapped the full onboarding process so five platform teams could see why application teams were waiting months to reach production and who owned each delay.",
+    status: "Client work at Rise8",
+    audience: "Application teams onboarding to a Space Force software platform",
+    result:
+      "Five internal teams got their first shared map of the full onboarding process and a ranked list of the problems to fix.",
     role: "Service design",
     summary:
-      "FORGE is a Space Force ground systems platform that needed a real path to production for application teams. I joined the Rise8 engagement as the service designer. Most individual pieces worked; onboarding failed at the seams between teams and contractors. The blueprint and friction log created a shared operating picture. The portal remained a concept, and interface work alone did not remove the structural waits.",
+      "Application teams were supposed to reach production on FORGE in a week. Some waited months, moving between internal teams and contractors without knowing who owned the next step. As the service designer, I mapped the 17-step process, documented the recurring problems, and designed a portal concept around three questions: where am I, who owns this, and what can I do now? The map and problem log were delivered. The portal was not built.",
     sections: [
       {
-        title: "Mapping the journey before anything else",
+        title: "Put the whole process on one page",
         body: [
-          "The first artifact I built was a service blueprint of the tenant journey end to end: seventeen phases from initial intake through production deployment, with four lanes per phase covering what the tenant was doing, what was visible to them, what was happening backstage, and which support systems were in play. Until the blueprint existed, the internal teams had been having the same onboarding conversations for months without realizing they were each describing different segments of the same path.",
-          "I ran event storming sessions in parallel to map the operating flow on the inside. The Domain-Driven Design framing made the core issue legible: the platform depended on tacit knowledge at almost every transition point. Tenants couldn't navigate the system because the system, internally, was a chain of human handoffs that assumed everyone already knew how it worked.",
-          "The work happened inside a multi-contractor reality. Several organizations shared responsibility for different parts of the platform with no shared tooling and no shared vocabulary. The blueprint became the first place anyone could point to and say, 'this phase belongs to your team, and here is where the handoff to mine is failing.'",
+          "I mapped 17 steps from the first intake conversation through production deployment. For each step, the map showed what the application team did, what they could see, what happened inside the platform team, and which systems were involved. Before that map existed, internal teams were describing different parts of onboarding as if each part were the whole process.",
+          "I also ran event-storming sessions with the internal teams. They showed how often onboarding depended on someone remembering an unwritten rule or knowing who to call next.",
+          "Several contractors shared responsibility but not tools or vocabulary. The map gave them a concrete way to identify the owner of each step and the handoffs that were failing.",
         ],
       },
       {
-        title: "The friction log",
+        title: "Turn complaints into a list teams could act on",
         body: [
-          "Platform teams tend to hear tenant complaints as anecdotes, so I built a friction log that forced every documented pain point through four fields before it could be discussed in a meeting: owning team, UX impact severity, breakage risk, and rationale. 'A tenant complained about X' became 'this is a high-severity issue with breakage risk, owned by your team, and here is why.'",
-          "The log also exposed repeating patterns that each lane had been treating as its own local problem: gaps in outage communication, unclear support ownership, undocumented ArgoCD expectations, Docker folder conventions that worked for the internal team and failed silently for tenants. Nearly all of it traced back to internal practices that had hardened into unspoken requirements for the people on the outside.",
+          "Tenant complaints were easy to dismiss as one-off stories. I logged each problem with an owner, its effect on the application team, the risk of leaving it unfixed, and the reason it mattered. That gave meetings a common way to decide what needed attention first.",
+          "The same problems kept appearing across teams: poor outage communication, unclear support ownership, undocumented ArgoCD requirements, and Docker conventions that failed without telling the application team why. What looked like separate complaints often came from an internal rule that had never been explained outside the platform team.",
         ],
       },
       {
-        title: "The portal concept",
+        title: "Show teams where they are and what to do next",
         body: [
-          "By the time the portal concept came together, I knew the three questions tenants couldn't get answered: where am I in the process, who owns the next step, and what can I do right now without waiting on anyone. Status, ownership, and next action became the spine of the design, and every other piece of information sat in support of them.",
-          "The services hub did the same job for the tools. GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements had all existed before; tenants found them through documentation and tribal knowledge, in that order. The hub put the full toolkit on one screen with each tool's access state next to it, and the platform stopped looking like six unrelated systems that happened to share users.",
-          "None of this changed the platform's internal architecture. It changed how much of the platform's capability tenants could see and act on, and that gap was where the months were getting lost.",
+          "The portal concept answered three questions application teams kept asking: where am I in the process, who owns the next step, and what can I do now without waiting? The design put status, ownership, and the next action first.",
+          "A second screen put GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, and SD Elements in one place and showed whether the team had access to each tool. Before that, people had to search documentation or ask someone which tools were available to them.",
+          "The concept could make the process easier to follow, but it could not remove manual provisioning, licensing delays, or late compliance work. Those problems needed changes to the platform itself.",
         ],
       },
       {
         title: "What I'd do differently",
         body: [
-          "The first thing I'd change is bringing tenant teams into the design work from week one. The internal retrospective on the engagement landed on the same point: client enablement started too late, and you build a handoff problem into the work when you don't include the people who'll own it after you leave. The friction log was a useful forcing function, but it came out of research on tenants rather than collaboration with them. Next time, a tenant team is in the room while the log is being built.",
-          "The second is not assuming visibility alone shortens the timeline. A lot of what the blueprint exposed was structural: manual provisioning that runs serially across several tools and takes weeks, licensing constraints that block parallel work, compliance scoping that lands after a project is already underway. A portal can show you that you're waiting, but it can't make the wait shorter. The concept needed a companion roadmap for the automation work that would compress the timeline, and I'd start that piece much earlier in the engagement.",
+          "I would bring application teams into the design work from the first week. The problem list came from research with them, but they were not in the room when internal teams decided how to respond. That made the eventual handoff harder than it needed to be.",
+          "I would also start the automation roadmap earlier. A portal can explain a wait, but it cannot shorten manual provisioning, resolve licensing constraints, or move compliance work earlier. Those changes had to happen alongside the interface work.",
         ],
       },
     ],
-    evidence: [
+    highlights: [
       {
-        level: "observed change",
-        label: "Shared operating picture",
-        body: "Seventeen phases across tenant action, visible touchpoint, backstage work, and support systems gave five teams one end-to-end view.",
+        label: "One shared process",
+        body: "Five internal teams could see all 17 onboarding steps, the owner of each step, and the handoffs between them.",
       },
       {
-        level: "observed change",
-        label: "Prioritized friction",
-        body: "Owner, UX severity, breakage risk, and rationale gave meetings a shared basis for ranking issues.",
+        label: "A ranked problem list",
+        body: "Teams could compare onboarding problems by owner, effect on the application team, and the risk of leaving them unfixed.",
       },
       {
-        level: "concept",
-        label: "Tenant portal",
-        body: "A concept organized around status, ownership, and next action; the portfolio does not present it as shipped.",
-      },
-      {
-        level: "still unproven",
-        label: "Onboarding duration",
-        body: "The work exposed structural delays but does not claim that the one-week target was reached or that months of waiting disappeared.",
+        label: "A portal concept",
+        body: "The unbuilt concept showed application teams their status, the owner of the next step, and what they could do without waiting.",
       },
     ],
     links: [
@@ -324,7 +299,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-service-blueprint.png",
         alt: "FORGE service blueprint mapping the tenant journey across onboarding phases, backstage work, support systems, and friction points.",
         caption:
-          "The service blueprint. Seventeen onboarding phases across the top. Four lanes per phase: tenant action, visible touchpoint, backstage work, and support system. The first time the whole tenant journey existed in one place.",
+          "The map covers 17 onboarding steps. Each step shows what the application team does, what they can see, what happens inside the platform team, and which systems are involved.",
         width: 4096,
         height: 2435,
         layout: "landscape",
@@ -335,7 +310,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-event-storm.png",
         alt: "FORGE event storming board showing commands, domain events, decision points, and hotspots across the internal platform workflow.",
         caption:
-          "The event storm. Commands, events, decision points, and hotspots laid out across the internal flow. The hotspots are the places where the platform was relying on someone in the room remembering what to do next.",
+          "The event-storming sessions showed where onboarding depended on an unwritten rule or on someone knowing who to call next.",
         width: 4096,
         height: 1315,
         layout: "wide",
@@ -346,7 +321,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-friction-log.png",
         alt: "FORGE friction log categorizing onboarding pain points by owner, impact, breakage risk, and rationale.",
         caption:
-          "The friction log. Each row is a tenant pain point with the owning team, UX impact severity, breakage risk, and rationale. The columns kept meetings on the issues that ranked highest instead of the ones argued loudest.",
+          "Each row names an onboarding problem, the team that owns it, its effect on the application team, and the risk of leaving it unfixed.",
         width: 4096,
         height: 2209,
         layout: "landscape",
@@ -357,7 +332,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-portal-onboarding.png",
         alt: "FORGE onboarding portal concept showing current review status, assigned team, progress, pending actions, and direct task links.",
         caption:
-          "The onboarding portal concept. Status of the current review, assigned team, progress through the seventeen phases, pending tenant actions, and direct task links. Designed around the three questions tenants couldn't get answered before: where am I, who owns this, what do I do next.",
+          "The unbuilt portal concept shows the current review, the team handling it, progress through onboarding, and any action the application team can take next.",
         width: 4096,
         height: 2283,
         layout: "landscape",
@@ -368,7 +343,7 @@ export const workItems: WorkItem[] = [
         src: "/artifacts/forge-portal-services.png",
         alt: "FORGE platform services hub showing tenant access to development tools and services from a single dashboard.",
         caption:
-          "The services hub. One screen for the tenant toolkit (GitLab, Nucleus, ArgoCD, JFrog Artifactory, Tracer, SD Elements) with the tenant's access state shown alongside each. Tenants no longer needed to hunt through documentation to find which tools they had access to.",
+          "The unbuilt services concept puts six platform tools on one screen and shows whether the application team has access to each one.",
         width: 4096,
         height: 2277,
         layout: "landscape",

@@ -111,18 +111,18 @@ export default async function WorkPage({ params }: WorkPageProps) {
               <dl className="mt-9 grid border-y border-[var(--border)] sm:grid-cols-[0.8fr_1.2fr] sm:divide-x sm:divide-[var(--border)]">
                 <div className="border-b border-[var(--border)] py-5 sm:border-b-0 sm:pr-6">
                   <dt className="font-mono text-xs text-[var(--accent)]">
-                    scope
+                    for
                   </dt>
                   <dd className="mt-3 text-sm leading-6 text-[var(--text-primary)]">
-                    {item.scope}
+                    {item.audience}
                   </dd>
                 </div>
                 <div className="py-5 sm:pl-6">
                   <dt className="font-mono text-xs text-[var(--accent)]">
-                    strongest proof
+                    what changed
                   </dt>
                   <dd className="mt-3 text-sm leading-6 text-[var(--text-primary)]">
-                    {item.proof}
+                    {item.result}
                   </dd>
                 </div>
               </dl>
@@ -145,24 +145,19 @@ export default async function WorkPage({ params }: WorkPageProps) {
             <Reveal>
               <section className="mt-16 border-t border-[var(--border)] pt-8">
                 <h2 className="font-mono text-sm text-[var(--accent)]">
-                  evidence record
+                  what came out of it
                 </h2>
                 <ul className="mt-6 divide-y divide-[var(--border)] border-y border-[var(--border)]">
-                  {item.evidence.map((evidence) => (
+                  {item.highlights.map((highlight) => (
                     <li
-                      key={evidence.label}
+                      key={highlight.label}
                       className="grid gap-3 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6 sm:px-4"
                     >
-                      <div>
-                        <p className="font-mono text-xs text-[var(--accent)]">
-                          {evidence.level}
-                        </p>
-                        <p className="mt-2 font-semibold text-[var(--text-primary)]">
-                          {evidence.label}
-                        </p>
-                      </div>
+                      <p className="font-semibold text-[var(--text-primary)]">
+                        {highlight.label}
+                      </p>
                       <p className="text-base leading-7 text-[var(--text-secondary)]">
-                        {evidence.body}
+                        {highlight.body}
                       </p>
                     </li>
                   ))}
