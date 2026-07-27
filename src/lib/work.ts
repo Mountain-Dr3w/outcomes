@@ -298,8 +298,8 @@ export const workItems: WorkItem[] = [
         alt: "Space Force Cloud Platform service blueprint mapping the application team's journey across onboarding steps, internal work, support systems, and recurring problems.",
         caption:
           "The map covers 17 onboarding steps. Each step shows what the application team does, what they can see, what happens inside the platform team, and which systems are involved.",
-        width: 4096,
-        height: 2435,
+        width: 1624,
+        height: 969,
         layout: "landscape",
       },
       {
@@ -309,8 +309,8 @@ export const workItems: WorkItem[] = [
         alt: "Space Force Cloud Platform event-storming board showing commands, events, decisions, and problem areas across the internal workflow.",
         caption:
           "The event-storming sessions showed where onboarding depended on an unwritten rule or on someone knowing who to call next.",
-        width: 4096,
-        height: 1315,
+        width: 2188,
+        height: 718,
         layout: "wide",
       },
       {
@@ -320,8 +320,8 @@ export const workItems: WorkItem[] = [
         alt: "Space Force Cloud Platform problem log organizing onboarding issues by owner, effect on application teams, risk, and rationale.",
         caption:
           "Each row names an onboarding problem, the team that owns it, its effect on the application team, and the risk of leaving it unfixed.",
-        width: 4096,
-        height: 2209,
+        width: 1708,
+        height: 921,
         layout: "landscape",
       },
       {
@@ -331,8 +331,8 @@ export const workItems: WorkItem[] = [
         alt: "Space Force Cloud Platform onboarding portal concept showing review status, assigned team, progress, pending actions, and direct task links.",
         caption:
           "The unbuilt portal concept shows the current review, the team handling it, progress through onboarding, and any action the application team can take next.",
-        width: 4096,
-        height: 2283,
+        width: 1672,
+        height: 941,
         layout: "landscape",
       },
       {
@@ -342,8 +342,8 @@ export const workItems: WorkItem[] = [
         alt: "Space Force Cloud Platform services concept showing an application team's access to development tools in one dashboard.",
         caption:
           "The unbuilt services concept puts six platform tools on one screen and shows whether the application team has access to each one.",
-        width: 4096,
-        height: 2277,
+        width: 1681,
+        height: 936,
         layout: "landscape",
       },
     ],

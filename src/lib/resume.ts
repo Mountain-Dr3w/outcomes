@@ -25,25 +25,25 @@ export const impactItems: ImpactItem[] = [
     metric: "300%",
     outcome: "growth in daily active users",
     context:
-      "Flight scheduling at Kessel Run. I mapped how scheduling worked and partnered with military leaders to remove the roadblocks keeping crews from using the product.",
+      "Flight scheduling at Kessel Run. I mapped the full service experience and worked with military leadership to clear the operational roadblocks holding it back.",
   },
   {
     metric: "20%",
     outcome: "faster maintenance initiation",
     context:
-      "A pilot debriefing tool used across several airframes and military branches. I led the work from research through delivery.",
+      "A pilot debriefing app used across multiple airframes and branches. I led UX from field research with aircrews through usability testing and delivery.",
   },
   {
     metric: "~40%",
     outcome: "growth in platform adoption",
     context:
-      "A government developer platform. Research found five problems that were keeping teams from adopting it, and I worked with the product team to address them.",
+      "A government Platform-as-a-Service. I mapped developer journeys, surfaced five friction points, and drove the resulting product changes.",
   },
 ];
 
 export const resume = {
   name: "Drew McFarland",
-  headline: "Product Designer and Strategist | USAF Veteran | Active Secret Clearance",
+  headline: "Senior Product Designer | USAF Veteran | Active Secret Clearance",
   website: "work.velveteen.sh",
   websiteHref: "https://work.velveteen.sh",
   email: "drewjmcfarland@live.com",
@@ -53,35 +53,35 @@ export const resume = {
       organization: "Rise8, Inc.",
       roles: [
         {
-          title: "Sr Product Designer / Product Lead",
+          title: "Senior Product Designer / Product Lead",
           period: "May 2025 to Present",
           bullets: [
-            "Found the main reason new teams could not deploy on a government DevSecOps platform and redirected the roadmap toward the work they needed first",
-            "Redesigned onboarding from account setup through first deployment so new teams could complete more of the process without an engineer walking them through it",
-            "Gave leadership four measures for the platform: setup time, time to first deployment, delivery without outside help, and reusable compliance work",
+            "Ran discovery to identify the constraint blocking new tenant deployments on a government DevSecOps platform that replaces a 12- to 18-month accreditation process, then redirected the roadmap toward the capabilities new programs need first",
+            "Led the redesign of tenant onboarding from provisioning through first deployment, facilitating service-blueprinting sessions with engineers and compliance leads and proposing reusable artifacts to reduce the high-touch engineering support new teams needed",
+            "Shaped the productization plan around four measurable outcomes: environment standup, time to first deploy, developer-led delivery, and reusable compliance, giving leadership one framework for prioritizing and reporting progress",
           ],
         },
       ],
     },
     {
-      organization: "USAF - Kessel Run",
+      organization: "USAF | Kessel Run",
       roles: [
         {
           title: "Design Operations Lead",
           period: "Apr 2022 to May 2025",
           bullets: [
-            "Grew daily active users 300% for a flight-scheduling application by mapping how scheduling worked and helping military leaders remove the operational roadblocks",
-            "Used a shared service map to keep 8 delivery teams focused on operator problems instead of disconnected feature requests",
-            "Created Section 508 standards, research templates, and design playbooks that 5 programs continued using after I left",
+            "Grew daily active users 300% for a flight-scheduling application by mapping the full service experience and working with military leadership to clear the operational roadblocks holding it back",
+            "Used service blueprints to align 8 delivery teams around operator needs, keeping engineering focused on work operators needed instead of features nobody asked for",
+            "Built Section 508 accessibility standards, research templates, and design playbooks adopted across 5 programs and still in use after I moved on",
           ],
         },
         {
           title: "Product Designer",
           period: "May 2017 to Apr 2022",
           bullets: [
-            "Cut maintenance initiation time 20% for a pilot debriefing app used across several airframes and military branches. I led the work from research through delivery",
-            "Found 5 problems that were keeping teams from adopting a government developer platform and worked with the product team on changes that increased adoption roughly 40%",
-            "Grew the application's footprint from 2 commands to 6 by building relationships with key advocates and running hands-on workshops with each new unit to show fit before pushing for rollout",
+            "Led UX for a pilot debriefing app used across multiple airframes and branches, from field research with aircrews through usability testing and delivery, cutting maintenance initiation time 20%",
+            "Mapped developer journeys on a Platform-as-a-Service, surfaced 5 friction points, and drove changes that increased platform adoption roughly 40%",
+            "Grew the app's footprint from 2 commands to 6 by finding advocates in each unit and running hands-on workshops to demonstrate fit before rollout",
           ],
         },
       ],
@@ -93,8 +93,8 @@ export const resume = {
           title: "Service Design Consultant",
           period: "Jun 2016 to Present",
           bullets: [
-            "Helped a defense technology startup move from concept to launch through user research, service design, and a pitch that led to a New York City contract and an SBIR grant",
-            "Researched how customers used a DoD data analysis product and helped the startup explain its value, contributing to a $150K Stage 1 SBIR award",
+            "Took a defense technology startup from concept to launch by running user research, building service blueprints, and shaping the pitch that secured a New York City government contract and an SBIR grant",
+            "Led discovery for a DoD data-analysis startup and turned the research into a value story that contributed to a $150K Phase I SBIR award",
           ],
         },
       ],

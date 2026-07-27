@@ -227,6 +227,12 @@ function SectionVisuals({
 }: {
   visuals: WorkVisual[];
 }) {
+  const phoneVisualSizes =
+    "(max-width: 639px) 13rem, (max-width: 1023px) calc(33.333vw - 3.167rem), calc(23vw - 3.917rem)";
+  const insetVisualSizes =
+    "(max-width: 639px) calc(100vw - 4rem), (max-width: 1023px) calc(100vw - 6.5rem), calc(69vw - 8.75rem)";
+  const edgeToEdgeVisualSizes =
+    "(max-width: 639px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 4rem), calc(69vw - 6.25rem)";
   const phoneVisuals = visuals.filter((visual) => visual.layout === "phone");
   const standardVisuals = visuals.filter((visual) => visual.layout !== "phone");
 
@@ -248,6 +254,7 @@ function SectionVisuals({
                     alt={visual.alt}
                     width={visual.width}
                     height={visual.height}
+                    sizes={phoneVisualSizes}
                     className="h-auto w-full rounded-[1.8rem]"
                   />
                 </a>
@@ -287,6 +294,9 @@ function SectionVisuals({
                   alt={visual.alt}
                   width={visual.width}
                   height={visual.height}
+                  sizes={
+                    isLandscape ? insetVisualSizes : edgeToEdgeVisualSizes
+                  }
                   className={
                     isLandscape
                       ? "h-auto w-full"
