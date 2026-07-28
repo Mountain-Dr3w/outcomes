@@ -4,10 +4,16 @@ Restore the homepage hero's outcome-led positioning using language supported by 
 
 ## Copy decision
 
-Restore the humanized hero that previously survived the portfolio's evidence pass:
+Keep the outcome-led headline and make its meaning tangible through the way Drew
+works:
 
 - H1: `outcomes over everything.`
-- Support: `I've watched plenty of polished work ship and change nothing, at Kessel Run and everywhere since. So I plan around the outcome instead of the artifact: a project counts when the way people work is different afterward.`
+- Support: `The part I care about most is what happens after software ships. I stay close to the people doing the work to understand how the work really happens, see what they actually use, and learn what gets easier—or what still gets in their way.`
+
+The support copy avoids repeating “outcomes” as a claim. Instead, it shows the
+conviction behind the headline through observable use, changed work, and the
+friction that remains. It also removes the Kessel Run reference so the blurb
+speaks to Drew's practice across his work.
 
 The quantified impact section directly below the hero remains the proof.
 

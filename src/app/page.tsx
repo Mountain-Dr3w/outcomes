@@ -50,10 +50,10 @@ export default function Home() {
           <div className="max-w-3xl space-y-8">
             <div className="space-y-5 font-serif text-lg leading-8 text-[var(--text-secondary)] sm:text-xl sm:leading-9">
               <p>
-                I&apos;ve watched plenty of polished work ship and change
-                nothing, at Kessel Run and everywhere since. So I plan around
-                the outcome instead of the artifact: a project counts when the
-                way people work is different afterward.
+                The part I care about most is what happens after software ships.
+                I stay close to the people doing the work to understand how the
+                work really happens, see what they actually use, and learn what
+                gets easier—or what still gets in their way.
               </p>
             </div>
             <dl className="grid grid-cols-[6rem_1fr] gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 font-mono text-xs">
