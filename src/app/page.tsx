@@ -53,7 +53,7 @@ export default function Home() {
                 The part I care about most is what happens after software ships.
                 I stay close to the people doing the work to understand how the
                 work really happens, see what they actually use, and learn what
-                gets easier—or what still gets in their way.
+                gets easier and what still gets in their way.
               </p>
             </div>
             <dl className="grid grid-cols-[6rem_1fr] gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 font-mono text-xs">

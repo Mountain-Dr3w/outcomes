@@ -8,7 +8,7 @@ Keep the outcome-led headline and make its meaning tangible through the way Drew
 works:
 
 - H1: `outcomes over everything.`
-- Support: `The part I care about most is what happens after software ships. I stay close to the people doing the work to understand how the work really happens, see what they actually use, and learn what gets easier—or what still gets in their way.`
+- Support: `The part I care about most is what happens after software ships. I stay close to the people doing the work to understand how the work really happens, see what they actually use, and learn what gets easier and what still gets in their way.`
 
 The support copy avoids repeating “outcomes” as a claim. Instead, it shows the
 conviction behind the headline through observable use, changed work, and the
