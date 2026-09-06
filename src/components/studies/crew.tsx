@@ -7,9 +7,9 @@ import styles from "./crew.module.css";
 import { CrewClocks, CrewUtilities } from "./crew-utilities";
 
 const requests = [
-  {id:"REQ-024",title:"Coastal access assessment",type:"Imagery review",due:"09:30",owner:"You",status:"In progress",description:"Review the latest imagery package for changes to road access following the exercise weather event. Flag areas where coverage is incomplete.",next:"Review FMV imagery of the marked coastal area for debris, standing water, or damaged road sections that could limit access. Note where the route remains clear, flag any gaps in coverage, and attach a short summary with timestamps for the incoming crew.",tool:"Imagery workspace"},
-  {id:"REQ-027",title:"Airfield condition update",type:"Change assessment",due:"11:00",owner:"Unassigned",status:"Needs owner",description:"Check the exercise airfield imagery against the previous shift’s baseline. Summarize visible changes and note any gaps in coverage.",next:"Review the baseline package and identify any changes to the airfield.",tool:"Imagery workspace"},
-  {id:"REQ-021",title:"Morning situation summary",type:"Reporting",due:"12:00",owner:"You",status:"Waiting on input",description:"Consolidate the crew’s observations into the morning exercise summary. One supporting assessment is still outstanding.",next:"Review the current draft and confirm the outstanding input with the crew lead.",tool:"Report editor"},
+  {id:"RFI-024",title:"Coastal access assessment",type:"Imagery review",due:"09:30",owner:"You",status:"In progress",description:"Review the latest imagery package for changes to road access following the exercise weather event. Flag areas where coverage is incomplete.",next:"Review FMV imagery of the marked coastal area for debris, standing water, or damaged road sections that could limit access. Note where the route remains clear, flag any gaps in coverage, and attach a short summary with timestamps for the incoming crew.",tool:"Imagery workspace"},
+  {id:"RFI-027",title:"Airfield condition update",type:"Change assessment",due:"11:00",owner:"Unassigned",status:"Needs owner",description:"Check the exercise airfield imagery against the previous shift’s baseline. Summarize visible changes and note any gaps in coverage.",next:"Review the baseline package and identify any changes to the airfield.",tool:"Imagery workspace"},
+  {id:"RFI-021",title:"Morning situation summary",type:"Reporting",due:"12:00",owner:"You",status:"Waiting on input",description:"Consolidate the crew’s observations into the morning exercise summary. One supporting assessment is still outstanding.",next:"Review the current draft and confirm the outstanding input with the crew lead.",tool:"Report editor"},
 ];
 const tools = [
   {name:"Coordinate converter",category:"UTILITY",description:"Convert MGRS and latitude / longitude",icon:ArrowsLeftRight},
@@ -34,8 +34,8 @@ export function CrewStudy() {
   useEffect(()=>{if(selected!==null)details.current?.showModal();else details.current?.close();},[selected]);
   useEffect(()=>{if(tool)toolDialog.current?.showModal();else toolDialog.current?.close();},[tool]);
   const request=selected===null?null:requests[selected];
-  const owner=(r:typeof requests[number])=>r.id==="REQ-027"&&claimed?"You":r.owner;
-  const status=(r:typeof requests[number])=>complete.includes(r.id)?"Complete":r.id==="REQ-027"&&claimed?"In progress":r.status;
+  const owner=(r:typeof requests[number])=>r.id==="RFI-027"&&claimed?"You":r.owner;
+  const status=(r:typeof requests[number])=>complete.includes(r.id)?"Complete":r.id==="RFI-027"&&claimed?"In progress":r.status;
   const visible=requests.filter(r=>(filter!=="Assigned to me"||owner(r)==="You")&&(filter!=="Needs owner"||owner(r)==="Unassigned")&&`${r.id} ${r.title}`.toLowerCase().includes(query.toLowerCase()));
   const nextRequest=requests.find(r=>owner(r)==="You"&&!complete.includes(r.id)&&status(r)!=="Waiting on input");
   return <div className={styles.app}>
