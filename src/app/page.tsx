@@ -30,7 +30,7 @@ export default function Home() {
                 <Link className="project-link" href={`/work/${item.slug}`}>
                   <div className={`project-image project-image-${item.slug}`}>
                     <ProjectThumbnail item={item} />
-                    <div className="project-category"><span>{item.eyebrow}</span><h3>{item.title}</h3><span className="project-arrow" aria-hidden="true">↗</span></div>
+                    <div className="project-category"><h3>{item.title}</h3><span className="project-arrow" aria-hidden="true">↗</span></div>
                     <span className="project-view">View case study <span aria-hidden="true">↗</span></span>
                   </div>
                 </Link>

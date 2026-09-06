@@ -52,6 +52,7 @@ export interface WorkItem {
   result: string;
   role: WorkRole;
   summary: string;
+  overview: { problem: string; solution: string; impact: string };
   chapter?: string;
   takeaway?: string;
   provenance?: string;
@@ -89,6 +90,7 @@ export interface WritingItem {
 export const workItems: WorkItem[] = [
   {
     slug: "velveteen",
+    overview: {"problem": "Getting an app online meant piecing together containers, configuration, and security checks after the code already worked.", "solution": "I designed a guided path from GitHub repository through setup review, security findings, and deployment.", "impact": "Velveteen is a running service I use to publish apps, including this portfolio."},
     title: "Velveteen",
     eyebrow: "Independent product / Deployment",
     year: "2026",
@@ -186,6 +188,7 @@ export const workItems: WorkItem[] = [
   },
   {
     slug: "sbir-radar",
+    overview: {"problem": "Small teams have to sift through inconsistent agency listings to find relevant research funding.", "solution": "I designed a mobile feed that brings topic details, deadlines, saved searches, and source coverage together.", "impact": "The working iOS prototype lets me test how people compare and save opportunities before building live monitoring."},
     title: "SBIR Radar",
     eyebrow: "iOS / Opportunity discovery",
     year: "2026",
@@ -292,6 +295,7 @@ export const workItems: WorkItem[] = [
   },
   {
     slug: "space-force-cloud-platform",
+    overview: {"problem": "Application teams could wait months to reach their first deployment on the cloud platform.", "solution": "I designed an onboarding path with clear ownership, visible progress, and the next action at each stage.", "impact": "Time to first deployment fell to 4.5 days, with 90% self-service onboarding and 80% fewer support tickets."},
     title: "Space Force Cloud Platform",
     eyebrow: "Rise8 · service design for a USSF cloud platform",
     year: "2026",

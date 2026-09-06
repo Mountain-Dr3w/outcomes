@@ -44,9 +44,9 @@ export default async function WorkPage({ params }: WorkPageProps) {
             <p className="case-deck">{item.outcome}</p>
           </div>
           <dl className="case-facts">
-            <div><dt className="eyebrow">My role</dt><dd>{item.role}</dd></div>
-            <div><dt className="eyebrow">Project</dt><dd>{item.status}</dd></div>
-            <div><dt className="eyebrow">Who it’s for</dt><dd>{item.audience}</dd></div>
+            <div><dt className="eyebrow">Problem</dt><dd>{item.overview.problem}</dd></div>
+            <div><dt className="eyebrow">Solution</dt><dd>{item.overview.solution}</dd></div>
+            <div><dt className="eyebrow">Impact</dt><dd>{item.overview.impact}</dd></div>
           </dl>
         </header>
         {item.metrics && <dl className="case-metrics" aria-label="Project results">{item.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd>{metric.context && <p>{metric.context}</p>}</div>)}</dl>}
@@ -56,7 +56,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
         <div className="case-body">
           <nav className="case-toc" aria-label="Case study chapters">
             <ol>{item.sections.map((section, index) => <li key={section.title}><a href={`#chapter-${index + 1}`}>{section.title}</a></li>)}{item.coverage?.length ? <li><a href="#in-the-news">In the news</a></li> : null}</ol>
-            {item.links.length > 0 && <div className="case-external">{item.links.map(link => <a className="text-link" key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div>}
+            {item.links.length > 0 && <div className="case-external">{item.links.map(link => <a className={`text-link${link.href.startsWith("/studies/") ? " design-preview-link" : ""}`} key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div>}
           </nav>
           <article className="case-prose" aria-label={`${item.title} case study`}>
             <p className="case-summary">{item.summary}</p>

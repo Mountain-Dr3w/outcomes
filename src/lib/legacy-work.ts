@@ -4,6 +4,7 @@ import type { WorkItem } from "./work";
 export const legacyWorkItems: WorkItem[] = [
   {
     slug: "jigsaw",
+    overview: {"problem": "New mission types and growing training demand pushed tanker planners beyond workflows built for one air operations center.", "solution": "I redesigned mission planning around geographic context, unfamiliar missions, and the needs of new planners.", "impact": "Adoption grew from one air operations center to four, and daily planning fell from over eight hours to 1.5 hours."},
     title: "Jigsaw",
     eyebrow: "USAF Kessel Run / Aerial refueling",
     year: "",
@@ -144,6 +145,7 @@ export const legacyWorkItems: WorkItem[] = [
   },
   {
     slug: "veriflux",
+    overview: {"problem": "Dispatchers and compliance teams needed to follow the same material from scheduled pickup through processing.", "solution": "I designed connected route, collection, and reporting workflows with a shared component library.", "impact": "The delivered designs gave dispatch and compliance teams a shared view of collection activity and material records."},
     title: "Veriflux",
     eyebrow: "Resource recovery / B2B software",
     year: "",

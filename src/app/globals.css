@@ -256,3 +256,14 @@ p { text-wrap: pretty; }
 .case-page-veriflux .case-external {margin-top:0;flex-shrink:0;}
 .case-page-veriflux .case-summary {max-width:760px;}
 @media(max-width:767px) {.case-page-veriflux .case-toc {display:block;}.case-page-veriflux .case-external {margin-top:20px;}}
+
+.case-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.project-category { min-height: 112px; }
+.project-category h3 { margin-top: 0; }
+@media (max-width: 767px) {
+  .case-external .design-preview-link { display: none; }
+  .case-external:has(.design-preview-link:only-child) { display: none; }
+  .case-facts { grid-template-columns: 1fr; gap: 24px; }
+  .case-facts > div:last-child { grid-column: auto; }
+  .project-category { min-height: 108px; }
+}

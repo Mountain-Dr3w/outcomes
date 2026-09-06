@@ -2,6 +2,7 @@ import type { WorkItem } from "./work";
 
 export const emmyWork: WorkItem = {
   slug: "emmys-milestones",
+    overview: {"problem": "Following our daughter’s developing skills meant searching separate notes and comparing them ourselves.", "solution": "I designed a native iOS app that connects related observations while preserving our words and their dates.", "impact": "My wife and I use the app through TestFlight to keep and revisit our daughter’s milestones."},
   title: "Emmy’s Milestones",
   eyebrow: "Personal project / Family observations",
   year: "2026",
