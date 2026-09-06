@@ -131,3 +131,5 @@
 .requestActions,.detailActions{justify-content:flex-start}
 
 .nextTask>p{max-width:none;width:100%}
+
+.heading .shiftTitle p{font-family:"Pearl Sans",sans-serif;font-size:13px;line-height:1.4;letter-spacing:.04em;color:#a4adb2;margin:0 0 9px}.shiftTitle{min-width:0}

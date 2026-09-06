@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, Check, ArrowLeft, FileText, Crosshair, ChatCircle, BookOpen, X, MagnifyingGlass, Circle, ArrowsLeftRight } from "@phosphor-icons/react";
+import { ArrowUpRight, ArrowRight, Check, FileText, Crosshair, ChatCircle, BookOpen, X, MagnifyingGlass, Circle, ArrowsLeftRight } from "@phosphor-icons/react";
 import styles from "./crew.module.css";
 import { CrewClocks, CrewUtilities } from "./crew-utilities";
 
@@ -45,7 +45,7 @@ export function CrewStudy() {
       <div className={styles.profile}><span>JW</span><div>Jordan Wells</div></div>
     </header>
     <main id="main" className={styles.main}>
-      <div className={styles.heading}><div><h1>{tab==="Overview"?"12 May | Day Shift":tab==="Requests"?"Requests & tasks":"Tools"}</h1><button className={styles.secondary} onClick={()=>changeover.current?.showModal()}>Changeover</button></div><CrewClocks /></div>
+      <div className={styles.heading}><div><div className={styles.shiftTitle}>{tab==="Overview" && <p>12 May</p>}<h1>{tab==="Overview"?"Day Shift":tab==="Requests"?"Requests & tasks":"Tools"}</h1></div><button className={styles.secondary} onClick={()=>changeover.current?.showModal()}>Changeover</button></div><CrewClocks /></div>
       <div className={tab==="Tools"?styles.toolsOnly:styles.layout}>
         {tab!=="Tools"&&<div className={styles.primaryColumn}>
           {tab==="Overview"&&<>
@@ -62,7 +62,7 @@ export function CrewStudy() {
 
       </div>
       <section className={styles.toolsTable} aria-labelledby="tools-title"><h2 id="tools-title">Tools</h2><table><thead><tr><th>Tool</th><th>Use it for</th><th><span className={styles.srOnly}>Open tool</span></th></tr></thead><tbody>{tools.map(t=><tr key={t.name}><td colSpan={3}><button aria-label={t.name} onClick={()=>setTool(t.name)}><span><t.icon size={19} aria-hidden="true"/>{t.name}</span><span>{t.description}</span><ArrowUpRight size={17} aria-hidden="true"/></button></td></tr>)}</tbody></table></section>
-      <footer className={styles.footer}><Link href="/work/isr-crew"><ArrowLeft size={14} aria-hidden="true"/>Back to case study</Link><span>Exercise workspace</span></footer>
+
     </main>
     <dialog ref={changeover} className={styles.toolDialog} aria-label="Changeover"><div className={styles.dialogTop}><span>Changeover · 06:42 Z</span><button aria-label="Close changeover" onClick={()=>changeover.current?.close()}><X size={22}/></button></div><h2>From the night crew</h2><p>Coastal imagery is ready. The airfield review still needs an owner, and the morning summary is waiting on one assessment.</p><button className={styles.primary} onClick={()=>{setAck(true);changeover.current?.close();}}><Check size={16}/>{ack?"Reviewed":"Mark as reviewed"}</button></dialog>
     <dialog ref={details} className={styles.detailDialog} onClose={()=>setSelected(null)} aria-labelledby="request-title">{request&&<><div className={styles.dialogTop}><span>{request.id} / {request.type}</span><button aria-label="Close request" onClick={()=>setSelected(null)}><X size={22}/></button></div><h2 id="request-title">{request.title}</h2><p className={styles.description}>{request.description}</p><dl className={styles.properties}><div><dt>Owner</dt><dd>{owner(request)}</dd></div><div><dt>Due today</dt><dd>{request.due} Z</dd></div><div><dt>Status</dt><dd>{status(request)}</dd></div></dl><div className={styles.next}><span>NEXT ACTION</span><p>{complete.includes(request.id)?"Assessment complete. Your update is ready for the next crew.":request.next}</p></div><div className={styles.detailActions}><button className={styles.secondary} onClick={()=>setComplete(complete.includes(request.id)?complete.filter(id=>id!==request.id):[...complete,request.id])}>{complete.includes(request.id)?"Reopen request":"Mark complete"}</button>{owner(request)==="Unassigned"?<button className={styles.primary} onClick={()=>setClaimed(true)}>Assign to me</button>:<button className={styles.primary} onClick={()=>setTool(request.tool)}>Open {request.tool.toLowerCase()}<ArrowUpRight size={16} aria-hidden="true"/></button>}</div><div className={styles.references}><h3>Related material</h3>{["Previous shift’s assessment","Collection notes & coverage"].map(t=><button key={t} onClick={()=>setTool(t)}><FileText size={16} aria-hidden="true"/>{t}<ArrowUpRight size={15} aria-hidden="true"/></button>)}</div></>}</dialog>

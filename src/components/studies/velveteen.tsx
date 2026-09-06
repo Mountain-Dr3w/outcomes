@@ -46,7 +46,7 @@ export function VelveteenStudy({ screen }: { screen: string }) {
     </main>
     <footer className={styles.actionBar}>
       {running ? <button className={styles.primary} onClick={() => finding.current?.showModal()}>Review security finding<ArrowRight size={19} /></button> : <Link className={styles.primary} href="/studies/velveteen/deployment">Deploy Launchpad<ArrowRight size={19} /></Link>}
-      <span className={styles.previewNote}>Design preview · Representative deployment</span>
+
     </footer>
     <dialog ref={finding} className={styles.sheet} aria-labelledby="finding-title">
       <div className={styles.sheetHeader}><ShieldWarning size={24} /><button onClick={() => finding.current?.close()} aria-label="Close finding"><X size={22} /></button></div>

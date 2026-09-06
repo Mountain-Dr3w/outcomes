@@ -1,3 +1,5 @@
+import { BlackPearlProgression } from "@/components/black-pearl-progression";
+import screenshotStyles from "@/components/case-screenshot.module.css";
 import { hasCaseAccess } from "@/lib/case-access";
 import { CasePasswordGate } from "@/components/case-password-gate";
 import coverageStyles from "@/components/press-coverage.module.css";
@@ -55,7 +57,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
             <div><dt className="eyebrow">Impact</dt><dd>{item.overview.impact}</dd></div>
           </dl>
         </header>
-        {item.slug === "emmys-milestones" ? <EmmyPreview /> : item.slug === "sbir-radar" ? <SbirPreview /> : item.slug === "velveteen" ? <VelveteenPreview /> : item.cover && <figure className={`case-cover case-cover-${item.slug}`}>
+        {item.slug === "emmys-milestones" ? <EmmyPreview /> : item.slug === "sbir-radar" ? <SbirPreview /> : item.slug === "velveteen" ? <VelveteenPreview /> : item.cover && <figure className={`case-cover case-cover-${item.slug} ${screenshotStyles.cover}`}>
           <Image src={item.cover.src} alt={item.cover.alt} width={item.cover.width} height={item.cover.height} sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 96px), 1320px" preload />
         </figure>}
         <div className="case-body">
@@ -68,6 +70,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
               <section className="story-section" id={`chapter-${index + 1}`} key={section.title} aria-labelledby={`heading-${index + 1}`}>
                 <h2 id={`heading-${index + 1}`}>{section.title}</h2>
                 {section.body.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                {item.slug === "isr-crew" && index === 1 && <BlackPearlProgression />}
                 <SectionVisuals visuals={item.visuals?.filter(visual => visual.afterSection === index) || []} />
               </section>
             ))}
@@ -112,7 +115,7 @@ function SectionVisuals({ visuals }: { visuals: WorkVisual[] }) {
 
 function Artifact({ visual }: { visual: WorkVisual }) {
   return <figure className="story-visual">
-    <a href={visual.src} target="_blank" rel="noreferrer" aria-label={`Open full-size image: ${visual.label}`}>
+    <a className={screenshotStyles.artifact} href={visual.src} target="_blank" rel="noreferrer" aria-label={`Open full-size image: ${visual.label}`}>
       <Image src={visual.src} alt={visual.alt} width={visual.width} height={visual.height} sizes={visual.layout === "phone" ? "(max-width: 767px) 44vw, 280px" : "(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 96px), 1320px"} />
     </a>
     <figcaption><span>{visual.label}</span><span>{visual.caption}</span></figcaption>

@@ -21,14 +21,18 @@ export const crewWork: WorkItem = {
     { label: "After", value: "~4 min", context: "Time-to-on-mission" },
     { label: "Time returned", value: "~41 min", context: "Per start, based on the reported before-and-after times" }
   ],
-  cover: { src: "/artifacts/redesigned/black-pearl-watch.png", alt: "ISR crew page with a shift handoff, next assigned task, and dedicated tool launcher.", width: 1440, height: 1000 },
+  cover: { src: "/artifacts/redesigned/black-pearl-shift-current.png", alt: "The Black Pearl with shift context, the next task and its map, and a tools table.", width: 1440, height: 1000 },
   sections: [
     { title: "The work before the work", body: [
       "Before an analyst could begin, they had to get their working environment together. The starting point was a Word document containing hyperlinks. It provided access to the pieces of the job, but the crew still needed a place to orient themselves, track requests and tasks, and open the tools for the day.",
       "We moved that starting point into The Black Pearl, a web app for the crew. The opportunity was bigger than organizing links: the crew page could put the work beside the tools needed to do it."
     ] },
+    { title: "From rough layout to working screen", body: [
+      "The early layouts below are reconstructed to explain the design decisions. They show the progression from putting everything on one page to giving the next task a clear place in the interface.",
+      "Step through five stages, from gathering the pieces on one page to refining the working screen. Each stage isolates a change in hierarchy, context, or visual treatment."
+    ] },
     { title: "Start with the shift", body: [
-      "The page begins with a handoff. A short summary gives the incoming analyst a place to understand what changed before they open individual requests. Reviewing the handoff is an explicit action; simply visiting the page doesn’t count as having read it.",
+      "The shift title, current times, and Changeover button establish the day’s context. Changeover opens a short handoff so the incoming analyst can understand what changed before opening individual requests. Reviewing the handoff is an explicit action; simply visiting the page doesn’t count as having read it.",
       "The next assigned task sits directly below, with its due time and a clear action. The full request list has its own view, where owners and statuses can be compared without crowding the shift home."
     ] },
     { title: "Keep the next action in context", body: [
@@ -48,6 +52,6 @@ export const crewWork: WorkItem = {
   links: [{ label: "Explore the design", href: "/studies/isr-crew/shift" }],
   visuals: [
     { afterSection: 0, label: "The start-of-shift journey", src: "/artifacts/redesigned/isr-crew-journey.svg", alt: "Reconstructed previous journey: locate the link document, orient to the shift, reconcile requests, open tools, begin work. Proposed crew-page journey: review handoff, choose a request, open its tool, begin work.", caption: "A reconstruction of the start-of-shift workflow, contrasting the document-based entry point with the crew page.", width: 1440, height: 700, layout: "wide" },
-    { afterSection: 2, label: "Ownership before action", src: "/artifacts/redesigned/black-pearl-request.png", alt: "An unassigned request with an Assign to me action and contextual supporting material.", caption: "The next action changes with ownership. Unassigned work is visible before the analyst opens a tool.", width: 1440, height: 1000, layout: "wide" }
+    { afterSection: 3, label: "Ownership before action", src: "/artifacts/redesigned/black-pearl-rfi-current.png", alt: "An unassigned request with an Assign to me action and contextual supporting material.", caption: "The next action changes with ownership. Unassigned work is visible before the analyst opens a tool.", width: 1440, height: 1000, layout: "wide" }
   ]
 };

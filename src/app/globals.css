@@ -107,8 +107,8 @@ p { text-wrap: pretty; }
 .case-deck { font-size: 22px; line-height: 1.55; letter-spacing: -.025em; color: var(--text-secondary); }
 .case-facts { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 32px; margin-top: 50px; border-top: 1px solid var(--border); padding-top: 23px; }
 .case-facts dd { font-size: 14px; line-height: 1.6; margin-top: 8px; }
-.case-cover { border: 1px solid var(--border); background: var(--bg-raised); position: relative; overflow: hidden; }
-.case-cover img { display: block; width: 100%; max-height: 700px; height: auto; object-fit: contain; }
+.case-cover { border: 0; background: transparent; position: relative; overflow: hidden; }
+.case-cover img { display: block; width: 100%; height: auto; }
 .case-cover-velveteen img { max-height: 620px; padding: 40px; }
 .case-cover figcaption { position: absolute; bottom: 16px; right: 20px; font-size: 12px; background: var(--bg); padding: 8px 12px; }
 .case-body { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 8%; padding: 75px 0 100px; }
@@ -123,7 +123,7 @@ p { text-wrap: pretty; }
 .story-section p { font-size: 18px; line-height: 1.8; color: var(--text-secondary); max-width: 65ch; }
 .story-section p + p { margin-top: 20px; }
 .story-visuals { display: grid; gap: 34px; margin-top: 36px; }
-.story-visual a { display: block; background: var(--bg-raised); border: 1px solid var(--border); }
+.story-visual a { display: block; background: transparent; border: 0; }
 .story-visual img { display: block; width: 100%; height: auto; }
 .story-visual figcaption { display: grid; grid-template-columns: 130px 1fr; gap: 20px; margin-top: 14px; font-size: 13px; line-height: 1.7; color: var(--text-muted); }
 .story-visual figcaption span:first-child { color: var(--text-primary); }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowLeft, ArrowRight, Check, CheckCircle, Cube, CaretUpDown, ArrowUpRight, Plus,
+  ArrowRight, Check, CheckCircle, Cube, CaretUpDown, ArrowUpRight, Plus,
   GitBranch, ListChecks, MagnifyingGlass, Package, ShieldCheck,
   Stack, TerminalWindow,
 } from "@phosphor-icons/react";
@@ -66,9 +66,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
           <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Readiness<span className={styles.navCount}>2 / 5</span></Link>
           <Link href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} />Services<span className={styles.navCount}>6</span></Link>
         </nav>
-        <div className={styles.sidebarFoot}>
-          <Link href="/work/space-force-cloud-platform"><ArrowLeft size={15} /> Back to case study</Link>
-        </div>
+
       </aside>
 
       <div className={styles.main}>

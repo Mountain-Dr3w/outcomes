@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { VerifluxMap } from "./veriflux-map";
-import { ArrowLeft, ArrowRight, Check, MapTrifold, Minus, Plus, Truck, Cube, ArrowsOutSimple, SquaresFour, SlidersHorizontal, ClipboardText, Headset } from "@phosphor-icons/react";
+import { ArrowRight, Check, MapTrifold, Minus, Plus, Truck, Cube, ArrowsOutSimple, SquaresFour, SlidersHorizontal, ClipboardText, Headset } from "@phosphor-icons/react";
 import styles from "./veriflux.module.css";
 
 const routes = [
@@ -44,7 +44,7 @@ export function VerifluxStudy({ screen, initialDate = "2025-05-12" }: { screen: 
         <button onClick={()=>setPreviewSection('Compliance')}><ClipboardText size={20}/>Compliance</button>
         <button onClick={()=>setPreviewSection('Support')}><Headset size={20}/>Support</button>
       </nav>
-      <Link className={styles.back} href="/work/veriflux"><ArrowLeft size={16}/>Case study</Link>
+
     </aside>
     <main id="main" className={styles.main}>
 
@@ -80,7 +80,7 @@ export function VerifluxStudy({ screen, initialDate = "2025-05-12" }: { screen: 
             </section>
           </div>
         </>}
-        <footer className={styles.footer}>Interactive example · Illustrative data<Link href={reporting?'/studies/veriflux/routes':'/studies/veriflux/materials'}>{reporting?'View routes':'View material reporting'}<ArrowRight size={15}/></Link></footer>
+
       </div>
     </main>
   </div>;
