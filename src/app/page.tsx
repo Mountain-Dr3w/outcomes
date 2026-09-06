@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import heroStyles from "@/components/home-hero.module.css";
 import { ContourField } from "@/components/contour-field";
 import { ProjectThumbnail } from "@/components/project-thumbnail";
@@ -30,8 +31,8 @@ export default function Home() {
                 <Link className="project-link" href={`/work/${item.slug}`}>
                   <div className={`project-image project-image-${item.slug}`}>
                     <ProjectThumbnail item={item} />
-                    <div className="project-category"><h3>{item.title}</h3><span className="project-arrow" aria-hidden="true">↗</span></div>
-                    <span className="project-view">View case study <span aria-hidden="true">↗</span></span>
+                    <div className="project-category"><h3>{item.title}</h3><ArrowUpRight className="project-arrow" size={26} aria-hidden="true" /></div>
+                    <span className="project-view">View case study <ArrowUpRight size={18} aria-hidden="true" /></span>
                   </div>
                 </Link>
               </article>
@@ -40,7 +41,7 @@ export default function Home() {
         </section>
         <section id="about" aria-labelledby="about-heading" className="about-section page-shell">
           <div><h2 id="about-heading">About me.</h2></div>
-          <div className="about-copy"><p>I spent eight years at Kessel Run designing software for military operations. At Rise8, my work focuses on the experience of using government cloud platforms.</p><Link className="text-link" href="/resume">Experience & resume <span aria-hidden="true">↗</span></Link></div>
+          <div className="about-copy"><p>I spent eight years at Kessel Run designing software for military operations. At Rise8, my work focuses on the experience of using government cloud platforms.</p><Link className="text-link" href="/resume">Experience & resume <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
         </section>
       </main>
       <SiteFooter />

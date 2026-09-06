@@ -95,9 +95,9 @@ export const workItems: WorkItem[] = [
     eyebrow: "Independent product / Deployment",
     year: "2026",
     outcome:
-      "Getting an AI-built app from a working repo to a reviewed deployment.",
+      "Taking an app from a working repository to a live deployment.",
     status: "Live product",
-    audience: "People deploying AI-built apps without an infrastructure team",
+    audience: "People deploying apps without an infrastructure team",
     result:
       "A running service that connects GitHub, prepares deployment files, and makes security findings part of the launch decision.",
     role: "Product design",

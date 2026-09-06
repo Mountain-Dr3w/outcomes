@@ -7,5 +7,5 @@
 .still { color: #91a99c; opacity: .4; }
 .control { position: absolute; z-index: 3; bottom: 25px; right: max(48px, calc((100vw - 1320px) / 2)); min-height: 44px; display: flex; align-items: center; gap: 10px; color: #9babad; font-size: 11px; cursor: pointer; padding: 0 10px; background: #0b0d0fcc; border: 1px solid #343d40; transition: color 120ms; }
 .control:hover { color: #fff; }
-@media (max-width: 767px) { .field { inset: 0 -65%; opacity: .85; }.field::after { background: linear-gradient(180deg, #0b0d0fe0, #0b0d0fb0 45%, #0b0d0f20 75%, #0b0d0f88); }.control { bottom: 18px; right: 20px; } }
+@media (max-width: 767px) { .field { inset: 0 -65%; opacity: .85; }.field::after { background: linear-gradient(180deg, #0b0d0fe0, #0b0d0fb0 45%, #0b0d0f20 75%, #0b0d0f88); }.control { bottom: max(18px, env(safe-area-inset-bottom)); right: 20px; } }
 @media (prefers-reduced-motion: reduce) { .control { display: none; } }
