@@ -56,12 +56,12 @@
 @media(max-width:800px){.layout{grid-template-columns:1fr;gap:40px;}.launcher{padding-top:0;border:0;}.toolList{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;}.heading h1{font-size:38px;}}
 @media(max-width:550px){.main{padding-top:32px;}.heading{display:flex;align-items:end;margin-bottom:32px;}.heading h1{font-size:38px;}.handoffSimple>p{font-size:17px;}.nextTaskTitle h3{font-size:25px;}.layout{margin-bottom:40px;}.toolList,.toolsOnly .toolList{grid-template-columns:1fr;}.tasking table{min-width:440px;}.tableWrap{max-width:100%;margin-right:0;}.detailDialog{padding:22px;}}
 
-@font-face{font-family:"Pearl UI";src:url("/fonts/ibm-plex-sans.ttf") format("truetype");font-weight:100 700;font-display:swap}
+
 @font-face{font-family:"Pearl Display";src:url("/fonts/chakra-petch.ttf") format("truetype");font-weight:400;font-display:swap}
-.app{font-family:"Pearl UI",Arial,sans-serif;}
+.app{font-family:"Pearl Sans",Arial,sans-serif;}
 .brand,.header nav button,.heading h1,.nextTaskTitle h3,.detailDialog h2,.toolDialog h2{font-family:"Pearl Display",sans-serif;font-weight:400;letter-spacing:0;}
-.brand{font-size:22px;}.header nav button{font-size:14px;}.heading h1{font-size:42px;line-height:1.15;}.heading p{font-family:"Pearl UI",Arial,sans-serif;}
-.sectionHead h2{font-family:"Pearl UI",Arial,sans-serif;font-weight:500;}
+.brand{font-size:22px;}.header nav button{font-size:14px;}.heading h1{font-size:42px;line-height:1.15;}.heading p{font-family:"Pearl Sans",Arial,sans-serif;}
+.sectionHead h2{font-family:"Pearl Sans",Arial,sans-serif;font-weight:500;}
 @media(max-width:550px){.brand{font-size:20px;}.heading h1{font-size:36px;}}
 
 /* Anchor the three working areas without adding more information. */
@@ -123,3 +123,9 @@
 .brandMark{display:block;width:38px;height:38px;flex:0 0 38px;overflow:visible}.brand{align-items:center}@media(max-width:550px){.brandMark{width:32px;height:32px;flex-basis:32px}}
 @media(min-width:801px){.nextTask>.taskMap{align-self:stretch;min-height:220px;position:relative}.taskMap>svg{position:absolute;inset:0;width:100%;height:100%}.taskMap .mapHover{top:50%}}
 .app{font-family:"Pearl Sans",Arial,sans-serif;font-weight:400}.app input,.app select{font-family:inherit}
+
+.taskMap .mapHover{inset:auto 0 0;transform:none;justify-content:flex-end;gap:9px;padding:32px 18px 15px;border:0;border-radius:0;background:linear-gradient(transparent,rgba(8,14,17,.88));color:#f0f4f5;font-size:12px;font-weight:500;letter-spacing:.01em;pointer-events:none}.taskMap:hover svg{filter:none}
+/* A map affordance, not a floating button. */
+.taskMap .mapHover{inset:auto 18px 16px auto;width:auto;padding:0;min-height:0;background:none;border:0;box-shadow:none;border-radius:0;font-family:"Pearl Sans",Arial,sans-serif;font-size:13px;font-weight:400;letter-spacing:0;line-height:1.4;text-shadow:0 1px 5px #000}.taskMap::after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,rgba(8,14,17,.72));opacity:0;pointer-events:none;transition:opacity .16s}.taskMap:hover::after,.taskMap:focus-visible::after{opacity:1}.taskMap .mapHover{z-index:1}.taskMap .mapHover svg{position:static;width:15px;height:15px}
+/* Action groups follow secondary → primary order in both DOM and layout. */
+.requestActions,.detailActions{justify-content:flex-end}.toolDialog>.primary{display:flex;width:fit-content;margin-left:auto}.launchDialog>.primary{margin-left:auto;margin-right:24px}
