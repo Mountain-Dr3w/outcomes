@@ -17,7 +17,7 @@ export function HeroExploration({ variant }: { variant: string }) {
         <div className={styles.composition}>
           <h1 id="intro-heading"><span>Product design for</span><span>the mission ahead.</span></h1>
           <div className={styles.intro}>
-            <p>I’m Drew, a senior product designer focused on GovTech. I work closely with the people behind the mission to understand what gets in their way, then design software that helps them move forward.</p>
+            <p>I’m Drew, a product designer based out of Nashville, TN, focused on GovTech. I work closely with the people behind the mission to understand what gets in their way, then design software that helps them move forward.</p>
             <Link href="/#work" target="_top" className={styles.workLink}>View work <span aria-hidden="true">↘</span></Link>
           </div>
         </div>

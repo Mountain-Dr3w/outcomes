@@ -18,7 +18,7 @@ export default function Home() {
               <h1 id="intro-heading"><span>Product design for</span><span>the mission ahead.</span></h1>
             </div>
             <div className="hero-aside">
-              <p>I’m Drew, a senior product designer focused on GovTech. I work closely with the people behind the mission to understand what gets in their way, then design software that helps them move forward.</p>
+              <p>I’m Drew, a product designer based out of Nashville, TN, focused on GovTech. I work closely with the people behind the mission to understand what gets in their way, then design software that helps them move forward.</p>
               <a className="text-link hero-link" href="#work">View work <span aria-hidden="true">↓</span></a>
             </div>
           </div>

@@ -260,3 +260,7 @@
 .learnMore:disabled { opacity: .45; cursor: not-allowed; }
 .serviceDetail .documentationNote { font-size: 11px; color: #9ba9b8; margin-top: 10px; }
 .undoService { display: block; color: #beddf6; text-decoration: underline; margin-top: 8px; }
+
+@media (min-width: 651px) {
+  .sidebar { position: sticky; top: 0; height: 100dvh; align-self: flex-start; overflow-y: auto; }
+}
