@@ -267,3 +267,5 @@ p { text-wrap: pretty; }
   .case-facts > div:last-child { grid-column: auto; }
   .project-category { min-height: 108px; }
 }
+
+@media (max-width: 767px) { .case-toc { display: none; } }
