@@ -159,8 +159,6 @@ export const legacyWorkItems: WorkItem[] = [
     chapter: "From pickup to material record",
     takeaway:
       "Make the route useful to dispatch and the resulting record useful to the next person.",
-    provenance:
-      "I delivered the route and material-reporting designs for Veriflux. The screens shown here update that work for 2026, keeping the same workflows and product identity. The interactive example uses illustrative data.",
     cover: {
       src: "/artifacts/redesigned/veriflux-routes-aligned.png",
       alt: "Current Veriflux redesign with route filters, collection progress, a Washington-area map, and selected-route details.",
