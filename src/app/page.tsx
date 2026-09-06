@@ -39,10 +39,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section id="about" aria-labelledby="about-heading" className="about-section page-shell">
-          <div><h2 id="about-heading">About me.</h2></div>
-          <div className="about-copy"><p>I spent eight years at Kessel Run designing software for military operations. At Rise8, my work focuses on the experience of using government cloud platforms.</p><Link className="text-link" href="/resume">Experience & resume <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
-        </section>
       </main>
       <SiteFooter />
     </>

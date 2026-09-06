@@ -15,7 +15,6 @@ export function SiteHeader() {
       </Link>
       <nav aria-label="Primary navigation" className="main-nav">
         <Link href="/#work">Work</Link>
-        <Link href="/#about">About</Link>
         <Link href="/resume">Resume <span aria-hidden="true">↗</span></Link>
       </nav>
     </header>
