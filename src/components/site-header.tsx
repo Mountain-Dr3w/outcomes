@@ -1,18 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
+import styles from "./site-header.module.css";
 import { SiteNavigation } from "./site-navigation";
 
 export function SiteHeader() {
   return (
     <header className="site-header page-shell">
-      <Link href="/" className="wordmark" aria-label="Drew McFarland home">
-        <svg className="brand-mark" aria-hidden="true" viewBox="0 0 32 32" fill="none">
-          <rect x="7" y="2" width="5" height="13" fill="currentColor" />
-          <rect x="20" y="2" width="5" height="13" fill="currentColor" />
-          <rect x="3" y="13" width="26" height="17" fill="currentColor" />
-          <rect x="9" y="19" width="4" height="4" fill="var(--bg)" />
-          <rect x="19" y="19" width="4" height="4" fill="var(--bg)" />
-        </svg>
-        <span>Drew McFarland</span>
+      <Link href="/" className={`wordmark ${styles.wordmark}`} aria-label="Drew McFarland home">
+        <Image className={styles.logo} src="/drewux-logo.svg" alt="" width={38} height={34} priority />
+        <span>DrewUX</span>
       </Link>
       <SiteNavigation />
     </header>

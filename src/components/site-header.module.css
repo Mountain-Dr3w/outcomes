@@ -1,0 +1,5 @@
+.wordmark { font-size: 28px; font-weight: 700; line-height: 1; gap: 12px; }
+@media (max-width: 767px) { .wordmark { font-size: 24px; gap: 10px; } }
+
+.logo { width: 38px; height: auto; flex-shrink: 0; }
+@media (max-width: 767px) { .logo { width: 32px; } }

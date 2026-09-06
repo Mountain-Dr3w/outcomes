@@ -18,17 +18,18 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://work.velveteen.sh"),
   title: {
-    default: "Drew McFarland",
-    template: "%s | Drew McFarland",
+    default: "DrewUX",
+    template: "%s | DrewUX",
   },
   description:
     "Product design for the mission ahead. Product design by Drew McFarland across government, defense, and developer tools.",
+  twitter: { card: "summary_large_image", title: "DrewUX" },
   openGraph: {
-    title: "Drew McFarland",
+    title: "DrewUX",
     description:
       "Product design for the mission ahead. Explore Drew McFarland’s product design work in mission planning, cloud platforms, and developer tools.",
     url: "https://work.velveteen.sh",
-    siteName: "Drew McFarland",
+    siteName: "DrewUX",
     type: "website",
   },
 };
