@@ -6,7 +6,7 @@ import Image from "next/image";
 import {
   ArrowRight, Check, CheckCircle, Cube, CaretUpDown, ArrowUpRight, Plus,
   GitBranch, ListChecks, MagnifyingGlass, Package, ShieldCheck,
-  Stack, Buildings, Globe, RocketLaunch, Users, Key, Lifebuoy, BookOpen, X,
+  Stack, Buildings, Globe, RocketLaunch, Users, Key, Lifebuoy, BookOpen, X, SidebarSimple,
 } from "@phosphor-icons/react";
 import styles from "./space-force.module.css";
 
@@ -28,6 +28,7 @@ const services = [
 ];
 
 export function SpaceForceStudy({ screen }: { screen: string }) {
+  const [collapsed, setCollapsed] = useState(false);
   const navDialog = useRef<HTMLDialogElement>(null);
   const [navDestination, setNavDestination] = useState("");
   const openDestination = (name: string) => { setNavDestination(name); navDialog.current?.showModal(); };
@@ -48,7 +49,8 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
 
   return (
     <div className={styles.workspace}>
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ""}`}>
+        <button className={styles.collapseToggle} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-expanded={!collapsed} onClick={()=>setCollapsed(!collapsed)} title={collapsed ? "Expand sidebar" : "Collapse sidebar"}><SidebarSimple size={19}/></button>
         <Link href="/studies/space-force/readiness" className={styles.brand} aria-label="Space Force Cloud Platform onboarding">
           <span className={styles.deltaMark}><Image src="/artifacts/redesigned/ussf-official-logo.png" alt="United States Space Force" width={200} height={272} className={styles.officialLogo} priority /></span>
           <span>SFCP</span>
@@ -67,18 +69,18 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
         </div>
         <nav className={styles.navigation} aria-label="Platform workspace">
           <p className={styles.navLabel}>Workspace</p>
-          <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Onboarding<span className={styles.navCount}>2 / 5</span></Link>
-          <button onClick={()=>openDestination("Systems")}><Buildings size={19}/>Systems</button>
-          <button onClick={()=>openDestination("Environments")}><Globe size={19}/>Environments</button>
+          <Link title="Onboarding" aria-label="Onboarding" href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} /><span className={styles.navText}>Onboarding</span><span className={styles.navCount}>2 / 5</span></Link>
+          <button title="Systems" aria-label="Systems" onClick={()=>openDestination("Systems")}><Buildings size={19}/><span className={styles.navText}>Systems</span></button>
+          <button title="Environments" aria-label="Environments" onClick={()=>openDestination("Environments")}><Globe size={19}/><span className={styles.navText}>Environments</span></button>
           <p className={styles.navLabel}>Delivery</p>
-          <Link href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} />Platform services<span className={styles.navCount}>6</span></Link>
-          <button onClick={()=>openDestination("Deployments")}><RocketLaunch size={19}/>Deployments</button>
-          <button onClick={()=>openDestination("Security & compliance")}><ShieldCheck size={19}/>Security &amp; compliance</button>
+          <Link title="Platform services" aria-label="Platform services" href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} /><span className={styles.navText}>Platform services</span><span className={styles.navCount}>6</span></Link>
+          <button title="Deployments" aria-label="Deployments" onClick={()=>openDestination("Deployments")}><RocketLaunch size={19}/><span className={styles.navText}>Deployments</span></button>
+          <button title="Security & compliance" aria-label="Security & compliance" onClick={()=>openDestination("Security & compliance")}><ShieldCheck size={19}/><span className={styles.navText}>Security &amp; compliance</span></button>
           <p className={styles.navLabel}>Team</p>
-          <button onClick={()=>openDestination("Members")}><Users size={19}/>Members</button>
-          <button onClick={()=>openDestination("Access requests")}><Key size={19}/>Access requests</button>
+          <button title="Members" aria-label="Members" onClick={()=>openDestination("Members")}><Users size={19}/><span className={styles.navText}>Members</span></button>
+          <button title="Access requests" aria-label="Access requests" onClick={()=>openDestination("Access requests")}><Key size={19}/><span className={styles.navText}>Access requests</span></button>
         </nav>
-        <div className={styles.supportNav}><button onClick={()=>openDestination("Documentation")}><BookOpen size={18}/>Documentation</button><button onClick={()=>openDestination("Platform support")}><Lifebuoy size={18}/>Platform support</button></div>
+        <div className={styles.supportNav}><button title="Documentation" aria-label="Documentation" onClick={()=>openDestination("Documentation")}><BookOpen size={18}/><span className={styles.navText}>Documentation</span></button><button title="Platform support" aria-label="Platform support" onClick={()=>openDestination("Platform support")}><Lifebuoy size={18}/><span className={styles.navText}>Platform support</span></button></div>
 
       </aside>
 
@@ -86,7 +88,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
       <div className={styles.main}>
         <div className={styles.contextBar}><span>Phoenix <span>/</span> Phoenix Service</span><span className={styles.environmentStatus}><span />Environment pending</span></div>
 
-        <main id="main" className={styles.content}>
+        <main id="main" className={`${styles.content} ${!isServices ? styles.onboardingContent : ""}`}>
           <div className={styles.pageTitle}>
             <div><h1>{isServices ? "Platform services" : "Team onboarding"}</h1>{isServices && <p>Connect your system to platform-managed delivery and security tools.</p>}</div>
           </div>
@@ -135,22 +137,20 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
 
               <div className={styles.readinessLayout}>
                 <section className={styles.openDetail} aria-live="polite">
-                  <div className={styles.statusLabel}>{selectedStage === 2 ? "Approved" : currentStage.state}</div>
+                  <div className={styles.stageDetailTop}><span>STEP {selectedStage + 1} OF 5</span><span className={styles.statusLabel}>{selectedStage === 2 ? "Approved" : currentStage.state}</span></div>
                   <div className={styles.detailHeading}>
-                    <h2>{selectedStage === 2 ? "Ready for provisioning" : currentStage.title}</h2>
-                    {selectedStage === 2 && <CheckCircle size={28} weight="light" aria-label="Approved" />}
+                    <h2>{selectedStage === 2 ? "You’re approved." : currentStage.title}</h2>
+
                   </div>
-                  <p className={styles.detailIntro}>{selectedStage === 2 ? "Your request is approved. The platform team will configure access before your environment is available." : currentStage.description}</p>
+                  <p className={styles.detailIntro}>{selectedStage === 2 ? "Phoenix Service is cleared to join the platform. Next, the platform team will provision your environment and tool access." : currentStage.description}</p>
                   {selectedStage === 2 ? <>
                     <dl className={styles.accessFacts}>
-                      <div><dt>Environment</dt><dd>Not active</dd></div>
-                      <div><dt>Next stage</dt><dd>Provisioning tools</dd></div>
+                      <div><dt>System</dt><dd>Phoenix Service</dd></div>
+                      <div><dt>Environment</dt><dd><span className={styles.pendingDot}/>Awaiting provisioning</dd></div>
+                      <div><dt>Next step</dt><dd>Provision tools &amp; access</dd></div>
+                      <div><dt>Responsible team</dt><dd>Platform team</dd></div>
                     </dl>
-                    <Link className={styles.serviceShortcut} href="/studies/space-force/services">
-                      <Stack size={24} weight="light" />
-                      <span><strong>Explore platform services</strong><span>Six tools for development, delivery, and security.</span></span>
-                      <ArrowRight size={21} />
-                    </Link>
+                    <div className={styles.onboardingAction}><div><strong>Explore your platform toolkit</strong><p>Review the services available for your system.</p></div><Link href="/studies/space-force/services">Browse services<ArrowRight size={16}/></Link></div>
                   </> : <div className={styles.otherStage}><p>{currentStage.detail}</p><p>{currentStage.next}</p></div>}
                 </section>
 
