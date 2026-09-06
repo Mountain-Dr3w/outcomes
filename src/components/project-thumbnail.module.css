@@ -18,3 +18,5 @@
 .sbir-radar .screen { width: 67%; left: 5%; top: 7%; transform: rotate(-5deg); box-shadow: 0 10px 35px #36271926; }
 .sbir-radar .detail { width: 51%; right: -19%; top: 30%; transform: rotate(7deg); box-shadow: 0 10px 35px #36271926; }
 @media (max-width: 767px) { .wordmark { font-size: clamp(21px, 5.4vw, 36px); } }
+.isr-crew {background:#202527;}
+.isr-crew .screen {width:150%;max-width:none;left:-28%;top:1%;}

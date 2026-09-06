@@ -2,8 +2,12 @@
 
 @font-face { font-family: "Space Grotesk Brand"; src: url("/fonts/space-grotesk.ttf") format("truetype"); font-weight: 400; font-display: swap; }
 
+@font-face { font-family: "Syne"; src: url("/fonts/syne.ttf") format("truetype"); font-weight: 400 800; font-display: swap; }
+
+@font-face { font-family: "DM Sans"; src: url("/fonts/dm-sans.ttf") format("truetype"); font-weight: 100 1000; font-display: swap; }
+
 :root {
-  --font-display: "Space Grotesk Brand", sans-serif;
+  --font-display: "DM Sans", sans-serif;
   --bg: #0b0d0f;
   --bg-raised: #131619;
   --bg-soft: #1a1e22;
@@ -41,7 +45,7 @@ p { text-wrap: pretty; }
 .page-shell { width: min(100% - 96px, 1320px); margin-inline: auto; }
 .eyebrow { font-family: var(--font-geist-mono), monospace; font-size: 12px; line-height: 1.6; letter-spacing: .065em; text-transform: uppercase; color: var(--text-muted); }
 .site-header { height: 108px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); gap: 24px; }
-.wordmark { font-family: "Space Grotesk Brand", sans-serif; letter-spacing: -.035em; white-space: nowrap; display: flex; align-items: center; gap: 15px; font-size: 14px; font-weight: 400; }
+.wordmark { font-family: var(--font-display); letter-spacing: -.035em; white-space: nowrap; display: flex; align-items: center; gap: 15px; font-size: 14px; font-weight: 500; }
 .brand-mark { width: 29px; height: 29px; flex-shrink: 0; }
 .main-nav { display: flex; gap: 34px; font-size: 13px; }
 .main-nav a { display: inline-flex; align-items: center; min-height: 44px; gap: 12px; transition: color .2s; }
@@ -99,7 +103,7 @@ p { text-wrap: pretty; }
 .case-top { padding-top: 42px; padding-bottom: 60px; }
 .back-link { display: inline-flex; gap: 16px; align-items: center; font-size: 13px; min-height: 44px; color: var(--text-secondary); }
 .case-heading { display: grid; grid-template-columns: 1.3fr 1fr; align-items: end; gap: 8%; margin-top: 56px; }
-.case-heading h1 { font-size: clamp(48px, 6.1vw, 88px); font-weight: 400; line-height: 1.02; letter-spacing: -.055em; margin-top: 16px; }
+.case-heading h1 { font-size: clamp(48px, 6.1vw, 88px); font-weight: 400; line-height: 1.08; letter-spacing: -.015em; margin-top: 16px; }
 .case-deck { font-size: 22px; line-height: 1.55; letter-spacing: -.025em; color: var(--text-secondary); }
 .case-facts { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 32px; margin-top: 50px; border-top: 1px solid var(--border); padding-top: 23px; }
 .case-facts dd { font-size: 14px; line-height: 1.6; margin-top: 8px; }
@@ -287,4 +291,28 @@ p { text-wrap: pretty; }
 .section-heading h2, .project-category h3, .about-section h2, .contact-title,
 .portfolio-resume :is(h1, h2, h3, h4), .portfolio-resume h1 + p {
   font-family: var(--font-display);
+}
+
+/* Keep touch-device behavior consistent through orientation changes. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (hover: none) and (pointer: coarse) {
+  .case-topbar .design-preview-link, .case-external .design-preview-link,
+  .case-body > .case-toc { display: none; }
+  .case-topbar .case-external:has(.design-preview-link:only-child) { display: none; }
+}
+
+@media(max-width:380px) {
+ .site-header {gap:8px;}
+ .wordmark {font-size:11px;gap:6px;}
+ .main-nav {gap:10px;font-size:11px;}
+}
+
+.site-navigation {position:relative;z-index:20;}
+.mobile-menu-toggle {display:none;}
+@media (max-width: 767px), screen and (hover: none) and (pointer: coarse) and (max-width: 1024px) {
+ .mobile-menu-toggle {display:flex;align-items:center;gap:12px;min-height:44px;padding:0 4px;background:none;border:0;color:inherit;font:inherit;font-size:14px;cursor:pointer;}
+ .site-navigation .main-nav {display:none;position:absolute;top:calc(100% + 12px);right:0;width:210px;padding:8px;background:#202020;border:1px solid #ffffff24;box-shadow:0 16px 40px #0005;}
+ .site-navigation .main-nav[data-open="true"] {display:flex;flex-direction:column;gap:0;}
+ .site-navigation .main-nav a {padding:12px 16px;font-size:16px;min-height:48px;}
+ .site-navigation .main-nav a:hover {background:#ffffff0a;color:#fff;}
 }

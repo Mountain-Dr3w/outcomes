@@ -1,34 +1,43 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./contour-field.module.css";
 
 const LINES = 38;
-const STEPS = 192;
+const STEPS = 256;
 const COLUMNS = 16;
-const DEPTH_STEPS = 4;
+const DEPTH_STEPS = 8;
 
 // Fade in world depth, so recycled rows are invisible when they enter the horizon.
 function depthOpacity(line: number, time = 0) {
   const z = 1.3 + line * .48 - (time * .35) % .48;
   const t = Math.max(0, Math.min(1, (z - 10) / 8));
-  return 1 - t * t * (3 - 2 * t);
+  const near = Math.max(0, Math.min(1, (z - 1.3) / 1.5));
+  return (1 - t * t * (3 - 2 * t)) * near * near * (3 - 2 * near);
 }
 
 function terrainHeight(x: number, worldZ: number) {
   const ridges = (Math.sin(x * .57 + worldZ * .31) * .5 + .5)
     * (Math.cos(worldZ * .42 - x * .19) * .5 + .5);
-  return ridges * 1.65 + .07 * Math.sin(x * 1.2 + worldZ * .7);
+  return ridges * 1.65 + .035 * Math.sin(x * 1.2 + worldZ * .7);
 }
 
-function point(u: number, line: number, pointer: number, time = 0) {
+function point(u: number, line: number, pointer: number, time = 0, camera = 0) {
   const travel = time * .35;
   const z = 1.3 + line * .48 - travel % .48;
   const worldZ = z + travel;
   const x = (u - .5) * 28;
   const relief = terrainHeight(x, worldZ);
-  return [600 + (x - pointer * .4) * 570 / z,
-    80 + (2.7 - relief) * 570 / z] as const;
+  // Rotate about the same terrain focus, keeping its screen position fixed.
+  const pivotZ = 8;
+  const angle = camera * .28 + pointer * .015;
+  const offsetZ = z - pivotZ;
+  const viewX = x * Math.cos(angle) - offsetZ * Math.sin(angle);
+  const viewZ = Math.max(.35, pivotZ + x * Math.sin(angle) + offsetZ * Math.cos(angle));
+  return [600 + viewX * 570 / viewZ,
+    80 + (2.7 - relief) * 570 / viewZ] as const;
+
 }
 
 function path(line: number) {
@@ -39,9 +48,10 @@ function path(line: number) {
 }
 const stillPaths = Array.from({ length: LINES }, (_, i) => path(i));
 
-export function ContourField() {
+export function ContourField({ controlsTargetId, pageCamera = false }: { controlsTargetId?: string; pageCamera?: boolean }) {
+  const [controlsTarget, setControlsTarget] = useState<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const motionRef = useRef({ elapsed: 0, pointer: 0 });
+  const motionRef = useRef({ elapsed: 0, pointer: 0, camera: 0 });
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
 
@@ -57,6 +67,10 @@ export function ContourField() {
     let visible = true;
     let pointer = motionRef.current.pointer;
     let target = 0;
+    let camera = motionRef.current.camera;
+    let targetCamera = 0;
+    const scroll = () => { targetCamera = pageCamera ? Math.min(1, window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight)) : 0; };
+    scroll();
     let width = 1;
     let height = 1;
     const draw = () => {
@@ -67,7 +81,7 @@ export function ContourField() {
       for (let line = 0; line < LINES; line++) {
         context.beginPath();
         for (let step = 0; step <= STEPS; step++) {
-          const [x, y] = point(step / STEPS, line, pointer, elapsed);
+          const [x, y] = point(step / STEPS, line, pointer, elapsed, camera);
           if (step === 0) context.moveTo(x / 1200 * width, y / 650 * height);
           else context.lineTo(x / 1200 * width, y / 650 * height);
         }
@@ -87,13 +101,13 @@ export function ContourField() {
       for (let column = 0; column <= COLUMNS; column++) {
         for (let step = 1; step <= (LINES - 1) * DEPTH_STEPS; step++) {
           const line = step / DEPTH_STEPS;
-          segment(point(column / COLUMNS, line - 1 / DEPTH_STEPS, pointer, elapsed), point(column / COLUMNS, line, pointer, elapsed), line - .5 / DEPTH_STEPS);
+          segment(point(column / COLUMNS, line - 1 / DEPTH_STEPS, pointer, elapsed, camera), point(column / COLUMNS, line, pointer, elapsed, camera), line - .5 / DEPTH_STEPS);
         }
       }
       const coursePoint = (line: number) => {
         const z = 1.3 + line * .48 - (elapsed * .35) % .48;
         const worldZ = z + elapsed * .35;
-        return point(.57 + Math.sin(worldZ * .3) * .035, line, pointer, elapsed);
+        return point(.57 + Math.sin(worldZ * .3) * .035, line, pointer, elapsed, camera);
       };
       context.strokeStyle = "rgba(206,163,95,.85)";
       context.lineWidth = 1.2;
@@ -107,12 +121,14 @@ export function ContourField() {
     const tick = (now: number) => {
       frame = 0;
       if (!visible || document.hidden || media.matches || paused) return;
-      if (now - last >= 1000 / 30) {
-        elapsed += last ? Math.min((now - last) / 1000, .06) : 0;
-        last = now;
-        pointer += (target - pointer) * .035;
-        draw();
-      }
+      const dt = last ? Math.min((now - last) / 1000, .05) : 0;
+      last = now;
+      elapsed += dt;
+      // Time-based damping stays consistent across display refresh rates.
+      pointer += (target - pointer) * (1 - Math.exp(-dt / .45));
+      camera += (targetCamera - camera) * (1 - Math.exp(-dt / .5));
+      canvas.dataset.camera = camera.toFixed(3);
+      draw();
       frame = requestAnimationFrame(tick);
     };
     const sync = () => {
@@ -121,11 +137,13 @@ export function ContourField() {
       last = 0;
       setReduced(media.matches);
       canvas.dataset.motion = paused || media.matches ? "paused" : visible && !document.hidden ? "playing" : "idle";
-      if (media.matches) { elapsed = 0; pointer = 0; }
+      if (media.matches) { elapsed = 0; pointer = 0; camera = 0; }
       draw();
       if (!paused && !media.matches && visible && !document.hidden) frame = requestAnimationFrame(tick);
     };
     const resize = new ResizeObserver(([entry]) => {
+      if (controlsTargetId) setControlsTarget(document.getElementById(controlsTargetId));
+      scroll();
       width = entry.contentRect.width;
       height = entry.contentRect.height;
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -140,20 +158,27 @@ export function ContourField() {
     resize.observe(canvas);
     observer.observe(canvas);
     window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("scroll", scroll, { passive: true });
     document.addEventListener("pointerleave", leave);
     document.addEventListener("visibilitychange", sync);
     media.addEventListener("change", sync);
     sync();
     return () => {
-      motionRef.current = { elapsed, pointer };
+      motionRef.current = { elapsed, pointer, camera };
       cancelAnimationFrame(frame);
       resize.disconnect(); observer.disconnect();
       window.removeEventListener("pointermove", move);
+      window.removeEventListener("scroll", scroll);
       document.removeEventListener("pointerleave", leave);
       document.removeEventListener("visibilitychange", sync);
       media.removeEventListener("change", sync);
     };
-  }, [paused]);
+  }, [paused, controlsTargetId, pageCamera]);
+
+  const motionButton = <button className={`${styles.control} ${controlsTargetId ? styles.inlineControl : ""}`} type="button" onClick={() => setPaused(!paused)} aria-label={paused ? "Play background animation" : "Pause background animation"}>
+      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">{paused ? <path d="M3 1.5 10 6 3 10.5Z" fill="currentColor" /> : <path d="M3 2v8M9 2v8" stroke="currentColor" strokeWidth="1.5" />}</svg>
+      <span>{paused ? "Play motion" : "Pause motion"}</span>
+    </button>;
 
   return <>
     <div className={styles.field} aria-hidden="true">
@@ -162,9 +187,6 @@ export function ContourField() {
         {stillPaths.map((d, i) => <path key={i} d={d} stroke="currentColor" strokeWidth=".85" opacity={depthOpacity(i)} />)}
       </svg>
     </div>
-    {!reduced && <button className={styles.control} type="button" onClick={() => setPaused(!paused)} aria-label={paused ? "Play background animation" : "Pause background animation"}>
-      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">{paused ? <path d="M3 1.5 10 6 3 10.5Z" fill="currentColor" /> : <path d="M3 2v8M9 2v8" stroke="currentColor" strokeWidth="1.5" />}</svg>
-      <span>{paused ? "Play motion" : "Pause motion"}</span>
-    </button>}
+    {!reduced && (controlsTargetId ? controlsTarget && createPortal(motionButton, controlsTarget) : motionButton)}
   </>;
 }

@@ -88,7 +88,6 @@ export default async function WorkPage({ params }: WorkPageProps) {
               <h2 id="impact-heading">Impact</h2>
               <dl className="case-metrics" aria-label="Project results">{item.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd>{metric.context && <p>{metric.context}</p>}</div>)}</dl>
             </section> : null}
-            {item.provenance && <p className="case-note">{item.provenance}</p>}
           </article>
         </div>
         <section className="next-case" aria-labelledby="next-heading">

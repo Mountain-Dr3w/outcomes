@@ -48,7 +48,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
       <aside className={styles.sidebar}>
         <Link href="/studies/space-force/readiness" className={styles.brand} aria-label="Space Force Cloud Platform readiness">
           <span className={styles.deltaMark}><Image src="/artifacts/redesigned/ussf-official-logo.png" alt="United States Space Force" width={200} height={272} className={styles.officialLogo} priority /></span>
-          <span>CLOUD PLATFORM</span>
+          <span>SFCP</span>
         </Link>
         <div className={styles.teamPicker}>
           <button className={styles.team} popoverTarget="team-picker" aria-label="Choose team, Phoenix" aria-haspopup="dialog">
@@ -63,7 +63,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
           </div>
         </div>
         <nav className={styles.navigation} aria-label="Platform workspace">
-          <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Readiness<span className={styles.navCount}>3 / 5</span></Link>
+          <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Readiness<span className={styles.navCount}>2 / 5</span></Link>
           <Link href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} />Services<span className={styles.navCount}>6</span></Link>
         </nav>
         <div className={styles.sidebarFoot}>
@@ -72,10 +72,11 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
       </aside>
 
       <div className={styles.main}>
+        <div className={styles.contextBar}><span>Phoenix <span>/</span> Phoenix Service</span><span className={styles.environmentStatus}><span />Environment pending</span></div>
 
         <main id="main" className={styles.content}>
           <div className={styles.pageTitle}>
-            <div><h1>{isServices ? "Platform services" : "Team readiness"}</h1><p>{isServices ? "Your software delivery toolkit." : "Phoenix / Phoenix Service"}</p></div>
+            <div><h1>{isServices ? "Platform services" : "Team readiness"}</h1><p>{isServices ? "Connect your system to platform-managed delivery and security tools." : "Track access, approval, and provisioning for Phoenix Service."}</p></div>
           </div>
 
           {isServices ? (
@@ -88,10 +89,10 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
               </div>
               <div className={styles.catalogLayout}>
                 <section aria-label="Platform services" className={styles.serviceList}>
-                  <div className={styles.listHeading}><span>SERVICE</span><span>{visibleServices.length} AVAILABLE IN CATALOG</span></div>
+                  <div className={styles.listHeading}><span>Service</span><span>{visibleServices.length} available</span></div>
                   {visibleServices.map((service) => {
                     const ServiceIcon = service.icon;
-                    return <button className={`${styles.serviceRow} ${selectedService === service.name ? styles.serviceSelected : ""}`} key={service.name} aria-pressed={selectedService === service.name} onClick={() => setSelectedService(service.name)}><span className={styles.serviceIcon}><ServiceIcon size={25} weight="light" /></span><span className={styles.serviceName}><strong>{service.name}</strong><span>{service.description}</span></span><ArrowRight className={styles.serviceArrow} size={18} /></button>;
+                    return <button className={`${styles.serviceRow} ${selectedService === service.name ? styles.serviceSelected : ""}`} key={service.name} aria-pressed={selectedService === service.name} onClick={() => setSelectedService(service.name)}><span className={styles.serviceIcon}><ServiceIcon size={25} weight="light" /></span><span className={styles.serviceName}><strong>{service.name}</strong><span>{service.description}</span></span><span className={styles.connectionState}>{addedServices.includes(service.name) ? "Requested" : "Available"}</span><ArrowRight className={styles.serviceArrow} size={16} /></button>;
                   })}
                   {visibleServices.length === 0 && <div className={styles.empty}>No services match “{search}”.<button onClick={() => { setSearch(""); setCategory("All services"); }}>Clear filters</button></div>}
                 </section>
@@ -100,6 +101,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
                   <p className={styles.kicker}>{selected.category}</p>
                   <h2>{selected.name}</h2>
                   <p>{selected.detail}</p>
+                  <dl className={styles.integrationFacts}><div><dt>System</dt><dd>Phoenix Service</dd></div><div><dt>Access</dt><dd>{isAdded ? "Requested" : "Not configured"}</dd></div><div><dt>Provisioned by</dt><dd>Platform team</dd></div></dl>
                   <div className={styles.capabilities}><span>USE IT FOR</span>{selected.capabilities.map((item) => <div key={item}><Check size={15} />{item}</div>)}</div>
                   <div className={styles.serviceActions}>
                     {selected.documentation ? <a className={styles.learnMore} href={selected.documentation} target="_blank" rel="noreferrer">Learn more<ArrowUpRight size={16} /></a> : <button className={styles.learnMore} disabled title="Public documentation is not available for this preview">Learn more<ArrowUpRight size={16} /></button>}
@@ -123,11 +125,12 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
 
               <div className={styles.readinessLayout}>
                 <section className={styles.openDetail} aria-live="polite">
+                  <div className={styles.statusLabel}>{selectedStage === 2 ? "Approved" : currentStage.state}</div>
                   <div className={styles.detailHeading}>
-                    <h2>{selectedStage === 2 ? "Phoenix is approved." : currentStage.title}</h2>
+                    <h2>{selectedStage === 2 ? "Ready for provisioning" : currentStage.title}</h2>
                     {selectedStage === 2 && <CheckCircle size={28} weight="light" aria-label="Approved" />}
                   </div>
-                  <p className={styles.detailIntro}>{selectedStage === 2 ? "Your platform request has cleared review. Next, the platform team will provision your tool accounts." : currentStage.description}</p>
+                  <p className={styles.detailIntro}>{selectedStage === 2 ? "Your request is approved. The platform team will configure access before your environment is available." : currentStage.description}</p>
                   {selectedStage === 2 ? <>
                     <dl className={styles.accessFacts}>
                       <div><dt>Environment</dt><dd>Not active</dd></div>

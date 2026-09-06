@@ -9,3 +9,17 @@
 .control:hover { color: #fff; }
 @media (max-width: 767px) { .field { inset: 0 -65%; opacity: .85; }.field::after { background: linear-gradient(180deg, #0b0d0fe0, #0b0d0fb0 45%, #0b0d0f20 75%, #0b0d0f88); }.control { bottom: max(18px, env(safe-area-inset-bottom)); right: 20px; } }
 @media (prefers-reduced-motion: reduce) { .control { display: none; } }
+/* Let the landscape carry the visual, with atmosphere instead of a text scrim. */
+.field { mask-image: linear-gradient(180deg, transparent, #000 20%, #000); }
+.field::after { background: linear-gradient(180deg, #0d131950, transparent 65%); }
+.control { right: 18px; bottom: 16px; border-color: #65716f70; border-radius: 24px; background: #0b1015b3; }
+@media(max-width:767px) {.field::after {background:linear-gradient(180deg,#0d131950,transparent 65%);}.control {right:12px;bottom:12px;}}
+
+.field::after {background:linear-gradient(180deg,transparent 45%,#0b0d0f55 65%,#0b0d0fe6 100%);}
+.still {color:#ccc;}
+.control {top:clamp(246px,calc(39vw - 54px),446px);bottom:auto;color:#ccc;background:#101010c9;}
+@media(max-width:767px) {.field::after {background:linear-gradient(180deg,transparent 30%,#0b0d0f99 58%,#0b0d0ff0 100%);}.control {top:clamp(174px,calc(36svh - 46px),294px);bottom:auto;}}
+@media(hover:none) and (pointer:coarse) and (orientation:landscape) and (max-height:600px) {.control {top:max(134px,calc(100svh - 161px));}}
+
+.control.inlineControl {position:static;inset:auto;min-height:44px;padding:10px 18px;border:1px solid #ffffff42;background:transparent;color:#c9cdd0;font-size:13px;border-radius:30px;flex-shrink:0;}
+.control.inlineControl:hover {background:#ffffff0d;border-color:#ffffff80;color:#fff;}

@@ -67,7 +67,7 @@ export const resume = {
       organization: "USAF | Kessel Run",
       roles: [
         {
-          title: "Design Operations Lead",
+          title: "Senior Product Designer",
           period: "Apr 2022 to May 2025",
           bullets: [
             "Grew daily active users 300% for a flight-scheduling application by mapping the full service experience and working with military leadership to clear the operational roadblocks holding it back",

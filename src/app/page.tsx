@@ -1,25 +1,30 @@
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import heroStyles from "@/components/home-hero.module.css";
 import { ContourField } from "@/components/contour-field";
 import { ProjectThumbnail } from "@/components/project-thumbnail";
 import Link from "next/link";
+import Image from "next/image";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { displayWorkItems } from "@/lib/work";
 
 export default function Home() {
   return (
-    <>
+    <div className={heroStyles.homepage}>
       <SiteHeader />
       <main id="main">
         <section className={`${heroStyles.hero} home-hero`} aria-labelledby="intro-heading">
-          <ContourField />
+          <div className={heroStyles.landscape}><ContourField controlsTargetId="hero-actions" /></div>
           <div className="hero-composition page-shell">
             <div className="hero-title-wrap">
               <h1 id="intro-heading"><span>Product design for</span><span>the mission ahead.</span></h1>
             </div>
+            <dl className={heroStyles.heroFacts}>
+              <div><dt>Based in</dt><dd>Nashville, TN</dd></div>
+              <div><dt>Focus</dt><dd>GovTech</dd></div>
+              <div><dt>Experience</dt><dd>10+ years</dd></div>
+            </dl>
             <div className="hero-aside">
-              <p>I’m Drew, a product designer based out of Nashville, TN, focused on GovTech. I work closely with the people behind the mission to understand what gets in their way, then design software that helps them move forward.</p>
-              <a className="text-link hero-link" href="#work">View work <span aria-hidden="true">↓</span></a>
+              <div id="hero-actions" className={heroStyles.actions}><a className="text-link hero-link" href="#work"><ArrowDown size={16} aria-hidden="true" />View work</a></div>
             </div>
           </div>
         </section>
@@ -39,8 +44,19 @@ export default function Home() {
             ))}
           </div>
         </section>
+        <section id="about" aria-labelledby="about-heading" className={`page-shell ${heroStyles.about}`}>
+          <div className={heroStyles.aboutPortrait}>
+            <h2 id="about-heading">About</h2>
+            <Image src="/drew-about.jpeg" alt="Drew presenting to a group in an office." width={685} height={1218} sizes="(max-width: 767px) calc(100vw - 40px), 36vw" />
+          </div>
+          <div className={heroStyles.aboutContent}>
+            <p className={heroStyles.aboutIntro}>I’m Drew, a product designer focused on GovTech.</p>
+            <p className={heroStyles.aboutBody}>I work closely with the people behind the mission to understand what gets in their way, then design software that helps them move forward.</p>
+
+          </div>
+        </section>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }

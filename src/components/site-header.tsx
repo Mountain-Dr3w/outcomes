@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SiteNavigation } from "./site-navigation";
 
 export function SiteHeader() {
   return (
@@ -13,10 +14,7 @@ export function SiteHeader() {
         </svg>
         <span>Drew McFarland</span>
       </Link>
-      <nav aria-label="Primary navigation" className="main-nav">
-        <Link href="/#work">Work</Link>
-        <Link href="/resume">Resume <span aria-hidden="true">↗</span></Link>
-      </nav>
+      <SiteNavigation />
     </header>
   );
 }

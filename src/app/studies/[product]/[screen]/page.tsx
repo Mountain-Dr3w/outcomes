@@ -7,7 +7,10 @@ import { SbirStudy } from "@/components/studies/sbir";
 import { SpaceForceStudy } from "@/components/studies/space-force";
 import { VelveteenStudy } from "@/components/studies/velveteen";
 
+import { CrewStudy } from "@/components/studies/crew";
+
 const screens: Record<string, string[]> = {
+  "isr-crew": ["shift"],
   "sbir-radar": ["opportunities", "radars", "saved", "sources"],
   "space-force": ["readiness", "services"],
   velveteen: ["review", "deployment"],
@@ -32,6 +35,7 @@ export default async function StudyPage({ params, searchParams }: { params: Prom
     const initialDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(date)) ? date : "2025-05-12";
     return <VerifluxStudy key={`${screen}-${initialDate}`} screen={screen} initialDate={initialDate} />;
   }
+  if (product === "isr-crew") return <CrewStudy />;
   if (product === "space-force") return <SpaceForceStudy screen={screen} />;
   if (product === "velveteen") return <VelveteenStudy screen={screen} />;
   return <SbirStudy screen={screen} />;
