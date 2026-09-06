@@ -1,0 +1,20 @@
+@font-face { font-family: 'Space Grotesk Hero'; src:url('/fonts/space-grotesk.ttf') format('truetype');font-weight:400;font-display:swap; }
+.hero { position:relative;isolation:isolate;overflow:clip; }
+.hero :global(.hero-composition) { position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-between;min-height:700px;padding:70px 0 100px;pointer-events:none;gap:40px; }
+.hero :global(.hero-title-wrap) {max-width:none;}
+.hero :global(.hero-title-wrap) h1 {font-family:'Space Grotesk Hero',sans-serif;font-size:clamp(64px,6.8vw,104px);font-weight:400;line-height:1.02;letter-spacing:-.045em;text-transform:uppercase;text-wrap:initial;}
+.hero :global(.hero-title-wrap) h1 > span {display:block;}
+.hero :global(.hero-aside) {align-self:flex-end;margin:0;max-width:435px;}
+.hero :global(.hero-aside) > p:first-of-type {font-size:17px;line-height:1.7;color:#c1c7c9;}
+.hero a {pointer-events:auto;}
+.hero :global(.hero-link) {margin-top:26px;border-color:#9b855f;}
+.hero :global(.hero-link) span {color:#d4b27d;}
+@media(min-width:1600px) {.hero :global(.hero-composition) {min-height:760px;}}
+@media(max-width:767px) {
+ .hero :global(.hero-composition) {justify-content:flex-start;min-height:710px;padding:48px 0 120px;gap:32px;}
+ .hero :global(.hero-title-wrap) h1 {font-size:clamp(36px,10.7vw,76px);line-height:1.06;letter-spacing:-.05em;}
+ .hero :global(.hero-aside) {align-self:flex-start;max-width:365px;}
+ .hero :global(.hero-aside) > p:first-of-type {font-size:16px;line-height:1.65;}
+ .hero :global(.hero-link) {margin-top:24px;}
+}
+@media(max-width:767px) {.hero :global(.hero-title-wrap) h1 > span {text-wrap:balance;}}

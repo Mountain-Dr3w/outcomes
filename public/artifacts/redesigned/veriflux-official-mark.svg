@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="555" height="536" viewBox="0 0 555 536">
+  <defs>
+    <clipPath id="clip-Mark_vivid_transparent">
+      <rect width="555" height="536"/>
+    </clipPath>
+  </defs>
+  <g id="Mark_vivid_transparent" clip-path="url(#clip-Mark_vivid_transparent)">
+    <g id="Group_16608" data-name="Group 16608" transform="translate(39.999 9)">
+      <g id="Group_16599" data-name="Group 16599" transform="translate(57.401 80.319)" style="isolation: isolate">
+        <g id="Group_16458" data-name="Group 16458" transform="translate(-0.401 -0.319)">
+          <path id="Subtraction_1" data-name="Subtraction 1" d="M180.473,358.273a180.491,180.491,0,0,1-84.836-21.054V267.365a123.565,123.565,0,0,0,38.373,24.742A123.307,123.307,0,0,0,265.3,267.37v69.852a180.466,180.466,0,0,1-84.831,21.051Zm157.96-92.555h-71.42a123.28,123.28,0,0,0,15.162-18.106,122.034,122.034,0,0,0,11.457-20.8,120.953,120.953,0,0,0-11.454-116.149,123.33,123.33,0,0,0-15.162-18.106h71.417a177.52,177.52,0,0,1,0,173.159Zm-244.5,0H22.513a177.5,177.5,0,0,1,0-173.158l71.417,0a123.33,123.33,0,0,0-15.162,18.106,121.8,121.8,0,0,0-11.456,20.8,120.985,120.985,0,0,0,0,95.351,121.923,121.923,0,0,0,11.457,20.8,123.292,123.292,0,0,0,15.16,18.1Zm1.7-174.81V21.054a181.141,181.141,0,0,1,169.667,0V90.9a123.294,123.294,0,0,0-169.664,0Z" fill="#00c752" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+        </g>
+        <rect id="Rectangle_588" data-name="Rectangle 588" width="79.661" height="77.277" transform="translate(140.599 139.681)" fill="#00c752"/>
+      </g>
+    </g>
+  </g>
+</svg>

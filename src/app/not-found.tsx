@@ -8,7 +8,7 @@ export default function NotFound() {
     >
       <div className="mx-auto w-full max-w-5xl lg:max-w-7xl">
         <p className="font-mono text-sm text-[var(--accent)]">404</p>
-        <h1 className="mt-4 max-w-lg font-serif text-4xl font-light italic leading-tight text-[var(--text-primary)] sm:text-5xl">
+        <h1 className="mt-4 max-w-lg font-sans text-4xl font-normal leading-tight text-[var(--text-primary)] sm:text-5xl">
           nothing at this address.
         </h1>
         <p className="mt-6 max-w-md text-base leading-7 text-[var(--text-secondary)]">

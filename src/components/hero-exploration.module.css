@@ -1,0 +1,47 @@
+@font-face { font-family: Tomorrow; src:url('/fonts/tomorrow.ttf') format('truetype');font-weight:400;font-display:swap; }
+@font-face { font-family: 'Chakra Petch'; src:url('/fonts/chakra-petch.ttf') format('truetype');font-weight:500;font-display:swap; }
+@font-face { font-family: Rajdhani; src:url('/fonts/rajdhani.ttf') format('truetype');font-weight:500;font-display:swap; }
+.preview { background:#0b0d0f; min-height:100svh; }
+.preview :global(.site-header) { border:0; height:100px; }
+.hero { position:relative; isolation:isolate; overflow:clip; min-height:680px; }
+.composition { width:min(100% - 112px,1320px); margin:auto; position:relative; z-index:1; min-height:680px; padding:70px 0 100px; display:flex;flex-direction:column;pointer-events:none; }
+.composition h1 { margin:0; color:#f1f3f2; font-size:clamp(56px,6.3vw,94px);font-weight:400;line-height:1.08;letter-spacing:-.045em;text-wrap:initial; }
+.composition h1 span { display:block; }
+.intro { max-width:420px; margin-top:36px; }
+.intro p { color:#c1c7c9;font-size:17px;line-height:1.7;margin:0; }
+.workLink { display:inline-flex;align-items:center;justify-content:space-between;gap:65px; min-height:48px;border-bottom:1px solid #9b855f;margin-top:26px;font-size:14px;pointer-events:auto; }
+.workLink span { color:#d4b27d; }
+.bearing .composition h1 { font-family:Tomorrow,sans-serif; }
+.bearing .composition { justify-content:center; }
+.horizon .composition { align-items:center;text-align:center;padding-top:48px; }
+.horizon .composition h1 { font-family:'Chakra Petch',sans-serif;font-weight:500;font-size:clamp(56px,6.5vw,100px);letter-spacing:-.025em; }
+.horizon .intro { max-width:500px;margin-top:24px; }
+.horizon .workLink { margin-top:20px; }
+.traverse .composition { justify-content:space-between; }
+.traverse .composition h1 { font-family:Rajdhani,sans-serif;font-weight:500;font-size:clamp(78px,9.5vw,142px);line-height:.93;letter-spacing:-.02em;text-transform:uppercase; }
+.traverse .intro { align-self:flex-end;margin-top:40px;max-width:385px; }
+@media(min-width:1600px) { .hero,.composition {min-height:740px;} }
+@media(max-width:900px) and (min-width:768px) { .composition {width:calc(100% - 80px);} }
+@media(max-width:767px) {
+ .preview :global(.site-header) {height:82px;}
+ .hero {min-height:690px;}
+ .composition {width:calc(100% - 40px);min-height:690px;padding:52px 0 140px;}
+ .composition h1 {font-size:clamp(31px,8.4vw,60px);line-height:1.16;letter-spacing:-.04em;}
+ .bearing .composition {justify-content:flex-start;}
+ .intro {max-width:335px;margin-top:28px;}
+ .intro p {font-size:16px;line-height:1.65;}
+ .horizon .composition {padding-top:64px;}
+ .horizon .composition h1 {font-size:clamp(31px,8.6vw,63px);line-height:1.14;}
+ .horizon .intro {margin-top:26px;max-width:330px;}
+ .traverse .composition {justify-content:flex-start;padding-top:48px;}
+ .traverse .composition h1 {font-size:clamp(43px,12vw,88px);line-height:1.04;letter-spacing:-.025em;}
+ .traverse .intro {align-self:flex-start;margin-top:40px;}
+}
+
+/* Selected Traverse direction, revised with a quieter technical sans. */
+@font-face {font-family:'Space Grotesk Hero';src:url('/fonts/space-grotesk.ttf') format('truetype');font-weight:400;font-display:swap;}
+.traverse .composition h1 {font-family:'Space Grotesk Hero',sans-serif;font-size:clamp(64px,6.8vw,104px);font-weight:400;line-height:1.02;letter-spacing:-.045em;}
+.traverse .intro {max-width:435px;}
+.traverse .composition {min-height:700px;}
+@media(max-width:767px) {.traverse .composition {min-height:710px;}.traverse .composition h1 {font-size:clamp(36px,10.7vw,76px);line-height:1.06;letter-spacing:-.05em;}.traverse .intro {margin-top:32px;}}
+@media(max-width:767px) {.traverse .composition h1 > span {text-wrap:balance;}}

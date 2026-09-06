@@ -1,0 +1,84 @@
+.canvas { min-height: 100svh; background: #0b0d0e; color: #f2f3ef; font-family: var(--font-geist-sans), Arial, sans-serif; }
+.app { width: 100%; max-width: 560px; min-height: 100svh; margin: auto; background: #111314; padding-bottom: 114px; }
+.app :is(h1,h2,h3,p,ul,dl,dd) { margin: 0; }
+.app button { font: inherit; cursor: pointer; }
+.app :is(a,button,summary):focus-visible { outline: 2px solid #d4e6b6; outline-offset: 4px; }
+.app svg { flex-shrink: 0; }
+.header { height: 72px; margin-inline: 22px; border-bottom: 1px solid #2b2e2f; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; gap: 9px; align-items: center; color: #eff1e9; font-size: 18px; font-weight: 550; letter-spacing: -.05em; }
+.back { display: flex; align-items: center; gap: 7px; min-height: 44px; color: #aeb4b3; font-size: 12px; }
+.main { padding: 27px 22px 18px; }
+.identity { display: flex; align-items: center; gap: 13px; }
+.appIcon { width: 53px; height: 57px; display: grid; place-items: center; background: #283126; border: 1px solid #42503a; border-radius: 13px; color: #e0eac8; font-size: 34px; letter-spacing: -.06em; line-height: 1; flex-shrink: 0; }
+.appLabel { display: block; font-size: 12px; color: #a1aba5; margin-bottom: 1px; }
+.identity h1 { font-size: 32px; line-height: 1.1; font-weight: 550; letter-spacing: -.05em; }
+.notLive { margin-left: auto; color: #a0a8a4; font-size: 11px; border: 1px solid #373d38; border-radius: 5px; padding: 4px 7px; white-space: nowrap; }
+.address { display: flex; align-items: center; gap: 8px; color: #a9b0ac; font-size: 12px; margin: 17px 0 28px; }
+.current { background: #1c211d; border: 1px solid #3a4436; border-radius: 14px; padding: 21px; }
+.currentTop { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #cad9b9; }
+.spinner { width: 13px; height: 13px; border: 1.5px solid #56624c; border-top-color: #dbebc4; border-right-color: #dbebc4; border-radius: 50%; animation: spin 1.5s linear infinite; }
+.current h2 { font-size: 27px; font-weight: 500; letter-spacing: -.045em; line-height: 1.2; margin-top: 16px; }
+.current > p { color: #b0bba7; font-size: 13px; line-height: 1.6; margin-top: 8px; }
+.progress { height: 3px; overflow: hidden; border-radius: 2px; background: #3a4435; margin-top: 25px; }
+.progress > span { height: 100%; width: 32%; display: block; background: #d3e3b9; animation: travel 2.6s ease-in-out infinite alternate; }
+.progressMeta { display: flex; justify-content: space-between; color: #acb9a1; font-size: 11px; margin-top: 10px; }
+.warning { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; margin-top: 14px; padding: 17px 15px; border: 1px solid #584932; border-radius: 11px; background: #28231b; color: #ddc49c; }
+.warning > span { flex: 1; }
+.warning strong { display: block; color: #ead6b7; font-size: 14px; font-weight: 500; }
+.warning > span > span { display: block; margin-top: 5px; color: #c6b494; font-size: 12px; line-height: 1.45; }
+.activity { margin-top: 22px; }
+.disclosure { border-bottom: 1px solid #2d3330; }
+.disclosure summary { display: flex; align-items: center; gap: 11px; min-height: 56px; list-style: none; cursor: pointer; color: #d2d8d1; font-size: 13px; }
+.disclosure summary::-webkit-details-marker { display: none; }
+.disclosure summary > svg:last-child { margin-left: auto; color: #879386; }
+.disclosure[open] summary > svg:last-child { transform: rotate(180deg); }
+.count { margin-left: auto; color: #a3ae9c; font-size: 12px; }
+.count + svg { margin-left: 3px !important; }
+.finishedIcon { color: #c2d6ac; display: grid; place-items: center; width: 18px; }
+.pendingIcon { border: 1px solid #7e8a74; width: 9px; height: 9px; border-radius: 50%; margin-inline: 5px 4px; }
+.disclosure ul { list-style: none; padding: 1px 0 15px 29px; }
+.disclosure li { display: flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.5; color: #b3beb0; padding: 9px 0; }
+.disclosure li > span { margin-left: auto; font-size: 11px; color: #9ba993; }
+.disclosure li.findingStep { color: #d8be94; }
+.technical { border-bottom: 0; }
+.technical summary { color: #a9b5a6; font-size: 12px; }
+.disclosure dl { padding-bottom: 16px; }
+.disclosure dl > div { display: flex; justify-content: space-between; gap: 15px; padding: 7px 0; font-size: 11px; }
+.disclosure dt { color: #9ba694; }
+.disclosure dd { color: #c7d1bf; overflow-wrap: anywhere; }
+.reviewIntro { margin-bottom: 22px; }
+.reviewIntro h2 { font-size: 26px; font-weight: 500; letter-spacing: -.045em; }
+.reviewIntro p { color: #aeb8a8; font-size: 14px; line-height: 1.7; margin-top: 9px; }
+.configuration { border: 1px solid #363d34; background: #1a1e1a; border-radius: 13px; padding: 0 17px; }
+.repo { padding: 19px 0; }
+.rowHeading { display: flex; align-items: center; gap: 8px; color: #b5c0ae; font-size: 12px; }
+.check { color: #c6d9b0; margin-left: auto; }
+.repo > p { margin-top: 13px; font-size: 13px; color: #b7c2af; }
+.repo strong { font-weight: 500; color: #ecf0e5; }
+.configRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 17px 0; border-top: 1px solid #353d32; font-size: 12px; }
+.configRow > span { color: #acb7a4; }
+.configRow strong { font-weight: 400; color: #e2e9d9; }
+.configRow .connected { display: flex; align-items: center; gap: 5px; color: #c7dbb1; }
+.publicNote { display: flex; align-items: flex-start; gap: 11px; margin-top: 23px; color: #b7c4aa; }
+.publicNote h3 { font-size: 14px; font-weight: 500; color: #e5ebde; }
+.publicNote p { font-size: 12px; line-height: 1.7; color: #a7b39c; margin-top: 6px; }
+.securityNote { font-size: 12px; line-height: 1.7; color: #a2af97; margin-top: 19px !important; padding-top: 17px; border-top: 1px solid #2e362a; }
+.actionBar { position: fixed; z-index: 10; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 560px); background: #111314; border-top: 1px solid #323830; padding: 16px 22px max(14px, env(safe-area-inset-bottom)); }
+.primary { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 51px; padding: 0 18px; background: #dce8c8; color: #1b2415; font-size: 14px; font-weight: 550; border-radius: 9px; }
+.primary:hover { background: #e7f1d7; }
+.previewNote { display: block; font-size: 10px; color: #9ba693; text-align: center; margin-top: 11px; }
+.sheet { width: min(100% - 16px, 540px); margin: auto auto 8px; padding: 23px; background: #20251e; color: #ecf0e5; border: 1px solid #4a5440; border-radius: 20px; max-height: 90svh; overflow: auto; }
+.sheet::backdrop { background: #050805bd; }
+.sheetHeader { display: flex; justify-content: space-between; align-items: center; color: #d6bc93; margin-bottom: 20px; }
+.sheetHeader button { display: grid; place-items: center; width: 44px; height: 44px; color: #d1dbc7; }
+.sheetApp { color: #acbaa0; font-size: 11px; }
+.sheet h2 { font-size: 27px; font-weight: 500; letter-spacing: -.045em; line-height: 1.2; margin-top: 10px; }
+.sheet > p { font-size: 14px; line-height: 1.7; color: #bfccb3; margin-top: 15px; }
+.unavailable { border-block: 1px solid #45513b; margin: 23px 0; padding: 19px 0; }
+.unavailable strong { font-size: 13px; font-weight: 500; }
+.unavailable p { color: #aebb9f; font-size: 12px; line-height: 1.8; margin-top: 9px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes travel { from { transform: translateX(0); } to { transform: translateX(210%); } }
+@media (min-width: 650px) { .canvas { padding: 36px 24px; } .app { border: 1px solid #30382b; border-radius: 18px; min-height: calc(100svh - 72px); padding-bottom: 0; overflow: hidden; } .main { padding: 28px 32px; } .header { margin-inline: 32px; } .actionBar { position: static; transform: none; padding: 22px 32px; } }
+@media (max-width: 359px) { .main { padding-inline: 17px; } .header { margin-inline: 17px; } .actionBar { padding-inline: 17px; } .identity { gap: 10px; } .identity h1 { font-size: 27px; } .appIcon { width: 43px; height: 49px; } .optionalBreak { display: none; } .warning { gap: 9px; } .warning > span > span { font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .spinner, .progress > span { animation: none; } }

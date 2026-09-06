@@ -1,0 +1,157 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  ArrowLeft, ArrowRight, Check, CheckCircle, Cube, CaretUpDown, ArrowUpRight, Plus,
+  GitBranch, ListChecks, MagnifyingGlass, Package, ShieldCheck,
+  Stack, TerminalWindow,
+} from "@phosphor-icons/react";
+import styles from "./space-force.module.css";
+
+const stages = [
+  { name: "Request submitted", state: "Complete", title: "Your request is on record.", description: "The Phoenix team’s platform request has been submitted with its product and organization details.", detail: "Submitted April 30, 2026 at 08:11", next: "Review the request record below." },
+  { name: "Under review", state: "Complete", title: "Review complete.", description: "The team’s request has passed review and moved to approval.", detail: "The approved request is the basis for provisioning.", next: "Continue to the current stage to see what happens next." },
+  { name: "Approved", state: "Current stage", title: "Preparing platform access", description: "Phoenix’s request is approved. Your tool accounts will be provisioned next.", detail: "Environment not active", next: "Explore the tools your team will use for development, delivery, and security review." },
+  { name: "Provisioning tools", state: "Not started", title: "Tool provisioning is next.", description: "Platform tool accounts will be set up for your team before the environment becomes active.", detail: "This stage has not started.", next: "No action is available at this stage yet." },
+  { name: "Active", state: "Not started", title: "Your destination: an active environment.", description: "The final stage marks the completion of the team’s platform onboarding.", detail: "Phoenix has not reached this stage.", next: "Return to Approved to see the current status." },
+];
+
+const services = [
+  { name: "GitLab", documentation: "https://docs.gitlab.com/", category: "Build & deliver", description: "Source control and continuous integration", detail: "Keep source code, merge requests, and CI pipelines together throughout delivery.", icon: GitBranch, capabilities: ["Source repositories", "Code review", "CI pipelines"] },
+  { name: "Argo CD", documentation: "https://argo-cd.readthedocs.io/en/stable/", category: "Build & deliver", description: "Continuous delivery for Kubernetes", detail: "Manage Kubernetes delivery from version-controlled application definitions.", icon: Stack, capabilities: ["Kubernetes delivery", "Git-based configuration", "Deployment visibility"] },
+  { name: "JFrog Artifactory", documentation: "https://docs.jfrog.com/artifactory/docs/getting-started", category: "Build & deliver", description: "Package and artifact management", detail: "Organize the packages and build artifacts your applications depend on.", icon: Package, capabilities: ["Artifact repositories", "Package storage", "Build artifacts"] },
+  { name: "Nucleus", documentation: "https://help.nucleussec.com/", category: "Security & compliance", description: "Vulnerability management", detail: "Bring vulnerability information together to support security review and remediation.", icon: ShieldCheck, capabilities: ["Vulnerability records", "Security review", "Remediation tracking"] },
+  { name: "Tracer", documentation: null, category: "Security & compliance", description: "Compliance traceability", detail: "Connect compliance information to the work and decisions behind a product.", icon: ListChecks, capabilities: ["Compliance records", "Traceability", "Review context"] },
+  { name: "SD Elements", documentation: "https://docs.sdelements.com/release/latest/guide/", category: "Security & compliance", description: "Security requirements", detail: "Identify and manage security requirements as part of the software delivery process.", icon: Cube, capabilities: ["Security requirements", "Development guidance", "Requirement tracking"] },
+];
+
+export function SpaceForceStudy({ screen }: { screen: string }) {
+  const isServices = screen === "services";
+  const [selectedStage, setSelectedStage] = useState(2);
+  const [selectedService, setSelectedService] = useState("GitLab");
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All services");
+  const [addedServices, setAddedServices] = useState<string[]>([]);
+  const isAdded = addedServices.includes(selectedService);
+  const currentStage = stages[selectedStage];
+  const selected = services.find((service) => service.name === selectedService) ?? services[0];
+  const SelectedIcon = selected.icon;
+  const visibleServices = services.filter((service) =>
+    (category === "All services" || category === service.category) &&
+    `${service.name} ${service.description}`.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  return (
+    <div className={styles.workspace}>
+      <aside className={styles.sidebar}>
+        <Link href="/studies/space-force/readiness" className={styles.brand} aria-label="Space Force Cloud Platform readiness">
+          <span className={styles.deltaMark}><Image src="/artifacts/redesigned/ussf-official-logo.png" alt="United States Space Force" width={200} height={272} className={styles.officialLogo} priority /></span>
+          <span>CLOUD PLATFORM</span>
+        </Link>
+        <div className={styles.teamPicker}>
+          <button className={styles.team} popoverTarget="team-picker" aria-label="Choose team, Phoenix" aria-haspopup="dialog">
+            <span className={styles.teamAvatar}>P</span>
+            <span className={styles.teamIdentity}><span>Workspace</span><strong>Phoenix</strong></span>
+            <CaretUpDown size={16} className={styles.teamCaret} />
+          </button>
+          <div id="team-picker" popover="auto" className={styles.teamMenu} role="dialog" aria-label="Choose team">
+            <p>Your workspaces</p>
+            <button popoverTarget="team-picker" popoverTargetAction="hide" aria-label="Phoenix, current workspace"><span className={styles.teamAvatar}>P</span><strong>Phoenix</strong><Check size={17} /></button>
+            <small>Phoenix is the workspace available in this preview.</small>
+          </div>
+        </div>
+        <nav className={styles.navigation} aria-label="Platform workspace">
+          <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Readiness<span className={styles.navCount}>3 / 5</span></Link>
+          <Link href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} />Services<span className={styles.navCount}>6</span></Link>
+        </nav>
+        <div className={styles.sidebarFoot}>
+          <Link href="/work/space-force-cloud-platform"><ArrowLeft size={15} /> Back to case study</Link>
+        </div>
+      </aside>
+
+      <div className={styles.main}>
+
+        <main id="main" className={styles.content}>
+          <div className={styles.pageTitle}>
+            <div><h1>{isServices ? "Platform services" : "Team readiness"}</h1><p>{isServices ? "Your software delivery toolkit." : "Phoenix / Phoenix Service"}</p></div>
+          </div>
+
+          {isServices ? (
+            <>
+              <div className={styles.catalogToolbar}>
+                <div className={styles.filters} aria-label="Filter services">
+                  {["All services", "Build & deliver", "Security & compliance"].map((item) => <button key={item} className={category === item ? styles.filterSelected : ""} aria-pressed={category === item} onClick={() => { setCategory(item); const firstMatch = services.find((service) => (item === "All services" || service.category === item) && `${service.name} ${service.description}`.toLowerCase().includes(search.toLowerCase())); if (firstMatch) setSelectedService(firstMatch.name); }}>{item}{item === "All services" && <span>6</span>}</button>)}
+                </div>
+                <label className={styles.search}><MagnifyingGlass size={17} /><input aria-label="Find a service" placeholder="Find a service" value={search} onChange={(event) => { const query = event.target.value; setSearch(query); const firstMatch = services.find((service) => (category === "All services" || service.category === category) && `${service.name} ${service.description}`.toLowerCase().includes(query.toLowerCase())); if (firstMatch) setSelectedService(firstMatch.name); }} /></label>
+              </div>
+              <div className={styles.catalogLayout}>
+                <section aria-label="Platform services" className={styles.serviceList}>
+                  <div className={styles.listHeading}><span>SERVICE</span><span>{visibleServices.length} AVAILABLE IN CATALOG</span></div>
+                  {visibleServices.map((service) => {
+                    const ServiceIcon = service.icon;
+                    return <button className={`${styles.serviceRow} ${selectedService === service.name ? styles.serviceSelected : ""}`} key={service.name} aria-pressed={selectedService === service.name} onClick={() => setSelectedService(service.name)}><span className={styles.serviceIcon}><ServiceIcon size={25} weight="light" /></span><span className={styles.serviceName}><strong>{service.name}</strong><span>{service.description}</span></span><ArrowRight className={styles.serviceArrow} size={18} /></button>;
+                  })}
+                  {visibleServices.length === 0 && <div className={styles.empty}>No services match “{search}”.<button onClick={() => { setSearch(""); setCategory("All services"); }}>Clear filters</button></div>}
+                </section>
+                <aside className={styles.serviceDetail} aria-live="polite">
+                  <div className={styles.detailIcon}><SelectedIcon size={34} weight="light" /></div>
+                  <p className={styles.kicker}>{selected.category}</p>
+                  <h2>{selected.name}</h2>
+                  <p>{selected.detail}</p>
+                  <div className={styles.capabilities}><span>USE IT FOR</span>{selected.capabilities.map((item) => <div key={item}><Check size={15} />{item}</div>)}</div>
+                  <div className={styles.serviceActions}>
+                    {selected.documentation ? <a className={styles.learnMore} href={selected.documentation} target="_blank" rel="noreferrer">Learn more<ArrowUpRight size={16} /></a> : <button className={styles.learnMore} disabled title="Public documentation is not available for this preview">Learn more<ArrowUpRight size={16} /></button>}
+                    <button className={styles.addService} disabled={isAdded} onClick={() => setAddedServices((items) => [...items, selected.name])}>{isAdded ? <Check size={17} /> : <Plus size={17} />}{isAdded ? "Added to my system" : "Add to my system"}</button>
+                  </div>
+                  {!selected.documentation && <p className={styles.documentationNote}>Public documentation isn’t available in this preview.</p>}
+                  <div className={styles.catalogNote}><TerminalWindow size={18} /><p>{isAdded ? `${selected.name} added to Phoenix in this preview. Live access has not been provisioned.` : "Add services to Phoenix in this preview. Live access is configured by the platform team."}{isAdded && <button className={styles.undoService} onClick={() => setAddedServices((items) => items.filter((name) => name !== selected.name))}>Undo</button>}</p></div>
+                </aside>
+              </div>
+              <div className={styles.servicesBottom}><Link href="/studies/space-force/readiness">View team readiness <ArrowRight size={16} /></Link></div>
+            </>
+          ) : (
+            <>
+              <div className={styles.onboardingLayout}>
+              <section className={styles.journey} aria-label="Onboarding stages">
+                <div className={styles.journeyHeader}><strong>Onboarding</strong><span>2 of 5 complete</span></div>
+                <div className={styles.stageTrack}>
+                  {stages.map((stage, index) => <button key={stage.name} onClick={() => setSelectedStage(index)} aria-label={`${stage.name}: ${stage.state}`} aria-current={index === 2 ? "step" : undefined} aria-pressed={selectedStage === index} className={`${styles.stage} ${index < 2 ? styles.stageComplete : ""} ${index === 2 ? styles.stageCurrent : ""} ${selectedStage === index ? styles.stageSelected : ""}`}><span className={styles.stageRail} /><span className={styles.stageNumber}>{index < 2 ? <Check size={14} weight="bold" /> : index + 1}</span><strong>{stage.name}</strong><span className={styles.stageState}>{stage.state}</span></button>)}
+                </div>
+              </section>
+
+              <div className={styles.readinessLayout}>
+                <section className={styles.openDetail} aria-live="polite">
+                  <div className={styles.detailHeading}>
+                    <h2>{selectedStage === 2 ? "Phoenix is approved." : currentStage.title}</h2>
+                    {selectedStage === 2 && <CheckCircle size={28} weight="light" aria-label="Approved" />}
+                  </div>
+                  <p className={styles.detailIntro}>{selectedStage === 2 ? "Your platform request has cleared review. Next, the platform team will provision your tool accounts." : currentStage.description}</p>
+                  {selectedStage === 2 ? <>
+                    <dl className={styles.accessFacts}>
+                      <div><dt>Environment</dt><dd>Not active</dd></div>
+                      <div><dt>Next stage</dt><dd>Provisioning tools</dd></div>
+                    </dl>
+                    <Link className={styles.serviceShortcut} href="/studies/space-force/services">
+                      <Stack size={24} weight="light" />
+                      <span><strong>Explore platform services</strong><span>Six tools for development, delivery, and security.</span></span>
+                      <ArrowRight size={21} />
+                    </Link>
+                  </> : <div className={styles.otherStage}><p>{currentStage.detail}</p><p>{currentStage.next}</p></div>}
+                </section>
+
+                <details className={styles.requestRecord}>
+                  <summary>Request record <span>Phoenix · Submitted April 30, 2026</span></summary>
+                  <dl><div><dt>Organization</dt><dd>Platform</dd></div><div><dt>Product</dt><dd>Phoenix Service</dd></div><div><dt>Project type</dt><dd>New project</dd></div><div><dt>Target go-live</dt><dd>Jun 1, 2026</dd></div><div><dt>Submitted</dt><dd>Apr 30, 2026 <span>08:11</span></dd></div></dl>
+                  <div className={styles.repository}><GitBranch size={18} /><div><span>TEAM REPOSITORY</span><strong>tenants / phoenix</strong></div></div>
+                </details>
+              </div>
+              </div>
+            </>
+          )}
+        </main>
+      </div>
+    </div>
+  );
+}

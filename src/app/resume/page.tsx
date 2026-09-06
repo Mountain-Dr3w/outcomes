@@ -57,10 +57,10 @@ export default function ResumePage() {
             <p className="font-mono text-sm text-[var(--accent)]">resume</p>
           </div>
           <div>
-            <h1 className="max-w-3xl font-serif text-4xl font-light italic leading-tight text-[var(--text-primary)] sm:text-5xl">
+            <h1 className="max-w-3xl font-sans text-4xl font-normal leading-tight text-[var(--text-primary)] sm:text-5xl">
               {resume.name}
             </h1>
-            <p className="mt-6 max-w-3xl font-serif text-xl leading-9 text-[var(--text-secondary)] sm:text-2xl sm:leading-10">
+            <p className="mt-6 max-w-3xl font-sans text-xl leading-9 text-[var(--text-secondary)] sm:text-2xl sm:leading-10">
               {resume.headline}
             </p>
             <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2 font-mono text-sm text-[var(--text-muted)]">
@@ -96,7 +96,7 @@ export default function ResumePage() {
           <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
             {resume.experience.map((item) => (
               <article key={item.organization} className="py-8 sm:px-6 sm:py-10">
-                <h3 className="font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
+                <h3 className="font-sans text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
                   {item.organization}
                 </h3>
 

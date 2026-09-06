@@ -1,0 +1,7 @@
+.preview { height: 660px; display: flex; align-items: center; justify-content: center; gap: 38px; padding: 32px; background: #dad7cb; overflow: hidden; }
+.preview img { height: 94%; width: auto; max-width: 44%; object-fit: contain; background: #f3f0e8; border: 4px solid #b9b7aa; border-radius: 26px; }
+.preview img:first-child { transform: translateY(-12px); }
+.preview img:last-child { transform: translateY(12px); }
+.compact { height: 100%; gap: 24px; padding: 22px; }
+.compact img { border-width: 3px; border-radius: 19px; }
+@media (max-width: 767px) { .preview { height: 425px; gap: 19px; padding: 18px; } .preview img { border-width: 3px; border-radius: 19px; } .compact { height: 100%; padding: 14px; gap: 15px; } .compact img { border-width: 2px; border-radius: 13px; } }

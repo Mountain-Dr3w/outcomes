@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Lora } from "next/font/google";
+import localFont from "next/font/local";
 
 import "./globals.css";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "./fonts/geist-latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/geist-mono-latin.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin"],
   display: "swap",
 });
 
@@ -28,11 +22,11 @@ export const metadata: Metadata = {
     template: "%s | Drew McFarland",
   },
   description:
-    "Drew McFarland's product design work across government, defense, and developer tools.",
+    "Product design for the mission ahead. Product design by Drew McFarland across government, defense, and developer tools.",
   openGraph: {
     title: "Drew McFarland",
     description:
-      "Case studies in GovTech, defense, and developer infrastructure from a product designer who also builds.",
+      "Product design for the mission ahead. Explore Drew McFarland’s product design work in mission planning, cloud platforms, and developer tools.",
     url: "https://work.velveteen.sh",
     siteName: "Drew McFarland",
     type: "website",
@@ -48,7 +42,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} ${lora.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <a className="skip-link" href="#main">

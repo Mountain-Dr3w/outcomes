@@ -1,347 +1,113 @@
+import coverageStyles from "@/components/press-coverage.module.css";
+import { EmmyPreview } from "@/components/emmy-preview";
 import type { Metadata } from "next";
-import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SbirPreview } from "@/components/sbir-preview";
+import { VelveteenPreview } from "@/components/velveteen-preview";
+import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { getNextWorkBySlug, getWorkBySlug, type WorkVisual, workItems } from "@/lib/work";
 
-import { MagneticLink } from "@/components/magnetic-link";
-import { Reveal } from "@/components/reveal";
-import {
-  getNextWorkBySlug,
-  getWorkBySlug,
-  type WorkVisual,
-  workItems,
-} from "@/lib/work";
-
-interface WorkPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+interface WorkPageProps { params: Promise<{ slug: string }> }
 
 export function generateStaticParams() {
-  return workItems.map((item) => ({
-    slug: item.slug,
-  }));
+  return workItems.map((item) => ({ slug: item.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: WorkPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: WorkPageProps): Promise<Metadata> {
   const { slug } = await params;
   const item = getWorkBySlug(slug);
-
-  if (!item) {
-    return {};
-  }
-
+  if (!item) return {};
   return {
     title: item.title,
     description: item.outcome,
-    openGraph: {
-      title: `${item.title} | Drew McFarland`,
-      description: item.outcome,
-      url: `/work/${item.slug}`,
-    },
+    alternates: { canonical: `/work/${item.slug}` },
+    openGraph: { title: `${item.title} | Drew McFarland`, description: item.outcome, url: `/work/${item.slug}` },
   };
 }
 
 export default async function WorkPage({ params }: WorkPageProps) {
   const { slug } = await params;
   const item = getWorkBySlug(slug);
-
-  if (!item) {
-    notFound();
-  }
-
+  if (!item) notFound();
   const nextItem = getNextWorkBySlug(item.slug);
 
   return (
-    <main id="main" className="min-h-[100dvh]">
-      <section className="px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[0.62fr_1.38fr]">
-          <aside className="lg:sticky lg:top-10 lg:self-start">
-            <Link
-              href="/#work"
-              className="group -mx-2 inline-flex min-h-11 items-center gap-2 px-2 font-mono text-sm font-medium text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
-            >
-              <ArrowLeftIcon
-                aria-hidden="true"
-                className="transition-transform group-hover:-translate-x-0.5"
-                size={14}
-                weight="bold"
-              />
-              back to case studies
-            </Link>
-            <h1 className="mt-5 font-serif text-5xl leading-[0.98] text-[var(--text-primary)] sm:text-6xl">
-              {item.title}
-            </h1>
-            <p className="mt-5 max-w-xs font-mono text-xs leading-6 text-[var(--text-muted)]">
-              {item.year}
-              <span aria-hidden="true"> · </span>
-              {item.status}
-            </p>
-            <div className="mt-8 border-y border-[var(--border)] py-6">
-              <p className="font-mono text-xs text-[var(--text-muted)]">
-                role
-              </p>
-              <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">
-                {item.role}
-              </p>
-            </div>
-            {item.links.length ? (
-              <div className="mt-8 flex flex-wrap gap-3">
-                {item.links.map((link) => (
-                  <MagneticLink key={link.href} href={link.href} external>
-                    {link.label}
-                  </MagneticLink>
-                ))}
-              </div>
-            ) : null}
-          </aside>
-
-          <div>
-            <Reveal>
-              <p className="max-w-4xl text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl lg:text-[2.75rem]">
-                {item.outcome}
-              </p>
-              <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">
-                {item.summary}
-              </p>
-              <dl className="mt-9 grid border-y border-[var(--border)] sm:grid-cols-[0.8fr_1.2fr] sm:divide-x sm:divide-[var(--border)]">
-                <div className="border-b border-[var(--border)] py-5 sm:border-b-0 sm:pr-6">
-                  <dt className="font-mono text-xs text-[var(--accent)]">
-                    for
-                  </dt>
-                  <dd className="mt-3 text-sm leading-6 text-[var(--text-primary)]">
-                    {item.audience}
-                  </dd>
-                </div>
-                <div className="py-5 sm:pl-6">
-                  <dt className="font-mono text-xs text-[var(--accent)]">
-                    what changed
-                  </dt>
-                  <dd className="mt-3 text-sm leading-6 text-[var(--text-primary)]">
-                    {item.result}
-                  </dd>
-                </div>
-              </dl>
-            </Reveal>
-
-            <section className="mt-16 grid gap-12">
-              {item.sections.map((section, index) => (
-                <CaseStudySection
-                  key={section.title}
-                  title={section.title}
-                  body={section.body}
-                  visuals={item.visuals?.filter(
-                    (visual) => visual.afterSection === index,
-                  )}
-                  delay={index * 0.04}
-                />
-              ))}
-            </section>
-
-            <Reveal>
-              <section className="mt-16 border-t border-[var(--border)] pt-8">
-                <h2 className="font-mono text-sm text-[var(--accent)]">
-                  what came out of it
-                </h2>
-                <ul className="mt-6 divide-y divide-[var(--border)] border-y border-[var(--border)]">
-                  {item.highlights.map((highlight) => (
-                    <li
-                      key={highlight.label}
-                      className="grid gap-3 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6 sm:px-4"
-                    >
-                      <p className="font-semibold text-[var(--text-primary)]">
-                        {highlight.label}
-                      </p>
-                      <p className="text-base leading-7 text-[var(--text-secondary)]">
-                        {highlight.body}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </Reveal>
-
-            <Reveal>
-              <section
-                aria-labelledby="continue-heading"
-                className="mt-20 grid gap-8 border-t border-[var(--border)] pt-8 sm:grid-cols-[0.22fr_1fr]"
-              >
-                <h2
-                  id="continue-heading"
-                  className="font-mono text-sm text-[var(--accent)]"
-                >
-                  continue
-                </h2>
-                <div>
-                  <p className="font-mono text-xs text-[var(--text-muted)]">
-                    next case
-                  </p>
-                  <Link
-                    href={`/work/${nextItem.slug}`}
-                    className="group mt-3 inline-flex items-baseline gap-3 font-serif text-3xl text-[var(--text-primary)] transition-colors hover:text-[var(--accent)] sm:text-4xl"
-                  >
-                    {nextItem.title}
-                    <span
-                      aria-hidden="true"
-                      className="font-sans text-xl transition-transform group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </Link>
-                  <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-[var(--text-muted)]">
-                    <Link
-                      href="/resume"
-                      className="inline-flex min-h-11 items-center transition-colors hover:text-[var(--accent)]"
-                    >
-                      resume
-                    </Link>
-                    <a
-                      href="mailto:drewjmcfarland@live.com"
-                      className="inline-flex min-h-11 items-center transition-colors hover:text-[var(--accent)]"
-                    >
-                      email Drew
-                    </a>
-                    <Link
-                      href="/#work"
-                      className="inline-flex min-h-11 items-center transition-colors hover:text-[var(--accent)]"
-                    >
-                      all work
-                    </Link>
-                  </div>
-                </div>
-              </section>
-            </Reveal>
+    <>
+      <SiteHeader />
+      <main id="main" className={`page-shell case-page-${item.slug}`}>
+        <header className="case-top">
+          <Link className="back-link" href="/#work"><span aria-hidden="true">←</span> All work</Link>
+          <div className="case-heading">
+            <div><h1>{item.title}</h1></div>
+            <p className="case-deck">{item.outcome}</p>
           </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-function SectionVisuals({
-  visuals,
-}: {
-  visuals: WorkVisual[];
-}) {
-  const phoneVisualSizes =
-    "(max-width: 639px) 13rem, (max-width: 1023px) calc(33.333vw - 3.167rem), calc(23vw - 3.917rem)";
-  const insetVisualSizes =
-    "(max-width: 639px) calc(100vw - 4rem), (max-width: 1023px) calc(100vw - 6.5rem), calc(69vw - 8.75rem)";
-  const edgeToEdgeVisualSizes =
-    "(max-width: 639px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 4rem), calc(69vw - 6.25rem)";
-  const phoneVisuals = visuals.filter((visual) => visual.layout === "phone");
-  const standardVisuals = visuals.filter((visual) => visual.layout !== "phone");
-
-  return (
-    <div className="mt-10 grid gap-8 border-y border-[var(--border)] py-8">
-      {phoneVisuals.length ? (
-        <div className="overflow-x-auto pb-3">
-          <div className="grid grid-flow-col auto-cols-[minmax(12rem,14rem)] gap-5 sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible">
-            {phoneVisuals.map((visual) => (
-              <figure key={visual.src} className="grid gap-3">
-                <a
-                  href={visual.src}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-[2.35rem] bg-black p-2 shadow-[0_28px_70px_rgba(0,0,0,0.35)] transition-transform hover:-translate-y-1"
-                >
-                  <Image
-                    src={visual.src}
-                    alt={visual.alt}
-                    width={visual.width}
-                    height={visual.height}
-                    sizes={phoneVisualSizes}
-                    className="h-auto w-full rounded-[1.8rem]"
-                  />
-                </a>
-                <figcaption className="border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)]">
-                  <span className="block text-[var(--accent)]">
-                    {visual.label}
-                  </span>
-                  <span>{visual.caption}</span>
-                </figcaption>
-              </figure>
+          <dl className="case-facts">
+            <div><dt className="eyebrow">My role</dt><dd>{item.role}</dd></div>
+            <div><dt className="eyebrow">Project</dt><dd>{item.status}</dd></div>
+            <div><dt className="eyebrow">Who it’s for</dt><dd>{item.audience}</dd></div>
+          </dl>
+        </header>
+        {item.metrics && <dl className="case-metrics" aria-label="Project results">{item.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd>{metric.context && <p>{metric.context}</p>}</div>)}</dl>}
+        {item.slug === "emmys-milestones" ? <EmmyPreview /> : item.slug === "sbir-radar" ? <SbirPreview /> : item.slug === "velveteen" ? <VelveteenPreview /> : item.cover && <figure className={`case-cover case-cover-${item.slug}`}>
+          <Image src={item.cover.src} alt={item.cover.alt} width={item.cover.width} height={item.cover.height} sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 96px), 1320px" preload />
+        </figure>}
+        <div className="case-body">
+          <nav className="case-toc" aria-label="Case study chapters">
+            <ol>{item.sections.map((section, index) => <li key={section.title}><a href={`#chapter-${index + 1}`}>{section.title}</a></li>)}{item.coverage?.length ? <li><a href="#in-the-news">In the news</a></li> : null}</ol>
+            {item.links.length > 0 && <div className="case-external">{item.links.map(link => <a className="text-link" key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div>}
+          </nav>
+          <article className="case-prose" aria-label={`${item.title} case study`}>
+            <p className="case-summary">{item.summary}</p>
+            {item.sections.map((section, index) => (
+              <section className="story-section" id={`chapter-${index + 1}`} key={section.title} aria-labelledby={`heading-${index + 1}`}>
+                <h2 id={`heading-${index + 1}`}>{section.title}</h2>
+                {section.body.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                <SectionVisuals visuals={item.visuals?.filter(visual => visual.afterSection === index) || []} />
+              </section>
             ))}
-          </div>
+            {item.coverage?.length ? <section className={`story-section ${coverageStyles.coverage}`} id="in-the-news" aria-labelledby="coverage-heading">
+              <h2 id="coverage-heading">In the news</h2>
+              <p className={coverageStyles.context}>Public reporting on Jigsaw’s development and adoption. These articles cover the broader program at different stages; their reported results are separate from the project outcomes above.</p>
+              <ul className={coverageStyles.list}>
+                {item.coverage.map(article => <li key={article.href}>
+                  <a href={article.href} target="_blank" rel="noreferrer">
+                    <div className={coverageStyles.meta}><span>{article.publisher}</span><time dateTime={article.date}>{article.dateLabel}</time></div>
+                    <h3>{article.title}<span aria-hidden="true">↗</span></h3>
+                    <p>{article.summary}</p>
+                  </a>
+                </li>)}
+              </ul>
+            </section> : null}
+            {item.provenance && <p className="case-note">{item.provenance}</p>}
+          </article>
         </div>
-      ) : null}
-
-      {standardVisuals.map((visual) => {
-        const isWide = visual.layout === "wide";
-        const isLandscape = visual.layout === "landscape";
-
-        return (
-          <figure key={visual.src} className="grid gap-3">
-            <div
-              className={[
-                "artifact-shadow overflow-hidden border border-[var(--border-strong)] bg-[var(--bg-raised)]",
-                isLandscape ? "p-3 sm:p-5" : "",
-                isWide ? "overflow-x-auto" : "",
-              ].join(" ")}
-            >
-              <a
-                href={visual.src}
-                target="_blank"
-                rel="noreferrer"
-                className={isLandscape ? "block" : undefined}
-              >
-                <Image
-                  src={visual.src}
-                  alt={visual.alt}
-                  width={visual.width}
-                  height={visual.height}
-                  sizes={
-                    isLandscape ? insetVisualSizes : edgeToEdgeVisualSizes
-                  }
-                  className={
-                    isLandscape
-                      ? "h-auto w-full"
-                      : isWide
-                        ? "h-auto w-full max-w-none"
-                        : "h-[30rem] w-full object-cover object-top sm:h-[38rem]"
-                  }
-                />
-              </a>
-            </div>
-            <figcaption className="grid gap-2 border-t border-[var(--border)] pt-3 font-mono text-xs leading-6 text-[var(--text-muted)] sm:grid-cols-[8rem_1fr]">
-              <span className="text-[var(--accent)]">{visual.label}</span>
-              <span>{visual.caption}</span>
-            </figcaption>
-          </figure>
-        );
-      })}
-    </div>
+        <section className="next-case" aria-labelledby="next-heading">
+          <h2 id="next-heading" className="eyebrow">Next case study</h2>
+          <Link href={`/work/${nextItem.slug}`}><span>{nextItem.title}</span><span aria-hidden="true">→</span></Link>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
 
-function CaseStudySection({
-  title,
-  body,
-  visuals,
-  delay,
-}: {
-  title: string;
-  body: string[];
-  visuals?: WorkVisual[];
-  delay: number;
-}) {
-  return (
-    <Reveal delay={delay}>
-      <article className="border-t border-[var(--border)] pt-8">
-        <h2 className="max-w-3xl font-serif text-3xl leading-tight text-[var(--text-primary)] sm:text-4xl">
-          {title}
-        </h2>
-        <div className="mt-6 grid max-w-3xl gap-5 text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
-          {body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-        {visuals?.length ? <SectionVisuals visuals={visuals} /> : null}
-      </article>
-    </Reveal>
-  );
+function SectionVisuals({ visuals }: { visuals: WorkVisual[] }) {
+  if (!visuals.length) return null;
+  const phones = visuals.filter(visual => visual.layout === "phone");
+  const standard = visuals.filter(visual => visual.layout !== "phone");
+  return <div className="story-visuals">
+    {standard.map(visual => <Artifact key={visual.src} visual={visual} />)}
+    {phones.length > 0 && <div className="story-phones">{phones.map(visual => <Artifact key={visual.src} visual={visual} />)}</div>}
+  </div>;
+}
+
+function Artifact({ visual }: { visual: WorkVisual }) {
+  return <figure className="story-visual">
+    <a href={visual.src} target="_blank" rel="noreferrer" aria-label={`Open full-size image: ${visual.label}`}>
+      <Image src={visual.src} alt={visual.alt} width={visual.width} height={visual.height} sizes={visual.layout === "phone" ? "(max-width: 767px) 44vw, 280px" : "(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 96px), 1320px"} />
+    </a>
+    <figcaption><span>{visual.label}</span><span>{visual.caption}</span></figcaption>
+  </figure>;
 }
