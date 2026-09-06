@@ -333,7 +333,7 @@ export const workItems: WorkItem[] = [
       },
     ],
     cover: {
-      src: "/artifacts/redesigned/sfcp-nav-readiness.png",
+      src: "/artifacts/redesigned/sfcp-onboarding-current.png",
       alt: "Redesigned onboarding portal showing the Phoenix team at the approved stage, its next step, and its request record.",
       width: 1440,
       height: 1000,
@@ -419,7 +419,7 @@ export const workItems: WorkItem[] = [
       {
         afterSection: 2,
         label: "Onboarding readiness",
-        src: "/artifacts/redesigned/sfcp-nav-readiness.png",
+        src: "/artifacts/redesigned/sfcp-onboarding-current.png",
         alt: "Refreshed Space Force Cloud Platform readiness screen with five onboarding stages, approval details, and the Phoenix request record.",
         caption:
           "Refreshed design: the current status leads the page, beside a five-step onboarding sequence. Phoenix is approved, but its environment is not active. The request record opens below.",
@@ -430,7 +430,7 @@ export const workItems: WorkItem[] = [
       {
         afterSection: 2,
         label: "Services hub",
-        src: "/artifacts/redesigned/sfcp-nav-services.png",
+        src: "/artifacts/redesigned/sfcp-services-current.png",
         alt: "Refreshed Space Force Cloud Platform catalog showing six development tools, category filters, search, and selected-service details.",
         caption:
           "Refreshed design: a searchable list replaces the tool grid. Selecting a service explains its purpose; catalog availability does not imply that the team has access.",
@@ -465,8 +465,8 @@ export function getWorkBySlug(slug: string): WorkItem | undefined {
 
 const displayOrder: WorkSlug[] = [
   "jigsaw",
-  "space-force-cloud-platform",
   "isr-crew",
+  "space-force-cloud-platform",
   "emmys-milestones",
   "velveteen",
   "veriflux",

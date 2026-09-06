@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight, Check, CheckCircle, Cube, CaretUpDown, ArrowUpRight, Plus,
   GitBranch, ListChecks, MagnifyingGlass, Package, ShieldCheck,
-  Stack, TerminalWindow,
+  Stack, Buildings, Globe, RocketLaunch, Users, Key, Lifebuoy, BookOpen, X,
 } from "@phosphor-icons/react";
 import styles from "./space-force.module.css";
 
@@ -28,6 +28,9 @@ const services = [
 ];
 
 export function SpaceForceStudy({ screen }: { screen: string }) {
+  const navDialog = useRef<HTMLDialogElement>(null);
+  const [navDestination, setNavDestination] = useState("");
+  const openDestination = (name: string) => { setNavDestination(name); navDialog.current?.showModal(); };
   const isServices = screen === "services";
   const [selectedStage, setSelectedStage] = useState(2);
   const [selectedService, setSelectedService] = useState("GitLab");
@@ -46,7 +49,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
   return (
     <div className={styles.workspace}>
       <aside className={styles.sidebar}>
-        <Link href="/studies/space-force/readiness" className={styles.brand} aria-label="Space Force Cloud Platform readiness">
+        <Link href="/studies/space-force/readiness" className={styles.brand} aria-label="Space Force Cloud Platform onboarding">
           <span className={styles.deltaMark}><Image src="/artifacts/redesigned/ussf-official-logo.png" alt="United States Space Force" width={200} height={272} className={styles.officialLogo} priority /></span>
           <span>SFCP</span>
         </Link>
@@ -63,18 +66,29 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
           </div>
         </div>
         <nav className={styles.navigation} aria-label="Platform workspace">
-          <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Readiness<span className={styles.navCount}>2 / 5</span></Link>
-          <Link href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} />Services<span className={styles.navCount}>6</span></Link>
+          <p className={styles.navLabel}>Workspace</p>
+          <Link href="/studies/space-force/readiness" className={!isServices ? styles.navActive : ""} aria-current={!isServices ? "page" : undefined}><CheckCircle size={19} />Onboarding<span className={styles.navCount}>2 / 5</span></Link>
+          <button onClick={()=>openDestination("Systems")}><Buildings size={19}/>Systems</button>
+          <button onClick={()=>openDestination("Environments")}><Globe size={19}/>Environments</button>
+          <p className={styles.navLabel}>Delivery</p>
+          <Link href="/studies/space-force/services" className={isServices ? styles.navActive : ""} aria-current={isServices ? "page" : undefined}><Stack size={19} />Platform services<span className={styles.navCount}>6</span></Link>
+          <button onClick={()=>openDestination("Deployments")}><RocketLaunch size={19}/>Deployments</button>
+          <button onClick={()=>openDestination("Security & compliance")}><ShieldCheck size={19}/>Security &amp; compliance</button>
+          <p className={styles.navLabel}>Team</p>
+          <button onClick={()=>openDestination("Members")}><Users size={19}/>Members</button>
+          <button onClick={()=>openDestination("Access requests")}><Key size={19}/>Access requests</button>
         </nav>
+        <div className={styles.supportNav}><button onClick={()=>openDestination("Documentation")}><BookOpen size={18}/>Documentation</button><button onClick={()=>openDestination("Platform support")}><Lifebuoy size={18}/>Platform support</button></div>
 
       </aside>
 
+      <dialog ref={navDialog} className={styles.navDialog}><div><h2>{navDestination}</h2><button aria-label="Close" onClick={()=>navDialog.current?.close()}><X size={20}/></button></div><p>This section is available in the working app. You can explore Onboarding and Platform services in this prototype.</p><button className={styles.navDismiss} onClick={()=>navDialog.current?.close()}>Got it</button></dialog>
       <div className={styles.main}>
         <div className={styles.contextBar}><span>Phoenix <span>/</span> Phoenix Service</span><span className={styles.environmentStatus}><span />Environment pending</span></div>
 
         <main id="main" className={styles.content}>
           <div className={styles.pageTitle}>
-            <div><h1>{isServices ? "Platform services" : "Team readiness"}</h1><p>{isServices ? "Connect your system to platform-managed delivery and security tools." : "Track access, approval, and provisioning for Phoenix Service."}</p></div>
+            <div><h1>{isServices ? "Platform services" : "Team onboarding"}</h1><p>{isServices ? "Connect your system to platform-managed delivery and security tools." : "Track access, approval, and provisioning for Phoenix Service."}</p></div>
           </div>
 
           {isServices ? (
@@ -105,11 +119,9 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
                     {selected.documentation ? <a className={styles.learnMore} href={selected.documentation} target="_blank" rel="noreferrer">Learn more<ArrowUpRight size={16} /></a> : <button className={styles.learnMore} disabled title="Public documentation is not available for this preview">Learn more<ArrowUpRight size={16} /></button>}
                     <button className={styles.addService} disabled={isAdded} onClick={() => setAddedServices((items) => [...items, selected.name])}>{isAdded ? <Check size={17} /> : <Plus size={17} />}{isAdded ? "Added to my system" : "Add to my system"}</button>
                   </div>
-                  {!selected.documentation && <p className={styles.documentationNote}>Public documentation isn’t available in this preview.</p>}
-                  <div className={styles.catalogNote}><TerminalWindow size={18} /><p>{isAdded ? `${selected.name} added to Phoenix in this preview. Live access has not been provisioned.` : "Add services to Phoenix in this preview. Live access is configured by the platform team."}{isAdded && <button className={styles.undoService} onClick={() => setAddedServices((items) => items.filter((name) => name !== selected.name))}>Undo</button>}</p></div>
                 </aside>
               </div>
-              <div className={styles.servicesBottom}><Link href="/studies/space-force/readiness">View team readiness <ArrowRight size={16} /></Link></div>
+              <div className={styles.servicesBottom}><Link href="/studies/space-force/readiness">View team onboarding <ArrowRight size={16} /></Link></div>
             </>
           ) : (
             <>
