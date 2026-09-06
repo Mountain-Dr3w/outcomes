@@ -162,7 +162,7 @@ export const legacyWorkItems: WorkItem[] = [
     provenance:
       "I delivered the route and material-reporting designs for Veriflux. The screens shown here update that work for 2026, keeping the same workflows and product identity. The interactive example uses illustrative data.",
     cover: {
-      src: "/artifacts/redesigned/veriflux-routes-reviewed.png",
+      src: "/artifacts/redesigned/veriflux-routes-aligned.png",
       alt: "Current Veriflux redesign with route filters, collection progress, a Washington-area map, and selected-route details.",
       width: 1440,
       height: 900,
@@ -214,7 +214,7 @@ export const legacyWorkItems: WorkItem[] = [
       {
         afterSection: 1,
         label: "Collection routes",
-        src: "/artifacts/redesigned/veriflux-routes-reviewed.png",
+        src: "/artifacts/redesigned/veriflux-routes-aligned.png",
         alt: "Veriflux web redesign showing searchable route rows, pickup progress, and a selected route beside the collection map.",
         caption:
           "The route list keeps driver, pickup progress, and estimated load visible beside the map. Selecting a route reveals its collection window and stops.",
@@ -225,7 +225,7 @@ export const legacyWorkItems: WorkItem[] = [
       {
         afterSection: 2,
         label: "Material reporting",
-        src: "/artifacts/redesigned/veriflux-home-reviewed.png",
+        src: "/artifacts/redesigned/veriflux-home-nav-final.png",
         alt: "Veriflux reporting design showing material stages, offloaded weight, pickup counts, and driver activity.",
         caption:
           "Material stages, offloaded weight, and driver activity share one view. A stage filter isolates each series, with daily weights in the table below.",

@@ -1,3 +1,5 @@
+import { hasCaseAccess } from "@/lib/case-access";
+import { CasePasswordGate } from "@/components/case-password-gate";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VerifluxStudy } from "@/components/studies/veriflux";
@@ -24,6 +26,7 @@ export function generateStaticParams() {
 export default async function StudyPage({ params, searchParams }: { params: Promise<{ product: string; screen: string }>; searchParams: Promise<{ date?: string }> }) {
   const { product, screen } = await params;
   if (!screens[product]?.includes(screen)) notFound();
+  if (!(await hasCaseAccess())) return <CasePasswordGate title="Explore the design" />;
   if (product === "veriflux") {
     const { date } = await searchParams;
     const initialDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(date)) ? date : "2025-05-12";

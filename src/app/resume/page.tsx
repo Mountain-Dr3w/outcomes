@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <main id="main" className="min-h-[100dvh]">
+    <main id="main" className="portfolio-resume min-h-[100dvh]">
       <header className="mx-auto max-w-5xl px-5 py-8 sm:px-8 sm:py-12 lg:max-w-6xl">
         <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-sm">
           <Link

@@ -15,14 +15,18 @@ function depthOpacity(line: number, time = 0) {
   return 1 - t * t * (3 - 2 * t);
 }
 
+function terrainHeight(x: number, worldZ: number) {
+  const ridges = (Math.sin(x * .57 + worldZ * .31) * .5 + .5)
+    * (Math.cos(worldZ * .42 - x * .19) * .5 + .5);
+  return ridges * 1.65 + .07 * Math.sin(x * 1.2 + worldZ * .7);
+}
+
 function point(u: number, line: number, pointer: number, time = 0) {
   const travel = time * .35;
   const z = 1.3 + line * .48 - travel % .48;
   const worldZ = z + travel;
   const x = (u - .5) * 28;
-  const ridges = (Math.sin(x * .57 + worldZ * .31) * .5 + .5)
-    * (Math.cos(worldZ * .42 - x * .19) * .5 + .5);
-  const relief = ridges * 1.65 + .07 * Math.sin(x * 1.2 + worldZ * .7);
+  const relief = terrainHeight(x, worldZ);
   return [600 + (x - pointer * .4) * 570 / z,
     80 + (2.7 - relief) * 570 / z] as const;
 }

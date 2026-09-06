@@ -1,3 +1,5 @@
+import { hasCaseAccess } from "@/lib/case-access";
+import { CasePasswordGate } from "@/components/case-password-gate";
 import coverageStyles from "@/components/press-coverage.module.css";
 import { EmmyPreview } from "@/components/emmy-preview";
 import type { Metadata } from "next";
@@ -31,6 +33,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
   const { slug } = await params;
   const item = getWorkBySlug(slug);
   if (!item) notFound();
+  if (!(await hasCaseAccess())) return <><SiteHeader /><CasePasswordGate title={item.title} /><SiteFooter /></>;
   const nextItem = getNextWorkBySlug(item.slug);
 
   return (
@@ -38,7 +41,10 @@ export default async function WorkPage({ params }: WorkPageProps) {
       <SiteHeader />
       <main id="main" className={`page-shell case-page-${item.slug}`}>
         <header className="case-top">
+          <div className="case-topbar">
           <Link className="back-link" href="/#work"><span aria-hidden="true">←</span> All work</Link>
+            {item.links.length > 0 && <div className="case-external">{item.links.map(link => <a className={`text-link${link.href.startsWith("/studies/") ? " design-preview-link" : ""}`} key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div>}
+          </div>
           <div className="case-heading">
             <div><h1>{item.title}</h1></div>
             <p className="case-deck">{item.outcome}</p>
@@ -49,14 +55,12 @@ export default async function WorkPage({ params }: WorkPageProps) {
             <div><dt className="eyebrow">Impact</dt><dd>{item.overview.impact}</dd></div>
           </dl>
         </header>
-        {item.metrics && <dl className="case-metrics" aria-label="Project results">{item.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd>{metric.context && <p>{metric.context}</p>}</div>)}</dl>}
         {item.slug === "emmys-milestones" ? <EmmyPreview /> : item.slug === "sbir-radar" ? <SbirPreview /> : item.slug === "velveteen" ? <VelveteenPreview /> : item.cover && <figure className={`case-cover case-cover-${item.slug}`}>
           <Image src={item.cover.src} alt={item.cover.alt} width={item.cover.width} height={item.cover.height} sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 96px), 1320px" preload />
         </figure>}
         <div className="case-body">
           <nav className="case-toc" aria-label="Case study chapters">
-            <ol>{item.sections.map((section, index) => <li key={section.title}><a href={`#chapter-${index + 1}`}>{section.title}</a></li>)}{item.coverage?.length ? <li><a href="#in-the-news">In the news</a></li> : null}</ol>
-            {item.links.length > 0 && <div className="case-external">{item.links.map(link => <a className={`text-link${link.href.startsWith("/studies/") ? " design-preview-link" : ""}`} key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div>}
+            <ol>{item.sections.map((section, index) => <li key={section.title}><a href={`#chapter-${index + 1}`}>{section.title}</a></li>)}{item.coverage?.length ? <li><a href="#in-the-news">In the news</a></li> : null}{item.metrics?.length ? <li><a href="#impact">Impact</a></li> : null}</ol>
           </nav>
           <article className="case-prose" aria-label={`${item.title} case study`}>
             <p className="case-summary">{item.summary}</p>
@@ -69,7 +73,7 @@ export default async function WorkPage({ params }: WorkPageProps) {
             ))}
             {item.coverage?.length ? <section className={`story-section ${coverageStyles.coverage}`} id="in-the-news" aria-labelledby="coverage-heading">
               <h2 id="coverage-heading">In the news</h2>
-              <p className={coverageStyles.context}>Public reporting on Jigsaw’s development and adoption. These articles cover the broader program at different stages; their reported results are separate from the project outcomes above.</p>
+              <p className={coverageStyles.context}>Public reporting on Jigsaw’s development and adoption. These articles cover the broader program at different stages; their reported results are separate from the outcomes of my work.</p>
               <ul className={coverageStyles.list}>
                 {item.coverage.map(article => <li key={article.href}>
                   <a href={article.href} target="_blank" rel="noreferrer">
@@ -79,6 +83,10 @@ export default async function WorkPage({ params }: WorkPageProps) {
                   </a>
                 </li>)}
               </ul>
+            </section> : null}
+            {item.metrics?.length ? <section className="story-section case-impact" id="impact" aria-labelledby="impact-heading">
+              <h2 id="impact-heading">Impact</h2>
+              <dl className="case-metrics" aria-label="Project results">{item.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd>{metric.context && <p>{metric.context}</p>}</div>)}</dl>
             </section> : null}
             {item.provenance && <p className="case-note">{item.provenance}</p>}
           </article>
