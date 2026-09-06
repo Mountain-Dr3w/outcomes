@@ -88,7 +88,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
 
         <main id="main" className={styles.content}>
           <div className={styles.pageTitle}>
-            <div><h1>{isServices ? "Platform services" : "Team onboarding"}</h1><p>{isServices ? "Connect your system to platform-managed delivery and security tools." : "Track access, approval, and provisioning for Phoenix Service."}</p></div>
+            <div><h1>{isServices ? "Platform services" : "Team onboarding"}</h1>{isServices && <p>Connect your system to platform-managed delivery and security tools.</p>}</div>
           </div>
 
           {isServices ? (
@@ -127,7 +127,7 @@ export function SpaceForceStudy({ screen }: { screen: string }) {
             <>
               <div className={styles.onboardingLayout}>
               <section className={styles.journey} aria-label="Onboarding stages">
-                <div className={styles.journeyHeader}><strong>Onboarding</strong><span>2 of 5 complete</span></div>
+                <div className={styles.journeyHeader}><span>2 of 5 steps complete</span></div>
                 <div className={styles.stageTrack}>
                   {stages.map((stage, index) => <button key={stage.name} onClick={() => setSelectedStage(index)} aria-label={`${stage.name}: ${stage.state}`} aria-current={index === 2 ? "step" : undefined} aria-pressed={selectedStage === index} className={`${styles.stage} ${index < 2 ? styles.stageComplete : ""} ${index === 2 ? styles.stageCurrent : ""} ${selectedStage === index ? styles.stageSelected : ""}`}><span className={styles.stageRail} /><span className={styles.stageNumber}>{index < 2 ? <Check size={14} weight="bold" /> : index + 1}</span><strong>{stage.name}</strong><span className={styles.stageState}>{stage.state}</span></button>)}
                 </div>
