@@ -29,7 +29,7 @@ export const crewWork: WorkItem = {
     ] },
     { title: "From rough layout to working screen", body: [
       "The early layouts below are reconstructed to explain the design decisions. They show the progression from putting everything on one page to giving the next task a clear place in the interface.",
-      "Step through five stages, from gathering the pieces on one page to refining the working screen. Each stage isolates a change in hierarchy, context, or visual treatment."
+      "Step through seven stages, from gathering the pieces on one page to refining the working screen. Each stage isolates a change in hierarchy, context, or visual treatment."
     ] },
     { title: "Start with the shift", body: [
       "The shift title, current times, and Changeover button establish the day’s context. Changeover opens a short handoff so the incoming analyst can understand what changed before opening individual requests. Reviewing the handoff is an explicit action; simply visiting the page doesn’t count as having read it.",
