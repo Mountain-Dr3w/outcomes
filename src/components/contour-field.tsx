@@ -90,8 +90,8 @@ export function ContourField({ controlsTargetId, pageCamera = false }: { control
         context.stroke();
       }
       // Fade every segment, including longitudinal grid lines and the route.
-      const segment = (a: readonly [number, number], b: readonly [number, number], line: number) => {
-        context.globalAlpha = depthOpacity(line, elapsed);
+      const segment = (a: readonly [number, number], b: readonly [number, number], line: number, visibility = 1) => {
+        context.globalAlpha = depthOpacity(line, elapsed) * visibility;
         context.beginPath();
         context.moveTo(a[0] / 1200 * width, a[1] / 650 * height);
         context.lineTo(b[0] / 1200 * width, b[1] / 650 * height);
@@ -104,16 +104,36 @@ export function ContourField({ controlsTargetId, pageCamera = false }: { control
           segment(point(column / COLUMNS, line - 1 / DEPTH_STEPS, pointer, elapsed, camera), point(column / COLUMNS, line, pointer, elapsed, camera), line - .5 / DEPTH_STEPS);
         }
       }
+      const angle = camera * .28 + pointer * .015;
+      const eyeX = -8 * Math.sin(angle);
+      const eyeZ = 8 - 8 * Math.cos(angle);
+      const travel = elapsed * .35;
       const coursePoint = (line: number) => {
-        const z = 1.3 + line * .48 - (elapsed * .35) % .48;
-        const worldZ = z + elapsed * .35;
-        return point(.57 + Math.sin(worldZ * .3) * .035, line, pointer, elapsed, camera);
+        const z = 1.3 + line * .48 - travel % .48;
+        const worldZ = z + travel;
+        const u = .57 + Math.sin(worldZ * .3) * .035;
+        const x = (u - .5) * 28;
+        const elevation = terrainHeight(x, worldZ) + .012;
+        // Trace toward the camera through the same height field that draws the hills.
+        // A narrow visibility ramp softens ridge crossings without exposing buried paths.
+        let clearance = Infinity;
+        for (let sample = 1; sample < 128; sample++) {
+          const t = sample / 128;
+          const rayX = eyeX + (x - eyeX) * t;
+          const rayZ = eyeZ + (z - eyeZ) * t;
+          const rayHeight = 2.7 + (elevation - 2.7) * t;
+          clearance = Math.min(clearance, rayHeight - terrainHeight(rayX, rayZ + travel));
+        }
+        return { position: point(u, line, pointer, elapsed, camera), visibility: Math.max(0, Math.min(1, clearance / .008)) };
       };
       context.strokeStyle = "rgba(206,163,95,.85)";
       context.lineWidth = 1.2;
+      let previous = coursePoint(0);
       for (let step = 1; step <= (LINES - 1) * DEPTH_STEPS; step++) {
         const line = step / DEPTH_STEPS;
-        segment(coursePoint(line - 1 / DEPTH_STEPS), coursePoint(line), line - .5 / DEPTH_STEPS);
+        const current = coursePoint(line);
+        segment(previous.position, current.position, line - .5 / DEPTH_STEPS, Math.min(previous.visibility, current.visibility));
+        previous = current;
       }
       context.globalAlpha = 1;
       canvas.dataset.ready = "true";
