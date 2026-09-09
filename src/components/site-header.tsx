@@ -8,7 +8,7 @@ export function SiteHeader() {
     <header className="site-header page-shell">
       <Link href="/" className={`wordmark ${styles.wordmark}`} aria-label="Drew McFarland home">
         <Image className={styles.logo} src="/drewux-logo.svg" alt="" width={38} height={34} priority />
-        <span>DrewUX</span>
+        <span>Drew McFarland</span>
       </Link>
       <SiteNavigation />
     </header>
